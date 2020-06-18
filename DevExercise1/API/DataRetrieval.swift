@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import ArcGis
+import ArcGIS
 
 let dataRetriever = API()
 
