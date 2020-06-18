@@ -17,18 +17,24 @@ class MainTabController: UITabBarController {
     }
     
     
+    func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController{
+        let nav = UINavigationController(rootViewController: rootViewController)
+        nav.tabBarItem.image = image
+        nav.navigationBar.barTintColor = .gray
+        return nav
+    }
     func setupTabs(){
         
+        //just need to fix positioning
         let cases = CountryCaseController()
-        cases.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
+        let tab1 = templateNavController(image: #imageLiteral(resourceName: "rona"), rootViewController: cases)
         
-        //figure out how to fix this tab so the picture actually appears, most likely a sizing issue in part of the image.
         let map = MapController()
-        map.tabBarItem = UITabBarItem(title: "Map", image: #imageLiteral(resourceName: "globe"), tag: 1)
+        let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)
         
         
         
-        viewControllers = [cases, map]
+        viewControllers = [tab1, tab2]
     }
 
     /*

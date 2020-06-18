@@ -1,12 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "globe.png",
+      "filename" : "rona.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "globe1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
