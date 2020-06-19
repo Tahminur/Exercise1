@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import ArcGIS
 import UIKit
 
 class Util{
@@ -22,5 +22,15 @@ class Util{
         return button
     }
     
+    
+    func convertFeatureToCountry(feature: AGSArcGISFeature)->Country{
+        let name = feature.attributes["Country_Region"] as! String
+        let lat = feature.attributes["Lat"] as! Double
+        let long = feature.attributes["Long_"] as! Double
+        let cases = feature.attributes["Confirmed"] as! String
+        
+        let country = Country.init(name: name, cases: cases, latitude: lat, longitude: long)
+        return country
+    }
     
 }

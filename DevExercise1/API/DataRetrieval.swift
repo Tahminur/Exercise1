@@ -9,18 +9,18 @@
 import Foundation
 import ArcGIS
 
-let dataRetriever = API()
+let apiManager = API()
 
 class API{
+    
+    
     let CasesFeatureTable: AGSServiceFeatureTable = {
         let featureServiceURL = URL(string: featureURL)!
             return AGSServiceFeatureTable(url: featureServiceURL)
         }()
 
     
-    
-    //below returns all features in the table must edit it in order to make it so that I can get all of the data from it.
-    func queryFeatureLayer() {
+    func queryFeatureLayer(){
 
         CasesFeatureTable.load { [weak self] (error) in
             
@@ -47,19 +47,20 @@ class API{
                     print("Something went wrong casting the results.")
                     return
                 }
-                
                 //the features returned is a set of AGSArcGISFeatures that each consist of an attribute field that contains the data for each country. Now you have to format this so that it can be used to show the data in the cases field.
+                
                 print("DEBUG: \(features.count)")
-                print(features[0].attributes["Country_Region"])
-                print(features[0].attributes["Lat"])
-                print(features[0].attributes["Long_"])
-                print(features[0].attributes["Recovered"])
-                print(features[0].attributes["Deaths"])
-                print(features[0].attributes["Confirmed"])
-
+                //possibly use
+                
+                //update my didset values here
+                //self.convertToCountry(feature: features[0])
+                
+                
             }
         }
     }
+    
+    
 
 }
 

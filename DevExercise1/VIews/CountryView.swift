@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class CountryView:UIView {
-    public let CountryDetails:UIButton
+/*public class CountryView:UIView {
+    //public let CountryDetails:UIButton 
     
-}
+}*/

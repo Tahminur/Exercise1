@@ -11,3 +11,4 @@ import Foundation
 
 
 let featureURL:String = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2"
+

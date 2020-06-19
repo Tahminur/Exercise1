@@ -10,8 +10,8 @@ import Foundation
 
 
 struct Country{
-    let name:String
-    var cases:Int
-    let latitude:Double
-    let longitude:Double
+    let name : String
+    var cases : String
+    let latitude : Double
+    let longitude : Double
 }
