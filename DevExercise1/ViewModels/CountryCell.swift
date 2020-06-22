@@ -10,17 +10,19 @@ import UIKit
 
 class CountryCell: UITableViewCell {
 
-    var countryData = UILabel()
     
+    var countryButton = UIButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         
         
-        addSubview(countryData)
+        //addSubview(countryData)
         
-        configureLabel()
+        addSubview(countryButton)
+        
+        configureButton()
         
         setLabelConstraints()
         
@@ -33,21 +35,20 @@ class CountryCell: UITableViewCell {
     
     
     func set(country: Country){
-        countryData.text = "\(country.name) : \(country.cases)"
+        countryButton.setTitle("\(country.name) : \(country.cases)", for: .normal)
+        countryButton.setTitleColor(.black, for: .normal)
     }
 
-    func configureLabel() {
-        countryData.clipsToBounds = true
-        countryData.adjustsFontSizeToFitWidth = true
-        
+    func configureButton() {
+        countryButton.clipsToBounds = true
     }
     
     func setLabelConstraints() {
-        countryData.translatesAutoresizingMaskIntoConstraints = false
-        countryData.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        countryData.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        countryData.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        countryData.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        countryButton.translatesAutoresizingMaskIntoConstraints = false
+        countryButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        countryButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        countryButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        countryButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
     }
     
     

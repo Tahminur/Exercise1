@@ -12,17 +12,7 @@ import UIKit
 
 class Util{
     //have to add in cases, but make sure it is easily changeable
-    func customButton(forCountry: Country) -> UIButton {
-        
-        let button = UIButton(type: .system)
-        let Title = NSMutableAttributedString(string: forCountry.name, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24), NSAttributedString.Key.foregroundColor:UIColor.red])
-        button.setAttributedTitle(Title, for: .normal)
-        button.backgroundColor = UIColor.red
-        
-        
-        return button
-    }
-    
+
     func convertFeatureToCountry(feature: AGSArcGISFeature)->Country{
         let name = feature.attributes["Country_Region"] as! String
         //let lat = feature.attributes["Lat"] as! NSNull

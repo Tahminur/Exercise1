@@ -12,6 +12,7 @@ import ArcGIS
 
 class CountryCaseController:UIViewController{
     var tableView = UITableView()
+    private let refresher = UIRefreshControl()
     let CasesFeatureTable: AGSServiceFeatureTable = {
     let featureServiceURL = URL(string: featureURL)!
         return AGSServiceFeatureTable(url: featureServiceURL)
@@ -25,13 +26,9 @@ class CountryCaseController:UIViewController{
         super.viewDidLoad()
         //have it perform asynchronously so update tableview can be called
         apiManager.queryFeatureLayer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5){
-            
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
             self.tableView.reloadData()
         }
-        
-        
-
         configureTableView()
         navigationItem.title = "Cases"
     }
@@ -40,31 +37,27 @@ class CountryCaseController:UIViewController{
     
     func configureTableView() {
         view.backgroundColor = .white
-        print("Inside country controller there are: \(DataRetrieved.count)")
         view.addSubview(tableView)
         setTableViewDelegates()
         tableView.rowHeight = 50
-        
         tableView.register(CountryCell.self, forCellReuseIdentifier: "CountryCell")
-        
         tableView.pin(to: view)
+        tableView.addSubview(refresher)
+        refresher.addTarget(self, action: #selector(refreshCountryData(_:)), for: .valueChanged)
     }
     
-    func updateTable() {
-        let hasNewCells = DataRetrieved.count > 0
-        
-        if hasNewCells {
-            tableView.reloadData()
+    @objc func refreshCountryData(_ sender: Any){
+        print("Refreshing data")
+        apiManager.queryFeatureLayer()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.tableView.reloadData()
+            self.refresher.endRefreshing()
         }
     }
-    
-    
     func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
     }
-    
-    
 }
 
 extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
