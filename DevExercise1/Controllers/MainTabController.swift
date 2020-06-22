@@ -24,7 +24,6 @@ class MainTabController: UITabBarController {
         return nav
     }
     func setupTabs(){
-        
         //just need to fix positioning
         let cases = CountryCaseController()
         let tab1 = templateNavController(image: #imageLiteral(resourceName: "rona"), rootViewController: cases)
