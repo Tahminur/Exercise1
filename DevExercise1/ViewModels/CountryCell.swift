@@ -27,7 +27,7 @@ class CountryCell: UITableViewCell {
         setLabelConstraints()
         
     }
-    
+    //for handling click action look at centerAtPoint function in arcGIS
     @objc func handleClickAction(){
         print("You Clicked On\(String(describing: countryButton.title))")
     }
