@@ -24,23 +24,13 @@ class MapController:UIViewController{
         navigationItem.title = "Map"
 
         generateWebMap()
+        //works()
     }
+
     
-    //Old version of loading map that did not work
-    /*func loadMap2(){
-        view.addSubview(mapView)
-        mapView.pin(to: view)
-        //map = AGSMap(url: URL(string: "https://www.arcgis.com/home/item.html?id=bbb2e4f589ba40d692fab712ae37b9acx")!)
-        
-        map = AGSMap(url: URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!)
-        self.map.load(completion: {[weak self] (error) in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-            self?.mapView.map = self?.map
-        })
-    }*/
+    //create arcgis auth challenge delegate and answer challenge with credentials
+    
+    
     
     func generateWebMap(){
         view.addSubview(mapView)
@@ -49,9 +39,9 @@ class MapController:UIViewController{
         //displays map items correctly but does not work for the specified link for some reason
         let portal = AGSPortal(url: URL(string:"https://www.arcgis.com")!, loginRequired: false)
         //change below itemID to bbb2e4f589ba40d692fab712ae37b9ac, but right now there is an invalid response error
-        let portalItem = AGSPortalItem(portal: portal, itemID: "bbb2e4f589ba40d692fab712ae37b9ac")
+        let portalItem = AGSPortalItem(portal: portal, itemID: "7cc54c8def82483193176d3ba0cf7acc")
         map = AGSMap(item: portalItem)
-        
+        portal.credential = AGSCredential()
         self.map.load(completion: {[weak self] (error) in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -61,7 +51,25 @@ class MapController:UIViewController{
         })
     }
     
-    
+    /*
+    func works(){
+        view.addSubview(mapView)
+        mapView.pin(to: view)
+        //displays map items correctly but does not work for the specified link for some reason
+        let portal = AGSPortal(url: URL(string:"https://www.arcgis.com")!, loginRequired: false)
+        //change below itemID to , but right now there is an invalid response error
+        let portalItem = AGSPortalItem(portal: portal, itemID: "")
+        map = AGSMap(item: portalItem)
+        //portal.credential = AGSCredential()
+        self.map.load(completion: {[weak self] (error) in
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            self?.mapView.map = self?.map
+        })
+        
+    }*/
 }
 
 

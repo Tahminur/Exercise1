@@ -67,6 +67,7 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
+        cell.countryButton.tag = indexPath.row
         
         let country = Util().convertFeatureToCountry(feature: DataRetrieved[indexPath.row])
         
@@ -74,6 +75,5 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
     
 }

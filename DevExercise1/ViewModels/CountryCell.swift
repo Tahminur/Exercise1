@@ -28,6 +28,10 @@ class CountryCell: UITableViewCell {
         
     }
     
+    @objc func handleClickAction(){
+        print("You Clicked On\(String(describing: countryButton.title))")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
@@ -49,6 +53,7 @@ class CountryCell: UITableViewCell {
         countryButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         countryButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         countryButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
+        
     }
     
     
