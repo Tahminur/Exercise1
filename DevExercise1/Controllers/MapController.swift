@@ -21,16 +21,19 @@ class MapController:UIViewController{
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Map"
-
         configureMap()
         addDataLayer()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+            self.mapView.reloadInputViews()
+        }
+        
         
     }
     //below is the way that wors for individually addig feature layers to a map
     func configureMap(){
         view.addSubview(mapView)
         mapView.pin(to: view)
-        map = AGSMap(basemap: .darkGrayCanvasVector())
+        map = AGSMap(basemap: .topographic())
         map.initialViewpoint = AGSViewpoint(center: AGSPoint(x:-13176752, y: 4090404, spatialReference: .webMercator()), scale: 300000)
         self.mapView.map = map
     }

@@ -71,9 +71,20 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
         
         let country = Util().convertFeatureToCountry(feature: DataRetrieved[indexPath.row])
         
-        cell.set(country: country)
+        //cell.set(country: country)
+        cell.textLabel?.text = "\(country.name) : \(country.cases)"
+        
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow
+        
+        let clickedCell = tableView.cellForRow(at: indexPath!)! as UITableViewCell
+        //go to location on map but for now will print out country
+        let itemText = clickedCell.textLabel!.text
+        print("You selected: \(itemText)")
     }
     
 }

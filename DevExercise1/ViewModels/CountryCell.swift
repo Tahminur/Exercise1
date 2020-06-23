@@ -11,7 +11,7 @@ import UIKit
 class CountryCell: UITableViewCell {
 
     
-    var countryButton = UIButton()
+    var countryButton = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,9 +28,7 @@ class CountryCell: UITableViewCell {
         
     }
     //for handling click action look at centerAtPoint function in arcGIS
-    @objc func handleClickAction(){
-        print("You Clicked On\(String(describing: countryButton.title))")
-    }
+
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -39,8 +37,10 @@ class CountryCell: UITableViewCell {
     
     
     func set(country: Country){
-        countryButton.setTitle("\(country.name) : \(country.cases)", for: .normal)
-        countryButton.setTitleColor(.black, for: .normal)
+        countryButton.text = "\(country.name) : \(country.cases)"
+        countryButton.textColor = .black
+        //countryButton.Title()
+        //countryButton.setTitleColor(.black, for: .normal)
     }
 
     func configureButton() {
