@@ -22,49 +22,36 @@ class MapController:UIViewController{
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.title = "Map"
-        /*view.addSubview(mapView)
-        map = AGSMap()
-        var tiledLayer = AGSArcGISTiledLayer(url: NSURL(string: "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer")! as URL)
-        var mapLayer = AGSArcGISMapImageLayer(url: NSURL(string: "https://sampleserver6.arcgisonline.com/arcgis/rest/services/Census/MapServer")! as URL)
-            
-        map.basemap.baseLayers.addObjects(from: [tiledLayer, mapLayer])
-        mapView.map = map*/
-        
-        loadMap()
-        
+
+        generateWebMap()
     }
     
-    /*func configureMap() {
-        let urle = URL(string: "http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer")
-        //let tiledLayer = AGSArcGISTiledLayer(url: urle!)
-        //mapView.map?.basemap = tiledLayer
-    }*/
-    
-    //shows up with powered by esri but no map data is shown for some reason
-    /*func configureMap() {
-        //adds mapView view to the application
+    //Old version of loading map that did not work
+    /*func loadMap2(){
         view.addSubview(mapView)
         mapView.pin(to: view)
+        //map = AGSMap(url: URL(string: "https://www.arcgis.com/home/item.html?id=bbb2e4f589ba40d692fab712ae37b9acx")!)
         
-        
-        
-        map = AGSMap(url: URL(string: mapURL)!)
-        map.load { [weak self] (error) in
-            
-            guard self != nil else { return }
-
-            if let error = error {
-                print("Error loading Map layer: \(error.localizedDescription)")
+        map = AGSMap(url: URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!)
+        self.map.load(completion: {[weak self] (error) in
+            guard error == nil else {
+                print(error!.localizedDescription)
                 return
             }
-            
-        }
+            self?.mapView.map = self?.map
+        })
     }*/
     
-    func loadMap(){
+    func generateWebMap(){
         view.addSubview(mapView)
         mapView.pin(to: view)
-        map = AGSMap(url: URL(string: "https://www.arcgis.com/home/item.html?id=bbb2e4f589ba40d692fab712ae37b9acx")!)
+        
+        //displays map items correctly but does not work for the specified link for some reason
+        let portal = AGSPortal(url: URL(string:"https://www.arcgis.com")!, loginRequired: false)
+        //change below itemID to bbb2e4f589ba40d692fab712ae37b9ac, but right now there is an invalid response error
+        let portalItem = AGSPortalItem(portal: portal, itemID: "bbb2e4f589ba40d692fab712ae37b9ac")
+        map = AGSMap(item: portalItem)
+        
         self.map.load(completion: {[weak self] (error) in
             guard error == nil else {
                 print(error!.localizedDescription)
@@ -73,6 +60,8 @@ class MapController:UIViewController{
             self?.mapView.map = self?.map
         })
     }
+    
+    
 }
 
 
