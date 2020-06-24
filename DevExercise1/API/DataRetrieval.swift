@@ -52,5 +52,23 @@ class API{
             }
         }
     }
-}
+    
+    
+    func retrieveFeatureLayer() -> AGSFeatureLayer {
+        //effectively nil at first so have to assign after loading table only do this because of completion block invoked by load
+        var newLayer:AGSFeatureLayer = AGSFeatureLayer(featureTable: CasesFeatureTable)
+        CasesFeatureTable.load { [weak self] (error) in
+        
+        guard let self = self else { return }
 
+        if let error = error {
+            print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
+            return
+        }
+            newLayer.clearSelection()
+            newLayer = AGSFeatureLayer(featureTable:self.CasesFeatureTable)
+        }
+        return newLayer
+    }
+
+}

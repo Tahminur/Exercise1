@@ -13,10 +13,7 @@ import ArcGIS
 class CountryCaseController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
-    let CasesFeatureTable: AGSServiceFeatureTable = {
-    let featureServiceURL = URL(string: featureURL)!
-        return AGSServiceFeatureTable(url: featureServiceURL)
-    }()
+
     
     
     
@@ -67,13 +64,10 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
-        cell.countryButton.tag = indexPath.row
         
         let country = Util().convertFeatureToCountry(feature: DataRetrieved[indexPath.row])
         
-        //cell.set(country: country)
-        cell.textLabel?.text = "\(country.name) : \(country.cases)"
-        
+        cell.set(country: country)
         
         return cell
     }
@@ -81,10 +75,12 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = tableView.indexPathForSelectedRow
         
-        let clickedCell = tableView.cellForRow(at: indexPath!)! as UITableViewCell
-        //go to location on map but for now will print out country
+        let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
+
         let itemText = clickedCell.textLabel!.text
         print("You selected: \(itemText)")
+        //below changes to correct tab now need to focus on centering
+        self.navigationController?.pushViewController(MapController(), animated: true)
     }
     
 }

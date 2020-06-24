@@ -12,6 +12,6 @@ import Foundation
 struct Country{
     let name : String
     var cases : Int
-    //let latitude : Double
-    //let longitude : Double
+    let latitude : NSNumber
+    let longitude : NSNumber
 }

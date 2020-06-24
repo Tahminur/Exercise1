@@ -15,11 +15,11 @@ class Util{
 
     func convertFeatureToCountry(feature: AGSArcGISFeature)->Country{
         let name = feature.attributes["Country_Region"] as! String
-        //let lat = feature.attributes["Lat"] as! NSNull
-        //let long = feature.attributes["Long_"] as! NSNull
+        let lat = feature.attributes["Lat"] as! NSNumber
+        let long = feature.attributes["Long_"] as! NSNumber
         let cases = feature.attributes["Confirmed"] as! Int
         
-        let country = Country.init(name: name, cases: cases)
+        let country = Country.init(name: name, cases: cases, latitude: lat, longitude: long)
         return country
     }
     

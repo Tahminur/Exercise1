@@ -22,8 +22,10 @@ class MapController:UIViewController{
         view.backgroundColor = .white
         navigationItem.title = "Map"
         configureMap()
+        //below returns nil for feature layers at the moment even though it correctly works for other data, most likely will have to change from weak reference to strong
         addDataLayer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5){
             self.mapView.reloadInputViews()
         }
         
@@ -34,13 +36,14 @@ class MapController:UIViewController{
         view.addSubview(mapView)
         mapView.pin(to: view)
         map = AGSMap(basemap: .topographic())
-        map.initialViewpoint = AGSViewpoint(center: AGSPoint(x:-13176752, y: 4090404, spatialReference: .webMercator()), scale: 300000)
+        //map.initialViewpoint = AGSViewpoint(center: AGSPoint(x:-13176752, y: 4090404, spatialReference: .webMercator()), scale: 300000)
         self.mapView.map = map
     }
     
     
+    
     func addDataLayer(){
-        let featureLayer = AGSFeatureLayer(featureTable: apiManager.CasesFeatureTable)
+        let featureLayer = apiManager.retrieveFeatureLayer()
         map.operationalLayers.add(featureLayer)
     }
 //below was old way that works for feture layers that have been incorporated into the map already.
