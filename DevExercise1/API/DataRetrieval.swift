@@ -19,6 +19,8 @@ class API{
     var DataRetrieved:[AGSArcGISFeature] = []
     
     
+    var completionHandlers = [([AGSArcGISFeature]) -> Void]()
+    
     let CountryFeatureTable: AGSServiceFeatureTable = {
         let countryServiceURL = URL(string: countryURL)!
             return AGSServiceFeatureTable(url: countryServiceURL)
@@ -67,4 +69,42 @@ class API{
         }
     }
 
+    
+    func queryFeatureLayer2(test: Void){
+        
+        CountryFeatureTable.load { [weak self] (error) in
+            
+            guard let self = self else { return }
+
+            if let error = error {
+                print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
+                return
+            }
+
+            let queryParameters = AGSQueryParameters()
+            queryParameters.whereClause = "\(countryNameKey) like '%%'"
+            queryParameters.returnGeometry = true
+
+            let outFields: AGSQueryFeatureFields = .loadAll
+            self.CountryFeatureTable.queryFeatures(with: queryParameters, queryFeatureFields: outFields) { (result, error) in
+
+                if let error = error {
+                    print("Error querying the Corona Cases feature layer: \(error.localizedDescription)")
+                    return
+                }
+
+                guard let result = result, let features = result.featureEnumerator().allObjects as? [AGSArcGISFeature] else {
+                    print("Something went wrong casting the results.")
+                    return
+                }
+                self.DataRetrieved = features
+                print("Retrieved \(self.DataRetrieved.count) layers")
+                
+            }
+        }
+        test
+        print("I should reload")
+    }
+
+    
 }
