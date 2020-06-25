@@ -79,12 +79,11 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
 
         let itemText = clickedCell.textLabel!.text
         selectedPoint = clickedCell.point
+        
         self.tabBarController?.selectedIndex = 1
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             print("You selected: \(itemText) located at \(clickedCell.point)")
             
-            
-            print(self.navigationController?.viewControllers.count)
         }
         
     }

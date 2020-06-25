@@ -19,14 +19,20 @@ class MapController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setupViewLoad()
+        
+    }
+    
+    func setupViewLoad(){
         view.backgroundColor = .white
         navigationItem.title = "Map"
         configureMap()
         addDataLayers()
     }
-    
-    
-    
     
     func configureMap(){
         view.addSubview(mapView)
