@@ -76,7 +76,7 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
         let indexPath = tableView.indexPathForSelectedRow
         
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
-
+        
         API.sharedInstance.selectedPoint = clickedCell.point
         
         self.tabBarController?.selectedIndex = 1

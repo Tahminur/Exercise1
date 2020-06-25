@@ -15,7 +15,13 @@ class Util{
 
     func convertFeatureToCountry(feature: AGSArcGISFeature)->Country{
         let name = feature.attributes["Country_Region"] as! String
-        let point = feature.geometry as! AGSPoint
+        
+        var point: AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
+        
+        if feature.geometry != nil{
+            point = feature.geometry as! AGSPoint
+        }
+        
         let cases = feature.attributes["Confirmed"] as! Int
         
         let country = Country.init(name: name, cases: cases, point: point)
