@@ -9,12 +9,13 @@
 import Foundation
 import ArcGIS
 
-let apiManager = API()
 var DataRetrieved:[AGSArcGISFeature] = []
 
 class API{
     
+    static let sharedInstance = API()
     
+    var selectedPoint:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
     
     let CountryFeatureTable: AGSServiceFeatureTable = {
         let countryServiceURL = URL(string: countryURL)!

@@ -22,7 +22,7 @@ class CountryCaseController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         //have it perform asynchronously so update tableview can be called
-        apiManager.queryFeatureLayer()
+        API.sharedInstance.queryFeatureLayer()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
             self.tableView.reloadData()
         }
@@ -45,7 +45,7 @@ class CountryCaseController:UIViewController{
     
     @objc func refreshCountryData(_ sender: Any){
         print("Refreshing data")
-        apiManager.queryFeatureLayer()
+        API.sharedInstance.queryFeatureLayer()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1){
             self.tableView.reloadData()
             self.refresher.endRefreshing()
@@ -77,14 +77,9 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
         
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
 
-        let itemText = clickedCell.textLabel!.text
-        selectedPoint = clickedCell.point
+        API.sharedInstance.selectedPoint = clickedCell.point
         
         self.tabBarController?.selectedIndex = 1
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("You selected: \(itemText) located at \(clickedCell.point)")
-            
-        }
         
     }
     

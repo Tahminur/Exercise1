@@ -39,16 +39,16 @@ class MapController:UIViewController{
         mapView.pin(to: view)
         map = AGSMap(basemap: .topographic())
         //initially over australia
-        map.initialViewpoint = AGSViewpoint(center: selectedPoint, scale: 30000000)
+        map.initialViewpoint = AGSViewpoint(center: API.sharedInstance.selectedPoint, scale: 30000000)
         self.mapView.map = map
     }
     
     
     
     func addDataLayers(){
-        let countryLayer = AGSFeatureLayer(featureTable: apiManager.CountryFeatureTable)
-        let casesLayer = AGSFeatureLayer(featureTable: apiManager.CasesFeatureTable)
-        let deathsLayer = AGSFeatureLayer(featureTable: apiManager.DeathsFeatureTable)
+        let countryLayer = AGSFeatureLayer(featureTable: API.sharedInstance.CountryFeatureTable)
+        let casesLayer = AGSFeatureLayer(featureTable: API.sharedInstance.CasesFeatureTable)
+        let deathsLayer = AGSFeatureLayer(featureTable: API.sharedInstance.DeathsFeatureTable)
         
         map.operationalLayers.add(countryLayer)
         map.operationalLayers.add(casesLayer)
