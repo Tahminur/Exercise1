@@ -59,13 +59,13 @@ class CountryCaseController:UIViewController{
 
 extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataRetrieved.count
+        return API.sharedInstance.DataRetrieved.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
         
-        let country = Util().convertFeatureToCountry(feature: DataRetrieved[indexPath.row])
+        let country = Util().convertFeatureToCountry(feature: API.sharedInstance.DataRetrieved[indexPath.row])
         
         cell.set(country: country)
         

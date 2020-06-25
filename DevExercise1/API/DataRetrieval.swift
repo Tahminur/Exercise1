@@ -9,13 +9,15 @@
 import Foundation
 import ArcGIS
 
-var DataRetrieved:[AGSArcGISFeature] = []
+
 
 class API{
     
     static let sharedInstance = API()
     
     var selectedPoint:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
+    var DataRetrieved:[AGSArcGISFeature] = []
+    
     
     let CountryFeatureTable: AGSServiceFeatureTable = {
         let countryServiceURL = URL(string: countryURL)!
@@ -59,8 +61,8 @@ class API{
                     print("Something went wrong casting the results.")
                     return
                 }
-                DataRetrieved = features
-                print("Retrieved \(DataRetrieved.count) layers")
+                self.DataRetrieved = features
+                print("Retrieved \(self.DataRetrieved.count) layers")
             }
         }
     }
