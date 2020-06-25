@@ -78,9 +78,15 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
 
         let itemText = clickedCell.textLabel!.text
-        print("You selected: \(itemText)")
-        //below changes to correct tab now need to focus on centering
-        self.navigationController?.pushViewController(MapController(), animated: true)
+        selectedPoint = clickedCell.point
+        self.tabBarController?.selectedIndex = 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print("You selected: \(itemText) located at \(clickedCell.point)")
+            
+            
+            print(self.navigationController?.viewControllers.count)
+        }
+        
     }
     
 }

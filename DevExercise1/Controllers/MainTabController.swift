@@ -34,7 +34,6 @@ class MainTabController: UITabBarController {
         let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)
         
         
-        
         viewControllers = [tab1, tab2]
     }
 

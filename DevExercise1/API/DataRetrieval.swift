@@ -15,15 +15,25 @@ var DataRetrieved:[AGSArcGISFeature] = []
 class API{
     
     
-    let CasesFeatureTable: AGSServiceFeatureTable = {
-        let featureServiceURL = URL(string: featureURL)!
-            return AGSServiceFeatureTable(url: featureServiceURL)
+    
+    let CountryFeatureTable: AGSServiceFeatureTable = {
+        let countryServiceURL = URL(string: countryURL)!
+            return AGSServiceFeatureTable(url: countryServiceURL)
         }()
-
+    
+    let DeathsFeatureTable: AGSServiceFeatureTable = {
+        let deathsServiceURL = URL(string: deathsURL)!
+        return AGSServiceFeatureTable(url: deathsServiceURL)
+    }()
+    
+    let CasesFeatureTable: AGSServiceFeatureTable = {
+        let casesServiceURL = URL(string: casesURL)!
+        return AGSServiceFeatureTable(url: casesServiceURL)
+    }()
     
     func queryFeatureLayer(){
         
-        CasesFeatureTable.load { [weak self] (error) in
+        CountryFeatureTable.load { [weak self] (error) in
             
             guard let self = self else { return }
 
@@ -33,11 +43,11 @@ class API{
             }
 
             let queryParameters = AGSQueryParameters()
-            queryParameters.whereClause = "\(String.CountryNameKey) like '%%'"
+            queryParameters.whereClause = "\(countryNameKey) like '%%'"
             queryParameters.returnGeometry = true
 
             let outFields: AGSQueryFeatureFields = .loadAll
-            self.CasesFeatureTable.queryFeatures(with: queryParameters, queryFeatureFields: outFields) { (result, error) in
+            self.CountryFeatureTable.queryFeatures(with: queryParameters, queryFeatureFields: outFields) { (result, error) in
 
                 if let error = error {
                     print("Error querying the Corona Cases feature layer: \(error.localizedDescription)")
@@ -49,26 +59,9 @@ class API{
                     return
                 }
                 DataRetrieved = features
+                print("Retrieved \(DataRetrieved.count) layers")
             }
         }
-    }
-    
-    
-    func retrieveFeatureLayer() -> AGSFeatureLayer {
-        //effectively nil at first so have to assign after loading table only do this because of completion block invoked by load
-        var newLayer:AGSFeatureLayer = AGSFeatureLayer(featureTable: CasesFeatureTable)
-        CasesFeatureTable.load { [weak self] (error) in
-        
-        guard let self = self else { return }
-
-        if let error = error {
-            print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
-            return
-        }
-            newLayer.clearSelection()
-            newLayer = AGSFeatureLayer(featureTable:self.CasesFeatureTable)
-        }
-        return newLayer
     }
 
 }

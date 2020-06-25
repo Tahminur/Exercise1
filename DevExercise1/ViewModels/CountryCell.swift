@@ -7,15 +7,14 @@
 //
 
 import UIKit
+import ArcGIS
 
 class CountryCell: UITableViewCell {
     
-    var latitude:NSNumber = 0
-    var longitude:NSNumber = 0
+    var point:AGSPoint = AGSPoint(x: 0, y: 0, spatialReference: .wgs84())
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
     }
 
     
@@ -27,8 +26,7 @@ class CountryCell: UITableViewCell {
     
     func set(country: Country){
         self.textLabel!.text = "\(country.name) : \(country.cases)"
-        latitude = country.latitude
-        longitude = country.longitude
+        point = country.point
     }
     
     

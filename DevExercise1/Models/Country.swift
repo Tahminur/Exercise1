@@ -7,11 +7,10 @@
 //
 
 import Foundation
-
+import ArcGIS
 
 struct Country{
     let name : String
     var cases : Int
-    let latitude : NSNumber
-    let longitude : NSNumber
+    let point: AGSPoint
 }

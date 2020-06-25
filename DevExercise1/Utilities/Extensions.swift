@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-public extension String {
-    static let CountryNameKey = "Country_Region"
-}
 
 extension UIView{
     func pin(to superView: UIView) {

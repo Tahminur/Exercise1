@@ -11,15 +11,14 @@ import ArcGIS
 import UIKit
 
 class Util{
-    //have to add in cases, but make sure it is easily changeable
+    //change this function to remove lat and long since the center at viewpoint actually uses the ags poing coordinate and not the lat or long
 
     func convertFeatureToCountry(feature: AGSArcGISFeature)->Country{
         let name = feature.attributes["Country_Region"] as! String
-        let lat = feature.attributes["Lat"] as! NSNumber
-        let long = feature.attributes["Long_"] as! NSNumber
+        let point = feature.geometry as! AGSPoint
         let cases = feature.attributes["Confirmed"] as! Int
         
-        let country = Country.init(name: name, cases: cases, latitude: lat, longitude: long)
+        let country = Country.init(name: name, cases: cases, point: point)
         return country
     }
     
