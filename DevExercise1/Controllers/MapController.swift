@@ -38,7 +38,7 @@ class MapController:UIViewController{
         view.addSubview(mapView)
         mapView.pin(to: view)
         map = AGSMap(basemap: .topographic())
-        //initially over australia
+
         map.initialViewpoint = AGSViewpoint(center: API.sharedInstance.selectedPoint, scale: 30000000)
         self.mapView.map = map
     }

@@ -21,23 +21,12 @@ class CountryCaseController:UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureTableView()
-        
-        /*DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+        API.sharedInstance.queryFeatureLayer {
             self.tableView.reloadData()
-        }*/
-        
+        }
+        configureTableView()
         navigationItem.title = "Cases"
     }
-    
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
-    
     //MARK: -Layout
     
     func configureTableView() {
@@ -49,27 +38,25 @@ class CountryCaseController:UIViewController{
         tableView.pin(to: view)
         tableView.addSubview(refresher)
         refresher.addTarget(self, action: #selector(refreshCountryData(_:)), for: .valueChanged)
+        
     }
     
     @objc func refreshCountryData(_ sender: Any){
         print("Refreshing data")
-        API.sharedInstance.queryFeatureLayer()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+        API.sharedInstance.queryFeatureLayer{
             self.tableView.reloadData()
             self.refresher.endRefreshing()
         }
+        
+        
     }
     func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.prefetchDataSource = self
     }
 }
 //MARK: - TableView
-extension CountryCaseController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
-    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        print("prefetching row of \(indexPaths)")
-    }
+extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return API.sharedInstance.DataRetrieved.count
