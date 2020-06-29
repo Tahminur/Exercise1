@@ -28,4 +28,27 @@ class Util{
         return country
     }
     
+    func textField(withPlaceolder placeHolder: String)-> UITextField{
+        let tf = UITextField()
+        tf.textColor = .black
+        tf.attributedPlaceholder = NSAttributedString(string: placeHolder, attributes: [NSAttributedString.Key.foregroundColor:UIColor.black])
+        return tf
+    }
+    
+    
+    func inputContainerView(textField:UITextField) -> UIView {
+        let view = UIView()
+
+        view.addSubview(textField)
+        
+        view.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        textField.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, paddingBottom: 8)
+        //below makes the underline.
+        let dividerView = UIView()
+        dividerView.backgroundColor = .red
+        view.addSubview(dividerView)
+        dividerView.anchor(left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingLeft: 8, height: 0.75)
+        return view
+    }
+    
 }
