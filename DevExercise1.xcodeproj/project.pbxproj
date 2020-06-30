@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		45C893C724AA811F0052D570 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C893C624AA811F0052D570 /* LoginController.swift */; };
+		45C893C924ABC2B10052D570 /* SignOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C893C824ABC2B10052D570 /* SignOutController.swift */; };
 		45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8181D24A0F4E0008B7E0F /* CountryCell.swift */; };
 		45FE2A4A249BC11C00D8727D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A49249BC11C00D8727D /* AppDelegate.swift */; };
 		45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A4B249BC11C00D8727D /* SceneDelegate.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		11E3A87BE270823BC462E861 /* Pods-DevExercise1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevExercise1Tests.debug.xcconfig"; path = "Target Support Files/Pods-DevExercise1Tests/Pods-DevExercise1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		45C893C624AA811F0052D570 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		45C893C824ABC2B10052D570 /* SignOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutController.swift; sourceTree = "<group>"; };
 		45D8181D24A0F4E0008B7E0F /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		45FE2A46249BC11C00D8727D /* DevExercise1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevExercise1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FE2A49249BC11C00D8727D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				45FE2A8E249BD46700D8727D /* MainTabController.swift */,
 				45FE2A86249BC2DF00D8727D /* CountryCaseController.swift */,
 				45C893C624AA811F0052D570 /* LoginController.swift */,
+				45C893C824ABC2B10052D570 /* SignOutController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				45FE2A87249BC2DF00D8727D /* CountryCaseController.swift in Sources */,
 				45FE2B21249C1DAE00D8727D /* Extensions.swift in Sources */,
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
+				45C893C924ABC2B10052D570 /* SignOutController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

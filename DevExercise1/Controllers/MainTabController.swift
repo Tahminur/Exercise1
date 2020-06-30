@@ -13,7 +13,20 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabs()
+        authenticateLoggedInUser()
+    }
+    
+    func authenticateLoggedInUser(){
+        //For now no authentication really takes place need to look at arxgis credentials more in depth to make sure it works properly
+        if user == ""{
+            DispatchQueue.main.async {
+                let nav = UINavigationController(rootViewController: LoginController())
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+        } else {
+            setupTabs()
+        }
     }
     
     
@@ -24,15 +37,17 @@ class MainTabController: UITabBarController {
         return nav
     }
     func setupTabs(){
-        //just need to fix positioning
+        
         let cases = CountryCaseController()
         let tab1 = templateNavController(image: #imageLiteral(resourceName: "rona"), rootViewController: cases)
         
         let map = MapController()
         let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)
         
+        let signout = SignOutController()
+        let tab3 = templateNavController(image: UIImage.init(systemName: "contact"), rootViewController: signout)
         
-        viewControllers = [tab1, tab2]
+        viewControllers = [tab1, tab2, tab3]
     }
 
 

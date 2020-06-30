@@ -35,6 +35,19 @@ class Util{
         return tf
     }
     
+    func buttoncreator(title:String) -> UIButton{
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.backgroundColor = .white
+        button.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        button.layer.cornerRadius = 5
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        
+        return button
+        
+    }
+    
     
     func inputContainerView(textField:UITextField) -> UIView {
         let view = UIView()
