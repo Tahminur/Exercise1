@@ -13,9 +13,12 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        authenticateLoggedInUser()
+        //authenticateLoggedInUser()
+        
+        API.sharedInstance.handleLogin(){
+            self.setupTabs()
+        }
     }
-    
     func authenticateLoggedInUser(){
         //For now no authentication really takes place need to look at arxgis credentials more in depth to make sure it works properly
         if user == ""{

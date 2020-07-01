@@ -19,8 +19,9 @@ class SignOutController:UIViewController{
     }()
     
     @objc func handleSignout(){
-        print("Signing out user: \(user)")
-        user = ""
+        print("Signing out user:")
+        
+        //transition back to first login page possibly, but this makes it too nested look for better solution
     }
     
     override func viewDidLoad() {

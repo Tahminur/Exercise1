@@ -30,13 +30,14 @@ class LoginController:UIViewController{
     
     var passwordText:UITextField = {
         let tf = Util().textField(withPlaceolder: "Enter password")
+        tf.isSecureTextEntry = true
         return tf
     }()
     private lazy var passwordContainerView:UIView = {
         let view = Util().inputContainerView(textField: passwordText)
         return view
     }()
-    
+        
     //MARK: - Configuration
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,18 +62,22 @@ class LoginController:UIViewController{
     @objc func handleLogin(){
         guard let username = usernameText.text else {return}
         guard let password = passwordText.text else {return}
-        print("Username is \(username) and password is: \(password)")
         
-        //handle login logic to arcgis here
-        
+        //AuthServices.handler.logUserIn(withEmail: <#T##String#>, password: <#T##String#>, completion: <#T##AuthDataResultCallback?##AuthDataResultCallback?##(AuthDataResult?, Error?) -> Void#>)
+        //AGSAuthenticationChallenge.continue(<#T##self: AGSAuthenticationChallenge##AGSAuthenticationChallenge#>)
         //if approved switch to case controller but for now will switch regardless
-        user = username
+        //user = username
         guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
         guard let switchView = window.rootViewController as? MainTabController else {return}
-        
         switchView.authenticateLoggedInUser()
         
         self.dismiss(animated: true, completion: nil)
     }
 }
 
+//Two possible ways to implement handling this
+
+//ONE:Firebase authentication. It allows for easy integration with current setup as well as allows for the remember me functionality
+
+
+//TWO: use arcgis remote resource protocol,arcgis authentication challenge, and the continue with credential function. Will have to also then have to use the AGSCredentialCache handling remember me and clearing out credentialcache

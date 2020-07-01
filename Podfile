@@ -7,6 +7,10 @@ target 'DevExercise1' do
 
   # Pods for DevExercise1
 	pod 'ArcGIS-Runtime-SDK-iOS'
+	pod 'Firebase/Core'
+	pod 'Firebase/Database'
+	pod 'Firebase/Storage'
+	pod 'Firebase/Auth'
   target 'DevExercise1Tests' do
     inherit! :search_paths
     # Pods for testing

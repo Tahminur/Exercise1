@@ -18,7 +18,6 @@ class CountryCaseController:UIViewController{
     
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         API.sharedInstance.queryFeatureLayer {
@@ -83,3 +82,4 @@ extension CountryCaseController: UITableViewDelegate, UITableViewDataSource {
         
     }
 }
+
