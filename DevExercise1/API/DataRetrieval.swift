@@ -12,16 +12,6 @@ import ArcGIS
 
 
 class API{
-    
-    func handleLogin(completion: @escaping () -> Void){
-        let portal = AGSPortal.arcGISOnline(withLoginRequired: true)
-        let portalItem = AGSPortalItem(portal:portal, itemID: "0MSEUqKaxRlEPj5g")
-        completion()
-    }
-    
-    
-    
-    
     static let sharedInstance = API()
     
     var selectedPoint:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
@@ -75,5 +65,4 @@ class API{
             
         }
     }
-    
 }

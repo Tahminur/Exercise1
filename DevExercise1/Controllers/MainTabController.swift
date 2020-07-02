@@ -8,20 +8,19 @@
 
 import UIKit
 import ArcGIS
+import Firebase
 
 class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //authenticateLoggedInUser()
-        
-        API.sharedInstance.handleLogin(){
-            self.setupTabs()
-        }
+        authenticateLoggedInUser()
     }
+    
+    
     func authenticateLoggedInUser(){
-        //For now no authentication really takes place need to look at arxgis credentials more in depth to make sure it works properly
-        if user == ""{
+        //If user not logged in go to loginviewcontroller otherwise homeview
+        if Auth.auth().currentUser == nil{
             DispatchQueue.main.async {
                 let nav = UINavigationController(rootViewController: LoginController())
                 nav.modalPresentationStyle = .fullScreen
@@ -48,7 +47,7 @@ class MainTabController: UITabBarController {
         let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)
         
         let signout = SignOutController()
-        let tab3 = templateNavController(image: UIImage.init(systemName: "contact"), rootViewController: signout)
+        let tab3 = templateNavController(image: UIImage.init(systemName: "person"), rootViewController: signout)
         
         viewControllers = [tab1, tab2, tab3]
     }

@@ -10,6 +10,7 @@
 		45C893C724AA811F0052D570 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C893C624AA811F0052D570 /* LoginController.swift */; };
 		45C893C924ABC2B10052D570 /* SignOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C893C824ABC2B10052D570 /* SignOutController.swift */; };
 		45C893CD24AD0B860052D570 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C893CC24AD0B860052D570 /* LoginAPI.swift */; };
+		45C893CF24AD29450052D570 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45C893CE24AD29440052D570 /* GoogleService-Info.plist */; };
 		45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8181D24A0F4E0008B7E0F /* CountryCell.swift */; };
 		45FE2A4A249BC11C00D8727D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A49249BC11C00D8727D /* AppDelegate.swift */; };
 		45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A4B249BC11C00D8727D /* SceneDelegate.swift */; };
@@ -54,6 +55,7 @@
 		45C893C624AA811F0052D570 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		45C893C824ABC2B10052D570 /* SignOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutController.swift; sourceTree = "<group>"; };
 		45C893CC24AD0B860052D570 /* LoginAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
+		45C893CE24AD29440052D570 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		45D8181D24A0F4E0008B7E0F /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		45FE2A46249BC11C00D8727D /* DevExercise1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevExercise1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FE2A49249BC11C00D8727D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				45FE2A49249BC11C00D8727D /* AppDelegate.swift */,
 				45FE2A55249BC11D00D8727D /* Assets.xcassets */,
 				45FE2A57249BC11D00D8727D /* LaunchScreen.storyboard */,
+				45C893CE24AD29440052D570 /* GoogleService-Info.plist */,
 				45FE2A5A249BC11D00D8727D /* Info.plist */,
 				45FE2A52249BC11C00D8727D /* DevExercise1.xcdatamodeld */,
 			);
@@ -362,6 +365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45FE2A59249BC11D00D8727D /* LaunchScreen.storyboard in Resources */,
+				45C893CF24AD29450052D570 /* GoogleService-Info.plist in Resources */,
 				45FE2A56249BC11D00D8727D /* Assets.xcassets in Resources */,
 				45FE2A51249BC11C00D8727D /* Main.storyboard in Resources */,
 			);

@@ -20,6 +20,3 @@ let countryURL:String = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/re
 
 
 let countryNameKey:String = "Country_Region"
-
-
-var user = ""

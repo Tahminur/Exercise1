@@ -7,13 +7,12 @@
 //
 
 import Foundation
-import FirebaseAuth
+import Firebase
 
 class AuthServices{
     static let handler = AuthServices()
     
-    
-    func logUserIn(withEmail email: String, password: String, completion: AuthDataResultCallback?){
+    func logUserIn(email: String, password: String, completion: AuthDataResultCallback?){
         print("DEBUG:email:\(email) password: \(password)")
         
         Auth.auth().signIn(withEmail: email, password: password, completion: completion)

@@ -14,12 +14,12 @@ class LoginController:UIViewController{
     
     
     //MARK: -Variables/Fields
-    var usernameText:UITextField = {
-        let tf = Util().textField(withPlaceolder: "Enter Username")
+    var emailText:UITextField = {
+        let tf = Util().textField(withPlaceolder: "Enter Email")
         return tf
     }()
-    private lazy var usernameContainerView:UIView = {
-        let view = Util().inputContainerView(textField: usernameText)
+    private lazy var emailContainerView:UIView = {
+        let view = Util().inputContainerView(textField: emailText)
         return view
     }()
      private let LoginButton: UIButton = {
@@ -48,7 +48,7 @@ class LoginController:UIViewController{
     func configureUI(){
         view.backgroundColor = .white
 
-        let stack = UIStackView(arrangedSubviews: [usernameContainerView, passwordContainerView, LoginButton] )
+        let stack = UIStackView(arrangedSubviews: [emailContainerView, passwordContainerView, LoginButton] )
         stack.axis = .vertical
         stack.spacing = 30
         stack.distribution = .fillEqually
@@ -60,18 +60,23 @@ class LoginController:UIViewController{
     
     
     @objc func handleLogin(){
-        guard let username = usernameText.text else {return}
+        guard let email = emailText.text else {return}
         guard let password = passwordText.text else {return}
         
-        //AuthServices.handler.logUserIn(withEmail: <#T##String#>, password: <#T##String#>, completion: <#T##AuthDataResultCallback?##AuthDataResultCallback?##(AuthDataResult?, Error?) -> Void#>)
-        //AGSAuthenticationChallenge.continue(<#T##self: AGSAuthenticationChallenge##AGSAuthenticationChallenge#>)
-        //if approved switch to case controller but for now will switch regardless
-        //user = username
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-        guard let switchView = window.rootViewController as? MainTabController else {return}
-        switchView.authenticateLoggedInUser()
+        AuthServices.handler.logUserIn(email: email, password: password){ (result, error) in
+            if let error = error {
+                print("DEBUG: Error logging in: \(error.localizedDescription)")
+                return
+            }
+            //if approved switch to case controller but for now will switch regardless
+            //user = username
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            guard let switchView = window.rootViewController as? MainTabController else {return}
+            switchView.authenticateLoggedInUser()
+            
+            self.dismiss(animated: true, completion: nil)
+        }
         
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
