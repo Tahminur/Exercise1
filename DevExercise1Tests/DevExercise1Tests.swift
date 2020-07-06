@@ -11,24 +11,25 @@ import XCTest
 
 class DevExercise1Tests: XCTestCase {
 
-    override func setUpWithError() throws {
+    var Arcgis:API!
+    override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        Arcgis = API()
     }
 
-    override func tearDownWithError() throws {
+    override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        Arcgis = nil
+        super.tearDown()
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+//should return 188 countries everytime this also tests data refresh since the same function is used before the completion handler goes on
+    func testDataRetrieval(){
+        let expectation = self.expectation(description: "Countries Retrieved")
+        Arcgis.queryFeatureLayer{
+            expectation.fulfill()
         }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssertEqual(Arcgis.DataRetrieved.count, 188)
+        
     }
-
 }
