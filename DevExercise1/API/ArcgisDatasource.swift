@@ -24,6 +24,11 @@ public protocol ReadableDataSource {
 public class CountryCasesRemoteDataSource: WritableDataSource,ReadableDataSource{
     
     let mapper = CountryMapper()
+    private let storage: CountryStorage
+    
+    public init(storage: CountryStorage){
+        self.storage = storage
+    }
 
     public func read(completion: @escaping () -> Void) {
         //
@@ -63,6 +68,9 @@ public class CountryCasesRemoteDataSource: WritableDataSource,ReadableDataSource
                     return
                 }
                 //TODO: Figure out where to store
+                self.storage.features = self.mapper.mapToCountry(features: features)
+                
+                
                 completion()
             }
             
