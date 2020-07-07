@@ -31,8 +31,10 @@ class MainTabController: UITabBarController {
         let map = MapController()
         let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)
         
+        let newMap = MapViewController()
+        let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
         
-        viewControllers = [tab1, tab2]
+        viewControllers = [tab1, tab2, newMapTab]
     }
 
 

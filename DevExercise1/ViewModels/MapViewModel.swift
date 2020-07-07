@@ -7,3 +7,30 @@
 //
 
 import Foundation
+import ArcGIS
+
+protocol MapViewModelInput {
+    var map:AGSMap {get}
+    var featureURLs:[String] {get}
+    func addFeaturesToMap()
+}
+
+
+class MapViewModel:MapViewModelInput{
+    var featureURLs: [String]
+    let map:AGSMap
+    
+    
+    init(map:AGSMap, featureURLs: [String]){
+        self.map = map
+        self.featureURLs = featureURLs
+        self.addFeaturesToMap()
+    }
+    
+    func addFeaturesToMap() {
+        for feature in featureURLs{
+            let featureTable = AGSServiceFeatureTable(url: URL(string: feature)!)
+            map.operationalLayers.add(AGSFeatureLayer(featureTable: featureTable))
+        }
+    }
+}

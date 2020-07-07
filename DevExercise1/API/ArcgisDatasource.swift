@@ -10,13 +10,26 @@ import Foundation
 import ArcGIS
 
 //be it local or remote will have to implement this protocol
-public protocol DataSource {
+public protocol WritableDataSource {
+    
     func fetch(completion: @escaping () -> Void)
-    func update(completion: @escaping () -> Void)
+}
+
+public protocol ReadableDataSource {
+    
+    func read(completion: @escaping () -> Void)
 }
 
 
-public class CountryCasesRemoteDataSource: DataSource{
+public class CountryCasesRemoteDataSource: WritableDataSource,ReadableDataSource{
+    
+    let mapper = CountryMapper()
+
+    public func read(completion: @escaping () -> Void) {
+        //
+        completion()
+    }
+    
     //
     private let CountryFeatureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: countryURL)!
@@ -55,10 +68,4 @@ public class CountryCasesRemoteDataSource: DataSource{
             
         }
     }
-    
-    public func update(completion: @escaping () -> Void) {
-        <#code#>
-    }
-    
-    
 }
