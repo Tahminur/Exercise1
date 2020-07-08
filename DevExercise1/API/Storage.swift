@@ -12,6 +12,7 @@ import ArcGIS
 protocol Storing{
     var features:[Country] {get}
     
+    func retrieveCountries() -> [Country]
     func storeQueries(country:Country)
 }
 
@@ -23,6 +24,9 @@ public final class CountryStorage: Storing{
         features.append(country)
     }
     
+    func retrieveCountries() -> [Country]{
+        return features
+    }
     //variable to store features in for now storage does not do anything other than just hold the variables
     var features: [Country] = []
     

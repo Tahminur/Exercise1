@@ -18,6 +18,7 @@ protocol MapViewModelInput {
 
 class MapViewModel:MapViewModelInput{
     var featureURLs: [String]
+    
     let map:AGSMap
     
     

@@ -9,7 +9,7 @@
 import Foundation
 import ArcGIS
 
-struct Country{
+public struct Country{
     let name : String
     var cases : Int
     let point: AGSPoint

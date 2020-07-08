@@ -10,38 +10,24 @@ import Foundation
 import ArcGIS
 
 //be it local or remote will have to implement this protocol
-public protocol WritableDataSource {
+public protocol RemoteDataSource {
     
-    func fetch(completion: @escaping () -> Void)
-}
-
-public protocol ReadableDataSource {
-    
-    func read(completion: @escaping () -> Void)
+    func fetch(completion:@escaping () -> Void)
 }
 
 
-public class CountryCasesRemoteDataSource: WritableDataSource,ReadableDataSource{
+public class CountryCasesRemoteDataSource:RemoteDataSource {
     
     let mapper = CountryMapper()
-    private let storage: CountryStorage
-    
-    public init(storage: CountryStorage){
-        self.storage = storage
-    }
-
-    public func read(completion: @escaping () -> Void) {
-        //
-        completion()
-    }
-    
+    //add error handling here as well
+    var DataRetrieved:[Country] = []
     //
     private let CountryFeatureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: countryURL)!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
     
-    public func fetch(completion: @escaping () -> Void) {
+    public func fetch(completion:@escaping () -> Void ) {
         CountryFeatureTable.load { [weak self] (error) in
             
             guard let self = self else { return }
@@ -67,11 +53,9 @@ public class CountryCasesRemoteDataSource: WritableDataSource,ReadableDataSource
                     print("Something went wrong casting the results.")
                     return
                 }
-                //TODO: Figure out where to store
-                self.storage.features = self.mapper.mapToCountry(features: features)
-                
-                
+                self.DataRetrieved = self.mapper.mapToCountry(features: features)
                 completion()
+                //TODO: Figure out where to store
             }
             
         }

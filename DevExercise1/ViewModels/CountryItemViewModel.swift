@@ -8,10 +8,10 @@
 
 import Foundation
 
-protocol CountryItemViewModelInput {
+/*protocol CountryItemViewModelInput {
     //this fetch is from the variable that will be populated by the api
     func fetch()
-}
+}*/
 
 protocol CountryItemViewModelOutput{
     var countryName: String {get}
