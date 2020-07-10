@@ -22,6 +22,7 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
     //add error handling here as well
     var DataRetrieved:[Country] = []
     //
+    
     private let CountryFeatureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: countryURL)!
         return AGSServiceFeatureTable(url: countryServiceURL)
@@ -55,7 +56,7 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
                 }
                 self.DataRetrieved = self.mapper.mapToCountry(features: features)
                 completion()
-                //TODO: Figure out where to store
+
             }
             
         }

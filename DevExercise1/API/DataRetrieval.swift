@@ -11,6 +11,15 @@ import ArcGIS
 
 
 
+//NOT USED ANYMORE REPLACED BY ARCGIDDATASOURCE, REPOSITORIES, AND STORAGE
+
+
+
+
+
+
+
+
 class API{
     
     static let sharedInstance = API()

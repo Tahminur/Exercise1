@@ -10,7 +10,6 @@ import Foundation
 import ArcGIS
 
 protocol Storing{
-    var features:[Country] {get}
     
     func retrieveCountries() -> [Country]
     func storeQueries(country:Country)
@@ -20,6 +19,8 @@ protocol Storing{
 public final class CountryStorage: Storing{
     public static var shared = CountryStorage()
     
+    var point:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
+    //may not be needed at all have for possible off loading to core data
     func storeQueries(country: Country) {
         features.append(country)
     }

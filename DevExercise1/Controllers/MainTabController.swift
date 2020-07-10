@@ -25,18 +25,18 @@ class MainTabController: UITabBarController {
     }
     func setupTabs(){
         //just need to fix positioning
-        let cases = CountryCaseController()
+        /*let cases = CountryCaseController()
         let tab1 = templateNavController(image: #imageLiteral(resourceName: "rona"), rootViewController: cases)
         
         let map = MapController()
-        let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)
+        let tab2 = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: map)*/
         
         let newMap = MapViewController()
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
         
         let newCases = CountryController()
-        let newCasesTab = templateNavController(image: UIImage.init(systemName: "pencil"), rootViewController: newCases)
-        viewControllers = [tab1, tab2, newMapTab, newCasesTab]
+        let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "rona"), rootViewController: newCases)
+        viewControllers = [newCasesTab, newMapTab]
     }
 
 

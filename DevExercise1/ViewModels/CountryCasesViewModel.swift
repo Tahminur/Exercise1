@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ArcGIS
 
 protocol CountryCasesViewModelInput {
     //this fetch is from the variable that will be populated by the api
@@ -27,10 +28,18 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
     }
     //TODO:add error handling alerts and tests
     func fetchFromDataSource(forceRefresh:Bool, completion:@escaping () -> Void) {
-        repository.fetch(forceRefresh: forceRefresh){
-            for country in self.repository.returnCountries(){
-                self.Countries.append(CountryItemViewModel(country: country))
+        if (forceRefresh){
+            Countries.removeAll()
+            repository.fetch(forceRefresh: forceRefresh){
+                //change from append to updata values in country models when positive
+                for country in self.repository.returnCountries(){
+                    self.Countries.append(CountryItemViewModel(country: country))
+                }
+                print("Count of fetch from datasource \(self.Countries.count)")
+                completion()
             }
+        } else{
+            completion()
         }
     }
     

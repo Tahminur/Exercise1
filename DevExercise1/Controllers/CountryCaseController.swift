@@ -10,6 +10,11 @@ import UIKit
 import ArcGIS
 
 
+//NOT USED ANYMORE: REPLACED BY COUNTRYCONTROLLER
+
+
+
+
 class CountryCaseController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()

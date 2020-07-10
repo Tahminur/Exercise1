@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ArcGIS
 
 public protocol Repositories{
     func fetch(forceRefresh:Bool, completion: @escaping () -> Void)
@@ -21,14 +22,18 @@ public class CountryDataRepository : Repositories {
         self.remoteDataSource = remoteDataSource
         self.storage = storage
     }
-    
+    //MARK:- Storing Countries
     public func fetch(forceRefresh:Bool, completion: @escaping () -> Void) {
         if (forceRefresh){
-            pullCountryDataFromRemote()
-        } else if (!forceRefresh){
-            print("Not forced")
+            //pullCountryDataFromRemote()
+            remoteDataSource.fetch(){
+                self.storage.features = self.remoteDataSource.DataRetrieved
+                print("in storage: \(self.storage.features.count)")
+                completion()
+            }
+        } else{
+            completion()
         }
-        completion()
     }
     
     public func returnCountries()->[Country]{
@@ -38,7 +43,7 @@ public class CountryDataRepository : Repositories {
     fileprivate func pullCountryDataFromRemote(){
         remoteDataSource.fetch(){
             self.storage.features = self.remoteDataSource.DataRetrieved
-            print("pulled from remote source")
+            print("in storage: \(self.storage.features.count)")
         }
     }
     

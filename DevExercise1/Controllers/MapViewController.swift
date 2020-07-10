@@ -22,6 +22,12 @@ class MapViewController:UIViewController{
         navigationItem.title = "New Map"
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.mapView.setViewpoint(AGSViewpoint(center: CountryStorage.shared.point, scale: 30000000))
+    }
+    
     func setupMapView(){
         view.addSubview(mapView)
         mapView.pin(to: view)

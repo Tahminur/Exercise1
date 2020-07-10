@@ -14,19 +14,15 @@ import ArcGIS
 class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
-    var viewModel:CountryCasesViewModel!
+    var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource(), storage: CountryStorage.shared))
     
-    static func create(with viewModel: CountryCasesViewModel) -> CountryController{
-        let view = CountryController()
-        view.viewModel = viewModel
-        
-        return view
-    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //need to fix issue of nil beign found in the view model  have to instantiate somewhere TODO figure out where
         viewModel.fetchFromDataSource(forceRefresh: false){
+            print("# of countries to appear\(self.viewModel.Countries.count)")
             self.tableView.reloadData()
         }
     }
@@ -35,6 +31,10 @@ class CountryController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        viewModel.fetchFromDataSource(forceRefresh: true){
+            print("# of countries to appear \(self.viewModel.Countries.count)")
+            self.tableView.reloadData()
+        }
         navigationItem.title = "New Cases"
     }
     //MARK: -Layout
@@ -55,9 +55,18 @@ class CountryController:UIViewController{
         print("Refreshing data")
         viewModel.fetchFromDataSource(forceRefresh: true){
             self.tableView.reloadData()
+            self.refresher.endRefreshing()
         }
+        self.testAlert()
+    }
+    
+    func testAlert() {
+        let alertController = UIAlertController(title: "Refreshing", message: "test", preferredStyle: .alert)
         
-        
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.present(alertController,animated: true, completion: nil)
+
     }
     func setTableViewDelegates() {
         tableView.delegate = self
@@ -83,8 +92,8 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
         let indexPath = tableView.indexPathForSelectedRow
         
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
-        //have to figure out how to pass this to the map
-        API.sharedInstance.selectedPoint = clickedCell.point
+        //have to figure out how to pass this to the new map
+        CountryStorage.shared.point = clickedCell.point
         
         self.tabBarController?.selectedIndex = 1
         

@@ -11,6 +11,8 @@ import UIKit
 
 import ArcGIS
 
+//DEPRECATED: NOT USED ANYMORE REPLACED BY MAPVIEWCONTROLLER
+
 
 class MapController:UIViewController{
     //will be the page that displays the map
