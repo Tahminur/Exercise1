@@ -14,7 +14,7 @@ class DevExercise1UITests: XCTestCase {
 
     override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
-
+        XCUIApplication().launch()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
@@ -22,4 +22,9 @@ class DevExercise1UITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    //should test that ispresentingController is now the map controller
+    func testClickCountryAction(){
+        
+    }
+    
 }

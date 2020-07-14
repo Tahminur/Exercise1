@@ -32,4 +32,11 @@ class DevExercise1Tests: XCTestCase {
         XCTAssertEqual(Arcgis.DataRetrieved.count, 188)
         
     }
+    //should test that alert is displayed
+    func testNoInternetConnection(){
+        
+    }
+    
+    
+    
 }

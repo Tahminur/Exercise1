@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-extension UIView{
+public extension UIView{
     func pin(to superView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
@@ -18,4 +18,35 @@ extension UIView{
         trailingAnchor.constraint(equalTo: superView.trailingAnchor).isActive = true
         bottomAnchor.constraint(equalTo: superView.bottomAnchor).isActive = true
     }
+}
+
+private var window: UIWindow!
+
+
+public extension UIAlertController{
+    func presentAlert(message: String, title: String? = ""){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        alertController.present(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    func present(animated: Bool, completion: (() -> Void)?){
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = UIViewController()
+        window.windowLevel = UIWindow.Level(rawValue: UIWindow.Level.RawValue(2000.0 + 1))
+        
+        window.makeKeyAndVisible()
+        window.rootViewController?.present(self,animated: animated, completion: completion)
+    }
+    
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        window = nil
+    }
+    
 }

@@ -8,19 +8,23 @@
 
 import UIKit
 import ArcGIS
-
+import Network
 
 
 class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
+    //below for newtwork connection
+    private let monitor = NWPathMonitor()
+    let queue = DispatchQueue(label: "Monitor")
+    
+    
     var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource(), storage: CountryStorage.shared))
     
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //need to fix issue of nil beign found in the view model  have to instantiate somewhere TODO figure out where
         viewModel.fetchFromDataSource(forceRefresh: false){
             print("# of countries to appear\(self.viewModel.Countries.count)")
             self.tableView.reloadData()
@@ -57,22 +61,25 @@ class CountryController:UIViewController{
             self.tableView.reloadData()
             self.refresher.endRefreshing()
         }
-        self.testAlert()
+        self.InternetConnectionCheck()
     }
     
-    func testAlert() {
-        let alertController = UIAlertController(title: "Refreshing", message: "test", preferredStyle: .alert)
-        
-        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(defaultAction)
-        self.present(alertController,animated: true, completion: nil)
-
+    func InternetConnectionCheck() {
+        monitor.pathUpdateHandler = { path in
+            if path.status != .satisfied {
+                self.presentAlert(message: "No Internet Connection")
+            }
+        }
+        monitor.start(queue: DispatchQueue.main)
     }
     func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
     }
 }
+
+
+
 //MARK: - TableView
 extension CountryController: UITableViewDelegate, UITableViewDataSource {
     
