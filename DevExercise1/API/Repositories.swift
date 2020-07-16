@@ -9,6 +9,10 @@
 import Foundation
 import ArcGIS
 
+
+//have feature layers also be loaded in here so 
+
+
 public protocol Repositories{
     func fetch(forceRefresh:Bool, completion: @escaping () -> Void)
 }

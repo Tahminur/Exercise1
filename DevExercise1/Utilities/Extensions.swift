@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-public extension UIView{
+extension UIView{
     func pin(to superView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         topAnchor.constraint(equalTo: superView.topAnchor).isActive = true
@@ -20,11 +20,20 @@ public extension UIView{
     }
 }
 
+extension UIViewController{
+    func presentAlert(message: String, title: String? = ""){
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(OKAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
+//there is an issue with these below for some reaoson the alert is not visible even though it is created, fixed the issue with it not being in the view hierarchy
 private var window: UIWindow!
 
 
 public extension UIAlertController{
-    func presentAlert(message: String, title: String? = ""){
+    func presentingAlert(message: String, title: String? = ""){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alertController.addAction(OKAction)
@@ -37,7 +46,7 @@ public extension UIAlertController{
     func present(animated: Bool, completion: (() -> Void)?){
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIViewController()
-        window.windowLevel = UIWindow.Level(rawValue: UIWindow.Level.RawValue(2000.0 + 1))
+        window.windowLevel = .alert
         
         window.makeKeyAndVisible()
         window.rootViewController?.present(self,animated: animated, completion: completion)

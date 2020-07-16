@@ -10,6 +10,10 @@ import Foundation
 import ArcGIS
 import UIKit
 
+
+//TODO: Add arcgis developer account to get rid of watermark
+
+
 //be it local or remote will have to implement this protocol
 public protocol RemoteDataSource {
     
@@ -29,7 +33,7 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
     let countryServiceURL = URL(string: countryURL)!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
-    
+    //the view is part of the view hierarchy but it is not present for some reason. Look for other way to present views.
     public func fetch(completion:@escaping () -> Void ) {
         FeatureTable.load { [weak self] (error) in
             
@@ -38,12 +42,13 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
             if let error = error {
                 
                 print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
-                UIAlertController().presentAlert(message: "Error loading Corona Cases feature layer: \(error.localizedDescription)")
+                UIAlertController().presentingAlert(message: "Error loading Corona Cases feature layer: \(error.localizedDescription)")
                 return
             }
 
             let queryParameters = AGSQueryParameters()
             queryParameters.whereClause = "\(countryNameKey) like '%%'"
+            //queryParameters.whereClause = "blah like '%%'"
             queryParameters.returnGeometry = true
 
             let outFields: AGSQueryFeatureFields = .loadAll
@@ -51,16 +56,17 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
 
                 if let error = error {
                     print("Error querying the Corona Cases feature layer: \(error.localizedDescription)")
-                    UIAlertController().presentAlert(message: "Error querying the Corona Cases feature layer: \(error.localizedDescription)")
+                    //UIAlertController().presentingAlert(message: "Error querying the Corona Cases feature layer: \(error.localizedDescription)")
                     return
                 }
 
                 guard let result = result, let features = result.featureEnumerator().allObjects as? [AGSArcGISFeature] else {
                     print("Something went wrong casting the results.")
-                    UIAlertController().presentAlert(message: "Something went wrong casting the results.")
+                    UIAlertController().presentingAlert(message: "Something went wrong casting the results.")
                     return
                 }
                 self.DataRetrieved = self.mapper.mapToCountry(features: features)
+                
                 completion()
 
             }

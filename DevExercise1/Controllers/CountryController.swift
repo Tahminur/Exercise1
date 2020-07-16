@@ -43,18 +43,6 @@ class CountryController:UIViewController{
     }
     //MARK: -Layout
     
-    func configureTableView() {
-        view.backgroundColor = .white
-        view.addSubview(tableView)
-        setTableViewDelegates()
-        tableView.rowHeight = 50
-        tableView.register(CountryCell.self, forCellReuseIdentifier: "CountryCell")
-        tableView.pin(to: view)
-        tableView.addSubview(refresher)
-        refresher.addTarget(self, action: #selector(refreshCountryData(_:)), for: .valueChanged)
-        
-    }
-    
     @objc func refreshCountryData(_ sender: Any){
         print("Refreshing data")
         viewModel.fetchFromDataSource(forceRefresh: true){
@@ -68,6 +56,7 @@ class CountryController:UIViewController{
         monitor.pathUpdateHandler = { path in
             if path.status != .satisfied {
                 self.presentAlert(message: "No Internet Connection")
+                print("nothing")
             }
         }
         monitor.start(queue: DispatchQueue.main)
@@ -83,6 +72,17 @@ class CountryController:UIViewController{
 //MARK: - TableView
 extension CountryController: UITableViewDelegate, UITableViewDataSource {
     
+    func configureTableView() {
+        view.backgroundColor = .white
+        view.addSubview(tableView)
+        setTableViewDelegates()
+        tableView.rowHeight = 50
+        tableView.register(CountryCell.self, forCellReuseIdentifier: "CountryCell")
+        tableView.pin(to: view)
+        tableView.addSubview(refresher)
+        refresher.addTarget(self, action: #selector(refreshCountryData(_:)), for: .valueChanged)
+        
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.Countries.count
     }

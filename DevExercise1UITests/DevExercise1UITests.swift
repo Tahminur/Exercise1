@@ -10,11 +10,11 @@ import XCTest
 @testable import DevExercise1
 
 class DevExercise1UITests: XCTestCase {
-
-
+    var app: XCUIApplication
+    
     override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        XCUIApplication().launch()
+        app = XCUIApplication().launch()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
@@ -24,7 +24,8 @@ class DevExercise1UITests: XCTestCase {
 
     //should test that ispresentingController is now the map controller
     func testClickCountryAction(){
-        
+        app.buttons.firstMatch.tap()
+        XCTAssert(app.)
     }
     
 }

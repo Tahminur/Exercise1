@@ -26,6 +26,17 @@ class CountryCell: UITableViewCell {
     
     func set(country: Country){
         self.textLabel!.text = "\(country.name) : \(country.cases)"
+        self.textLabel!.textColor = Util().decideColor(caseNumber: country.cases)
+        self.textLabel!.textAlignment = .center
+        self.textLabel!.font = .systemFont(ofSize: 20)
+        self.textLabel!.layer.shadowColor = UIColor.black.cgColor
+        self.textLabel!.layer.shadowRadius = 2
+        self.textLabel!.layer.shadowOpacity = 0.25
+        self.textLabel!.layer.shadowOffset = CGSize(width: 4, height: 4)
+        self.textLabel!.layer.masksToBounds = false
+        
+        
+        self.backgroundColor = #colorLiteral(red: 0.8159592152, green: 0.9822254777, blue: 0.9723348022, alpha: 1)
         point = country.point
     }
     
