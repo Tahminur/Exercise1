@@ -32,7 +32,7 @@ class MainTabController: UITabBarController {
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
         
         let newCases = CountryController()
-        let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "iconfinder_coronovirus_embulance_medical_care_5932587"), rootViewController: newCases)
+        let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "29-2"), rootViewController: newCases)
         viewControllers = [newCasesTab, newMapTab]
     }
 }
