@@ -21,17 +21,29 @@ class MapViewModel:MapViewModelInput{
     
     let map:AGSMap
     
+    var featureTables: [AGSServiceFeatureTable] = []
     
     init(map:AGSMap, featureURLs: [String]){
         self.map = map
         self.featureURLs = featureURLs
+        for feature in featureURLs{
+            featureTables.append(AGSServiceFeatureTable(url: URL(string: feature)!))
+        }
         self.addFeaturesToMap()
+        
     }
     
     func addFeaturesToMap() {
-        for feature in featureURLs{
-            let featureTable = AGSServiceFeatureTable(url: URL(string: feature)!)
-            map.operationalLayers.add(AGSFeatureLayer(featureTable: featureTable))
+        for feature in featureTables{
+            //let featureTable = AGSServiceFeatureTable(url: URL(string: feature)!)
+            //map.operationalLayers.add(AGSFeatureLayer(featureTable: featureTable))
+            map.operationalLayers.add(AGSFeatureLayer(featureTable: feature))
+        
         }
+    }
+//NOTE: Cannot repull feature layers unless they are gotten rid of first since esri will return an error saying that the object is already owned otherwise. Think of how to add the refresh be it through a boolean flag or call directly
+    func refreshMap(){
+        map.operationalLayers.removeAllObjects()
+        addFeaturesToMap()
     }
 }

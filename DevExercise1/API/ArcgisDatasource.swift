@@ -30,7 +30,7 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
     //
     
     public let FeatureTable: AGSServiceFeatureTable = {
-    let countryServiceURL = URL(string: countryURL)!
+    let countryServiceURL = URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
     //the view is part of the view hierarchy but it is not present for some reason. Look for other way to present views.
@@ -42,13 +42,11 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
             if let error = error {
                 
                 print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
-                UIAlertController().presentingAlert(message: "Error loading Corona Cases feature layer: \(error.localizedDescription)")
                 return
             }
 
             let queryParameters = AGSQueryParameters()
-            queryParameters.whereClause = "\(countryNameKey) like '%%'"
-            //queryParameters.whereClause = "blah like '%%'"
+            queryParameters.whereClause = "\("Country_Region") like '%%'"
             queryParameters.returnGeometry = true
 
             let outFields: AGSQueryFeatureFields = .loadAll
@@ -56,7 +54,6 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
 
                 if let error = error {
                     print("Error querying the Corona Cases feature layer: \(error.localizedDescription)")
-                    //UIAlertController().presentingAlert(message: "Error querying the Corona Cases feature layer: \(error.localizedDescription)")
                     return
                 }
 

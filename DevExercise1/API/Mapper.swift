@@ -10,11 +10,9 @@ import Foundation
 import ArcGIS
 
 
-protocol Mapper {
-    func mapToCountry(features:[AGSArcGISFeature])->[Country]
-}
 
-public final class CountryMapper:Mapper {
+
+public class CountryMapper {
     func mapToCountry(features:[AGSArcGISFeature]) -> [Country] {
         var countriesToReturn:[Country] = []
         for feature in features{
@@ -32,5 +30,14 @@ public final class CountryMapper:Mapper {
             countriesToReturn.append(country)
         }
         return countriesToReturn
+    }
+}
+
+public class CalloutMapper {
+    func mapToCallout(feature:[AGSArcGISFeature]) -> Callout {
+        let title:String = feature[0].attributes["Province_State"] as! String
+        let details:Int = feature[0].attributes["Confirmed"] as! Int
+        
+        return Callout(title: title, detail: "\(details)")
     }
 }
