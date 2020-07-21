@@ -36,9 +36,6 @@ class MapViewController:UIViewController{
         viewModel.authenticateMap2(completion: setupMapView(approved:))
         
     }
-    //
-   
-    
     func setupMapView(approved: String?){
         if approved != nil{
             self.presentAlert(message: "You have to Sign In")

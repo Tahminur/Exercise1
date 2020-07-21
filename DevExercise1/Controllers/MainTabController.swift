@@ -24,7 +24,6 @@ class MainTabController: UITabBarController {
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         nav.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        //nav.navigationBar.backgroundColor = UIColor.init(red: 178, green: 37, blue: 37, alpha: 0)
         return nav
     }
     func setupTabs(){
