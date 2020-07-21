@@ -26,7 +26,6 @@ class MapViewController:UIViewController{
     //MARK:-View setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMapView()
         navigationItem.title = "New Map"
         setupDelegates()
     }
@@ -34,20 +33,27 @@ class MapViewController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        viewModel.authenticateMap2(completion: setupMapView(approved:))
         
-        self.mapView.setViewpoint(AGSViewpoint(center: CountryStorage.shared.point, scale: 30000000))
-        //try self.viewModel.refreshMap(isRefresh: true)
     }
+    //
+   
     
-    func setupMapView(){
+    func setupMapView(approved: String?){
+        if approved != nil{
+            self.presentAlert(message: "You have to Sign In")
+        }
+        else{
         view.addSubview(mapView)
         mapView.pin(to: view)
         do{
-            try viewModel.authenticateMap()
+            try viewModel.LicenseMap()
         } catch{
-            self.presentAlert(message: "Authentication Failed")
+            self.presentAlert(message: "Error with Licensing")
         }
         mapView.map = viewModel.map
+        mapView.setViewpoint(AGSViewpoint(center: CountryStorage.shared.point, scale: 30000000))
+        }
     }
 }
 
