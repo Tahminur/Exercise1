@@ -20,7 +20,7 @@ class MapViewController:UIViewController{
     "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/0"])
     var mapView:AGSMapView = AGSMapView()
     
-    
+    //Used for handling callouts
     private weak var activeSelectionQuery: AGSCancelable?
     
     //MARK:-View setup
@@ -32,11 +32,11 @@ class MapViewController:UIViewController{
     }
     
     
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.mapView.setViewpoint(AGSViewpoint(center: CountryStorage.shared.point, scale: 30000000))
+        self.viewModel.refreshMap(isRefresh: true)
     }
     
     func setupMapView(){
@@ -58,7 +58,7 @@ extension MapViewController: AGSGeoViewTouchDelegate{
         if let activeSelectionQuery = activeSelectionQuery {
             activeSelectionQuery.cancel()
         }
-//builds tap tolerance
+        //builds tap tolerance
         let toleranceInPoints: Double = 12
         let toleranceInMapUnits = toleranceInPoints * mapView.unitsPerPoint
         let envelope = AGSEnvelope(xMin: mapPoint.x - toleranceInMapUnits,
@@ -76,24 +76,29 @@ extension MapViewController: AGSGeoViewTouchDelegate{
             if let error = error {
                 self?.presentAlert(message: error.localizedDescription)
             }
+            self!.mapView.callout.dismiss()
             //do something here to have the callout
             if let result = queryResult {
                 //print("\(result.featureEnumerator().allObjects.count) feature(s) selected")
                 let calloutDetails = result.featureEnumerator().allObjects as? [AGSArcGISFeature]
-                //makes sure that there is a feature associated with the callOutDetails
-                guard calloutDetails != nil else {
+                //makes sure that there is a feature associated with the callOutDetails else exits the function
+                if calloutDetails!.count == 0 {
+                    
                     return
                 }
-                
-                //look at attributes Confirmed and "Province_State" and also make sure that only click action s on features register others shopuld do nothing
-                //for some reason some of the province states return null need to check reason for this
-                let callout = CalloutMapper().mapToCallout(feature: calloutDetails!)
-                if self!.mapView.callout.isHidden {
-                    self!.mapView.callout.title = callout.title
-                    self!.mapView.callout.detail = "\(callout.detail) confirmed cases so far!"
-                    self!.mapView.callout.show(at: mapPoint, screenOffset: CGPoint.zero, rotateOffsetWithMap: false, animated: true)
-                } else {
-                    self?.mapView.callout.dismiss()
+                //for some reason some of the province states return null so have a catch statement for those errors, for now displays an alert, maybe can replace it with something else
+                do{
+                    let callout = try CalloutMapper().mapToCallout(feature: calloutDetails!)
+                    if self!.mapView.callout.isHidden {
+                        self!.mapView.callout.title = callout.title
+                        self!.mapView.callout.detail = "\(callout.detail) confirmed cases so far!"
+                        self!.mapView.callout.show(at: mapPoint, screenOffset: CGPoint.zero, rotateOffsetWithMap: false, animated: true)
+                        self!.mapView.callout.isAccessoryButtonHidden = true
+                    } else {
+                        self?.mapView.callout.dismiss()
+                    }
+                } catch{
+                    self?.presentAlert(message: "This feature has no state province sadly")
                 }
             }
         

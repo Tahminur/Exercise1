@@ -42,8 +42,15 @@ class MapViewModel:MapViewModelInput{
         }
     }
 //NOTE: Cannot repull feature layers unless they are gotten rid of first since esri will return an error saying that the object is already owned otherwise. Think of how to add the refresh be it through a boolean flag or call directly
-    func refreshMap(){
-        map.operationalLayers.removeAllObjects()
-        addFeaturesToMap()
+    func refreshMap(isRefresh:Bool) throws {
+        if isRefresh{
+            map.operationalLayers.removeAllObjects()
+            addFeaturesToMap()
+            
+        } else {
+            print("DEBUG: refresh not called")
+        }
+        
+        
     }
 }

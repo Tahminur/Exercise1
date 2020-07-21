@@ -33,8 +33,15 @@ public class CountryMapper {
     }
 }
 
+enum MappingErrors:Error{
+    case badFeature
+}
+
 public class CalloutMapper {
-    func mapToCallout(feature:[AGSArcGISFeature]) -> Callout {
+    func mapToCallout(feature:[AGSArcGISFeature]) throws -> Callout {
+        if feature[0].attributes["Province_State"] is NSNull{
+            throw MappingErrors.badFeature
+        }
         let title:String = feature[0].attributes["Province_State"] as! String
         let details:Int = feature[0].attributes["Confirmed"] as! Int
         

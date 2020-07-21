@@ -21,11 +21,7 @@ public final class CountryStorage: Storing{
     public static var shared = CountryStorage()
     
     var point:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
-    //may not be needed at all have for possible off loading to core data
-    /*func storeQueries(country: Country) {
-        features.append(country)
-    }*/
-    
+
     func retrieveCountries() -> [Country]{
         return features
     }

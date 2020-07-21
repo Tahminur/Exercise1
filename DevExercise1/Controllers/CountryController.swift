@@ -9,14 +9,15 @@
 import UIKit
 import ArcGIS
 import Network
+//import 
 
 
 class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
     //below for newtwork connection
-    private let monitor = NWPathMonitor()
-    let queue = DispatchQueue(label: "Monitor")
+    //private let monitor = NWPathMonitor()
+    //let queue = DispatchQueue(label: "Monitor")
     
     
     var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource(), storage: CountryStorage.shared))
@@ -49,10 +50,11 @@ class CountryController:UIViewController{
             self.tableView.reloadData()
             self.refresher.endRefreshing()
         }
-        self.InternetConnectionCheck()
+        //self.InternetConnectionCheck()
+        
     }
-    
-    func InternetConnectionCheck() {
+//move to view model
+    /*func InternetConnectionCheck() {
         monitor.pathUpdateHandler = { path in
             if path.status != .satisfied {
                 self.presentAlert(message: "No Internet Connection")
@@ -60,7 +62,7 @@ class CountryController:UIViewController{
             }
         }
         monitor.start(queue: DispatchQueue.main)
-    }
+    }*/
     func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self

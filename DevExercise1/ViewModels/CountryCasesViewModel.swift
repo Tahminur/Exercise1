@@ -18,6 +18,8 @@ protocol CountryCasesViewModelOutput{
     var Countries: [CountryItemViewModel] {get}
 }
 
+
+
 public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCasesViewModelInput{
     var Countries: [CountryItemViewModel] = []
     
@@ -26,7 +28,9 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
     public init(repository: CountryDataRepository){
         self.repository = repository
     }
-    //TODO:add error handling alerts and tests
+    //TODO: figure out how to throw the error here and create the alert in the view controller upon recieving the error(see mapper function)
+    
+    
     func fetchFromDataSource(forceRefresh:Bool, completion:@escaping () -> Void) {
         if (forceRefresh){
             Countries.removeAll()
@@ -43,9 +47,47 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
         }
     }
     
+    func fetchFromDataSource2(forceRefresh:Bool, completion:@escaping () -> Void) throws {
+        //handle cse where there is no internet connection here 
+        
+        
+        
+        if (forceRefresh){
+            Countries.removeAll()
+            repository.fetch(forceRefresh: forceRefresh){
+                //change from append to updata values in country models when positive
+                for country in self.repository.returnCountries(){
+                    self.Countries.append(CountryItemViewModel(country: country))
+                }
+                
+                completion()
+            }
+        } else{
+            completion()
+        }
+    }
     
     
-    
-    
-    
+    //move to view model
+    /*func InternetConnectionCheck() {
+        monitor.pathUpdateHandler = { path in
+            if path.status != .satisfied {
+                self.presentAlert(message: "No Internet Connection")
+                print("nothing")
+            }
+        }
+        monitor.start(queue: DispatchQueue.main)
+    }
+ */
+}
+
+extension CountryCasesViewModel{
+    //for handling errors with the fetchfroomDatasource function
+    enum CountryErrors:Error, LocalizedError{
+        case badCountry
+        
+        case badFetch
+        
+        case noInternet
+    }
 }
