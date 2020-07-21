@@ -36,12 +36,17 @@ class MapViewController:UIViewController{
         super.viewWillAppear(animated)
         
         self.mapView.setViewpoint(AGSViewpoint(center: CountryStorage.shared.point, scale: 30000000))
-        self.viewModel.refreshMap(isRefresh: true)
+        //try self.viewModel.refreshMap(isRefresh: true)
     }
     
     func setupMapView(){
         view.addSubview(mapView)
         mapView.pin(to: view)
+        do{
+            try viewModel.authenticateMap()
+        } catch{
+            self.presentAlert(message: "Authentication Failed")
+        }
         mapView.map = viewModel.map
     }
 }
