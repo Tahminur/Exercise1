@@ -25,15 +25,16 @@ public protocol RemoteDataSource {
 public class CountryCasesRemoteDataSource:RemoteDataSource {
     
     let mapper = CountryMapper()
-    //add error handling here as well
+
     var DataRetrieved:[Country] = []
-    //
+    
     
     public let FeatureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
-    //the view is part of the view hierarchy but it is not present for some reason. Look for other way to present views.
+
+    
     public func fetch(completion:@escaping () -> Void ) {
         FeatureTable.load { [weak self] (error) in
             
@@ -59,7 +60,6 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
 
                 guard let result = result, let features = result.featureEnumerator().allObjects as? [AGSArcGISFeature] else {
                     print("Something went wrong casting the results.")
-                    UIAlertController().presentingAlert(message: "Something went wrong casting the results.")
                     return
                 }
                 self.DataRetrieved = self.mapper.mapToCountry(features: features)

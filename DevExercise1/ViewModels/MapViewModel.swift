@@ -14,8 +14,7 @@ protocol MapViewModelInput {
     var featureURLs:[String] {get}
     func addFeaturesToMap()
     
-    //
-    func authenticateMap()
+    func authenticateMap(completion:@escaping (String?) -> Void)
     func LicenseMap() throws
 }
 
@@ -33,9 +32,7 @@ class MapViewModel:MapViewModelInput{
         for feature in featureURLs{
             featureTables.append(AGSServiceFeatureTable(url: URL(string: feature)!))
         }
-        //self.authenticateMap()
         self.addFeaturesToMap()
-        //self.showMap()
     }
     
     func addFeaturesToMap() {
@@ -43,18 +40,6 @@ class MapViewModel:MapViewModelInput{
             map.operationalLayers.add(AGSFeatureLayer(featureTable: feature))
         
         }
-    }
-//NOTE: Cannot repull feature layers unless they are gotten rid of first since esri will return an error saying that the object is already owned otherwise. Think of how to add the refresh be it through a boolean flag or call directly Pushed to milestone 3
-    func refreshMap(isRefresh:Bool) throws {
-        if isRefresh{
-            //check network connectivity and throw if no internet
-            map.operationalLayers.removeAllObjects()
-            addFeaturesToMap()
-        } else {
-            print("DEBUG: refresh not called")
-        }
-        
-        
     }
     
     //Gets rid of watermark
@@ -67,29 +52,12 @@ class MapViewModel:MapViewModelInput{
         }
     }
     
-    //TODO: Add authentication into the map layer. Kinda hacky I feel, plus need to add for when authentication fails don't load in map
-    func authenticateMap(){
-        let portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
-         portal.load() {(error) in
-            if let error = error {
-                print(error)
-            }
-                 // check the portal item loaded and print the modified date
-            if portal.loadStatus == AGSLoadStatus.loaded {
-                if let portalName = portal.portalInfo?.portalName {
-                    print(portalName)
-                }
-                
-            }
-        }
-    }
-    func authenticateMap2(completion:@escaping (String?) -> Void){
-        let portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
+    func authenticateMap(completion:@escaping (String?) -> Void){
+        let portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: false)
         portal.load() { (error) in
             if let error = error {
                 completion(error.localizedDescription)
                 }
-            // check the portal item loaded and print the modified date
                 if portal.loadStatus == AGSLoadStatus.loaded {
                     completion(nil)
                 }

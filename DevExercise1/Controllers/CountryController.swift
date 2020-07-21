@@ -15,54 +15,52 @@ import Network
 class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
-    //below for newtwork connection
-    //private let monitor = NWPathMonitor()
-    //let queue = DispatchQueue(label: "Monitor")
     
     
     var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource(), storage: CountryStorage.shared))
     
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        viewModel.fetchFromDataSource(forceRefresh: false){
-            print("# of countries to appear\(self.viewModel.Countries.count)")
+    func setupCountries(possibleMsg:String?){
+        if possibleMsg == nil{
             self.tableView.reloadData()
         }
+        else{
+            self.tableView.reloadData()
+            self.presentAlert(message: possibleMsg!)
+        }
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        viewModel.fetchFromDataSource(forceRefresh: false,completion: setupCountries(possibleMsg:))
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        viewModel.fetchFromDataSource(forceRefresh: true){
-            print("# of countries to appear \(self.viewModel.Countries.count)")
-            self.tableView.reloadData()
-        }
-        navigationItem.title = "New Cases"
+        viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountries(possibleMsg:))
+        navigationItem.title = "Cases"
     }
     //MARK: -Layout
     
     @objc func refreshCountryData(_ sender: Any){
         print("Refreshing data")
-        viewModel.fetchFromDataSource(forceRefresh: true){
+        viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountriesRefresh(possibleMsg:))
+    }
+    
+    func setupCountriesRefresh(possibleMsg:String?){
+        if possibleMsg == nil{
             self.tableView.reloadData()
             self.refresher.endRefreshing()
         }
-        //self.InternetConnectionCheck()
-        
-    }
-//move to view model
-    /*func InternetConnectionCheck() {
-        monitor.pathUpdateHandler = { path in
-            if path.status != .satisfied {
-                self.presentAlert(message: "No Internet Connection")
-                print("nothing")
-            }
+        else{
+            self.tableView.reloadData()
+            self.presentAlert(message: possibleMsg!)
         }
-        monitor.start(queue: DispatchQueue.main)
-    }*/
+    }
+
     func setTableViewDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -101,7 +99,7 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
         let indexPath = tableView.indexPathForSelectedRow
         
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
-        //have to figure out how to pass this to the new map
+        
         CountryStorage.shared.point = clickedCell.point
         
         self.tabBarController?.selectedIndex = 1

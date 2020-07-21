@@ -11,7 +11,7 @@ import ArcGIS
 
 protocol CountryCasesViewModelInput {
     //this fetch is from the variable that will be populated by the api
-    func fetchFromDataSource(forceRefresh:Bool, completion:@escaping () -> Void)
+    func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void)
 }
 
 protocol CountryCasesViewModelOutput{
@@ -28,66 +28,25 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
     public init(repository: CountryDataRepository){
         self.repository = repository
     }
-    //TODO: figure out how to throw the error here and create the alert in the view controller upon recieving the error(see mapper function)
     
     
-    func fetchFromDataSource(forceRefresh:Bool, completion:@escaping () -> Void) {
+    func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void) {
         if (forceRefresh){
             Countries.removeAll()
             repository.fetch(forceRefresh: forceRefresh){
-                //change from append to updata values in country models when positive
                 for country in self.repository.returnCountries(){
                     self.Countries.append(CountryItemViewModel(country: country))
                 }
-                print("Count of fetch from datasource \(self.Countries.count)")
-                completion()
-            }
-        } else{
-            completion()
-        }
-    }
-    
-    func fetchFromDataSource2(forceRefresh:Bool, completion:@escaping () -> Void) throws {
-        //handle cse where there is no internet connection here 
-        
-        
-        
-        if (forceRefresh){
-            Countries.removeAll()
-            repository.fetch(forceRefresh: forceRefresh){
-                //change from append to updata values in country models when positive
-                for country in self.repository.returnCountries(){
-                    self.Countries.append(CountryItemViewModel(country: country))
+                if self.Countries.count == 0{
+                    completion("Error fetching Countries")
+                    return
                 }
-                
-                completion()
+                completion(nil)
+                return
             }
         } else{
-            completion()
+            completion(nil)
         }
     }
-    
-    
-    //move to view model
-    /*func InternetConnectionCheck() {
-        monitor.pathUpdateHandler = { path in
-            if path.status != .satisfied {
-                self.presentAlert(message: "No Internet Connection")
-                print("nothing")
-            }
-        }
-        monitor.start(queue: DispatchQueue.main)
-    }
- */
 }
 
-extension CountryCasesViewModel{
-    //for handling errors with the fetchfroomDatasource function
-    enum CountryErrors:Error, LocalizedError{
-        case badCountry
-        
-        case badFetch
-        
-        case noInternet
-    }
-}

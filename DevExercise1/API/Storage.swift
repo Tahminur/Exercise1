@@ -12,7 +12,7 @@ import ArcGIS
 protocol Storing{
     
     func retrieveCountries() -> [Country]
-    //func storeQueries(country:Country)
+
     var features:[Country] {get set}
 }
 

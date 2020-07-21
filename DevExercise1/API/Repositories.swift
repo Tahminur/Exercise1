@@ -29,7 +29,7 @@ public class CountryDataRepository : Repositories {
     //MARK:- Storing Countries
     public func fetch(forceRefresh:Bool, completion: @escaping () -> Void) {
         if (forceRefresh){
-            //pullCountryDataFromRemote()
+
             remoteDataSource.fetch(){
                 self.storage.features = self.remoteDataSource.DataRetrieved
                 print("in storage: \(self.storage.features.count)")
