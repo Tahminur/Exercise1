@@ -28,7 +28,7 @@ extension UIViewController{
         self.present(alertController, animated: true, completion: nil)
     }
 }
-//there is an issue with these below for some reaoson the alert is not visible even though it is created, fixed the issue with it not being in the view hierarchy
+
 private var window: UIWindow!
 
 

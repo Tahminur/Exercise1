@@ -70,4 +70,8 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
             
         }
     }
+    
+    public func retrieveCountries() -> [Country]{
+        return self.DataRetrieved
+    }
 }

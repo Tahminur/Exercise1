@@ -20,19 +20,16 @@ public protocol Repositories{
 public class CountryDataRepository : Repositories {
     
     private let remoteDataSource: CountryCasesRemoteDataSource
-    private let storage: CountryStorage
     
-    public init(remoteDataSource: CountryCasesRemoteDataSource, storage: CountryStorage){
+    
+    public init(remoteDataSource: CountryCasesRemoteDataSource){
         self.remoteDataSource = remoteDataSource
-        self.storage = storage
     }
-    //MARK:- Storing Countries
+    
+    
     public func fetch(forceRefresh:Bool, completion: @escaping () -> Void) {
         if (forceRefresh){
-
             remoteDataSource.fetch(){
-                self.storage.features = self.remoteDataSource.DataRetrieved
-                print("in storage: \(self.storage.features.count)")
                 completion()
             }
         } else{
@@ -40,14 +37,15 @@ public class CountryDataRepository : Repositories {
         }
     }
     
-    public func returnCountries()->[Country]{
-        return storage.retrieveCountries()
+    public func retrieveCountries()->[Country]{
+        return remoteDataSource.retrieveCountries()
     }
+    
+    
     
     fileprivate func pullCountryDataFromRemote(){
         remoteDataSource.fetch(){
-            self.storage.features = self.remoteDataSource.DataRetrieved
-            print("in storage: \(self.storage.features.count)")
+            
         }
     }
     

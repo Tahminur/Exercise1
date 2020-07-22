@@ -16,7 +16,6 @@
 		45759AB324B4E00F009FEBEA /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB224B4E00F009FEBEA /* Mapper.swift */; };
 		45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */; };
 		45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB624B4EB69009FEBEA /* MapViewController.swift */; };
-		45D4F6CF24C23A63008D4822 /* Callout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D4F6CE24C23A63008D4822 /* Callout.swift */; };
 		45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8181D24A0F4E0008B7E0F /* CountryCell.swift */; };
 		45FE2A4A249BC11C00D8727D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A49249BC11C00D8727D /* AppDelegate.swift */; };
 		45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A4B249BC11C00D8727D /* SceneDelegate.swift */; };
@@ -63,7 +62,6 @@
 		45759AB224B4E00F009FEBEA /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryItemViewModel.swift; sourceTree = "<group>"; };
 		45759AB624B4EB69009FEBEA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		45D4F6CE24C23A63008D4822 /* Callout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callout.swift; sourceTree = "<group>"; };
 		45D8181D24A0F4E0008B7E0F /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		45FE2A46249BC11C00D8727D /* DevExercise1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevExercise1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FE2A49249BC11C00D8727D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -206,7 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				45FE2A88249BC3E300D8727D /* Country.swift */,
-				45D4F6CE24C23A63008D4822 /* Callout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -509,7 +506,6 @@
 				4549520524B633F300023370 /* CountryController.swift in Sources */,
 				45FE2B23249C1DB800D8727D /* Util.swift in Sources */,
 				456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */,
-				45D4F6CF24C23A63008D4822 /* Callout.swift in Sources */,
 				45759AB324B4E00F009FEBEA /* Mapper.swift in Sources */,
 				45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */,
 				45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */,

@@ -11,31 +11,31 @@ import XCTest
 
 class DevExercise1Tests: XCTestCase {
 
-    var Arcgis:API!
     override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        Arcgis = API()
+        
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        Arcgis = nil
+        
         super.tearDown()
     }
 //should return 188 countries everytime this also tests data refresh since the same function is used before the completion handler goes on
     func testDataRetrieval(){
-        let expectation = self.expectation(description: "Countries Retrieved")
+        /*let expectation = self.expectation(description: "Countries Retrieved")
         Arcgis.queryFeatureLayer{
             expectation.fulfill()
         }
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertEqual(Arcgis.DataRetrieved.count, 188)
+        XCTAssertEqual(Arcgis.DataRetrieved.count, 188)*/
         
     }
-    //should test that alert is displayed
-    func testNoInternetConnection(){
+    //check storage for countries once
+    func testStorage(){
         
     }
+
     
     
     

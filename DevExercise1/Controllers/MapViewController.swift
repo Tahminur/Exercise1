@@ -41,7 +41,7 @@ class MapViewController:UIViewController{
             self.presentAlert(message: "Error with Licensing")
         }
         mapView.map = viewModel.map
-        mapView.setViewpoint(AGSViewpoint(center: CountryStorage.shared.point, scale: 30000000))
+        mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
         
     }
 }

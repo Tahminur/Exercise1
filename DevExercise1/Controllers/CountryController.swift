@@ -17,7 +17,7 @@ class CountryController:UIViewController{
     private let refresher = UIRefreshControl()
     
     
-    var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource(), storage: CountryStorage.shared))
+    var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource()))
     
     
     func setupCountries(possibleMsg:String?){
@@ -46,7 +46,6 @@ class CountryController:UIViewController{
     //MARK: -Layout
     
     @objc func refreshCountryData(_ sender: Any){
-        print("Refreshing data")
         viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountriesRefresh(possibleMsg:))
     }
     
@@ -100,7 +99,8 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
         
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
         
-        CountryStorage.shared.point = clickedCell.point
+        Storage.shared.point = clickedCell.point
+        
         
         self.tabBarController?.selectedIndex = 1
         

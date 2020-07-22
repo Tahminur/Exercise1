@@ -26,6 +26,8 @@ class MapViewModel:MapViewModelInput{
     
     var featureTables: [AGSServiceFeatureTable] = []
     
+    var point:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
+    
     init(map:AGSMap, featureURLs: [String]){
         self.map = map
         self.featureURLs = featureURLs

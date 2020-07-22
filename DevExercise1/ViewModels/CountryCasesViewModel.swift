@@ -34,7 +34,7 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
         if (forceRefresh){
             Countries.removeAll()
             repository.fetch(forceRefresh: forceRefresh){
-                for country in self.repository.returnCountries(){
+                for country in self.repository.retrieveCountries(){
                     self.Countries.append(CountryItemViewModel(country: country))
                 }
                 if self.Countries.count == 0{
