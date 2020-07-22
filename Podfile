@@ -6,7 +6,7 @@ target 'DevExercise1' do
   use_frameworks!
 
   # Pods for DevExercise1
-	pod 'MaterialComponents'
+	pod 'ReachabilitySwift'
 	pod 'ArcGIS-Runtime-SDK-iOS'
   target 'DevExercise1Tests' do
     inherit! :search_paths

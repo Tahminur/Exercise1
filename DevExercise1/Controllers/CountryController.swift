@@ -8,19 +8,19 @@
 
 import UIKit
 import ArcGIS
-import Network
-//import 
+import Reachability
 
 
 class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
     
+    let reachableTest = TestConnection()
     
     var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource()))
     
     
-    func setupCountries(possibleMsg:String?){
+    func setupCountries(possibleMsg:String?){      
         if possibleMsg == nil{
             self.tableView.reloadData()
         }
