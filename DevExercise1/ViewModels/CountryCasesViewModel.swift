@@ -23,6 +23,7 @@ protocol CountryCasesViewModelOutput{
 public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCasesViewModelInput{
     var Countries: [CountryItemViewModel] = []
     
+    
     private let repository: CountryDataRepository
     
     public init(repository: CountryDataRepository){
@@ -31,6 +32,10 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
     
     
     func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void) {
+        /*if internetConnection.status != nil{
+            completion(internetConnection.status!)
+            return
+        }*/
         if (forceRefresh){
             Countries.removeAll()
             repository.fetch(forceRefresh: forceRefresh){

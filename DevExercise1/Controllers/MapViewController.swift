@@ -20,16 +20,25 @@ class MapViewController:UIViewController{
     "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/0"])
     var mapView:AGSMapView = AGSMapView()
     
+    
     //MARK:-View setup
     override func viewDidLoad() {
         super.viewDidLoad()
+        if InternetConnection.shared.status != nil{
+            self.presentAlert(message: InternetConnection.shared.status!)
+        }
         navigationItem.title = "Map"
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupMapView()
+        if InternetConnection.shared.status != nil{
+            self.presentAlert(message: InternetConnection.shared.status!)
+        }else{
+            setupMapView()
+        }
+        
         
     }
     func setupMapView(){

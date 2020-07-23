@@ -7,73 +7,25 @@
 //
 
 import Foundation
-import Reachability
 import Network
 
 public class InternetConnection{
     let monitor = NWPathMonitor()
+    let queue = DispatchQueue.main
+    var status:String?
     
-    func setup() -> String? {
-        var ErrorMsg:String? = nil
-        
+    public static var shared:InternetConnection = InternetConnection()
+    
+    init(){
         monitor.pathUpdateHandler = { path in
             if path.status == .satisfied{
-                ErrorMsg = "We have Internet"
+                self.status = nil
             }
             else{
-                ErrorMsg = "No Internet"
+                self.status = "No Internet Connection"
             }
         }
-        return ErrorMsg
+        monitor.start(queue: queue)
     }
 }
 
-fileprivate var reachability:Reachability!
-
-
-protocol ReachabilityActionDelegate {
-    func reachabilityChanged(_ isReachable: Bool) -> String?
-}
-
-protocol ReachabilityObserverDelegate: class, ReachabilityActionDelegate {
-    func addReachabilityObserver() throws
-    func removeReachabilityObserver()
-}
-
-extension ReachabilityObserverDelegate{
-    func addReachabilityObserver() throws {
-        reachability = try Reachability()
-        
-        reachability.whenReachable = { [weak self] reachability in
-            self?.reachabilityChanged(true)
-        }
-        
-        reachability.whenUnreachable = { [weak self] reachability in
-            self?.reachabilityChanged(false)
-        }
-        
-        try reachability.startNotifier()
-    }
-    
-    /** Unsubscribe */
-    func removeReachabilityObserver() {
-        reachability.stopNotifier()
-        reachability = nil
-    }
-}
-
-class TestConnection:ReachabilityObserverDelegate{
-    func reachabilityChanged(_ isReachable: Bool) -> String? {
-        if !isReachable {
-            return "No Internet Connection"
-        }
-        return nil
-    }
-    
-    required init(){
-        try? addReachabilityObserver()
-    }
-    deinit {
-        removeReachabilityObserver()
-    }
-}

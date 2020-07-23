@@ -15,7 +15,6 @@ class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
     
-    let reachableTest = TestConnection()
     
     var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource()))
     
@@ -33,20 +32,35 @@ class CountryController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        viewModel.fetchFromDataSource(forceRefresh: false,completion: setupCountries(possibleMsg:))
+        if InternetConnection.shared.status != nil{
+            self.presentAlert(message: InternetConnection.shared.status!)
+        }else{
+            viewModel.fetchFromDataSource(forceRefresh: false,completion: setupCountries(possibleMsg:))
+        }
+        
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountries(possibleMsg:))
+        if InternetConnection.shared.status != nil{
+            self.presentAlert(message: InternetConnection.shared.status!)
+        }else{
+            viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountries(possibleMsg:))
+        }
         navigationItem.title = "Cases"
     }
     //MARK: -Layout
     
     @objc func refreshCountryData(_ sender: Any){
-        viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountriesRefresh(possibleMsg:))
+        if InternetConnection.shared.status != nil{
+            self.presentAlert(message: InternetConnection.shared.status!)
+            self.refresher.endRefreshing()
+        }else{
+            viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountriesRefresh(possibleMsg:))
+        }
+        
     }
     
     func setupCountriesRefresh(possibleMsg:String?){
@@ -55,8 +69,10 @@ class CountryController:UIViewController{
             self.refresher.endRefreshing()
         }
         else{
-            self.tableView.reloadData()
             self.presentAlert(message: possibleMsg!)
+            self.refresher.endRefreshing()
+            
+            
         }
     }
 
