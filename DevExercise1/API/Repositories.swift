@@ -14,39 +14,50 @@ import ArcGIS
 
 
 public protocol Repositories{
-    func fetch(forceRefresh:Bool, completion: @escaping () -> Void)
+    func fetch(forceRefresh:Bool, completion: @escaping (Result<[Country],fetchError>) -> Void)
 }
 
 public class CountryDataRepository : Repositories {
     
     private let remoteDataSource: CountryCasesRemoteDataSource
-    
+    private let mapper = CountryMapper()
     
     public init(remoteDataSource: CountryCasesRemoteDataSource){
         self.remoteDataSource = remoteDataSource
     }
     
-    
-    public func fetch(forceRefresh:Bool, completion: @escaping () -> Void) {
+    //will handle fetching from local or fetching from remote
+    public func fetch(forceRefresh:Bool, completion: @escaping (Result<[Country],fetchError>) -> Void) {
         if (forceRefresh){
-            remoteDataSource.fetch(){
-                completion()
+            remoteDataSource.fetch(){ result in
+                switch result {
+                case .success(let features):
+                    let countriesFetched = self.mapper.mapToCountry(features: features)
+                    completion(.success(countriesFetched))
+                case .failure(.errorCasting):
+                    completion(.failure(.errorCasting))
+                case .failure(.errorQuery):
+                    completion(.failure(.errorQuery))
+                case .failure(.errorLoad):
+                    completion(.failure(.errorLoad))
+                }
             }
         } else{
-            completion()
+            let countriesFetched = self.mapper.mapToCountry(features: remoteDataSource.retrieveCountries())
+            completion(.success(countriesFetched))
         }
     }
     
-    public func retrieveCountries()->[Country]{
-        return remoteDataSource.retrieveCountries()
-    }
+    //public func retrieveCountries()->[Country]{
+        //return remoteDataSource.retrieveCountries()
+    //}
     
     
     
     fileprivate func pullCountryDataFromRemote(){
-        remoteDataSource.fetch(){
+        //remoteDataSource.fetch(){
             
-        }
+        //}
     }
     
 }

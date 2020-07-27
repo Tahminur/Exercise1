@@ -6,7 +6,6 @@ target 'DevExercise1' do
   use_frameworks!
 
   # Pods for DevExercise1
-	pod 'ReachabilitySwift'
 	pod 'ArcGIS-Runtime-SDK-iOS'
 	pod 'MockingbirdFramework', '~> 0.14'
   target 'DevExercise1Tests' do

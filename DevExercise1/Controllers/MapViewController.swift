@@ -24,10 +24,12 @@ class MapViewController:UIViewController{
     //MARK:-View setup
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Map"
         if InternetConnection.shared.status != nil{
             self.presentAlert(message: InternetConnection.shared.status!)
+        }else{
+            setupMapView()
         }
-        navigationItem.title = "Map"
     }
     
     
@@ -36,7 +38,7 @@ class MapViewController:UIViewController{
         if InternetConnection.shared.status != nil{
             self.presentAlert(message: InternetConnection.shared.status!)
         }else{
-            setupMapView()
+            mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
         }
         
         
@@ -45,12 +47,14 @@ class MapViewController:UIViewController{
         view.addSubview(mapView)
         mapView.pin(to: view)
         do{
-            try viewModel.LicenseMap()
+            try viewModel.licenseMap()
         } catch{
             self.presentAlert(message: "Error with Licensing")
         }
         mapView.map = viewModel.map
-        mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
         
+    }
+    func setViewpoint(){
+        mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
     }
 }

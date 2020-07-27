@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		452ABE0524C8CD05009E08C1 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */; };
-		452ABE0724C8CD68009E08C1 /* RemoteDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452ABE0624C8CD68009E08C1 /* RemoteDataSourceTests.swift */; };
 		452ABE0924C8D16F009E08C1 /* InternetConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452ABE0824C8D16F009E08C1 /* InternetConnection.swift */; };
+		452B064E24CB3EB500F1BFE3 /* MapViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B064D24CB3EB500F1BFE3 /* MapViewTests.swift */; };
+		452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */; };
+		452B065224CF641000F1BFE3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065124CF641000F1BFE3 /* Reachability.swift */; };
 		4549520524B633F300023370 /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520424B633F300023370 /* CountryController.swift */; };
 		4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520624B63BA200023370 /* CountryCasesViewModel.swift */; };
 		4549520924B64DCD00023370 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520824B64DCD00023370 /* Repositories.swift */; };
@@ -57,10 +59,12 @@
 
 /* Begin PBXFileReference section */
 		11E3A87BE270823BC462E861 /* Pods-DevExercise1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevExercise1Tests.debug.xcconfig"; path = "Target Support Files/Pods-DevExercise1Tests/Pods-DevExercise1Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		1DEA6F4D614D51B008B30E47 /* DevExercise1Tests-DevExercise1Mocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; lastKnownFileType = sourcecode.swift; name = "DevExercise1Tests-DevExercise1Mocks.generated.swift"; path = "MockingbirdMocks/DevExercise1Tests-DevExercise1Mocks.generated.swift"; sourceTree = "<group>"; };
+		1DEA6F4D614D51B008B30E47 /* DevExercise1Tests-DevExercise1Mocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "DevExercise1Tests-DevExercise1Mocks.generated.swift"; path = "MockingbirdMocks/DevExercise1Tests-DevExercise1Mocks.generated.swift"; sourceTree = "<group>"; };
 		452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
-		452ABE0624C8CD68009E08C1 /* RemoteDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataSourceTests.swift; sourceTree = "<group>"; };
 		452ABE0824C8D16F009E08C1 /* InternetConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetConnection.swift; sourceTree = "<group>"; };
+		452B064D24CB3EB500F1BFE3 /* MapViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewTests.swift; sourceTree = "<group>"; };
+		452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
+		452B065124CF641000F1BFE3 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		4549520424B633F300023370 /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
 		4549520624B63BA200023370 /* CountryCasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCasesViewModel.swift; sourceTree = "<group>"; };
 		4549520824B64DCD00023370 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
@@ -175,7 +179,7 @@
 			children = (
 				45FE2A63249BC11D00D8727D /* DevExercise1Tests.swift */,
 				452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */,
-				452ABE0624C8CD68009E08C1 /* RemoteDataSourceTests.swift */,
+				452B064D24CB3EB500F1BFE3 /* MapViewTests.swift */,
 				45FE2A65249BC11D00D8727D /* Info.plist */,
 			);
 			path = DevExercise1Tests;
@@ -204,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				456D8E0324B3BD76004B72A1 /* ArcgisDatasource.swift */,
+				452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */,
 				4549520824B64DCD00023370 /* Repositories.swift */,
 				45759AB024B4DEB6009FEBEA /* Storage.swift */,
 				45759AB224B4E00F009FEBEA /* Mapper.swift */,
@@ -243,6 +248,7 @@
 				45FE2B20249C1DAE00D8727D /* Extensions.swift */,
 				45FE2B22249C1DB800D8727D /* Util.swift */,
 				452ABE0824C8D16F009E08C1 /* InternetConnection.swift */,
+				452B065124CF641000F1BFE3 /* Reachability.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -464,13 +470,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1-DevExercise1UITests/Pods-DevExercise1-DevExercise1UITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1-DevExercise1UITests/Pods-DevExercise1-DevExercise1UITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -523,13 +525,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1/Pods-DevExercise1-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1/Pods-DevExercise1-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -566,6 +564,7 @@
 				45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */,
 				4549520524B633F300023370 /* CountryController.swift in Sources */,
 				45FE2B23249C1DB800D8727D /* Util.swift in Sources */,
+				452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */,
 				456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */,
 				45759AB324B4E00F009FEBEA /* Mapper.swift in Sources */,
 				45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */,
@@ -575,6 +574,7 @@
 				4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */,
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
 				45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */,
+				452B065224CF641000F1BFE3 /* Reachability.swift in Sources */,
 				4549520924B64DCD00023370 /* Repositories.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,8 +583,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				452ABE0724C8CD68009E08C1 /* RemoteDataSourceTests.swift in Sources */,
 				45FE2A64249BC11D00D8727D /* DevExercise1Tests.swift in Sources */,
+				452B064E24CB3EB500F1BFE3 /* MapViewTests.swift in Sources */,
 				452ABE0524C8CD05009E08C1 /* RepositoryTests.swift in Sources */,
 				A58BFED117108C9DAA3DD58B /* DevExercise1Tests-DevExercise1Mocks.generated.swift in Sources */,
 			);

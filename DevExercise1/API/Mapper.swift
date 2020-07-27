@@ -18,6 +18,7 @@ public class CountryMapper {
         for feature in features{
             let name = feature.attributes["Country_Region"] as! String
             
+            //pass error instead of hardcoded point to the user to notify no location for country
             var point: AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
             
             if feature.geometry != nil{

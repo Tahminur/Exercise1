@@ -14,11 +14,12 @@ class RemoteDataSourceTests: XCTestCase {
 
     var unitTest:CountryCasesRemoteDataSource!
     
-    //var mockRepo: CountryCasesRemoteDataSource!
+    let mockRepo = mock(CountryCasesRemoteDataSource.self)
     
     override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
         unitTest = CountryCasesRemoteDataSource()
+        
     }
 
     override func tearDown() {
@@ -37,7 +38,9 @@ class RemoteDataSourceTests: XCTestCase {
         XCTAssertEqual(unitTest.retrieveCountries().count, 188)
     }
     func testIncorrectFeatureTable(){
-        
+        mockRepo.fetch {
+            
+        }
     }
     
     

@@ -17,32 +17,35 @@ import UIKit
 //be it local or remote will have to implement this protocol
 public protocol RemoteDataSource {
     
-    func fetch(completion:@escaping () -> Void)
-    var FeatureTable:AGSServiceFeatureTable {get}
+    func fetch(completion:@escaping (Result<[AGSArcGISFeature],fetchError>) -> Void)
+    var featureTable:AGSServiceFeatureTable {get}
 }
 
 
 public class CountryCasesRemoteDataSource:RemoteDataSource {
     
-    let mapper = CountryMapper()
+    
+    
+    //let mapper = CountryMapper()
 
-    var DataRetrieved:[Country] = []
+    var dataRetrieved:[AGSArcGISFeature] = []
     
     
-    public let FeatureTable: AGSServiceFeatureTable = {
+    public let featureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
 
-    
-    public func fetch(completion:@escaping () -> Void ) {
-        FeatureTable.load { [weak self] (error) in
+    //change to propogate errors pass data retrieved to the completion handler, and get rid of the other fetch call in the view model.
+    public func fetch(completion:@escaping (Result<[AGSArcGISFeature],fetchError>) -> Void ) {
+        featureTable.load { [weak self] (error) in
             
             guard let self = self else { return }
 
             if let error = error {
                 
                 print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
+                completion(.failure(.errorLoad))
                 return
             }
 
@@ -51,27 +54,26 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
             queryParameters.returnGeometry = true
 
             let outFields: AGSQueryFeatureFields = .loadAll
-            self.FeatureTable.queryFeatures(with: queryParameters, queryFeatureFields: outFields) { (result, error) in
+            self.featureTable.queryFeatures(with: queryParameters, queryFeatureFields: outFields) { (result, error) in
 
                 if let error = error {
                     print("Error querying the Corona Cases feature layer: \(error.localizedDescription)")
+                    completion(.failure(.errorQuery))
                     return
                 }
 
                 guard let result = result, let features = result.featureEnumerator().allObjects as? [AGSArcGISFeature] else {
                     print("Something went wrong casting the results.")
+                    completion(.failure(.errorCasting))
                     return
                 }
-                self.DataRetrieved = self.mapper.mapToCountry(features: features)
-                
-                completion()
-
+                self.dataRetrieved = features
+                completion(.success(features))
             }
-            
         }
     }
     
-    public func retrieveCountries() -> [Country]{
-        return self.DataRetrieved
+    public func retrieveCountries() -> [AGSArcGISFeature]{
+        return self.dataRetrieved
     }
 }

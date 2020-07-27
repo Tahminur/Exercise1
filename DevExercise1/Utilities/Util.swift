@@ -29,16 +29,5 @@ class Util{
     }
     
     
-    func decideColor(caseNumber: Int) -> UIColor{
-        switch caseNumber {
-        case 0..<2000:
-            return #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
-        case 2001..<8000:
-            return #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-            
-        default:
-            return #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
-        }
-    }
     
 }

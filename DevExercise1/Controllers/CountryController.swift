@@ -8,7 +8,6 @@
 
 import UIKit
 import ArcGIS
-import Reachability
 
 
 class CountryController:UIViewController{
@@ -17,7 +16,6 @@ class CountryController:UIViewController{
     
     
     var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource()))
-    
     
     func setupCountries(possibleMsg:String?){      
         if possibleMsg == nil{
@@ -32,23 +30,34 @@ class CountryController:UIViewController{
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        if InternetConnection.shared.status != nil{
-            self.presentAlert(message: InternetConnection.shared.status!)
-        }else{
-            viewModel.fetchFromDataSource(forceRefresh: false,completion: setupCountries(possibleMsg:))
+        //below unselects the table cell
+        if let index = self.tableView.indexPathForSelectedRow{
+            self.tableView.deselectRow(at: index, animated: true)
         }
-        
+        //fetches data
+        viewModel.fetchFromDataSource(forceRefresh: false){ result in
+            if result == nil{
+                self.tableView.reloadData()
+            }
+            else{
+                self.presentAlert(message: result!)
+            }
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        if InternetConnection.shared.status != nil{
-            self.presentAlert(message: InternetConnection.shared.status!)
-        }else{
-            viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountries(possibleMsg:))
+        viewModel.fetchFromDataSource(forceRefresh: true){ result in
+            if result == nil{
+                self.tableView.reloadData()
+            }
+            else{
+                self.presentAlert(message: result!)
+            }
         }
+        
         navigationItem.title = "Cases"
     }
     //MARK: -Layout
@@ -60,7 +69,6 @@ class CountryController:UIViewController{
         }else{
             viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountriesRefresh(possibleMsg:))
         }
-        
     }
     
     func setupCountriesRefresh(possibleMsg:String?){
@@ -99,13 +107,13 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
         
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.Countries.count
+        return viewModel.countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
         
-        cell.set(country: viewModel.Countries[indexPath.row].country)
+        cell.set(country: viewModel.countries[indexPath.row].country)
         
         return cell
     }

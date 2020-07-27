@@ -15,13 +15,13 @@ protocol CountryCasesViewModelInput {
 }
 
 protocol CountryCasesViewModelOutput{
-    var Countries: [CountryItemViewModel] {get}
+    var countries: [CountryItemViewModel] {get}
 }
 
 
 
 public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCasesViewModelInput{
-    var Countries: [CountryItemViewModel] = []
+    var countries: [CountryItemViewModel] = []
     
     
     private let repository: CountryDataRepository
@@ -32,26 +32,19 @@ public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCas
     
     
     func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void) {
-        /*if internetConnection.status != nil{
-            completion(internetConnection.status!)
-            return
-        }*/
         if (forceRefresh){
-            Countries.removeAll()
-            repository.fetch(forceRefresh: forceRefresh){
-                for country in self.repository.retrieveCountries(){
-                    self.Countries.append(CountryItemViewModel(country: country))
+            countries.removeAll()
+            repository.fetch(forceRefresh: forceRefresh){ result in
+                switch result{
+                case .success(let fetched):
+                    for country in fetched{
+                        self.countries.append(CountryItemViewModel(country: country))
+                        completion(nil)
+                    }
+                case .failure(let error):
+                    completion(error.localizedDescription)
                 }
-                if self.Countries.count == 0{
-                    completion("Error fetching Countries")
-                    return
-                }
-                completion(nil)
-                return
             }
-        } else{
-            completion(nil)
         }
     }
 }
-

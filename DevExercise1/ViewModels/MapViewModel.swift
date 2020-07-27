@@ -15,7 +15,7 @@ protocol MapViewModelInput {
     func addFeaturesToMap()
     
     func authenticateMap(completion:@escaping (String?) -> Void)
-    func LicenseMap() throws
+    func licenseMap() throws
 }
 
 
@@ -40,30 +40,30 @@ class MapViewModel:MapViewModelInput{
     func addFeaturesToMap() {
         for feature in featureTables{
             map.operationalLayers.add(AGSFeatureLayer(featureTable: feature))
-        
         }
     }
     
     //Gets rid of watermark
-    func LicenseMap() throws{
+    func licenseMap() throws{
         do {
-         try AGSArcGISRuntimeEnvironment.setLicenseKey("runtimelite,1000,rud4539920132,none,3M2PMD17J1802J7EZ106")
+            try AGSArcGISRuntimeEnvironment.setLicenseKey("runtimelite,1000,rud4539920132,none,3M2PMD17J1802J7EZ106")
         }
         catch let error as NSError {
             throw error
         }
     }
     
+    
     func authenticateMap(completion:@escaping (String?) -> Void){
-        let portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: false)
+        let portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
         portal.load() { (error) in
             if let error = error {
                 completion(error.localizedDescription)
-                }
-                if portal.loadStatus == AGSLoadStatus.loaded {
-                    completion(nil)
-                }
             }
+            if portal.loadStatus == AGSLoadStatus.loaded {
+                completion(nil)
+            }
+        }
     }
     
     
