@@ -18,8 +18,6 @@ protocol CountryCasesViewModelOutput{
     var countries: [CountryItemViewModel] {get}
 }
 
-
-
 public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCasesViewModelInput{
     var countries: [CountryItemViewModel] = []
     

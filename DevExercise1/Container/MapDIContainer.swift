@@ -8,9 +8,11 @@
 
 import Foundation
 
-
-final class MapDIContainer{
+protocol MapControllerFactory{
     
+}
+
+final class MapDIContainer:MapControllerFactory{
     
     struct Dependencies{
         let mapRepo:MapRepository
@@ -22,7 +24,11 @@ final class MapDIContainer{
         self.dependencies = dependencies
     }
     
-    func makeMapViewModel(){
-        
+    func makeMapViewModel() -> MapViewModel{
+        return MapViewModel(repository: dependencies.mapRepo)
+    }
+    
+    func makeMapViewController() -> MapViewController{
+        return MapViewController()
     }
 }

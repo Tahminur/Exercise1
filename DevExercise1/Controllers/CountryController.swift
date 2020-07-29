@@ -14,18 +14,7 @@ class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
     
-    
-    var viewModel:CountryCasesViewModel = CountryCasesViewModel(repository: CountryDataRepository(remoteDataSource: CountryCasesRemoteDataSource()))
-    
-    func setupCountries(possibleMsg:String?){      
-        if possibleMsg == nil{
-            self.tableView.reloadData()
-        }
-        else{
-            self.tableView.reloadData()
-            self.presentAlert(message: possibleMsg!)
-        }
-    }
+    var viewModel:CountryCasesViewModel!
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +34,6 @@ class CountryController:UIViewController{
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
@@ -57,13 +45,13 @@ class CountryController:UIViewController{
                 self.presentAlert(message: result!)
             }
         }
-        
         navigationItem.title = "Cases"
     }
     //MARK: -Layout
     
     static func create(with viewModel: CountryCasesViewModel, countryController: CountryControllerFactory) -> CountryController{
-        let view = UIStoryboard(name: "CountryCases", bundle: nil).instantiateViewController(identifier: "CountryController") as! CountryController
+        
+        let view = CountryController()
         view.viewModel = viewModel
         return view
     }
@@ -85,8 +73,6 @@ class CountryController:UIViewController{
         else{
             self.presentAlert(message: possibleMsg!)
             self.refresher.endRefreshing()
-            
-            
         }
     }
 
@@ -95,8 +81,6 @@ class CountryController:UIViewController{
         tableView.dataSource = self
     }
 }
-
-
 
 //MARK: - TableView
 extension CountryController: UITableViewDelegate, UITableViewDataSource {
@@ -126,11 +110,9 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = tableView.indexPathForSelectedRow
-        
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
         
         Storage.shared.point = clickedCell.point
-        
         
         self.tabBarController?.selectedIndex = 1
         

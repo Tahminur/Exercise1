@@ -11,6 +11,10 @@ import ArcGIS
 
 class MainTabController: UITabBarController {
 
+    lazy var appDIContainer: AppDIContainer = {
+        return (UIApplication.shared.delegate as! AppDelegate).appDIContainer
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabs()
@@ -28,10 +32,11 @@ class MainTabController: UITabBarController {
         return nav
     }
     func setupTabs(){
+        
         let newMap = MapViewController()
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
         
-        let newCases = CountryController()
+        let newCases = appDIContainer.countryContainer.makeCountryController()
         let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "29-2"), rootViewController: newCases)
         viewControllers = [newCasesTab, newMapTab]
     }
