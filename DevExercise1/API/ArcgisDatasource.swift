@@ -8,7 +8,6 @@
 
 import Foundation
 import ArcGIS
-import UIKit
 
 
 //TODO: Add arcgis developer account to get rid of watermark
@@ -23,13 +22,8 @@ public protocol RemoteDataSource {
 
 
 public class CountryCasesRemoteDataSource:RemoteDataSource {
-    
-    
-    
-    //let mapper = CountryMapper()
 
     var dataRetrieved:[AGSArcGISFeature] = []
-    
     
     public let featureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
@@ -76,4 +70,14 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
     public func retrieveCountries() -> [AGSArcGISFeature]{
         return self.dataRetrieved
     }
+}
+
+//The service feature tables are stored here and since this is remote the feature layers will be created in the map repository
+public class MapRemoteDataSource{
+    public let features: [AGSServiceFeatureTable] = [AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")),
+    AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1")),
+    AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/0"))]
+    
+    
+    
 }

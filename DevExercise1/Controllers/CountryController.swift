@@ -62,6 +62,12 @@ class CountryController:UIViewController{
     }
     //MARK: -Layout
     
+    static func create(with viewModel: CountryCasesViewModel, countryController: CountryControllerFactory) -> CountryController{
+        let view = UIStoryboard(name: "CountryCases", bundle: nil).instantiateViewController(identifier: "CountryController") as! CountryController
+        view.viewModel = viewModel
+        return view
+    }
+    
     @objc func refreshCountryData(_ sender: Any){
         if InternetConnection.shared.status != nil{
             self.presentAlert(message: InternetConnection.shared.status!)

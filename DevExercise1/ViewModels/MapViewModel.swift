@@ -10,39 +10,48 @@ import Foundation
 import ArcGIS
 
 protocol MapViewModelInput {
-    var map:AGSMap {get}
-    var featureURLs:[String] {get}
+
     func addFeaturesToMap()
-    
     func authenticateMap(completion:@escaping (String?) -> Void)
     func licenseMap() throws
 }
 
-
+//map shouldn't be created here
 class MapViewModel:MapViewModelInput{
-    var featureURLs: [String]
+
+    private let repository: MapRepository
     
-    var map:AGSMap
-    
-    var featureTables: [AGSServiceFeatureTable] = []
+    var featureLayers: [AGSFeatureLayer] = []
     
     var point:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
     
-    init(map:AGSMap, featureURLs: [String]){
+    init(repository:MapRepository){
+        self.repository = repository
+        retrieveFeatureLayers()
+    }
+    /*init(map:AGSMap, featureURLs: [String]){
         self.map = map
         self.featureURLs = featureURLs
         for feature in featureURLs{
             featureTables.append(AGSServiceFeatureTable(url: URL(string: feature)!))
         }
         self.addFeaturesToMap()
-    }
+    }*/
     
-    func addFeaturesToMap() {
+    /*func addFeaturesToMap() {
         for feature in featureTables{
             map.operationalLayers.add(AGSFeatureLayer(featureTable: feature))
         }
+    }*/
+    
+    func addFeaturesToMap() {
+        
     }
     
+    
+    func retrieveFeatureLayers(){
+        featureLayers = repository.fetch()
+    }
     //Gets rid of watermark
     func licenseMap() throws{
         do {

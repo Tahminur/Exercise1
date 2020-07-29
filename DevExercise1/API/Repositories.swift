@@ -48,16 +48,24 @@ public class CountryDataRepository : Repositories {
         }
     }
     
-    //public func retrieveCountries()->[Country]{
-        //return remoteDataSource.retrieveCountries()
-    //}
     
+}
+
+public class MapRepository{
     
+    private let remoteDataSource:MapRemoteDataSource
     
-    fileprivate func pullCountryDataFromRemote(){
-        //remoteDataSource.fetch(){
-            
-        //}
+    public init(remoteDataSource:MapRemoteDataSource){
+        self.remoteDataSource = remoteDataSource
     }
+    
+    public func fetch()->[AGSFeatureLayer]{
+        var layers:[AGSFeatureLayer] = []
+        for table in remoteDataSource.features{
+            layers.append(AGSFeatureLayer(featureTable: table))
+        }
+        return layers
+    }
+    
     
 }
