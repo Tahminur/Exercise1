@@ -11,7 +11,6 @@ import ArcGIS
 
 protocol MapViewModelInput {
 
-    func addFeaturesToMap()
     func authenticateMap(completion:@escaping (String?) -> Void)
     func licenseMap() throws
 }
@@ -28,24 +27,6 @@ class MapViewModel:MapViewModelInput{
     init(repository:MapRepository){
         self.repository = repository
         retrieveFeatureLayers()
-    }
-    /*init(map:AGSMap, featureURLs: [String]){
-        self.map = map
-        self.featureURLs = featureURLs
-        for feature in featureURLs{
-            featureTables.append(AGSServiceFeatureTable(url: URL(string: feature)!))
-        }
-        self.addFeaturesToMap()
-    }*/
-    
-    /*func addFeaturesToMap() {
-        for feature in featureTables{
-            map.operationalLayers.add(AGSFeatureLayer(featureTable: feature))
-        }
-    }*/
-    
-    func addFeaturesToMap() {
-        
     }
     
     

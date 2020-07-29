@@ -47,16 +47,16 @@ public class CountryDataRepository : Repositories {
             completion(.success(countriesFetched))
         }
     }
-    
-    
 }
 
 public class MapRepository{
     
     private let remoteDataSource:MapRemoteDataSource
+    private var features: [AGSFeatureLayer] = []
     
     public init(remoteDataSource:MapRemoteDataSource){
         self.remoteDataSource = remoteDataSource
+        features = fetch()
     }
     
     public func fetch()->[AGSFeatureLayer]{

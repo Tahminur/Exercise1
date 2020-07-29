@@ -11,32 +11,30 @@ import Foundation
 
 final class AppDIContainer{
     
-    struct Dependencies {
-        let countryDataSource: CountryCasesRemoteDataSource
-        let mapDataSource: MapRemoteDataSource
-    }
+    lazy var countryDataSource:CountryCasesRemoteDataSource = {
+        return CountryCasesRemoteDataSource()
+    }()
     
-    private let dependencies: Dependencies
-    
-    init(dependencies: Dependencies){
-        self.dependencies = dependencies
-    }
+    lazy var mapDataSource:MapRemoteDataSource = {
+        return MapRemoteDataSource()
+    }()
     
     lazy var countryRepository: CountryDataRepository = {
-        return CountryDataRepository(remoteDataSource: dependencies.countryDataSource)
+        return CountryDataRepository(remoteDataSource: countryDataSource)
     }()
     lazy var mapRepository:MapRepository = {
-        return MapRepository(remoteDataSource: dependencies.mapDataSource)
+        return MapRepository(remoteDataSource: mapDataSource)
     }()
     
+    lazy var countryContainer:CountryDIContainer = {
+        let dependencies = CountryDIContainer.Dependencies(countryRepo: countryRepository)
+        return CountryDIContainer(dependencies: dependencies)
+    }()
     
-    //MARK: - View Models
-    func makeCountryCaseViewModels() -> CountryCasesViewModel {
-        return CountryCasesViewModel(repository: countryRepository)
-    }
-    
-    
-    
+    lazy var mapContainer:MapDIContainer = {
+        let dependencies = MapDIContainer.Dependencies(mapRepo: mapRepository)
+        return MapDIContainer(dependencies: dependencies)
+    }()
     
     
 }

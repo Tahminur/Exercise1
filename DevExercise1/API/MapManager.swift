@@ -21,16 +21,15 @@ class MapManager:NSObject{
             return _shared!
         }
     }
-    
-    
+
     let portalURL:URL
     let portalItem: AGSPortalItem
     let portal: AGSPortal
     let map: AGSMap
     override init(){
         self.portalURL = URL(string: "https://arcgis.com")!
-        self.portal = AGSPortal(url: portalURL, loginRequired: true)
-        self.portalItem = AGSPortalItem(portal: portal, itemID: "bbb2e4f589ba40d692fab712ae37b9ac")
+        self.portal = AGSPortal(url: portalURL, loginRequired: false)
+        self.portalItem = AGSPortalItem(portal: portal, itemID: "38dd71df8d1740058b041904220013ab")
         self.map = AGSMap(item:self.portalItem)
         super.init()
         //agsauth setup

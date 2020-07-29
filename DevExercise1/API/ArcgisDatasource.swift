@@ -77,7 +77,4 @@ public class MapRemoteDataSource{
     public let features: [AGSServiceFeatureTable] = [AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")),
     AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1")),
     AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/0"))]
-    
-    
-    
 }
