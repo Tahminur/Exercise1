@@ -33,7 +33,8 @@ class MainTabController: UITabBarController {
     }
     func setupTabs(){
         
-        let newMap = MapViewController()
+        //let newMap = MapViewController()
+        let newMap = appDIContainer.mapContainer.makeMapViewController()
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
         
         let newCases = appDIContainer.countryContainer.makeCountryController()

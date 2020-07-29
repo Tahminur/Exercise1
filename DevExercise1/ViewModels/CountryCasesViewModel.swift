@@ -21,13 +21,11 @@ protocol CountryCasesViewModelOutput{
 public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCasesViewModelInput{
     var countries: [CountryItemViewModel] = []
     
-    
     private let repository: CountryDataRepository
     
     public init(repository: CountryDataRepository){
         self.repository = repository
     }
-    
     
     func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void) {
         if (forceRefresh){

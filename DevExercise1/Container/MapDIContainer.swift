@@ -29,6 +29,6 @@ final class MapDIContainer:MapControllerFactory{
     }
     
     func makeMapViewController() -> MapViewController{
-        return MapViewController()
+        return MapViewController.create(with: makeMapViewModel(), mapController: self)
     }
 }

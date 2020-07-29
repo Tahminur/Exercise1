@@ -11,11 +11,9 @@ import ArcGIS
 
 protocol MapViewModelInput {
 
-    func authenticateMap(completion:@escaping (String?) -> Void)
     func licenseMap() throws
 }
 
-//map shouldn't be created here
 class MapViewModel:MapViewModelInput{
 
     private let repository: MapRepository
@@ -26,12 +24,12 @@ class MapViewModel:MapViewModelInput{
     
     init(repository:MapRepository){
         self.repository = repository
-        retrieveFeatureLayers()
     }
     
     
-    func retrieveFeatureLayers(){
+    func retrieveFeatureLayers(completion:@escaping ([AGSFeatureLayer]) -> Void){
         featureLayers = repository.fetch()
+        completion(repository.fetch())
     }
     //Gets rid of watermark
     func licenseMap() throws{
@@ -42,21 +40,4 @@ class MapViewModel:MapViewModelInput{
             throw error
         }
     }
-    
-    
-    func authenticateMap(completion:@escaping (String?) -> Void){
-        let portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
-        portal.load() { (error) in
-            if let error = error {
-                completion(error.localizedDescription)
-            }
-            if portal.loadStatus == AGSLoadStatus.loaded {
-                completion(nil)
-            }
-        }
-    }
-    
-    
-    
-    
 }
