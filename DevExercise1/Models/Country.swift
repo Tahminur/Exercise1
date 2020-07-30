@@ -12,5 +12,5 @@ import ArcGIS
 public struct Country{
     let name : String
     var cases : Int
-    let point: AGSPoint
+    let point: AGSPoint?
 }

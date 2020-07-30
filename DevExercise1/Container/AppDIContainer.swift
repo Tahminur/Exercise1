@@ -8,6 +8,7 @@
 
 import Foundation
 
+public typealias Reachable = () -> Bool
 
 final class AppDIContainer{
     
@@ -19,8 +20,13 @@ final class AppDIContainer{
         return MapRemoteDataSource()
     }()
     
+    lazy var internetCheck: Reachable = {
+        guard let r = Reachability() else {return false}
+        return r.isReachable
+    }
+    
     lazy var countryRepository: CountryDataRepository = {
-        return CountryDataRepository(remoteDataSource: countryDataSource)
+        return CountryDataRepository(remoteDataSource: countryDataSource,reachable: internetCheck)
     }()
     lazy var mapRepository:MapRepository = {
         return MapRepository(remoteDataSource: mapDataSource)

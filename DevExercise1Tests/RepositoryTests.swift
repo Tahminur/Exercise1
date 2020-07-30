@@ -7,36 +7,58 @@
 //
 
 import XCTest
+import ArcGIS
 @testable import DevExercise1
 
 class RepositoryTests: XCTestCase {
 
+    var countryRemoteDataSource: CountryCasesRemoteDataSource!
+    var features: [AGSArcGISFeature]!
+    var errorFromFetch: fetchError!
+    
     override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+        countryRemoteDataSource = CountryCasesRemoteDataSource()
+        features = []
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        
+        countryRemoteDataSource = nil
+        features = nil
+        errorFromFetch = nil
         super.tearDown()
     }
 //should return 188 countries everytime this also tests data refresh since the same function is used before the completion handler goes on
     func testDataRetrieval(){
-        /*let expectation = self.expectation(description: "Countries Retrieved")
-        Arcgis.queryFeatureLayer{
+        let expectation = self.expectation(description: "Countries Retrieved")
+        countryRemoteDataSource.fetch(){ results in
+            switch results{
+            case .success(let retrieved):
+                self.features = retrieved
+            case .failure(_):
+                return
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertEqual(Arcgis.DataRetrieved.count, 188)*/
-        
+        XCTAssertEqual(features.count, 188)
     }
-    //check storage for countries once
-    func testStorage(){
-        
+    
+    func testDataRetrievalFailure(){
+        let expectation = self.expectation(description: "Failed to retrieve countries")
+        countryRemoteDataSource.featureTable = AGSServiceFeatureTable(url: URL(string: "https://www.arcgis.com/home/index.html")!)
+        countryRemoteDataSource.fetch(){results in
+            switch results{
+                case .success(let retrieved):
+                    self.features = retrieved
+                case .failure(let error):
+                    self.errorFromFetch = error
+                }
+                expectation.fulfill()
+            }
+        waitForExpectations(timeout: 5, handler: nil)
+        XCTAssert(errorFromFetch != nil)
     }
-
-    
-    
     
 }

@@ -7,37 +7,32 @@
 //
 
 import XCTest
+import ArcGIS
 @testable import DevExercise1
 
 class DevExercise1Tests: XCTestCase {
 
+    var cell: CountryCell!
+    var nilPointCountry:Country!
+    var mapper:CountryMapper!
     
     override func setUp(){
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        
+        cell = CountryCell()
+        mapper = CountryMapper()
+        nilPointCountry = Country(name: "TestCountry", cases: 0, point: nil)
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        
+        nilPointCountry = nil
+        cell = nil
         super.tearDown()
     }
-//should return 188 countries everytime this also tests data refresh since the same function is used before the completion handler goes on
-    func testDataRetrieval(){
-        /*let expectation = self.expectation(description: "Countries Retrieved")
-        Arcgis.queryFeatureLayer{
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertEqual(Arcgis.DataRetrieved.count, 188)*/
-        
-    }
-    //check storage for countries once
-    func testStorage(){
-        
+    
+    func testCountryCellSet(){
+        cell.set(country:nilPointCountry)
+        XCTAssert(cell.point == nil)
     }
 
-    
-    
-    
 }

@@ -10,7 +10,6 @@ import Foundation
 import ArcGIS
 
 protocol CountryCasesViewModelInput {
-    //this fetch is from the variable that will be populated by the api
     func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void)
 }
 

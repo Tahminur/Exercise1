@@ -9,23 +9,17 @@
 import Foundation
 import ArcGIS
 
-
-//TODO: Add arcgis developer account to get rid of watermark
-
-
-//be it local or remote will have to implement this protocol
 public protocol RemoteDataSource {
     
     func fetch(completion:@escaping (Result<[AGSArcGISFeature],fetchError>) -> Void)
     var featureTable:AGSServiceFeatureTable {get}
 }
 
-
 public class CountryCasesRemoteDataSource:RemoteDataSource {
 
     var dataRetrieved:[AGSArcGISFeature] = []
     
-    public let featureTable: AGSServiceFeatureTable = {
+    public var featureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
@@ -74,7 +68,7 @@ public class CountryCasesRemoteDataSource:RemoteDataSource {
 
 //The service feature tables are stored here and since this is remote the feature layers will be created in the map repository
 public class MapRemoteDataSource{
-    public let features: [AGSServiceFeatureTable] = [AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")),
-    AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1")),
-    AGSServiceFeatureTable(url: URL(fileURLWithPath: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/0"))]
+    public let features: [AGSServiceFeatureTable] = [AGSServiceFeatureTable(url:URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!),
+    AGSServiceFeatureTable(url: URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/1")!),
+    AGSServiceFeatureTable(url: URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/0")!)]
 }

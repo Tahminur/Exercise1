@@ -8,11 +8,11 @@
 
 import Foundation
 
-
 public enum fetchError: Error{
     case errorLoad
     case errorQuery
     case errorCasting
+    case noInternet
 }
 
 extension fetchError: LocalizedError {
@@ -24,7 +24,8 @@ extension fetchError: LocalizedError {
             return NSLocalizedString("There was a problem querying the countries", comment: "Error Query")
         case .errorCasting:
             return NSLocalizedString("There was a problem casting the countries", comment: "Error Casting")
+        case .noInternet:
+            return NSLocalizedString("THere was a problem connecting to the internet",comment: "No Internet")
         }
-    }
-        
+    }        
 }

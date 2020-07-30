@@ -10,7 +10,6 @@ import Foundation
 import ArcGIS
 
 protocol MapViewModelInput {
-
     func licenseMap() throws
 }
 
@@ -18,17 +17,11 @@ class MapViewModel:MapViewModelInput{
 
     private let repository: MapRepository
     
-    var featureLayers: [AGSFeatureLayer] = []
-    
-    var point:AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
-    
     init(repository:MapRepository){
         self.repository = repository
     }
     
-    
     func retrieveFeatureLayers(completion:@escaping ([AGSFeatureLayer]) -> Void){
-        featureLayers = repository.fetch()
         completion(repository.fetch())
     }
     //Gets rid of watermark

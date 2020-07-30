@@ -9,10 +9,6 @@
 import Foundation
 import ArcGIS
 
-
-//have feature layers also be loaded in here so 
-
-
 public protocol Repositories{
     func fetch(forceRefresh:Bool, completion: @escaping (Result<[Country],fetchError>) -> Void)
 }
@@ -21,30 +17,39 @@ public class CountryDataRepository : Repositories {
     
     private let remoteDataSource: CountryCasesRemoteDataSource
     private let mapper = CountryMapper()
+    private let reachable:Reachable
     
-    public init(remoteDataSource: CountryCasesRemoteDataSource){
+    public init(remoteDataSource: CountryCasesRemoteDataSource, reachable: @escaping Reachable){
         self.remoteDataSource = remoteDataSource
+        self.reachable = reachable
     }
     
     //will handle fetching from local or fetching from remote
     public func fetch(forceRefresh:Bool, completion: @escaping (Result<[Country],fetchError>) -> Void) {
-        if (forceRefresh){
-            remoteDataSource.fetch(){ result in
-                switch result {
-                case .success(let features):
-                    let countriesFetched = self.mapper.mapToCountry(features: features)
-                    completion(.success(countriesFetched))
-                case .failure(.errorCasting):
-                    completion(.failure(.errorCasting))
-                case .failure(.errorQuery):
-                    completion(.failure(.errorQuery))
-                case .failure(.errorLoad):
-                    completion(.failure(.errorLoad))
+        if reachable(){
+            if (forceRefresh){
+                remoteDataSource.fetch(){ result in
+                    switch result {
+                    case .success(let features):
+                        let countriesFetched = self.mapper.mapToCountry(features: features)
+                        completion(.success(countriesFetched))
+                    case .failure(.errorCasting):
+                        completion(.failure(.errorCasting))
+                    case .failure(.errorQuery):
+                        completion(.failure(.errorQuery))
+                    case .failure(.errorLoad):
+                        completion(.failure(.errorLoad))
+                    case .failure(.noInternet):
+                        return //never will make it here
+                    }
                 }
+            } else{
+                let countriesFetched = self.mapper.mapToCountry(features: remoteDataSource.retrieveCountries())
+                completion(.success(countriesFetched))
             }
-        } else{
-            let countriesFetched = self.mapper.mapToCountry(features: remoteDataSource.retrieveCountries())
-            completion(.success(countriesFetched))
+        }
+        else{
+            completion(.failure(.noInternet))
         }
     }
 }
@@ -52,11 +57,9 @@ public class CountryDataRepository : Repositories {
 public class MapRepository{
     
     private let remoteDataSource:MapRemoteDataSource
-    private var features: [AGSFeatureLayer] = []
     
     public init(remoteDataSource:MapRemoteDataSource){
         self.remoteDataSource = remoteDataSource
-        features = fetch()
     }
     
     public func fetch()->[AGSFeatureLayer]{
@@ -66,6 +69,5 @@ public class MapRepository{
         }
         return layers
     }
-    
     
 }

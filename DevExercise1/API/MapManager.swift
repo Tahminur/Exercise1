@@ -50,10 +50,8 @@ extension MapManager: AGSAuthenticationManagerDelegate{
     
     func refreshMap(on mapView: AGSMapView, then completion: (() -> Void)?){
         mapView.map = nil
-        
         self.map.load(completion:{ [weak self] (error) in
             guard let strongSelf = self else {return}
-            
             guard error == nil else {
                 let msg = (error?.localizedDescription)
                 print(msg)

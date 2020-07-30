@@ -8,22 +8,18 @@
 
 import Foundation
 import ArcGIS
-/*protocol CountryItemViewModelInput {
-    //this fetch is from the variable that will be populated by the api
-    func fetch()
-}*/
 
 protocol CountryItemViewModelOutput{
     var countryName: String {get}
     var countryCases: Int {get}
-    var countryPoint: AGSPoint {get}
+    var countryPoint: AGSPoint? {get}
 }
 
 public struct CountryItemViewModel:CountryItemViewModelOutput{
     let country:Country
     let countryName: String
     var countryCases: Int
-    var countryPoint: AGSPoint
+    var countryPoint: AGSPoint?
     
     init(country:Country){
         self.country = country

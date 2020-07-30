@@ -9,13 +9,10 @@
 import UIKit
 import ArcGIS
 
-
 class CountryController:UIViewController{
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
-    
     var viewModel:CountryCasesViewModel!
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -37,6 +34,7 @@ class CountryController:UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
+        print()
         viewModel.fetchFromDataSource(forceRefresh: true){ result in
             if result == nil{
                 self.tableView.reloadData()
@@ -50,29 +48,20 @@ class CountryController:UIViewController{
     //MARK: -Layout
     
     static func create(with viewModel: CountryCasesViewModel, countryController: CountryControllerFactory) -> CountryController{
-        
         let view = CountryController()
         view.viewModel = viewModel
         return view
     }
     
     @objc func refreshCountryData(_ sender: Any){
-        if InternetConnection.shared.status != nil{
-            self.presentAlert(message: InternetConnection.shared.status!)
-            self.refresher.endRefreshing()
-        }else{
-            viewModel.fetchFromDataSource(forceRefresh: true,completion: setupCountriesRefresh(possibleMsg:))
-        }
-    }
-    
-    func setupCountriesRefresh(possibleMsg:String?){
-        if possibleMsg == nil{
-            self.tableView.reloadData()
-            self.refresher.endRefreshing()
-        }
-        else{
-            self.presentAlert(message: possibleMsg!)
-            self.refresher.endRefreshing()
+        viewModel.fetchFromDataSource(forceRefresh: true){ result in
+            if result == nil{
+                self.tableView.reloadData()
+                self.refresher.endRefreshing()
+            }
+            else{
+                self.presentAlert(message: result!)
+            }
         }
     }
 
@@ -94,17 +83,15 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
         tableView.pin(to: view)
         tableView.addSubview(refresher)
         refresher.addTarget(self, action: #selector(refreshCountryData(_:)), for: .valueChanged)
-        
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CountryCell") as! CountryCell
-        
         cell.set(country: viewModel.countries[indexPath.row].country)
-        
         return cell
     }
     
@@ -112,8 +99,11 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
         let indexPath = tableView.indexPathForSelectedRow
         let clickedCell = tableView.cellForRow(at: indexPath!)! as! CountryCell
         
-        Storage.shared.point = clickedCell.point
-        
+        guard clickedCell.point != nil else {
+            presentAlert(message: "This country has no associated location, Weird")
+            return
+        }
+        Storage.shared.point = clickedCell.point!
         self.tabBarController?.selectedIndex = 1
         
     }

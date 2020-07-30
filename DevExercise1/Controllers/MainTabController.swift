@@ -22,7 +22,6 @@ class MainTabController: UITabBarController {
         self.tabBar.tintColor = .white
     }
     
-    
     func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController{
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image
@@ -31,12 +30,10 @@ class MainTabController: UITabBarController {
         nav.hidesBarsOnSwipe = true
         return nav
     }
+    
     func setupTabs(){
-        
-        //let newMap = MapViewController()
         let newMap = appDIContainer.mapContainer.makeMapViewController()
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
-        
         let newCases = appDIContainer.countryContainer.makeCountryController()
         let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "29-2"), rootViewController: newCases)
         viewControllers = [newCasesTab, newMapTab]

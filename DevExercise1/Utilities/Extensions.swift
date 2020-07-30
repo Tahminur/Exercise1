@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 extension UIView{
     func pin(to superView: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +30,6 @@ extension UIViewController{
 
 private var window: UIWindow!
 
-
 public extension UIAlertController{
     func presentingAlert(message: String, title: String? = ""){
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -39,10 +37,7 @@ public extension UIAlertController{
         alertController.addAction(OKAction)
         alertController.present(animated: true, completion: nil)
     }
-    
-    
-    
-    
+
     func present(animated: Bool, completion: (() -> Void)?){
         window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIViewController()
@@ -51,7 +46,6 @@ public extension UIAlertController{
         window.makeKeyAndVisible()
         window.rootViewController?.present(self,animated: animated, completion: completion)
     }
-    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)

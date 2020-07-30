@@ -9,59 +9,50 @@
 import Foundation
 import ArcGIS
 
-
-
-
-
 class MapViewController:UIViewController{
 
-    //move this to the dependency injection
     var viewModel: MapViewModel!
-    var mapView:AGSMapView!
+    var mapView:AGSMapView = AGSMapView()
+    var map:AGSMap!
     //MARK:-View setup
     static func create(with viewModel: MapViewModel, mapController: MapControllerFactory) -> MapViewController{
         let view = MapViewController()
         view.viewModel = viewModel
-        let mapView = AGSMapView()
-        mapView.map = AGSMap(basemap: .darkGrayCanvasVector())
-        viewModel.retrieveFeatureLayers(){ layers in
+        let map = AGSMap(basemap: .darkGrayCanvasVector())
+        viewModel.retrieveFeatureLayers(){layers in
             for layer in layers{
-                mapView.map?.operationalLayers.add(layer)
+                map.operationalLayers.add(layer)
             }
         }
-        view.mapView = mapView
+        view.map = map
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mapView.wrapAroundMode = .enabledWhenSupported
-        navigationItem.title = "Map"
         view.addSubview(mapView)
-        mapView.pin(to: view)
+        self.mapView.pin(to: view)
+        navigationItem.title = "Map"
+        self.mapView.map = self.map
         do{
             try viewModel.licenseMap()
         } catch{
             self.presentAlert(message: "Error with Licensing")
         }
-        mapView.reloadInputViews()
         //below is for the method that uses the mapmanager
         //setupMap()
     }
-    
-    func setupMap(){
+    /*func setupMap(){
         DispatchQueue.main.async {
             self.view.addSubview(self.mapView)
             self.mapView.pin(to: self.view)
             MapManager.shared.refreshMap(on: self.mapView, then: nil)
         }
-    }
+    }*/
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print(mapView.map?.operationalLayers.count)
-        mapView.reloadInputViews()
-        //mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
+        setViewpoint()
     }
     func setViewpoint(){
         mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))

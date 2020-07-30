@@ -9,24 +9,18 @@
 import Foundation
 import ArcGIS
 
-
-
-
 public class CountryMapper {
     func mapToCountry(features:[AGSArcGISFeature]) -> [Country] {
         var countriesToReturn:[Country] = []
         for feature in features{
             let name = feature.attributes["Country_Region"] as! String
-            
-            //pass error instead of hardcoded point to the user to notify no location for country
-            var point: AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
-            
-            if feature.geometry != nil{
+            var point: AGSPoint?
+            if feature.geometry == nil{
+                point = nil
+            }else{
                 point = feature.geometry as! AGSPoint
             }
-            
             let cases = feature.attributes["Confirmed"] as! Int
-            
             let country = Country.init(name: name, cases: cases, point: point)
             countriesToReturn.append(country)
         }

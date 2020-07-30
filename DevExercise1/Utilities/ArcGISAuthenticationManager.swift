@@ -12,8 +12,4 @@ import ArcGIS
 class ArcGISAuthenticationManager: NSObject{
     static let shared = ArcGISAuthenticationManager()
     var portal: AGSPortal!
-    
-    /*func agsAuthentication(username:String, password: String, success:@escaping(_ _ userInfo: AGSPortalUser?)->Void, failure:@escaping(_ error: NSError?) -> Void){
-        self.portal = AGS
-    }*/
 }
