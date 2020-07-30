@@ -585,14 +585,6 @@ public final class MapViewModelMock: DevExercise1.MapViewModel, Mockingbird.Mock
     public static func initialize(`repository`: DevExercise1.MapRepository, __file: StaticString = #file, __line: UInt = #line) -> MapViewModelMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
-  // MARK: Mocked point
-
-  override public var `point`: AGSPoint { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
-
-  public func getPoint() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> AGSPoint, AGSPoint> { fatalError("See 'Thunk Stubs' in the README") }
-
-  public func setPoint(_ newValue: @escaping @autoclosure () -> AGSPoint) -> Mockingbird.Mockable<Mockingbird.PropertySetterDeclaration, (AGSPoint) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
-
   // MARK: Mocked `licenseMap`()
 
   public override func `licenseMap`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
@@ -745,31 +737,4 @@ public final class SceneDelegateMock: Mockingbird.Mock {
 @available(*, unavailable, message: "'SceneDelegate' does not declare any accessible designated initializers and cannot be mocked")
 public func mock(_ type: DevExercise1.SceneDelegate.Type, file: StaticString = #file, line: UInt = #line) -> SceneDelegateMock {
   fatalError()
-}
-
-// MARK: - Mocked Util
-
-public final class UtilMock: DevExercise1.Util, Mockingbird.Mock {
-  static let staticMock = Mockingbird.StaticMock()
-  public let mockingContext = Mockingbird.MockingContext()
-  public let stubbingContext = Mockingbird.StubbingContext()
-  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
-  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
-
-  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
-    super.init()
-    Mockingbird.checkVersion(for: self)
-    self.sourceLocation = sourceLocation
-  }
-
-  // MARK: Mocked `convertFeatureToCountry`(`feature`: AGSArcGISFeature)
-
-  public override func `convertFeatureToCountry`(`feature`: AGSArcGISFeature) -> DevExercise1.Country { fatalError("See 'Thunk Stubs' in the README") }
-
-  public func `convertFeatureToCountry`(`feature`: @escaping @autoclosure () -> AGSArcGISFeature) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSArcGISFeature) -> DevExercise1.Country, DevExercise1.Country> { fatalError("See 'Thunk Stubs' in the README") }
-}
-
-/// Returns a concrete mock of `Util`.
-public func mock(_ type: DevExercise1.Util.Type, file: StaticString = #file, line: UInt = #line) -> UtilMock {
-  return UtilMock(sourceLocation: Mockingbird.SourceLocation(file, line))
 }

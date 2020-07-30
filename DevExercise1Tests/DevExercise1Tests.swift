@@ -34,5 +34,4 @@ class DevExercise1Tests: XCTestCase {
         cell.set(country:nilPointCountry)
         XCTAssert(cell.point == nil)
     }
-
 }

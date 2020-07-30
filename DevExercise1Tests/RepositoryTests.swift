@@ -29,7 +29,7 @@ class RepositoryTests: XCTestCase {
         errorFromFetch = nil
         super.tearDown()
     }
-//should return 188 countries everytime this also tests data refresh since the same function is used before the completion handler goes on
+
     func testDataRetrieval(){
         let expectation = self.expectation(description: "Countries Retrieved")
         countryRemoteDataSource.fetch(){ results in
