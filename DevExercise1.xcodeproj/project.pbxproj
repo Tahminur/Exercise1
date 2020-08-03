@@ -15,9 +15,10 @@
 		452B065924D094BD00F1BFE3 /* MapDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065824D094BD00F1BFE3 /* MapDIContainer.swift */; };
 		452B065B24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065A24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift */; };
 		452B065D24D0BFD600F1BFE3 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065C24D0BFD600F1BFE3 /* MapManager.swift */; };
+		453E602324D8A5F600B3559E /* CountryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E602224D8A5F600B3559E /* CountryRepository.swift */; };
+		453E602524D8A63B00B3559E /* MapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E602424D8A63B00B3559E /* MapRepository.swift */; };
 		4549520524B633F300023370 /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520424B633F300023370 /* CountryController.swift */; };
 		4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520624B63BA200023370 /* CountryCasesViewModel.swift */; };
-		4549520924B64DCD00023370 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520824B64DCD00023370 /* Repositories.swift */; };
 		456D8E0424B3BD76004B72A1 /* ArcgisDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D8E0324B3BD76004B72A1 /* ArcgisDatasource.swift */; };
 		456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */; };
 		45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB024B4DEB6009FEBEA /* Storage.swift */; };
@@ -70,9 +71,10 @@
 		452B065824D094BD00F1BFE3 /* MapDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDIContainer.swift; sourceTree = "<group>"; };
 		452B065A24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcGISAuthenticationManager.swift; sourceTree = "<group>"; };
 		452B065C24D0BFD600F1BFE3 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		453E602224D8A5F600B3559E /* CountryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRepository.swift; sourceTree = "<group>"; };
+		453E602424D8A63B00B3559E /* MapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepository.swift; sourceTree = "<group>"; };
 		4549520424B633F300023370 /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
 		4549520624B63BA200023370 /* CountryCasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCasesViewModel.swift; sourceTree = "<group>"; };
-		4549520824B64DCD00023370 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
 		456D8E0324B3BD76004B72A1 /* ArcgisDatasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcgisDatasource.swift; sourceTree = "<group>"; };
 		456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		45759AB024B4DEB6009FEBEA /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -224,8 +226,9 @@
 				456D8E0324B3BD76004B72A1 /* ArcgisDatasource.swift */,
 				452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */,
 				452B065C24D0BFD600F1BFE3 /* MapManager.swift */,
-				4549520824B64DCD00023370 /* Repositories.swift */,
+				453E602224D8A5F600B3559E /* CountryRepository.swift */,
 				45759AB024B4DEB6009FEBEA /* Storage.swift */,
+				453E602424D8A63B00B3559E /* MapRepository.swift */,
 				45759AB224B4E00F009FEBEA /* Mapper.swift */,
 			);
 			path = API;
@@ -610,7 +613,8 @@
 				452B065D24D0BFD600F1BFE3 /* MapManager.swift in Sources */,
 				45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */,
 				452B065224CF641000F1BFE3 /* Reachability.swift in Sources */,
-				4549520924B64DCD00023370 /* Repositories.swift in Sources */,
+				453E602524D8A63B00B3559E /* MapRepository.swift in Sources */,
+				453E602324D8A5F600B3559E /* CountryRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

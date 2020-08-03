@@ -15,7 +15,7 @@ protocol CountryControllerFactory{
 final class CountryDIContainer:CountryControllerFactory{
     
     struct Dependencies {
-        let countryRepo:CountryDataRepository
+        let countryRepo:CountryRepository
     }
     
     private let dependencies: Dependencies

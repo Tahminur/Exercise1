@@ -25,11 +25,11 @@ final class AppDIContainer{
         return r.isReachable
     }
     
-    lazy var countryRepository: CountryDataRepository = {
-        return CountryDataRepository(remoteDataSource: countryDataSource,reachable: internetCheck)
+    lazy var countryRepository: CountryRepository = {
+        return CountryRepositoryImplementation(remoteDataSource: countryDataSource,reachable: internetCheck)
     }()
     lazy var mapRepository:MapRepository = {
-        return MapRepository(remoteDataSource: mapDataSource)
+        return MapRepositoryImplementation(remoteDataSource: mapDataSource)
     }()
     
     lazy var countryContainer:CountryDIContainer = {

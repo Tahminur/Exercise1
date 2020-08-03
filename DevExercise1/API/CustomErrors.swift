@@ -25,7 +25,7 @@ extension fetchError: LocalizedError {
         case .errorCasting:
             return NSLocalizedString("There was a problem casting the countries", comment: "Error Casting")
         case .noInternet:
-            return NSLocalizedString("THere was a problem connecting to the internet",comment: "No Internet")
+            return NSLocalizedString("There was a problem connecting to the internet",comment: "No Internet")
         }
     }        
 }

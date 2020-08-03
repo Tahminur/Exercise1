@@ -9,7 +9,12 @@
 import Foundation
 import ArcGIS
 
-public class CountryMapper {
+protocol Mapper{
+    func mapToCountry(features:[AGSArcGISFeature]) -> [Country]
+}
+
+
+public class CountryMapper: Mapper {
     func mapToCountry(features:[AGSArcGISFeature]) -> [Country] {
         var countriesToReturn:[Country] = []
         for feature in features{
