@@ -7,10 +7,11 @@ target 'DevExercise1' do
 
   # Pods for DevExercise1
 	pod 'ArcGIS-Runtime-SDK-iOS'
-	pod 'MockingbirdFramework', '~> 0.14'
+	
   target 'DevExercise1Tests' do
     inherit! :search_paths
     # Pods for testing
+	pod 'MockingbirdFramework', '~> 0.14'
   end
 
   target 'DevExercise1UITests' do
