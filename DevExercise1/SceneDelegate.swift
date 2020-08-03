@@ -18,11 +18,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         //setting the root view below to be the maintabcontroller
         guard let scene = (scene as? UIWindowScene) else { return }
-        
+
         window = UIWindow(windowScene: scene)
         window?.rootViewController = MainTabController()
         window?.makeKeyAndVisible()
-        
+
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -56,6 +56,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
-
 }
-

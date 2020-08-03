@@ -9,24 +9,24 @@
 import Foundation
 import ArcGIS
 
-protocol MapRepository{
-    func fetch()->[AGSFeatureLayer]
+protocol MapRepository {
+    func fetch() -> [AGSFeatureLayer]
 }
 
-public class MapRepositoryImplementation: MapRepository{
-    
-    private let remoteDataSource:MapRemoteDataSource
-    
-    public init(remoteDataSource:MapRemoteDataSource){
+public class MapRepositoryImplementation: MapRepository {
+
+    private let remoteDataSource: MapRemoteDataSource
+
+    public init(remoteDataSource: MapRemoteDataSource) {
         self.remoteDataSource = remoteDataSource
     }
-    
-    public func fetch()->[AGSFeatureLayer]{
-        var layers:[AGSFeatureLayer] = []
-        for table in remoteDataSource.features{
+
+    public func fetch() -> [AGSFeatureLayer] {
+        var layers: [AGSFeatureLayer] = []
+        for table in remoteDataSource.features {
             layers.append(AGSFeatureLayer(featureTable: table))
         }
         return layers
     }
-    
+
 }

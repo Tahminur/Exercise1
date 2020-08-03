@@ -15,8 +15,8 @@ class RepositoryTests: XCTestCase {
     var countryRemoteDataSource: CountryCasesRemoteDataSource!
     var features: [AGSArcGISFeature]!
     var errorFromFetch: fetchError!
-    
-    override func setUp(){
+
+    override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         countryRemoteDataSource = CountryCasesRemoteDataSource()
         features = []
@@ -30,13 +30,13 @@ class RepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testDataRetrieval(){
+    func testDataRetrieval() {
         let expectation = self.expectation(description: "Countries Retrieved")
-        countryRemoteDataSource.fetch(){ results in
-            switch results{
+        countryRemoteDataSource.fetch { results in
+            switch results {
             case .success(let retrieved):
                 self.features = retrieved
-            case .failure(_):
+            case .failure:
                 return
             }
             expectation.fulfill()
@@ -44,12 +44,12 @@ class RepositoryTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertEqual(features.count, 188)
     }
-    
-    func testDataRetrievalFailure(){
+
+    func testDataRetrievalFailure() {
         let expectation = self.expectation(description: "Failed to retrieve countries")
         countryRemoteDataSource.featureTable = AGSServiceFeatureTable(url: URL(string: "https://www.arcgis.com/home/index.html")!)
-        countryRemoteDataSource.fetch(){results in
-            switch results{
+        countryRemoteDataSource.fetch {results in
+            switch results {
                 case .success(let retrieved):
                     self.features = retrieved
                 case .failure(let error):
@@ -60,5 +60,5 @@ class RepositoryTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssert(errorFromFetch != nil)
     }
-    
+
 }

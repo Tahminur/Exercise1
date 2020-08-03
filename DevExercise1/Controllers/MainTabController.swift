@@ -14,15 +14,15 @@ class MainTabController: UITabBarController {
     lazy var appDIContainer: AppDIContainer = {
         return (UIApplication.shared.delegate as! AppDelegate).appDIContainer
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabs()
         self.tabBar.barTintColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         self.tabBar.tintColor = .white
     }
-    
-    func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController{
+
+    func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image
         nav.navigationBar.barTintColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
@@ -30,8 +30,8 @@ class MainTabController: UITabBarController {
         nav.hidesBarsOnSwipe = true
         return nav
     }
-    
-    func setupTabs(){
+
+    func setupTabs() {
         let newMap = appDIContainer.mapContainer.makeMapViewController()
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
         let newCases = appDIContainer.countryContainer.makeCountryController()

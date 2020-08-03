@@ -2,7 +2,7 @@ import ObjectiveC
 
 public protocol NSObjectProtocol {}
 
-open class NSObject : NSObjectProtocol {
+open class NSObject: NSObjectProtocol {
   public init() {}
 }
 

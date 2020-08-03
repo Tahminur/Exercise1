@@ -8,27 +8,27 @@
 
 import Foundation
 
-protocol MapControllerFactory{
-    
+protocol MapControllerFactory {
+
 }
 
-final class MapDIContainer:MapControllerFactory{
-    
-    struct Dependencies{
-        let mapRepo:MapRepository
+final class MapDIContainer: MapControllerFactory {
+
+    struct Dependencies {
+        let mapRepo: MapRepository
     }
-    
+
     private let dependencies: Dependencies
-    
-    init(dependencies: Dependencies){
+
+    init(dependencies: Dependencies) {
         self.dependencies = dependencies
     }
-    
-    func makeMapViewModel() -> MapViewModel{
+
+    func makeMapViewModel() -> MapViewModel {
         return MapViewModel(repository: dependencies.mapRepo)
     }
-    
-    func makeMapViewController() -> MapViewController{
+
+    func makeMapViewController() -> MapViewController {
         return MapViewController.create(with: makeMapViewModel(), mapController: self)
     }
 }

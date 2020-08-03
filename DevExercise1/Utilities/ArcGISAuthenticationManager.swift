@@ -9,7 +9,7 @@
 import Foundation
 import ArcGIS
 
-class ArcGISAuthenticationManager: NSObject{
+class ArcGISAuthenticationManager: NSObject {
     static let shared = ArcGISAuthenticationManager()
     var portal: AGSPortal!
 }

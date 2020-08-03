@@ -12,24 +12,24 @@ import Mockingbird
 
 class RemoteDataSourceTests: XCTestCase {
 
-    var unitTest:CountryCasesRemoteDataSource!
-    
+    var unitTest: CountryCasesRemoteDataSource!
+
     let mockRepo = mock(CountryCasesRemoteDataSource.self)
-    
-    override func setUp(){
+
+    override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         unitTest = CountryCasesRemoteDataSource()
-        
+
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         unitTest = nil
-        
+
         super.tearDown()
     }
 //should return 188 countries
-    func testDataRetrieval(){
+    func testDataRetrieval() {
         let expectation = self.expectation(description: "Countries Retrieved")
         unitTest.fetch {
             expectation.fulfill()
@@ -37,13 +37,10 @@ class RemoteDataSourceTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssertEqual(unitTest.retrieveCountries().count, 188)
     }
-    func testIncorrectFeatureTable(){
+    func testIncorrectFeatureTable() {
         mockRepo.fetch {
-            
+
         }
     }
-    
-    
-    
-    
+
 }

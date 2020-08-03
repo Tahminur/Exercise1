@@ -10,7 +10,7 @@ import Foundation
 import ArcGIS
 import UIKit
 
-class Util{
+class Util {
     //change this function to remove lat and long since the center at viewpoint actually uses the ags poing coordinate and not the lat or long
-    
+
 }

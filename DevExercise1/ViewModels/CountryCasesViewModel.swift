@@ -10,29 +10,29 @@ import Foundation
 import ArcGIS
 
 protocol CountryCasesViewModelInput {
-    func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void)
+    func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (String?) -> Void)
 }
 
-protocol CountryCasesViewModelOutput{
+protocol CountryCasesViewModelOutput {
     var countries: [CountryItemViewModel] {get}
 }
 
-public final class CountryCasesViewModel:CountryCasesViewModelOutput, CountryCasesViewModelInput{
+public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCasesViewModelInput {
     var countries: [CountryItemViewModel] = []
-    
+
     private let repository: CountryRepository
-    
-    public init(repository: CountryRepository){
+
+    public init(repository: CountryRepository) {
         self.repository = repository
     }
     //move reachable internet check here and pass error on failure to after this in the countrycontroller
-    func fetchFromDataSource(forceRefresh:Bool, completion:@escaping (String?) -> Void) {
-        if (forceRefresh){
+    func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (String?) -> Void) {
+        if forceRefresh {
             countries.removeAll()
-            repository.fetch(forceRefresh: forceRefresh){ result in
-                switch result{
+            repository.fetch(forceRefresh: forceRefresh) { result in
+                switch result {
                 case .success(let fetched):
-                    for country in fetched{
+                    for country in fetched {
                         self.countries.append(CountryItemViewModel(country: country))
                         completion(nil)
                     }

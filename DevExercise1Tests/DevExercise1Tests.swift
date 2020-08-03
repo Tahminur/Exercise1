@@ -13,10 +13,10 @@ import ArcGIS
 class DevExercise1Tests: XCTestCase {
 
     var cell: CountryCell!
-    var nilPointCountry:Country!
-    var mapper:CountryMapper!
-    
-    override func setUp(){
+    var nilPointCountry: Country!
+    var mapper: CountryMapper!
+
+    override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         cell = CountryCell()
         mapper = CountryMapper()
@@ -29,9 +29,9 @@ class DevExercise1Tests: XCTestCase {
         cell = nil
         super.tearDown()
     }
-    
-    func testCountryCellSet(){
-        cell.set(country:nilPointCountry)
+
+    func testCountryCellSet() {
+        cell.set(country: nilPointCountry)
         XCTAssert(cell.point == nil)
     }
 }

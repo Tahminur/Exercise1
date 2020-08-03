@@ -10,37 +10,36 @@ import Foundation
 
 public typealias Reachable = () -> Bool
 
-final class AppDIContainer{
-    
-    lazy var countryDataSource:CountryCasesRemoteDataSource = {
+final class AppDIContainer {
+
+    lazy var countryDataSource: CountryCasesRemoteDataSource = {
         return CountryCasesRemoteDataSource()
     }()
-    
-    lazy var mapDataSource:MapRemoteDataSource = {
+
+    lazy var mapDataSource: MapRemoteDataSource = {
         return MapRemoteDataSource()
     }()
-    
+
     lazy var internetCheck: Reachable = {
         guard let r = Reachability() else {return false}
         return r.isReachable
     }
-    
+
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImplementation(remoteDataSource: countryDataSource,reachable: internetCheck)
+        return CountryRepositoryImplementation(remoteDataSource: countryDataSource, reachable: internetCheck)
     }()
-    lazy var mapRepository:MapRepository = {
+    lazy var mapRepository: MapRepository = {
         return MapRepositoryImplementation(remoteDataSource: mapDataSource)
     }()
-    
-    lazy var countryContainer:CountryDIContainer = {
+
+    lazy var countryContainer: CountryDIContainer = {
         let dependencies = CountryDIContainer.Dependencies(countryRepo: countryRepository)
         return CountryDIContainer(dependencies: dependencies)
     }()
-    
-    lazy var mapContainer:MapDIContainer = {
+
+    lazy var mapContainer: MapDIContainer = {
         let dependencies = MapDIContainer.Dependencies(mapRepo: mapRepository)
         return MapDIContainer(dependencies: dependencies)
     }()
-    
-    
+
 }

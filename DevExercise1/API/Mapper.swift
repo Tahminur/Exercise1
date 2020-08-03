@@ -9,20 +9,19 @@
 import Foundation
 import ArcGIS
 
-protocol Mapper{
-    func mapToCountry(features:[AGSArcGISFeature]) -> [Country]
+protocol Mapper {
+    func mapToCountry(features: [AGSArcGISFeature]) -> [Country]
 }
 
-
 public class CountryMapper: Mapper {
-    func mapToCountry(features:[AGSArcGISFeature]) -> [Country] {
-        var countriesToReturn:[Country] = []
-        for feature in features{
+    func mapToCountry(features: [AGSArcGISFeature]) -> [Country] {
+        var countriesToReturn: [Country] = []
+        for feature in features {
             let name = feature.attributes["Country_Region"] as! String
             var point: AGSPoint?
-            if feature.geometry == nil{
+            if feature.geometry == nil {
                 point = nil
-            }else{
+            } else {
                 point = feature.geometry as! AGSPoint
             }
             let cases = feature.attributes["Confirmed"] as! Int

@@ -9,26 +9,26 @@
 import Foundation
 import ArcGIS
 
-public protocol CountryRepository{
-    func fetch(forceRefresh:Bool, completion: @escaping (Result<[Country],fetchError>) -> Void)
+public protocol CountryRepository {
+    func fetch(forceRefresh: Bool, completion: @escaping (Result<[Country], fetchError>) -> Void)
 }
 
-public class CountryRepositoryImplementation : CountryRepository {
-    
+public class CountryRepositoryImplementation: CountryRepository {
+
     private let remoteDataSource: CountryCasesRemoteDataSource
     private let mapper = CountryMapper()
-    private let reachable:Reachable
-    
-    public init(remoteDataSource: CountryCasesRemoteDataSource, reachable: @escaping Reachable){
+    private let reachable: Reachable
+
+    public init(remoteDataSource: CountryCasesRemoteDataSource, reachable: @escaping Reachable) {
         self.remoteDataSource = remoteDataSource
         self.reachable = reachable
     }
-    
+
     //will handle fetching from local or fetching from remote
-    public func fetch(forceRefresh:Bool, completion: @escaping (Result<[Country],fetchError>) -> Void) {
-        if reachable(){
-            if (forceRefresh){
-                remoteDataSource.fetch(){ result in
+    public func fetch(forceRefresh: Bool, completion: @escaping (Result<[Country], fetchError>) -> Void) {
+        if reachable() {
+            if forceRefresh {
+                remoteDataSource.fetch { result in
                     switch result {
                     case .success(let features):
                         let countriesFetched = self.mapper.mapToCountry(features: features)
@@ -43,12 +43,11 @@ public class CountryRepositoryImplementation : CountryRepository {
                         return //never will make it here
                     }
                 }
-            } else{
+            } else {
                 let countriesFetched = self.mapper.mapToCountry(features: remoteDataSource.retrieveCountries())
                 completion(.success(countriesFetched))
             }
-        }
-        else{
+        } else {
             completion(.failure(.noInternet))
         }
     }
