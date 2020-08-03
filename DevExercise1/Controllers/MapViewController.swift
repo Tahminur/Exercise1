@@ -14,6 +14,7 @@ class MapViewController: UIViewController {
     var viewModel: MapViewModel!
     var mapView: AGSMapView = AGSMapView()
     var map: AGSMap!
+    private weak var activeSelectionQuery: AGSCancelable?
     // MARK: - View setup
     static func create(with viewModel: MapViewModel, mapController: MapControllerFactory) -> MapViewController {
         let view = MapViewController()
@@ -33,6 +34,7 @@ class MapViewController: UIViewController {
         view.addSubview(mapView)
         self.mapView.pin(to: view)
         navigationItem.title = "Map"
+        setupDelegates()
         self.mapView.map = self.map
         do {
             try viewModel.licenseMap()
@@ -59,6 +61,56 @@ class MapViewController: UIViewController {
     }
 }
 
-extension MapViewController {
+extension MapViewController: AGSGeoViewTouchDelegate {
 
+    func setupDelegates() {
+        mapView.touchDelegate = self
+    }
+
+    func geoView(_ geoView: AGSGeoView, didTapAtScreenPoint screenPoint: CGPoint, mapPoint: AGSPoint) {
+        if let activeSelectionQuery = activeSelectionQuery {
+                activeSelectionQuery.cancel()
+            }
+            //builds tap tolerance
+            let toleranceInPoints: Double = 12
+            let toleranceInMapUnits = toleranceInPoints * mapView.unitsPerPoint
+            let envelope = AGSEnvelope(xMin: mapPoint.x - toleranceInMapUnits,
+                                       yMin: mapPoint.y - toleranceInMapUnits,
+                                       xMax: mapPoint.x + toleranceInMapUnits,
+                                       yMax: mapPoint.y + toleranceInMapUnits,
+                                       spatialReference: mapView.map?.spatialReference)
+
+            let queryParams = AGSQueryParameters()
+            queryParams.geometry = envelope
+            //queries the given layer within the map.
+            let featureLayer = mapView.map!.operationalLayers[1] as! AGSFeatureLayer
+
+            activeSelectionQuery = featureLayer.selectFeatures(withQuery: queryParams, mode: .new) { [weak self] (queryResult: AGSFeatureQueryResult?, error: Error?) in
+                if let error = error {
+                    self?.presentAlert(message: error.localizedDescription)
+                }
+                self!.mapView.callout.dismiss()
+                //do something here to have the callout
+                if let result = queryResult {
+                    //print("\(result.featureEnumerator().allObjects.count) feature(s) selected")
+                    let calloutDetails = result.featureEnumerator().allObjects as? [AGSArcGISFeature]
+                    //makes sure that there is a feature associated with the callOutDetails else exits the function
+                    if calloutDetails!.count == 0 {
+
+                        return
+                    }
+
+                    if self!.mapView.callout.isHidden {
+                        self!.mapView.callout.title = "Test title"
+                        self!.mapView.callout.detail = "Test Details"
+                        self!.mapView.callout.show(at: mapPoint, screenOffset: CGPoint.zero, rotateOffsetWithMap: false, animated: true)
+                        self!.mapView.callout.isAccessoryButtonHidden = true
+                    } else {
+                        self?.mapView.callout.dismiss()
+                    }
+
+            }
+
+        }
+    }
 }
