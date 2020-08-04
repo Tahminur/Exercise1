@@ -25,8 +25,16 @@ final class AppDIContainer {
         return r.isReachable
     }
 
+    lazy var calloutMapper: CalloutMapper = {
+        return CalloutMapperImplementation()
+    }()
+
+    lazy var countryMapper: CountryMapper = {
+        return CountryMapperImplemetation()
+    }()
+
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImplementation(remoteDataSource: countryDataSource, reachable: internetCheck)
+        return CountryRepositoryImplementation(remoteDataSource: countryDataSource, mapper: countryMapper, reachable: internetCheck)
     }()
     lazy var mapRepository: MapRepository = {
         return MapRepositoryImplementation(remoteDataSource: mapDataSource)
@@ -38,7 +46,7 @@ final class AppDIContainer {
     }()
 
     lazy var mapContainer: MapDIContainer = {
-        let dependencies = MapDIContainer.Dependencies(mapRepo: mapRepository)
+        let dependencies = MapDIContainer.Dependencies(mapRepo: mapRepository, calloutMapper: calloutMapper)
         return MapDIContainer(dependencies: dependencies)
     }()
 

@@ -16,6 +16,7 @@ final class MapDIContainer: MapControllerFactory {
 
     struct Dependencies {
         let mapRepo: MapRepository
+        let calloutMapper: CalloutMapper
     }
 
     private let dependencies: Dependencies
@@ -29,6 +30,6 @@ final class MapDIContainer: MapControllerFactory {
     }
 
     func makeMapViewController() -> MapViewController {
-        return MapViewController.create(with: makeMapViewModel(), mapController: self)
+        return MapViewController.create(with: makeMapViewModel(), mapper: dependencies.calloutMapper, mapController: self)
     }
 }

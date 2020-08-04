@@ -1,20 +1,20 @@
 //
-//  Mapper.swift
+//  CountryMapper.swift
 //  DevExercise1
 //
-//  Created by Tahminur Rahman on 7/7/20.
+//  Created by Tahminur Rahman on 8/3/20.
 //  Copyright © 2020 Tahminur Rahman. All rights reserved.
 //
 
 import Foundation
 import ArcGIS
 
-protocol Mapper {
+public protocol CountryMapper {
     func mapToCountry(features: [AGSArcGISFeature]) -> [Country]
 }
 
-public class CountryMapper: Mapper {
-    func mapToCountry(features: [AGSArcGISFeature]) -> [Country] {
+public class CountryMapperImplemetation: CountryMapper {
+    public func mapToCountry(features: [AGSArcGISFeature]) -> [Country] {
         var countriesToReturn: [Country] = []
         for feature in features {
             let name = feature.attributes["Country_Region"] as! String

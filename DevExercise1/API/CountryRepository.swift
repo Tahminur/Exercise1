@@ -16,12 +16,13 @@ public protocol CountryRepository {
 public class CountryRepositoryImplementation: CountryRepository {
 
     private let remoteDataSource: CountryCasesRemoteDataSource
-    private let mapper = CountryMapper()
+    private let mapper: CountryMapper
     private let reachable: Reachable
 
-    public init(remoteDataSource: CountryCasesRemoteDataSource, reachable: @escaping Reachable) {
+    public init(remoteDataSource: CountryCasesRemoteDataSource, mapper: CountryMapper, reachable: @escaping Reachable) {
         self.remoteDataSource = remoteDataSource
         self.reachable = reachable
+        self.mapper = mapper
     }
 
     //will handle fetching from local or fetching from remote
