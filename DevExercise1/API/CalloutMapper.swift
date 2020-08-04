@@ -34,11 +34,17 @@ public class CalloutMapperImplementation: CalloutMapper {
         
     }*/
     public func mapToCallout(feature: [AGSArcGISFeature]) throws -> Callout {
-        var detail: String? = feature[0].attributes["Province_State"] as? String
-        var cases: Int? = feature[0].attributes["Confirmed"] as? Int
-        var country: String? = feature[0].attributes["Country_Region"] as? String
+        let detail: String? = feature[0].attributes["Province_State"] as? String
+        let cases: Int? = feature[0].attributes["Confirmed"] as? Int
+        let country: String? = feature[0].attributes["Country_Region"] as? String
         print("the province state: \(String(describing: detail)). cases: \(String(describing: cases)). country: \(String(describing: country))")
         return Callout(title: "Testing", detail: "the province state: \(String(describing: detail)). cases: \(String(describing: cases)). country: \(String(describing: country))")
 
+    }
+    public func mapToCallout2(feature: [AGSArcGISFeature]) throws -> Callout {
+        if feature[0].attributes["Province_State"] is NSNull{
+            
+        }
+        return Callout(title: "", detail: "")
     }
 }
