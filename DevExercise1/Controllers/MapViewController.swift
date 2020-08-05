@@ -8,25 +8,36 @@
 
 import Foundation
 import ArcGIS
+import UIKit
 
 class MapViewController: UIViewController {
 
     var viewModel: MapViewModel!
     var mapView: AGSMapView = AGSMapView()
+    let refreshButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.tintColor = .black
+        //button.backgroundColor
+        button.setTitle("Refresh Map", for: .normal)
+        button.setTitleColor(UIColor.blue, for: .normal)
+        button.addTarget(self, action: #selector(refreshMapButtonPress(_:)), for: .touchUpInside)
+        button.frame = CGRect(x: 15, y: -50, width: 300, height: 500)
+        return button
+    }()
+    
     var map: AGSMap!
     var mapper: CalloutMapper!
     private weak var activeSelectionQuery: AGSCancelable?
-    private weak var activeSelectionQuery2: AGSCancelable?
     // MARK: - View setup
     static func create(with viewModel: MapViewModel, mapper: CalloutMapper, mapController: MapControllerFactory) -> MapViewController {
         let view = MapViewController()
         view.viewModel = viewModel
         let map = AGSMap(basemap: .darkGrayCanvasVector())
-        viewModel.retrieveFeatureLayers {layers in
+        /*viewModel.retrieveFeatureLayers {layers in
             for layer in layers {
                 map.operationalLayers.add(layer)
             }
-        }
+        }*/
         view.map = map
         view.mapper = mapper
         return view
@@ -36,6 +47,8 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(mapView)
         self.mapView.pin(to: view)
+        view.addSubview(refreshButton)
+        refreshButton.anchor(bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingBottom: 200, paddingRight: 16, width: 100, height: 100)
         navigationItem.title = "Map"
         setupDelegates()
         self.mapView.map = self.map
@@ -58,9 +71,32 @@ class MapViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setViewpoint()
+        refreshMap()
+        
+        
     }
     func setViewpoint() {
         mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
+    }
+    //only refreshes every other view change currently
+    func refreshMap() {
+        print("refreshed map")
+        self.mapView.map?.operationalLayers.removeAllObjects()
+        self.viewModel.retrieveFeatureLayers(){ layers in
+            for layer in layers {
+                self.mapView.map?.operationalLayers.add(layer)
+            }
+        }
+        
+    }
+    @objc func refreshMapButtonPress(_ sender: Any) {
+        print("refreshed map")
+        self.mapView.map?.operationalLayers.removeAllObjects()
+        self.viewModel.retrieveFeatureLayers(){ layers in
+            for layer in layers {
+                self.mapView.map?.operationalLayers.add(layer)
+            }
+        }
     }
 }
 
