@@ -11,6 +11,7 @@ import ArcGIS
 
 enum MappingErrors: Error {
     case badFeature
+    case noFeatures
 }
 //for some reason some of the features that have a
 public protocol CalloutMapper {
@@ -18,33 +19,24 @@ public protocol CalloutMapper {
 }
 
 public class CalloutMapperImplementation: CalloutMapper {
-    /*public func mapToCallout(feature:[AGSArcGISFeature]) throws -> Callout {
-        if !(feature[0].attributes["Province_State"] is NSNull){
-            let title:String = feature[0].attributes["Province_State"] as! String
-            let details:Int = feature[0].attributes["Confirmed"] as! Int
-            
-            return Callout(title: title, detail: "\(details)")
+
+    public func mapToCallout(feature: [AGSArcGISFeature]) throws -> Callout {
+
+        var title: String = ""
+        var details: Int = 0
+
+        if feature.count == 0 {
+            throw MappingErrors.noFeatures
         }
-        if !(feature[0].attributes["Country_Region"] is NSNull){
-            let title:String = feature[0].attributes["Country_Region"] as! String
-            let details:Int = feature[0].attributes["Confirmed"] as! Int
+        if feature[0].attributes["Province_State"] != nil {
+            title = feature[0].attributes["Province_State"] as! String
+            details = feature[0].attributes["Confirmed"] as! Int
+            return Callout(title: title, detail: "\(details)")
+        } else if feature[0].attributes["Country_Region"] != nil {
+            title = feature[0].attributes["Country_Region"] as! String
+            details = feature[1].attributes["Confirmed"] as! Int
             return Callout(title: title, detail: "\(details)")
         }
         throw MappingErrors.badFeature
-        
-    }*/
-    public func mapToCallout(feature: [AGSArcGISFeature]) throws -> Callout {
-        let detail: String? = feature[0].attributes["Province_State"] as? String
-        let cases: Int? = feature[0].attributes["Confirmed"] as? Int
-        let country: String? = feature[0].attributes["Country_Region"] as? String
-        print("the province state: \(String(describing: detail)). cases: \(String(describing: cases)). country: \(String(describing: country))")
-        return Callout(title: "Testing", detail: "the province state: \(String(describing: detail)). cases: \(String(describing: cases)). country: \(String(describing: country))")
-
-    }
-    public func mapToCallout2(feature: [AGSArcGISFeature]) throws -> Callout {
-        if feature[0].attributes["Province_State"] is NSNull{
-            
-        }
-        return Callout(title: "", detail: "")
     }
 }
