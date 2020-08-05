@@ -19,7 +19,7 @@ class DevExercise1Tests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         cell = CountryCell()
-        mapper = CountryMapper()
+        mapper = CountryMapperImplemetation()
         nilPointCountry = Country(name: "TestCountry", cases: 0, point: nil)
     }
 

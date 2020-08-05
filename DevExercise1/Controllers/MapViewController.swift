@@ -53,18 +53,17 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         setViewpoint()
         refreshMap()
-        
-        
+
     }
     func setViewpoint() {
         mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
     }
-    //MARK: -Refreshing Map
+    // MARK: - Refreshing Map
     //only refreshes every other view change currently
     func refreshMap() {
         self.map = AGSMap(basemap: .darkGrayCanvasVector())
         self.mapView.map = self.map
-        self.viewModel.retrieveFeatureLayers(){ layers in
+        self.viewModel.retrieveFeatureLayers { layers in
             for layer in layers {
                 self.mapView.map?.operationalLayers.add(layer)
             }
@@ -74,14 +73,14 @@ class MapViewController: UIViewController {
     @objc func refreshMapButtonPress(_ sender: Any) {
         self.map = AGSMap(basemap: .darkGrayCanvasVector())
         self.mapView.map = self.map
-        self.viewModel.retrieveFeatureLayers(){ layers in
+        self.viewModel.retrieveFeatureLayers { layers in
             for layer in layers {
                 self.mapView.map?.operationalLayers.add(layer)
             }
         }
         self.setViewpoint()
     }
-    func configureUI(){
+    func configureUI() {
         view.addSubview(mapView)
         self.mapView.pin(to: view)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshMapButtonPress(_:)))

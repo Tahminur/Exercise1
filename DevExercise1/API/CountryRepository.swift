@@ -15,11 +15,11 @@ public protocol CountryRepository {
 
 public class CountryRepositoryImplementation: CountryRepository {
 
-    private let remoteDataSource: CountryCasesRemoteDataSource
+    private let remoteDataSource: CountryRemoteDataSource
     private let mapper: CountryMapper
     private let reachable: Reachable
 
-    public init(remoteDataSource: CountryCasesRemoteDataSource, mapper: CountryMapper, reachable: @escaping Reachable) {
+    public init(remoteDataSource: CountryRemoteDataSource, mapper: CountryMapper, reachable: @escaping Reachable) {
         self.remoteDataSource = remoteDataSource
         self.reachable = reachable
         self.mapper = mapper

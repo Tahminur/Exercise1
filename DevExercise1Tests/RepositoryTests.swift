@@ -9,16 +9,16 @@
 import XCTest
 import ArcGIS
 @testable import DevExercise1
-
+//change tests so they do not rely on network connectivity
 class RepositoryTests: XCTestCase {
 
-    var countryRemoteDataSource: CountryCasesRemoteDataSource!
+    var countryRemoteDataSource: CountryRemoteDataSource!
     var features: [AGSArcGISFeature]!
     var errorFromFetch: fetchError!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        countryRemoteDataSource = CountryCasesRemoteDataSource()
+        countryRemoteDataSource = CountryRemoteDataSourceImplementation()
         features = []
     }
 
@@ -47,7 +47,7 @@ class RepositoryTests: XCTestCase {
 
     func testDataRetrievalFailure() {
         let expectation = self.expectation(description: "Failed to retrieve countries")
-        countryRemoteDataSource.featureTable = AGSServiceFeatureTable(url: URL(string: "https://www.arcgis.com/home/index.html")!)
+        //countryRemoteDataSource.featureTable = AGSServiceFeatureTable(url: URL(string: "https://www.arcgis.com/home/index.html")!)
         countryRemoteDataSource.fetch {results in
             switch results {
                 case .success(let retrieved):

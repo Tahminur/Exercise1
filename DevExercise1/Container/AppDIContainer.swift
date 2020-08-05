@@ -12,8 +12,8 @@ public typealias Reachable = () -> Bool
 
 final class AppDIContainer {
 
-    lazy var countryDataSource: CountryCasesRemoteDataSource = {
-        return CountryCasesRemoteDataSource()
+    lazy var countryDataSource: CountryRemoteDataSource = {
+        return CountryRemoteDataSourceImplementation()
     }()
 
     lazy var mapDataSource: MapRemoteDataSource = {
