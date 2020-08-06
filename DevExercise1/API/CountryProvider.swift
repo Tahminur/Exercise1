@@ -13,14 +13,13 @@ public enum CountryProvider {
     case getCountries
 }
 
-
 extension CountryProvider: TargetType {
     public var path: String {
         switch self {
         case .getCountries: return ""
         }
     }
-    
+
     public var method: Moya.Method {
         return .get
     }
@@ -39,13 +38,12 @@ extension CountryProvider: TargetType {
         }
     }
 
-    public var headers: [String : String]? {
+    public var headers: [String: String]? {
         return [
             "Content-Type": "application/json"
         ]
     }
-    
-    
+
     public var baseURL: URL {
         return URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
     }
