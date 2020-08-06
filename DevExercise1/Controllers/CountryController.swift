@@ -58,6 +58,7 @@ class CountryController: UIViewController {
                 self.refresher.endRefreshing()
             } else {
                 self.presentAlert(message: result!)
+                self.tableView.reloadData()
             }
         }
     }

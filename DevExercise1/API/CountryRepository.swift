@@ -33,6 +33,7 @@ public class CountryRepositoryImplementation: CountryRepository {
                     switch result {
                     case .success(let features):
                         let countriesFetched = self.mapper.mapToCountry(features: features)
+                        
                         completion(.success(countriesFetched))
                     case .failure(.errorCasting):
                         completion(.failure(.errorCasting))

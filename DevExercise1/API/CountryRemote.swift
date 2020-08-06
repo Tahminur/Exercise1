@@ -56,7 +56,6 @@ public class CountryRemoteDataSourceImplementation: CountryRemoteDataSource {
                     completion(.failure(.errorCasting))
                     return
                 }
-                self.dataRetrieved = features
                 completion(.success(features))
             }
         }
