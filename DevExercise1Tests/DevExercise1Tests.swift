@@ -14,12 +14,10 @@ class DevExercise1Tests: XCTestCase {
 
     var cell: CountryCell!
     var nilPointCountry: Country!
-    var mapper: CountryMapper!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         cell = CountryCell()
-        mapper = CountryMapperImplemetation()
         nilPointCountry = Country(name: "TestCountry", cases: 0, point: nil)
     }
 
@@ -35,7 +33,4 @@ class DevExercise1Tests: XCTestCase {
         XCTAssert(cell.textLabel?.text == "\(nilPointCountry.name) : \(nilPointCountry.cases)")
     }
 
-    func testCountryMapper() {
-
-    }
 }

@@ -95,8 +95,8 @@ extension MapViewController: AGSGeoViewTouchDelegate {
     func setupDelegates() {
         mapView.touchDelegate = self
     }
-
-    func retrieveFeatures(queryParams: AGSQueryParameters, featureLayer: AGSFeatureLayer, completion: @escaping ([AGSArcGISFeature]) -> Void ) {
+//retrieve the individual feature associated with the click, needs to be called twice in this case
+    func retrieveFeature(queryParams: AGSQueryParameters, featureLayer: AGSFeatureLayer, completion: @escaping ([AGSArcGISFeature]) -> Void ) {
         activeSelectionQuery = featureLayer.selectFeatures(withQuery: queryParams, mode: .new) { [weak self] (queryResult: AGSFeatureQueryResult?, error: Error?) in
             if let error = error {
                 self?.presentAlert(message: error.localizedDescription)
@@ -131,10 +131,10 @@ extension MapViewController: AGSGeoViewTouchDelegate {
         let featureLayer = mapView.map!.operationalLayers as! [AGSFeatureLayer]
         var clickedFeatureDetails: [AGSArcGISFeature] = []
         //have to use the retrieveFeatures twice once for each of the featureLayers we are concerned with
-        retrieveFeatures(queryParams: queryParams, featureLayer: featureLayer[0]) { feature in
+        retrieveFeature(queryParams: queryParams, featureLayer: featureLayer[0]) { feature in
             clickedFeatureDetails.append(contentsOf: feature)
         }
-        retrieveFeatures(queryParams: queryParams, featureLayer: featureLayer[1]) { features in
+        retrieveFeature(queryParams: queryParams, featureLayer: featureLayer[1]) { features in
             clickedFeatureDetails.append(contentsOf: features)
             do {
                 let callout = try self.mapper.mapToCallout(feature: clickedFeatureDetails)

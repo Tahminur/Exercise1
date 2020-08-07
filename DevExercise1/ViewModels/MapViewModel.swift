@@ -20,7 +20,7 @@ class MapViewModel: MapViewModelInput {
     init(repository: MapRepository) {
         self.repository = repository
     }
-
+//used for fetching layers from repository effectively instantiating them since this will create the operational layers for the map once called in the map controller
     func retrieveFeatureLayers(completion:@escaping ([AGSFeatureLayer]) -> Void) {
         completion(repository.fetch())
     }
