@@ -9,6 +9,7 @@
 import XCTest
 import ArcGIS
 import Moya
+import Mockingbird
 
 @testable import DevExercise1
 //change tests so they do not rely on network connectivity
@@ -17,13 +18,19 @@ class RepositoryTests: XCTestCase {
     let failedRetrieveEndpoint = { (target: CountryProvider) -> Endpoint in
         return Endpoint(url: URL(target: target).absoluteString, sampleResponseClosure: { .networkResponse(500, Data()) }, method: target.method, task: target.task, httpHeaderFields: target.headers)
     }
-
+    var dataSource: CountryRemoteDataSourceImplementationMock!
+    var repo: CountryRepositoryImplementation!
+    var mapper: CountryMapperMock!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        dataSource = mock(CountryRemoteDataSourceImplementation.self)
+        mapper = mock(CountryMapper.self)
+        repo = CountryRepositoryImplementation(remoteDataSource: dataSource, mapper: mapper, reachable: {return true})
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        reset(dataSource)
         super.tearDown()
     }
 
@@ -59,5 +66,35 @@ class RepositoryTests: XCTestCase {
             }
         }
         wait(for: [expectation], timeout: 10.0)
+    }
+    
+    func testCountryMapping() {
+        given(dataSource.fetch(completion: any())) ~> {completion in
+            completion(.success([]))
+        }
+        given(mapper.mapToCountry(features:any())).willReturn([])
+        let expectation = eventually {
+            verify(
+                mapper.mapToCountry(features: any())
+            ).wasCalled()
+        }
+        repo.fetch(forceRefresh: true){ _ in}
+        wait(for: [expectation], timeout: 5.0)
+    }
+    
+    
+    func testDataSourceFetch() {
+        given(dataSource.fetch(completion: any())) ~> {completion in
+            completion(.success([]))
+        }
+        given(mapper.mapToCountry(features:any())).willReturn([])
+        let expectation = eventually {
+            verify(
+                dataSource.fetch(completion: any())
+            ).wasCalled()
+        }
+        repo.fetch(forceRefresh: true){ _ in}
+        wait(for: [expectation], timeout: 5.0)
+        
     }
 }
