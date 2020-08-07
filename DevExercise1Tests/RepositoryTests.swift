@@ -14,21 +14,16 @@ import Moya
 //change tests so they do not rely on network connectivity
 class RepositoryTests: XCTestCase {
 
-    var countryRemoteDataSource: CountryRemoteDataSource!
-    var features: [AGSArcGISFeature]!
-    var errorFromFetch: fetchError!
+    let failedRetrieveEndpoint = { (target: CountryProvider) -> Endpoint in
+        return Endpoint(url: URL(target: target).absoluteString, sampleResponseClosure: { .networkResponse(500, Data()) }, method: target.method, task: target.task, httpHeaderFields: target.headers)
+    }
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        countryRemoteDataSource = CountryRemoteDataSourceImplementation()
-        features = []
     }
 
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
-        countryRemoteDataSource = nil
-        features = nil
-        errorFromFetch = nil
         super.tearDown()
     }
 
@@ -50,20 +45,22 @@ class RepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-/*    func testDataRetrievalFailure() {
+    func testDataRetrievalFailure() {
         let expectation = self.expectation(description: "Failed to retrieve countries")
-        //countryRemoteDataSource.featureTable = AGSServiceFeatureTable(url: URL(string: "https://www.arcgis.com/home/index.html")!)
-        countryRemoteDataSource.fetch {results in
-            switch results {
-                case .success(let retrieved):
-                    self.features = retrieved
-                case .failure(let error):
-                    self.errorFromFetch = error
-                }
+        let provider = MoyaProvider<CountryProvider>(endpointClosure: failedRetrieveEndpoint, stubClosure: MoyaProvider.immediatelyStub)
+
+        provider.request(.getCountries) { result in
+            switch result {
+            case .success(let t):
+                //checks if it has 0 bytes loaded in 
+                XCTAssert(t.data == Data())
+                expectation.fulfill()
+            case .failure:
                 expectation.fulfill()
             }
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssert(errorFromFetch != nil)
+        }
+
+        wait(for: [expectation], timeout: 10.0)
     }
-*/
+
 }

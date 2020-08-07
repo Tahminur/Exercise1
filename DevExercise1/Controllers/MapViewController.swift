@@ -141,7 +141,7 @@ extension MapViewController: AGSGeoViewTouchDelegate {
                     if self.mapView.callout.isHidden {
                         self.mapView.callout.borderWidth = 1
                         self.mapView.callout.title = callout.title
-                        self.mapView.callout.detail = "\(callout.detail) confirmed cases so far!"
+                        self.mapView.callout.detail = callout.detail
                         self.mapView.callout.show(at: mapPoint, screenOffset: CGPoint.zero, rotateOffsetWithMap: false, animated: true)
                         self.mapView.callout.isAccessoryButtonHidden = true
                     } else {
