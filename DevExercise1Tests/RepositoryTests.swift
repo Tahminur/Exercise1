@@ -8,6 +8,8 @@
 
 import XCTest
 import ArcGIS
+import Moya
+
 @testable import DevExercise1
 //change tests so they do not rely on network connectivity
 class RepositoryTests: XCTestCase {
@@ -30,22 +32,25 @@ class RepositoryTests: XCTestCase {
         super.tearDown()
     }
 
-    func testDataRetrieval() {
-        let expectation = self.expectation(description: "Countries Retrieved")
-        countryRemoteDataSource.fetch { results in
-            switch results {
+    func testRetrieveData() {
+        let expectation = XCTestExpectation(description: "Fetching countries from API")
+
+        let provider = MoyaProvider<CountryProvider>(stubClosure: MoyaProvider.immediatelyStub)
+        //remote =
+        provider.request(.getCountries) { result in
+            switch result {
             case .success(let retrieved):
-                self.features = retrieved
+                XCTAssertNotNil(retrieved.data)
+                expectation.fulfill()
             case .failure:
-                return
+                XCTFail("Jobs should be correctly passed")
             }
-            expectation.fulfill()
+
         }
-        waitForExpectations(timeout: 5, handler: nil)
-        XCTAssertEqual(features.count, 188)
+        wait(for: [expectation], timeout: 10.0)
     }
 
-    func testDataRetrievalFailure() {
+/*    func testDataRetrievalFailure() {
         let expectation = self.expectation(description: "Failed to retrieve countries")
         //countryRemoteDataSource.featureTable = AGSServiceFeatureTable(url: URL(string: "https://www.arcgis.com/home/index.html")!)
         countryRemoteDataSource.fetch {results in
@@ -60,5 +65,5 @@ class RepositoryTests: XCTestCase {
         waitForExpectations(timeout: 5, handler: nil)
         XCTAssert(errorFromFetch != nil)
     }
-
+*/
 }

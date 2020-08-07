@@ -61,6 +61,7 @@ class MapViewController: UIViewController {
     // MARK: - Refreshing Map
     //only refreshes every other view change currently
     func refreshMap() {
+        self.map = nil
         self.map = AGSMap(basemap: .darkGrayCanvasVector())
         self.mapView.map = self.map
         self.viewModel.retrieveFeatureLayers { layers in
@@ -71,6 +72,7 @@ class MapViewController: UIViewController {
         self.setViewpoint()
     }
     @objc func refreshMapButtonPress(_ sender: Any) {
+        self.map = nil
         self.map = AGSMap(basemap: .darkGrayCanvasVector())
         self.mapView.map = self.map
         self.viewModel.retrieveFeatureLayers { layers in
