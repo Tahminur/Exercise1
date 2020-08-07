@@ -32,6 +32,10 @@ class DevExercise1Tests: XCTestCase {
 
     func testCountryCellSet() {
         cell.set(country: nilPointCountry)
-        XCTAssert(cell.point == nil)
+        XCTAssert(cell.textLabel?.text == "\(nilPointCountry.name) : \(nilPointCountry.cases)")
+    }
+
+    func testCountryMapper() {
+
     }
 }

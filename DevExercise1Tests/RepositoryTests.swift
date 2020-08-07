@@ -29,9 +29,8 @@ class RepositoryTests: XCTestCase {
 
     func testRetrieveData() {
         let expectation = XCTestExpectation(description: "Fetching countries from API")
-
         let provider = MoyaProvider<CountryProvider>(stubClosure: MoyaProvider.immediatelyStub)
-        //remote =
+
         provider.request(.getCountries) { result in
             switch result {
             case .success(let retrieved):
@@ -51,16 +50,14 @@ class RepositoryTests: XCTestCase {
 
         provider.request(.getCountries) { result in
             switch result {
-            case .success(let t):
+            case .success(let emptyFeature):
                 //checks if it has 0 bytes loaded in 
-                XCTAssert(t.data == Data())
+                XCTAssert(emptyFeature.data == Data())
                 expectation.fulfill()
             case .failure:
                 expectation.fulfill()
             }
         }
-
         wait(for: [expectation], timeout: 10.0)
     }
-
 }
