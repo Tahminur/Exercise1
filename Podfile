@@ -7,7 +7,7 @@ target 'DevExercise1' do
 
   # Pods for DevExercise1
 	pod 'ArcGIS-Runtime-SDK-iOS'
-	pod 'Moya', '>= 13.0.0'
+	pod 'Moya'
   target 'DevExercise1Tests' do
     inherit! :search_paths
     # Pods for testing
