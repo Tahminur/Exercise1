@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol CountryControllerFactory {
-
-}
-
-final class CountryDIContainer: CountryControllerFactory {
+final class CountryDIContainer {
 
     struct Dependencies {
         let countryRepo: CountryRepository
@@ -29,7 +25,7 @@ final class CountryDIContainer: CountryControllerFactory {
     }
 
     func makeCountryController() -> CountryController {
-        return CountryController.create(with: makeCountryViewModel(), countryController: self)
+        return CountryController.create(with: makeCountryViewModel())
     }
 
 }

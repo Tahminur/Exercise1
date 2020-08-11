@@ -18,7 +18,7 @@ public protocol CalloutMapper {
     func mapToCallout(feature: [AGSArcGISFeature]) throws -> Callout
 }
 
-public class CalloutMapperImplementation: CalloutMapper {
+public class CalloutMapperImpl: CalloutMapper {
 
     public func mapToCallout(feature: [AGSArcGISFeature]) throws -> Callout {
 

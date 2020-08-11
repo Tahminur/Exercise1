@@ -45,7 +45,7 @@ class CountryController: UIViewController {
     }
     // MARK: - Layout
 
-    static func create(with viewModel: CountryCasesViewModel, countryController: CountryControllerFactory) -> CountryController {
+    static func create(with viewModel: CountryCasesViewModel) -> CountryController {
         let view = CountryController()
         view.viewModel = viewModel
         return view

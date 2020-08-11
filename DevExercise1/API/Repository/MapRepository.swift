@@ -13,7 +13,7 @@ protocol MapRepository {
     func fetch() -> [AGSFeatureLayer]
 }
 
-public class MapRepositoryImplementation: MapRepository {
+public class MapRepositoryImpl: MapRepository {
 
     private let remoteDataSource: MapRemoteDataSource
 

@@ -13,7 +13,7 @@ public protocol CountryRepository {
     func fetch(forceRefresh: Bool, completion: @escaping (Result<[Country], fetchError>) -> Void)
 }
 
-public class CountryRepositoryImplementation: CountryRepository {
+public class CountryRepositoryImpl: CountryRepository {
 
     private let remoteDataSource: CountryRemoteDataSource
     private let mapper: CountryMapper

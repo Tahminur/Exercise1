@@ -6,6 +6,8 @@
 //  Copyright © 2020 Tahminur Rahman. All rights reserved.
 //
 
+//TODO: -GET RID OF THIS FILE AND REPLACE WITH THE POD
+
 import Foundation
 import SystemConfiguration
 

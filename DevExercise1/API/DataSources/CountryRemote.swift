@@ -16,7 +16,7 @@ public protocol CountryRemoteDataSource {
     func retrieveCountries() -> [AGSArcGISFeature]
 }
 
-public class CountryRemoteDataSourceImplementation: CountryRemoteDataSource {
+public class CountryRemoteDataSourceImpl: CountryRemoteDataSource {
 
     var dataRetrieved: [AGSArcGISFeature] = []
 

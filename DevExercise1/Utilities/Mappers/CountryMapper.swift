@@ -13,7 +13,7 @@ public protocol CountryMapper {
     func mapToCountry(features: [AGSArcGISFeature]) -> [Country]
 }
 
-public class CountryMapperImplemetation: CountryMapper {
+public class CountryMapperImpl: CountryMapper {
     public func mapToCountry(features: [AGSArcGISFeature]) -> [Country] {
         var countriesToReturn: [Country] = []
         for feature in features {

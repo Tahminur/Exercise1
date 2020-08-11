@@ -13,7 +13,7 @@ public typealias Reachable = () -> Bool
 final class AppDIContainer {
 
     lazy var countryDataSource: CountryRemoteDataSource = {
-        return CountryRemoteDataSourceImplementation()
+        return CountryRemoteDataSourceImpl()
     }()
 
     lazy var mapDataSource: MapRemoteDataSource = {
@@ -26,18 +26,18 @@ final class AppDIContainer {
     }
 
     lazy var calloutMapper: CalloutMapper = {
-        return CalloutMapperImplementation()
+        return CalloutMapperImpl()
     }()
 
     lazy var countryMapper: CountryMapper = {
-        return CountryMapperImplemetation()
+        return CountryMapperImpl()
     }()
 
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImplementation(remoteDataSource: countryDataSource, mapper: countryMapper, reachable: internetCheck)
+        return CountryRepositoryImpl(remoteDataSource: countryDataSource, mapper: countryMapper, reachable: internetCheck)
     }()
     lazy var mapRepository: MapRepository = {
-        return MapRepositoryImplementation(remoteDataSource: mapDataSource)
+        return MapRepositoryImpl(remoteDataSource: mapDataSource)
     }()
 
     lazy var countryContainer: CountryDIContainer = {

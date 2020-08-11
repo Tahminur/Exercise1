@@ -67,34 +67,33 @@ class RepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
-    
+
     func testCountryMapping() {
         given(dataSource.fetch(completion: any())) ~> {completion in
             completion(.success([]))
         }
-        given(mapper.mapToCountry(features:any())).willReturn([])
+        given(mapper.mapToCountry(features: any())).willReturn([])
         let expectation = eventually {
             verify(
                 mapper.mapToCountry(features: any())
             ).wasCalled()
         }
-        repo.fetch(forceRefresh: true){ _ in}
+        repo.fetch(forceRefresh: true) { _ in}
         wait(for: [expectation], timeout: 5.0)
     }
-    
-    
+
     func testDataSourceFetch() {
         given(dataSource.fetch(completion: any())) ~> {completion in
             completion(.success([]))
         }
-        given(mapper.mapToCountry(features:any())).willReturn([])
+        given(mapper.mapToCountry(features: any())).willReturn([])
         let expectation = eventually {
             verify(
                 dataSource.fetch(completion: any())
             ).wasCalled()
         }
-        repo.fetch(forceRefresh: true){ _ in}
+        repo.fetch(forceRefresh: true) { _ in}
         wait(for: [expectation], timeout: 5.0)
-        
+
     }
 }

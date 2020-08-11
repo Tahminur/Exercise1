@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol MapControllerFactory {
-
-}
-
-final class MapDIContainer: MapControllerFactory {
+final class MapDIContainer {
 
     struct Dependencies {
         let mapRepo: MapRepository
@@ -30,6 +26,6 @@ final class MapDIContainer: MapControllerFactory {
     }
 
     func makeMapViewController() -> MapViewController {
-        return MapViewController.create(with: makeMapViewModel(), mapper: dependencies.calloutMapper, mapController: self)
+        return MapViewController.create(with: makeMapViewModel(), mapper: dependencies.calloutMapper)
     }
 }
