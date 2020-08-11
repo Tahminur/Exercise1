@@ -26,6 +26,7 @@
 		4561A68424E32EBD00E9751B /* SignOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68324E32EBD00E9751B /* SignOutController.swift */; };
 		4561A68624E32F4300E9751B /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68524E32F4300E9751B /* SignOutViewModel.swift */; };
 		4561A68824E3317200E9751B /* UserLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68724E3317200E9751B /* UserLocal.swift */; };
+		4561A68C24E3576400E9751B /* UserDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68B24E3576400E9751B /* UserDIContainer.swift */; };
 		456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */; };
 		45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB024B4DEB6009FEBEA /* Storage.swift */; };
 		45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */; };
@@ -93,6 +94,7 @@
 		4561A68324E32EBD00E9751B /* SignOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutController.swift; sourceTree = "<group>"; };
 		4561A68524E32F4300E9751B /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
 		4561A68724E3317200E9751B /* UserLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocal.swift; sourceTree = "<group>"; };
+		4561A68B24E3576400E9751B /* UserDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDIContainer.swift; sourceTree = "<group>"; };
 		456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		45759AB024B4DEB6009FEBEA /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryItemViewModel.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				452B065424D081AE00F1BFE3 /* AppDIContainer.swift */,
 				452B065824D094BD00F1BFE3 /* MapDIContainer.swift */,
 				452B065624D094A700F1BFE3 /* CountryDIContainer.swift */,
+				4561A68B24E3576400E9751B /* UserDIContainer.swift */,
 			);
 			path = Container;
 			sourceTree = "<group>";
@@ -687,6 +690,7 @@
 				4549520524B633F300023370 /* CountryController.swift in Sources */,
 				452B065924D094BD00F1BFE3 /* MapDIContainer.swift in Sources */,
 				4561A68824E3317200E9751B /* UserLocal.swift in Sources */,
+				4561A68C24E3576400E9751B /* UserDIContainer.swift in Sources */,
 				452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */,
 				456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */,
 				45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */,

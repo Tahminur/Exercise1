@@ -10,6 +10,12 @@ import Foundation
 
 //signing in will be done here as well as possibly signout the results of which will be passed into the user repository
 //looking into if this should instead just be a function or remain as a class
-public class UserRemoteImpl {
+public protocol UserRemote {
+    func arcGISSignIn()
+}
 
+public class UserRemoteImpl: UserRemote {
+    public func arcGISSignIn() {
+        print("You're approved to use the app")
+    }
 }

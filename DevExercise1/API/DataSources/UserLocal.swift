@@ -8,6 +8,18 @@
 
 import Foundation
 
-public class UserLocalImpl {
+public protocol UserLocal {
+    func rememberUser()
 
+    func signOut()
+}
+
+public class UserLocalImpl: UserLocal {
+    public func rememberUser() {
+        print("ya I remember I stored you in either in secure storage or standard storage")
+    }
+
+    public func signOut() {
+        print("Signing out and forgetting unless remember me checked")
+    }
 }

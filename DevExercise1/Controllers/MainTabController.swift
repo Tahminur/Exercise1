@@ -37,7 +37,10 @@ class MainTabController: UITabBarController {
         let newCases = appDIContainer.countryContainer.makeCountryController()
         let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "29-2"), rootViewController: newCases)
         //to be changed
-        let loginController = templateNavController(image: nil, rootViewController: LoginViewController())
-        viewControllers = [newCasesTab, newMapTab, loginController]
+        let login = appDIContainer.userContainer.makeLoginViewController()
+        let loginPage = templateNavController(image: nil, rootViewController: login)
+        let signOut = appDIContainer.userContainer.makeSignOutController()
+        let signOutTab = templateNavController(image: nil, rootViewController: signOut)
+        viewControllers = [newCasesTab, newMapTab, loginPage, signOutTab]
     }
 }

@@ -36,6 +36,8 @@ class LoginViewController: UIViewController {
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+
         return button
     }()
 
@@ -55,6 +57,13 @@ class LoginViewController: UIViewController {
 
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
+    }
+
+    @objc func handleLogin() {
+        guard let username = usernameField.text else { return }
+        guard let password = passwordField.text else { return }
+        viewModel.login()
+        //use user repo to handle this
     }
 
     static func create(with viewModel: Login) -> LoginViewController {

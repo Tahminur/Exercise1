@@ -63,7 +63,7 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
-
+//TODO:get rid of this variable and present alerts in a different way
 private var window: UIWindow!
 
 public extension UIAlertController {

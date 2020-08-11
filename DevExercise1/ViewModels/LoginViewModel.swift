@@ -11,19 +11,27 @@ import Foundation
 //will have access to user repo
 protocol Login {
 
-    func signIn()
+    func login()
 
     func rememberMe()
 
 }
 
 public final class LoginViewModelImpl: Login {
-    func signIn() {
-        print("nothing yet")
+
+    private let repository: UserRepositoryImpl
+
+    public init(repository: UserRepositoryImpl) {
+        self.repository = repository
+    }
+    //error handle to be added here
+    func login() {
+        repository.handleLogin()
+
     }
 
     func rememberMe() {
-        print("I remember you from user repo/ signed in before")
+        print("I remember you")
     }
 
 }

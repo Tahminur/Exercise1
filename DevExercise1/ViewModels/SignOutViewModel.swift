@@ -13,8 +13,14 @@ protocol SignOut {
 }
 
 public final class SignOutImpl: SignOut {
+    private let repository: UserRepositoryImpl
+
+    public init(repository: UserRepositoryImpl) {
+        self.repository = repository
+    }
+    //error handling
     func signOut() {
-        print("I'm signing out and updating my user repository")
+        repository.handleSignOut()
     }
 
 }

@@ -17,6 +17,7 @@ public class CountryRepositoryImpl: CountryRepository {
 
     private let remoteDataSource: CountryRemoteDataSource
     private let mapper: CountryMapper
+    //below variable to be changed
     private let reachable: Reachable
 
     public init(remoteDataSource: CountryRemoteDataSource, mapper: CountryMapper, reachable: @escaping Reachable) {
