@@ -8,15 +8,22 @@
 
 import Foundation
 
+//will have access to user repo
 protocol Login {
 
-    func SignIn()
+    func signIn()
+
+    func rememberMe()
 
 }
 
 public final class LoginViewModelImpl: Login {
-    func SignIn() {
+    func signIn() {
         print("nothing yet")
+    }
+
+    func rememberMe() {
+        print("I remember you from user repo/ signed in before")
     }
 
 }

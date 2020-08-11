@@ -21,6 +21,11 @@
 		4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520624B63BA200023370 /* CountryCasesViewModel.swift */; };
 		4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67B24E319D700E9751B /* LoginViewModel.swift */; };
 		4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67D24E31ABB00E9751B /* LoginViewController.swift */; };
+		4561A68024E32DFA00E9751B /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67F24E32DFA00E9751B /* UserRepository.swift */; };
+		4561A68224E32E1100E9751B /* UserRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68124E32E1100E9751B /* UserRemote.swift */; };
+		4561A68424E32EBD00E9751B /* SignOutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68324E32EBD00E9751B /* SignOutController.swift */; };
+		4561A68624E32F4300E9751B /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68524E32F4300E9751B /* SignOutViewModel.swift */; };
+		4561A68824E3317200E9751B /* UserLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68724E3317200E9751B /* UserLocal.swift */; };
 		456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */; };
 		45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB024B4DEB6009FEBEA /* Storage.swift */; };
 		45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */; };
@@ -83,6 +88,11 @@
 		4549520624B63BA200023370 /* CountryCasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCasesViewModel.swift; sourceTree = "<group>"; };
 		4561A67B24E319D700E9751B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4561A67D24E31ABB00E9751B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4561A67F24E32DFA00E9751B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		4561A68124E32E1100E9751B /* UserRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRemote.swift; sourceTree = "<group>"; };
+		4561A68324E32EBD00E9751B /* SignOutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutController.swift; sourceTree = "<group>"; };
+		4561A68524E32F4300E9751B /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
+		4561A68724E3317200E9751B /* UserLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocal.swift; sourceTree = "<group>"; };
 		456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		45759AB024B4DEB6009FEBEA /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryItemViewModel.swift; sourceTree = "<group>"; };
@@ -188,6 +198,8 @@
 			children = (
 				45C78EDD24DB551800BF0C6D /* MapRemote.swift */,
 				45C78EDB24DB550300BF0C6D /* CountryRemote.swift */,
+				4561A68124E32E1100E9751B /* UserRemote.swift */,
+				4561A68724E3317200E9751B /* UserLocal.swift */,
 			);
 			path = DataSources;
 			sourceTree = "<group>";
@@ -197,6 +209,7 @@
 			children = (
 				453E602224D8A5F600B3559E /* CountryRepository.swift */,
 				453E602424D8A63B00B3559E /* MapRepository.swift */,
+				4561A67F24E32DFA00E9751B /* UserRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -282,6 +295,7 @@
 				4549520424B633F300023370 /* CountryController.swift */,
 				45FE2A8E249BD46700D8727D /* MainTabController.swift */,
 				4561A67D24E31ABB00E9751B /* LoginViewController.swift */,
+				4561A68324E32EBD00E9751B /* SignOutController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -320,6 +334,7 @@
 				45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */,
 				4549520624B63BA200023370 /* CountryCasesViewModel.swift */,
 				4561A67B24E319D700E9751B /* LoginViewModel.swift */,
+				4561A68524E32F4300E9751B /* SignOutViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -663,6 +678,7 @@
 				45FE2A54249BC11C00D8727D /* DevExercise1.xcdatamodeld in Sources */,
 				45FE2A8F249BD46700D8727D /* MainTabController.swift in Sources */,
 				45FE2A4A249BC11C00D8727D /* AppDelegate.swift in Sources */,
+				4561A68624E32F4300E9751B /* SignOutViewModel.swift in Sources */,
 				45FE2A89249BC3E300D8727D /* Country.swift in Sources */,
 				45C78EDE24DB551800BF0C6D /* MapRemote.swift in Sources */,
 				45C78EDC24DB550300BF0C6D /* CountryRemote.swift in Sources */,
@@ -670,14 +686,18 @@
 				45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */,
 				4549520524B633F300023370 /* CountryController.swift in Sources */,
 				452B065924D094BD00F1BFE3 /* MapDIContainer.swift in Sources */,
+				4561A68824E3317200E9751B /* UserLocal.swift in Sources */,
 				452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */,
 				456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */,
 				45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */,
+				4561A68024E32DFA00E9751B /* UserRepository.swift in Sources */,
 				45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */,
 				452B065524D081AE00F1BFE3 /* AppDIContainer.swift in Sources */,
 				4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */,
 				45FE2B21249C1DAE00D8727D /* Extensions.swift in Sources */,
+				4561A68424E32EBD00E9751B /* SignOutController.swift in Sources */,
 				4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */,
+				4561A68224E32E1100E9751B /* UserRemote.swift in Sources */,
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
 				4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */,
 				45C78EDA24D9036D00BF0C6D /* Callout.swift in Sources */,
