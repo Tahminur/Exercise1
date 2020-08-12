@@ -8,6 +8,7 @@
 
 import Foundation
 
+//implement named user login from arcgis
 public class UserRepositoryImpl {
     private let userRemote: UserRemote
     private let userLocal: UserLocal
@@ -16,9 +17,9 @@ public class UserRepositoryImpl {
         self.userRemote = userRemote
         self.userLocal = userLocal
     }
-
-    func handleLogin() {
-        userRemote.arcGISSignIn()
+    //create the ags credential here and sign in
+    func handleLogin(username: String, password: String) {
+        userRemote.arcGISSignIn(username: username, password: password)
     }
 
     func handleSignOut() {

@@ -59,7 +59,6 @@ class MapViewController: UIViewController {
         mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
     }
     // MARK: - Refreshing Map
-    //only refreshes every other view change currently
     func refreshMap() {
         self.map = nil
         self.map = AGSMap(basemap: .darkGrayCanvasVector())

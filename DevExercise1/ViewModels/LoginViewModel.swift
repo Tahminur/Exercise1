@@ -11,7 +11,7 @@ import Foundation
 //will have access to user repo
 protocol Login {
 
-    func login()
+    func login(username:String, password: String)
 
     func rememberMe()
 
@@ -25,9 +25,8 @@ public final class LoginViewModelImpl: Login {
         self.repository = repository
     }
     //error handle to be added here
-    func login() {
-        repository.handleLogin()
-
+    func login(username:String, password:String) {
+        repository.handleLogin(username: username, password: password)
     }
 
     func rememberMe() {

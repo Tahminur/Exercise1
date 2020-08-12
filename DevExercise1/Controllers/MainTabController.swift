@@ -17,11 +17,35 @@ class MainTabController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTabs()
+        authenticateUserAndConfigure()
         self.tabBar.barTintColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         self.tabBar.tintColor = .white
     }
-
+//need to change for when remember me is available
+    func authenticateUserAndConfigure(){
+        if nil == nil{
+            DispatchQueue.main.async {
+                let loginController = self.appDIContainer.userContainer.makeLoginViewController()
+                let nav = UINavigationController(rootViewController: loginController)
+                nav.modalPresentationStyle = .fullScreen
+                self.present(nav, animated: true, completion: nil)
+            }
+        } else {
+            setupTabs()
+        }
+    }
+    
+    func setupTabs() {
+        let newMap = appDIContainer.mapContainer.makeMapViewController()
+        let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
+        let newCases = appDIContainer.countryContainer.makeCountryController()
+        let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "29-2"), rootViewController: newCases)
+        //to be changed
+        let signOut = appDIContainer.userContainer.makeSignOutController()
+        let signOutTab = templateNavController(image: UIImage(systemName: "person"), rootViewController: signOut)
+        viewControllers = [newCasesTab, newMapTab, signOutTab]
+    }
+    
     func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image
@@ -29,18 +53,5 @@ class MainTabController: UITabBarController {
         nav.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
         nav.hidesBarsOnSwipe = true
         return nav
-    }
-
-    func setupTabs() {
-        let newMap = appDIContainer.mapContainer.makeMapViewController()
-        let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
-        let newCases = appDIContainer.countryContainer.makeCountryController()
-        let newCasesTab = templateNavController(image: #imageLiteral(resourceName: "29-2"), rootViewController: newCases)
-        //to be changed
-        let login = appDIContainer.userContainer.makeLoginViewController()
-        let loginPage = templateNavController(image: nil, rootViewController: login)
-        let signOut = appDIContainer.userContainer.makeSignOutController()
-        let signOutTab = templateNavController(image: nil, rootViewController: signOut)
-        viewControllers = [newCasesTab, newMapTab, loginPage, signOutTab]
     }
 }

@@ -62,7 +62,14 @@ class LoginViewController: UIViewController {
     @objc func handleLogin() {
         guard let username = usernameField.text else { return }
         guard let password = passwordField.text else { return }
-        viewModel.login()
+        viewModel.login(username: username, password: password)
+        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        
+        guard let tab = window.rootViewController as? MainTabController else { return }
+        
+        tab.setupTabs()
+        
+        self.dismiss(animated: true, completion: nil)
         //use user repo to handle this
     }
 
