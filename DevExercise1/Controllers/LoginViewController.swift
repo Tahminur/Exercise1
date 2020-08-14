@@ -58,18 +58,26 @@ class LoginViewController: UIViewController {
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
     }
-
+//have to fix this so that it can allow multipe attempts to login, currently only allows one
     @objc func handleLogin() {
         guard let username = usernameField.text else { return }
         guard let password = passwordField.text else { return }
-        viewModel.login(username: username, password: password)
-        guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+        viewModel.login(username: username, password: password){ result in
+            switch result {
+            case .success:
+                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+                
+                guard let tab = window.rootViewController as? MainTabController else { return }
+                
+                tab.setupTabs()
+                
+                self.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            
+        }
         
-        guard let tab = window.rootViewController as? MainTabController else { return }
-        
-        tab.setupTabs()
-        
-        self.dismiss(animated: true, completion: nil)
         //use user repo to handle this
     }
 
