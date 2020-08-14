@@ -12,6 +12,9 @@ import UIKit
 class SignOutController: UIViewController {
 
     var viewModel: SignOut!
+    lazy var appDIContainer: AppDIContainer = {
+        return (UIApplication.shared.delegate as! AppDelegate).appDIContainer
+    }()
 
     private let signOutButton: UIButton = {
         let button = UIButton(type: .system)
@@ -27,6 +30,12 @@ class SignOutController: UIViewController {
 
     @objc func handleSignOut() {
         viewModel.signOut()
+        DispatchQueue.main.async {
+            let loginController = self.appDIContainer.userContainer.makeLoginViewController()
+            let nav = UINavigationController(rootViewController: loginController)
+            nav.modalPresentationStyle = .fullScreen
+            self.present(nav, animated: true, completion: nil)
+        }
     }
 
     override func viewDidLoad() {

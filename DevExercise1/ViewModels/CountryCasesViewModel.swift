@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import ArcGIS
 
 protocol CountryCasesViewModelInput {
     func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (String?) -> Void)

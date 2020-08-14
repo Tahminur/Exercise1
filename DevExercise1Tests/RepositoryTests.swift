@@ -18,14 +18,14 @@ class RepositoryTests: XCTestCase {
     let failedRetrieveEndpoint = { (target: CountryProvider) -> Endpoint in
         return Endpoint(url: URL(target: target).absoluteString, sampleResponseClosure: { .networkResponse(500, Data()) }, method: target.method, task: target.task, httpHeaderFields: target.headers)
     }
-    var dataSource: CountryRemoteDataSourceImplementationMock!
-    var repo: CountryRepositoryImplementation!
+    var dataSource: CountryRemoteDataSourceImplMock!
+    var repo: CountryRepositoryImpl!
     var mapper: CountryMapperMock!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        dataSource = mock(CountryRemoteDataSourceImplementation.self)
+        dataSource = mock(CountryRemoteDataSourceImpl.self)
         mapper = mock(CountryMapper.self)
-        repo = CountryRepositoryImplementation(remoteDataSource: dataSource, mapper: mapper, reachable: {return true})
+        repo = CountryRepositoryImpl(remoteDataSource: dataSource, mapper: mapper, reachable: {return true})
     }
 
     override func tearDown() {
