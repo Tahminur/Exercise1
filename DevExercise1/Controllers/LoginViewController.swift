@@ -66,7 +66,6 @@ class LoginViewController: UIViewController {
             switch result {
             case .success:
                 guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-                
                 guard let tab = window.rootViewController as? MainTabController else { return }
                 
                 tab.setupTabs()
@@ -75,10 +74,7 @@ class LoginViewController: UIViewController {
             case .failure(let error):
                 print(error.localizedDescription)
             }
-            
         }
-        
-        //use user repo to handle this
     }
 
     static func create(with viewModel: Login) -> LoginViewController {

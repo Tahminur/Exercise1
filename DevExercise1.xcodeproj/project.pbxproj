@@ -13,8 +13,6 @@
 		452B065524D081AE00F1BFE3 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065424D081AE00F1BFE3 /* AppDIContainer.swift */; };
 		452B065724D094A700F1BFE3 /* CountryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065624D094A700F1BFE3 /* CountryDIContainer.swift */; };
 		452B065924D094BD00F1BFE3 /* MapDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065824D094BD00F1BFE3 /* MapDIContainer.swift */; };
-		452B065B24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065A24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift */; };
-		452B065D24D0BFD600F1BFE3 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065C24D0BFD600F1BFE3 /* MapManager.swift */; };
 		453E602324D8A5F600B3559E /* CountryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E602224D8A5F600B3559E /* CountryRepository.swift */; };
 		453E602524D8A63B00B3559E /* MapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E602424D8A63B00B3559E /* MapRepository.swift */; };
 		4549520524B633F300023370 /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520424B633F300023370 /* CountryController.swift */; };
@@ -83,8 +81,6 @@
 		452B065424D081AE00F1BFE3 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		452B065624D094A700F1BFE3 /* CountryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDIContainer.swift; sourceTree = "<group>"; };
 		452B065824D094BD00F1BFE3 /* MapDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDIContainer.swift; sourceTree = "<group>"; };
-		452B065A24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcGISAuthenticationManager.swift; sourceTree = "<group>"; };
-		452B065C24D0BFD600F1BFE3 /* MapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		453E602224D8A5F600B3559E /* CountryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRepository.swift; sourceTree = "<group>"; };
 		453E602424D8A63B00B3559E /* MapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepository.swift; sourceTree = "<group>"; };
 		4549520424B633F300023370 /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
@@ -314,7 +310,6 @@
 			children = (
 				4561A67924E3180600E9751B /* DataSources */,
 				4561A67A24E3182F00E9751B /* Repository */,
-				452B065C24D0BFD600F1BFE3 /* MapManager.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -354,7 +349,6 @@
 				45C78EE124DC94AE00BF0C6D /* Mappers */,
 				4561A67824E3178200E9751B /* Errors */,
 				45FE2B20249C1DAE00D8727D /* Extensions.swift */,
-				452B065A24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift */,
 				452B065124CF641000F1BFE3 /* Reachability.swift */,
 			);
 			path = Utilities;
@@ -681,7 +675,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				452B065B24D0BA5C00F1BFE3 /* ArcGISAuthenticationManager.swift in Sources */,
 				45C78ED824D902EB00BF0C6D /* CalloutMapper.swift in Sources */,
 				45C78ED624D902C200BF0C6D /* CountryMapper.swift in Sources */,
 				45FE2A54249BC11C00D8727D /* DevExercise1.xcdatamodeld in Sources */,
@@ -712,7 +705,6 @@
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
 				4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */,
 				45C78EDA24D9036D00BF0C6D /* Callout.swift in Sources */,
-				452B065D24D0BFD600F1BFE3 /* MapManager.swift in Sources */,
 				45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */,
 				452B065224CF641000F1BFE3 /* Reachability.swift in Sources */,
 				4561A69024E3845300E9751B /* SecureStorage.swift in Sources */,

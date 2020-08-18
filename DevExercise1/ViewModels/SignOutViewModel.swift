@@ -9,7 +9,7 @@
 import Foundation
 
 protocol SignOut {
-    func signOut()
+    func signOut(completion:@escaping () -> Void)
 }
 
 public final class SignOutImpl: SignOut {
@@ -19,8 +19,9 @@ public final class SignOutImpl: SignOut {
         self.repository = repository
     }
     //error handling
-    func signOut() {
-        repository.handleSignOut()
+    func signOut(completion:@escaping () -> Void) {
+        repository.handleSignOut(){
+            completion()
+        }
     }
-
 }

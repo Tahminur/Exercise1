@@ -29,3 +29,9 @@ extension fetchError: LocalizedError {
         }
     }
 }
+
+public enum loginError: Error {
+    case incorrectCredentials
+    case incorrectLogin
+    case noInternet
+}

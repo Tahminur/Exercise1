@@ -12,7 +12,7 @@ import ArcGIS
 
 protocol UserRepository{
     func handleLogin(username:String, password:String,completion:@escaping(Result<(),Error>)-> Void)
-    func handleSignOut()
+    func handleSignOut(completion: @escaping () -> Void)
 }
 
 
@@ -22,8 +22,6 @@ public class UserRepositoryImpl:UserRepository {
     private let userLocal: UserLocal
     
     private var userCredential: AGSCredential? = nil
-
-    private var authenticatedUser: AGSPortalUser? = nil
     
     public init(userRemote: UserRemote, userLocal: UserLocal) {
         self.userRemote = userRemote
@@ -36,7 +34,7 @@ public class UserRepositoryImpl:UserRepository {
             switch result {
             case .success(let user):
                 //handle saving this user to local here
-                self.authenticatedUser = user
+                self.userCredential = user
                 completion(.success(()))
                 
             case .failure(let error):
@@ -48,9 +46,13 @@ public class UserRepositoryImpl:UserRepository {
         //store in user local the ags credential
     }
 
-    func handleSignOut() {
-        userLocal.signOut()
-        userCredential = nil
+    func handleSignOut(completion: @escaping () -> Void) {
+        userRemote.gest {
+            self.userLocal.signOut()
+            self.userCredential = nil
+            completion()
+        }   
+        
     }
 
 }
