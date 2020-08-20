@@ -31,7 +31,23 @@ extension fetchError: LocalizedError {
 }
 
 public enum loginError: Error {
-    case incorrectCredentials
+    case missingUsername
+    case missingPassword
     case incorrectLogin
     case noInternet
+}
+
+extension loginError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .missingPassword:
+            return NSLocalizedString("Missing password", comment: "No password")
+        case .missingUsername:
+            return NSLocalizedString("Missing username", comment: "No username")
+        case .incorrectLogin:
+            return NSLocalizedString("Your username or password is incorrect", comment: "Incorrect Login")
+        case .noInternet:
+            return NSLocalizedString("No Internet Connection Found", comment: "No Internet")
+        }
+    }
 }

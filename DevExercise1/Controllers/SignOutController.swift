@@ -19,7 +19,7 @@ class SignOutController: UIViewController {
     private let signOutButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Out", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), for: .normal)
         button.backgroundColor = .white
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 5
@@ -29,7 +29,7 @@ class SignOutController: UIViewController {
     }()
 
     @objc func handleSignOut() {
-        viewModel.signOut(){
+        viewModel.signOut {
             DispatchQueue.main.async {
                 let loginController = self.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)

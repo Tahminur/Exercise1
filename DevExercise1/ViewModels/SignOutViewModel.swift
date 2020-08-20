@@ -20,7 +20,7 @@ public final class SignOutImpl: SignOut {
     }
     //error handling
     func signOut(completion:@escaping () -> Void) {
-        repository.handleSignOut(){
+        repository.handleSignOut {
             completion()
         }
     }

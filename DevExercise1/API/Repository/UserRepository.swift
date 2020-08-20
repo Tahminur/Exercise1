@@ -9,39 +9,46 @@
 import Foundation
 import ArcGIS
 
-
-protocol UserRepository{
-    func handleLogin(username:String, password:String,completion:@escaping(Result<(),Error>)-> Void)
+protocol UserRepository {
+    func handleLogin(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void)
     func handleSignOut(completion: @escaping () -> Void)
 }
 
-
 //implement named user login from arcgis
-public class UserRepositoryImpl:UserRepository {
+public class UserRepositoryImpl: UserRepository {
     private let userRemote: UserRemote
     private let userLocal: UserLocal
-    
-    private var userCredential: AGSCredential? = nil
-    
+
+    private var userCredential: AGSCredential?
+
     public init(userRemote: UserRemote, userLocal: UserLocal) {
         self.userRemote = userRemote
         self.userLocal = userLocal
     }
     //create the ags credential here and sign in
-    func handleLogin(username: String, password: String,completion:@escaping(Result<(),Error>)-> Void) {
+    func handleLogin(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void) {
         userCredential = AGSCredential(user: username, password: password)
-        userRemote.arcGISSignIn(credential: userCredential!){ result in
+        if username == "" {
+            completion(.failure(loginError.missingUsername))
+            return
+        }
+        if password == "" {
+            completion(.failure(loginError.missingPassword))
+            return
+        }
+        //check internet connectivity here
+        userRemote.arcGISSignIn(credential: userCredential!) { result in
             switch result {
             case .success(let user):
                 //handle saving this user to local here
                 self.userCredential = user
                 completion(.success(()))
-                
-            case .failure(let error):
+
+            case .failure:
                 //pass up the error
-                completion(.failure(error))
+                completion(.failure(loginError.incorrectLogin))
             }
-            
+
         }
         //store in user local the ags credential
     }
@@ -51,8 +58,8 @@ public class UserRepositoryImpl:UserRepository {
             self.userLocal.signOut()
             self.userCredential = nil
             completion()
-        }   
-        
+        }
+
     }
 
 }

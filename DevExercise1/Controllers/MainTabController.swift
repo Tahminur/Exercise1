@@ -23,8 +23,8 @@ class MainTabController: UITabBarController {
         self.tabBar.tintColor = .white
     }
 //need to change for when remember me is available to check for credential = nil or not
-    func authenticateUserAndConfigure(){
-        if nil == nil{
+    func authenticateUserAndConfigure() {
+        if nil == nil {
             DispatchQueue.main.async {
                 let loginController = self.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)
@@ -35,7 +35,7 @@ class MainTabController: UITabBarController {
             setupTabs()
         }
     }
-    
+
     func setupTabs() {
         let newMap = appDIContainer.mapContainer.makeMapViewController()
         let newMapTab = templateNavController(image: #imageLiteral(resourceName: "globe"), rootViewController: newMap)
@@ -46,7 +46,7 @@ class MainTabController: UITabBarController {
         let signOutTab = templateNavController(image: UIImage(systemName: "person"), rootViewController: signOut)
         viewControllers = [newCasesTab, newMapTab, signOutTab]
     }
-    
+
     func templateNavController(image: UIImage?, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         nav.tabBarItem.image = image

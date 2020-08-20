@@ -63,29 +63,3 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
-//TODO:get rid of this variable and present alerts in a different way
-private var window: UIWindow!
-
-public extension UIAlertController {
-    func presentingAlert(message: String, title: String? = "") {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alertController.addAction(OKAction)
-        alertController.present(animated: true, completion: nil)
-    }
-
-    func present(animated: Bool, completion: (() -> Void)?) {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window.rootViewController = UIViewController()
-        window.windowLevel = .alert
-
-        window.makeKeyAndVisible()
-        window.rootViewController?.present(self, animated: animated, completion: completion)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        window = nil
-    }
-
-}
