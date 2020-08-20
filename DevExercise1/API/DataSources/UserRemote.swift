@@ -11,7 +11,7 @@ import ArcGIS
 //signing in will be done here as well as possibly signout the results of which will be passed into the user repository
 public protocol UserRemote {
     func arcGISSignIn(credential: AGSCredential, completion:@escaping (Result<AGSCredential, Error>) -> Void)
-    func gest(completion: @escaping () -> Void)
+    func logOut(completion: @escaping () -> Void)
 }
 
 public class UserRemoteImpl: NSObject, UserRemote {
@@ -33,7 +33,7 @@ public class UserRemoteImpl: NSObject, UserRemote {
             }
         }
     }
-    public func gest(completion: @escaping () -> Void) {
+    public func logOut(completion: @escaping () -> Void) {
         AGSAuthenticationManager.shared().credentialCache.removeAndRevokeCredential(self.portal.credential!) { [weak self] (error) in
             if let error = error {
                 print(error)

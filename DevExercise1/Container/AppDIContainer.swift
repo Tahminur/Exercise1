@@ -21,8 +21,11 @@ final class AppDIContainer {
     lazy var userRemote: UserRemote = {
         return UserRemoteImpl()
     }()
+    lazy var secureStorage: SecureStorage = {
+        return SecureDataStorage()
+    }()
     lazy var userLocal: UserLocal = {
-        return UserLocalImpl()
+        return UserLocalImpl(secure: secureStorage)
     }()
     //Internet checker
     lazy var internetCheck: Reachable = {

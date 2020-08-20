@@ -42,6 +42,12 @@ public class UserRepositoryImpl: UserRepository {
             case .success(let user):
                 //handle saving this user to local here
                 self.userCredential = user
+                do {
+                    try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
+                } catch{
+                    //replace error here with typed error with localized description
+                    completion(.failure(error))
+                }
                 completion(.success(()))
 
             case .failure:
@@ -54,12 +60,15 @@ public class UserRepositoryImpl: UserRepository {
     }
 
     func handleSignOut(completion: @escaping () -> Void) {
-        userRemote.gest {
-            self.userLocal.signOut()
+        userRemote.logOut {
+            do {
+                try self.userLocal.signOut()
+            } catch{
+                return
+            }
             self.userCredential = nil
             completion()
         }
-
     }
 
 }

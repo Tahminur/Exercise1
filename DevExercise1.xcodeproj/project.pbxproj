@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4515FEEF24EEEFB000AE7EA4 /* SecureStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4515FEEE24EEEFB000AE7EA4 /* SecureStore.swift */; };
+		4515FEF124EEEFD700AE7EA4 /* SecureStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4515FEF024EEEFD700AE7EA4 /* SecureStoreError.swift */; };
+		4515FEF324EEF00800AE7EA4 /* SecureStoreQueryable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4515FEF224EEF00800AE7EA4 /* SecureStoreQueryable.swift */; };
+		4515FEF524EEF26200AE7EA4 /* SecureDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4515FEF424EEF26200AE7EA4 /* SecureDataStorage.swift */; };
 		452ABE0524C8CD05009E08C1 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */; };
 		452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */; };
 		452B065224CF641000F1BFE3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065124CF641000F1BFE3 /* Reachability.swift */; };
@@ -26,7 +30,6 @@
 		4561A68824E3317200E9751B /* UserLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68724E3317200E9751B /* UserLocal.swift */; };
 		4561A68C24E3576400E9751B /* UserDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68B24E3576400E9751B /* UserDIContainer.swift */; };
 		4561A68E24E3843B00E9751B /* StandardStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68D24E3843B00E9751B /* StandardStorage.swift */; };
-		4561A69024E3845300E9751B /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68F24E3845300E9751B /* SecureStorage.swift */; };
 		456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */; };
 		45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB024B4DEB6009FEBEA /* Storage.swift */; };
 		45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */; };
@@ -75,6 +78,10 @@
 /* Begin PBXFileReference section */
 		11E3A87BE270823BC462E861 /* Pods-DevExercise1Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DevExercise1Tests.debug.xcconfig"; path = "Target Support Files/Pods-DevExercise1Tests/Pods-DevExercise1Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		1DEA6F4D614D51B008B30E47 /* DevExercise1Tests-DevExercise1Mocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "DevExercise1Tests-DevExercise1Mocks.generated.swift"; path = "MockingbirdMocks/DevExercise1Tests-DevExercise1Mocks.generated.swift"; sourceTree = "<group>"; };
+		4515FEEE24EEEFB000AE7EA4 /* SecureStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStore.swift; sourceTree = "<group>"; };
+		4515FEF024EEEFD700AE7EA4 /* SecureStoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreError.swift; sourceTree = "<group>"; };
+		4515FEF224EEF00800AE7EA4 /* SecureStoreQueryable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreQueryable.swift; sourceTree = "<group>"; };
+		4515FEF424EEF26200AE7EA4 /* SecureDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataStorage.swift; sourceTree = "<group>"; };
 		452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
 		452B065124CF641000F1BFE3 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
@@ -94,7 +101,6 @@
 		4561A68724E3317200E9751B /* UserLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocal.swift; sourceTree = "<group>"; };
 		4561A68B24E3576400E9751B /* UserDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDIContainer.swift; sourceTree = "<group>"; };
 		4561A68D24E3843B00E9751B /* StandardStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardStorage.swift; sourceTree = "<group>"; };
-		4561A68F24E3845300E9751B /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		45759AB024B4DEB6009FEBEA /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		45759AB424B4E56F009FEBEA /* CountryItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryItemViewModel.swift; sourceTree = "<group>"; };
@@ -161,6 +167,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4515FEED24EEEEE800AE7EA4 /* SecureStorage */ = {
+			isa = PBXGroup;
+			children = (
+				4515FEEE24EEEFB000AE7EA4 /* SecureStore.swift */,
+				4515FEF224EEF00800AE7EA4 /* SecureStoreQueryable.swift */,
+				4515FEF424EEF26200AE7EA4 /* SecureDataStorage.swift */,
+				4515FEF024EEEFD700AE7EA4 /* SecureStoreError.swift */,
+			);
+			path = SecureStorage;
+			sourceTree = "<group>";
+		};
 		452B065324D0818C00F1BFE3 /* Container */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,8 +192,8 @@
 		4561A67624E314AC00E9751B /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				4515FEED24EEEEE800AE7EA4 /* SecureStorage */,
 				45759AB024B4DEB6009FEBEA /* Storage.swift */,
-				4561A68F24E3845300E9751B /* SecureStorage.swift */,
 				4561A68D24E3843B00E9751B /* StandardStorage.swift */,
 			);
 			path = Storage;
@@ -688,6 +705,7 @@
 				45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */,
 				4549520524B633F300023370 /* CountryController.swift in Sources */,
 				452B065924D094BD00F1BFE3 /* MapDIContainer.swift in Sources */,
+				4515FEF524EEF26200AE7EA4 /* SecureDataStorage.swift in Sources */,
 				4561A68824E3317200E9751B /* UserLocal.swift in Sources */,
 				4561A68C24E3576400E9751B /* UserDIContainer.swift in Sources */,
 				452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */,
@@ -695,11 +713,13 @@
 				45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */,
 				4561A68024E32DFA00E9751B /* UserRepository.swift in Sources */,
 				45759AB524B4E56F009FEBEA /* CountryItemViewModel.swift in Sources */,
+				4515FEEF24EEEFB000AE7EA4 /* SecureStore.swift in Sources */,
 				4561A68E24E3843B00E9751B /* StandardStorage.swift in Sources */,
 				452B065524D081AE00F1BFE3 /* AppDIContainer.swift in Sources */,
 				4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */,
 				45FE2B21249C1DAE00D8727D /* Extensions.swift in Sources */,
 				4561A68424E32EBD00E9751B /* SignOutController.swift in Sources */,
+				4515FEF124EEEFD700AE7EA4 /* SecureStoreError.swift in Sources */,
 				4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */,
 				4561A68224E32E1100E9751B /* UserRemote.swift in Sources */,
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
@@ -707,8 +727,8 @@
 				45C78EDA24D9036D00BF0C6D /* Callout.swift in Sources */,
 				45759AB124B4DEB6009FEBEA /* Storage.swift in Sources */,
 				452B065224CF641000F1BFE3 /* Reachability.swift in Sources */,
-				4561A69024E3845300E9751B /* SecureStorage.swift in Sources */,
 				453E602524D8A63B00B3559E /* MapRepository.swift in Sources */,
+				4515FEF324EEF00800AE7EA4 /* SecureStoreQueryable.swift in Sources */,
 				453E602324D8A5F600B3559E /* CountryRepository.swift in Sources */,
 				45C78EE024DC7DE600BF0C6D /* CountryProvider.swift in Sources */,
 			);
