@@ -10,23 +10,31 @@ import Foundation
 import ArcGIS
 
 protocol UserRepository {
-    func handleLogin(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void)
+    func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
     func handleSignOut(completion: @escaping () -> Void)
+    func authenticationValid() -> String?
+    var hasInitialLogin: Bool { get }
+    func passSavedUser() -> [String]
 }
 
 //implement named user login from arcgis
 public class UserRepositoryImpl: UserRepository {
     private let userRemote: UserRemote
     private let userLocal: UserLocal
-
     private var userCredential: AGSCredential?
+    public var hasInitialLogin: Bool = false
+    
+    //use for invalidating session for now the expiration interval is set to 1 but have no way of checking for expired tokens
+    func authenticationValid() -> String?{
+        return userLocal.authenticationToken
+    }
 
     public init(userRemote: UserRemote, userLocal: UserLocal) {
         self.userRemote = userRemote
         self.userLocal = userLocal
     }
     //create the ags credential here and sign in
-    func handleLogin(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void) {
+    func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void) {
         userCredential = AGSCredential(user: username, password: password)
         if username == "" {
             completion(.failure(loginError.missingUsername))
@@ -42,33 +50,45 @@ public class UserRepositoryImpl: UserRepository {
             case .success(let user):
                 //handle saving this user to local here
                 self.userCredential = user
-                do {
-                    try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
-                } catch{
-                    //replace error here with typed error with localized description
-                    completion(.failure(error))
+                if rememberMe {
+                    do {
+                        try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
+                        self.hasInitialLogin = rememberMe
+                    } catch{
+                        //replace error here with typed error with localized description
+                        completion(.failure(error))
+                    }
                 }
                 completion(.success(()))
-
             case .failure:
                 //pass up the error
                 completion(.failure(loginError.incorrectLogin))
             }
-
         }
-        //store in user local the ags credential
     }
 
     func handleSignOut(completion: @escaping () -> Void) {
         userRemote.logOut {
-            do {
-                try self.userLocal.signOut()
-            } catch{
-                return
+            if !self.hasInitialLogin{
+                do {
+                    try self.userLocal.signOut()
+                    self.userCredential = nil
+                } catch{
+                    return
+                }
             }
-            self.userCredential = nil
             completion()
         }
     }
-
+    func passSavedUser() -> [String]{
+        if self.hasInitialLogin {
+            do {
+                let creds = try userLocal.savedUser()
+                return creds!
+            } catch{
+                print("handle error")
+            }
+        }
+        return ["",""]
+    }
 }

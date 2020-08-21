@@ -37,7 +37,6 @@ class LoginViewController: UIViewController {
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
-
         return button
     }()
 
@@ -60,6 +59,16 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setRememberedCredentials()
+    }
+    func setRememberedCredentials(){
+        if viewModel.username != "" && viewModel.password != "" {
+            usernameField.text = viewModel.username
+            passwordField.text = viewModel.password
+        }
     }
 
     func configureUI() {
@@ -99,6 +108,7 @@ class LoginViewController: UIViewController {
         if rememberMeSwitch.isOn{
             print("handle remembering here")
         }
+        viewModel.rememberMe = rememberMeSwitch.isOn
     }
 
     static func create(with viewModel: Login) -> LoginViewController {

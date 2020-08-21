@@ -23,8 +23,10 @@ class MainTabController: UITabBarController {
         self.tabBar.tintColor = .white
     }
 //need to change for when remember me is available to check for credential = nil or not
+    
     func authenticateUserAndConfigure() {
-        if nil == nil {
+        let authenticated = appDIContainer.userRepository.authenticationValid()
+        if authenticated == nil {
             DispatchQueue.main.async {
                 let loginController = self.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)

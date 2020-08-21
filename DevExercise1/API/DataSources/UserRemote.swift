@@ -46,7 +46,8 @@ public class UserRemoteImpl: NSObject, UserRemote {
         super.init()
         AGSAuthenticationManager.shared().delegate = self
         let configuration = AGSOAuthConfiguration(portalURL: URL(string: "https://www.arcgis.com")!, clientID: "bRLWdgtj7WaPnYSY", redirectURL: "https://www.arcgis.com")
-        configuration.refreshTokenExchangeInterval = 1
+        //configuration.refreshTokenExchangeInterval = 1
+        configuration.refreshTokenExpirationInterval = 1
         AGSAuthenticationManager.shared().oAuthConfigurations.add(configuration)
     }
 }

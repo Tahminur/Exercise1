@@ -16,7 +16,9 @@ public protocol UserLocal {
     var authenticatedUser: String? { get }
     //change to hasrememberme after confirming and add after standardstorage is made
     //var hasInitialLogin: Bool { get }
+    func savedUser() throws -> [String]?
     func removeAllData() throws
+    var authenticationToken: String? { get }
 }
 
 public class UserLocalImpl: UserLocal {
@@ -30,13 +32,10 @@ public class UserLocalImpl: UserLocal {
         return try? secure.retrieve(item: .user)
     }
     
+    public var authenticationToken: String? {
+        return try? secure.retrieve(item: .token)
+    }
     
-    
-    /*public var hasInitialLogin: Bool {
-        return
-    }*/
-    
-    //user defaults updated here in remember user call look into how
     public func rememberUser(username: String, password: String, token: String) throws {
         try secure.store(value: username, item: .user)
         try secure.store(value: password, item: .password)
@@ -44,9 +43,18 @@ public class UserLocalImpl: UserLocal {
     }
 
     
+    public func savedUser() throws -> [String]? {
+        let username:String? = try? secure.retrieve(item: .user)
+        let password:String? = try? secure.retrieve(item: .password)
+        if username != nil && password != nil {
+            return [username!,password!]
+        }
+        return nil
+    }
+    
     public func signOut() throws{
         print("Signing out and forgetting unless remember me checked")
-        try secure.delete(.user,.password, .token)
+        try secure.delete(.user, .password, .token)
     }
     
     public func removeAllData() throws {

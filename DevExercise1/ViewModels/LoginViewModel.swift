@@ -12,21 +12,26 @@ import Foundation
 protocol Login {
 
     func login(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void)
-
-    func rememberMe()
-
+    var rememberMe: Bool { get set }
+    var username: String { get }
+    var password: String { get }
 }
 
 public final class LoginViewModelImpl: Login {
 
     private let repository: UserRepositoryImpl
+    var username: String
+    var password: String
+    var rememberMe: Bool = false
 
     public init(repository: UserRepositoryImpl) {
         self.repository = repository
+        username = repository.passSavedUser()[0]
+        password = repository.passSavedUser()[1]
     }
     //error handle to be added here
     func login(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void) {
-        repository.handleLogin(username: username, password: password) { result in
+        repository.handleLogin(username: username, password: password, rememberMe: self.rememberMe) { result in
             switch result {
             case .success:
                 completion(.success(()))
@@ -36,9 +41,6 @@ public final class LoginViewModelImpl: Login {
 
         }
     }
-
-    func rememberMe() {
-        print("I remember you")
-    }
+    
 
 }
