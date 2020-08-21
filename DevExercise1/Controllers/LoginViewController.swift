@@ -31,7 +31,7 @@ class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.setTitleColor(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1) , for: .normal)
+        button.setTitleColor(#colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1), for: .normal)
         button.backgroundColor = .white
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
         button.layer.cornerRadius = 5
@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         label.textColor = .white
         return label
     }()
-    
+
     private let rememberMeSwitch: UISwitch = {
         let button = UISwitch()
         button.thumbTintColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -64,7 +64,7 @@ class LoginViewController: UIViewController {
         super.viewWillAppear(animated)
         setRememberedCredentials()
     }
-    func setRememberedCredentials(){
+    func setRememberedCredentials() {
         if viewModel.username != "" && viewModel.password != "" {
             usernameField.text = viewModel.username
             passwordField.text = viewModel.password
@@ -104,8 +104,8 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    @objc func enableRememberMe(){
-        if rememberMeSwitch.isOn{
+    @objc func enableRememberMe() {
+        if rememberMeSwitch.isOn {
             print("handle remembering here")
         }
         viewModel.rememberMe = rememberMeSwitch.isOn

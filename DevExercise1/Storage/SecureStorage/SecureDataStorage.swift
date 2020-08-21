@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum SecureDataItem{
+public enum SecureDataItem {
     case user, password, token
     var key: String {
         switch self {
@@ -26,7 +26,7 @@ public protocol SecureStorage {
     func removeAllData() throws
     func retrieve(item: SecureDataItem) throws -> String
     func delete(_ items: SecureDataItem...) throws
-    func store(value:String, item: SecureDataItem) throws
+    func store(value: String, item: SecureDataItem) throws
     func contains(item: SecureDataItem) -> Bool
 }
 
@@ -45,36 +45,35 @@ extension SecureDataSourceError: LocalizedError {
     }
 }
 
-
 public class SecureDataStorage: SecureStorage {
-    
+
     private let store: SecureStore
-    
-    init(service: String = "Service"){
+
+    init(service: String = "Service") {
         self.store = SecureStore(secureStoreQueryable: GenericSecureStoreQueryable(service: service))
     }
-    
+
     public func removeAllData() throws {
         try store.removeAllValues()
     }
-    
+
     public func retrieve(item: SecureDataItem) throws -> String {
         guard let value = try store.getValue(for: item.key) else {
             throw SecureDataSourceError.nilItem
         }
         return value
     }
-    
+
     public func delete(_ items: SecureDataItem...) throws {
-        try items.forEach{
+        try items.forEach {
             try store.removeValue(for: $0.key)
         }
     }
-    
+
     public func store(value: String, item: SecureDataItem) throws {
         try store.setValue(value, for: item.key)
     }
-    
+
     public func contains(item: SecureDataItem) -> Bool {
         guard let _ = try? retrieve(item: item) else {
             return false

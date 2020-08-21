@@ -23,9 +23,9 @@ public class UserRepositoryImpl: UserRepository {
     private let userLocal: UserLocal
     private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
-    
+
     //use for invalidating session for now the expiration interval is set to 1 but have no way of checking for expired tokens
-    func authenticationValid() -> String?{
+    func authenticationValid() -> String? {
         return userLocal.authenticationToken
     }
 
@@ -54,7 +54,7 @@ public class UserRepositoryImpl: UserRepository {
                     do {
                         try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
                         self.hasInitialLogin = rememberMe
-                    } catch{
+                    } catch {
                         //replace error here with typed error with localized description
                         completion(.failure(error))
                     }
@@ -69,26 +69,26 @@ public class UserRepositoryImpl: UserRepository {
 
     func handleSignOut(completion: @escaping () -> Void) {
         userRemote.logOut {
-            if !self.hasInitialLogin{
+            if !self.hasInitialLogin {
                 do {
                     try self.userLocal.signOut()
                     self.userCredential = nil
-                } catch{
+                } catch {
                     return
                 }
             }
             completion()
         }
     }
-    func passSavedUser() -> [String]{
+    func passSavedUser() -> [String] {
         if self.hasInitialLogin {
             do {
                 let creds = try userLocal.savedUser()
                 return creds!
-            } catch{
+            } catch {
                 print("handle error")
             }
         }
-        return ["",""]
+        return ["", ""]
     }
 }

@@ -23,7 +23,7 @@ class MainTabController: UITabBarController {
         self.tabBar.tintColor = .white
     }
 //need to change for when remember me is available to check for credential = nil or not
-    
+
     func authenticateUserAndConfigure() {
         let authenticated = appDIContainer.userRepository.authenticationValid()
         if authenticated == nil {
