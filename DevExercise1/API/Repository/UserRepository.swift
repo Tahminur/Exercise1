@@ -24,7 +24,6 @@ public class UserRepositoryImpl: UserRepository {
     private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
 
-    //use for invalidating session for now the expiration interval is set to 1 but have no way of checking for expired tokens
     func authenticationValid() -> String? {
         return userLocal.authenticationToken
     }

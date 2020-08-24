@@ -9,6 +9,7 @@
 import XCTest
 @testable import DevExercise1
 
+//this file just tests the secure store files which are the base for the remember me functions
 class SecureStoreTests: XCTestCase {
   var secureStoreWithGenericPwd: SecureStore!
   var secureStoreWithInternetPwd: SecureStore!
