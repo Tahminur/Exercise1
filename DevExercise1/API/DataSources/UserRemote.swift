@@ -11,7 +11,7 @@ import ArcGIS
 
 public protocol UserRemote {
     func arcGISSignIn(credential: AGSCredential, completion:@escaping (Result<AGSCredential, Error>) -> Void)
-    func logOut(completion: @escaping () -> Void)
+    func logOut(completion: @escaping (Result<(),Error>) -> Void)
 }
 
 public class UserRemoteImpl: NSObject, UserRemote {
@@ -33,20 +33,13 @@ public class UserRemoteImpl: NSObject, UserRemote {
             }
         }
     }
-    public func logOut(completion: @escaping () -> Void) {
-        /*AGSAuthenticationManager.shared().credentialCache.removeAndRevokeCredentials(self.portal.credential!) { [weak self] (error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            completion()
-        }*/
+    public func logOut(completion: @escaping (Result<(), Error>) -> Void) {
         AGSAuthenticationManager.shared().credentialCache.removeAndRevokeAllCredentials(){ [weak self] (credentials) in
-            completion()
-            //fix this below as well
-            if credentials != nil {
+            if credentials.count != 0{
+                completion(.failure(loginError.issueWithCredentials))
                 return
             }
+            completion(.success(()))
         }
     }
 

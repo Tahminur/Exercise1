@@ -11,7 +11,7 @@ import ArcGIS
 
 protocol UserRepository {
     func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
-    func handleSignOut(completion: @escaping () -> Void)
+    func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
     func authenticationValid() -> String?
     var hasInitialLogin: Bool { get }
     func passSavedUser(completion: @escaping (Result<[String],Error>) -> Void)
@@ -64,8 +64,30 @@ public class UserRepositoryImpl: UserRepository {
         }
     }
 
-    func handleSignOut(completion: @escaping () -> Void) {
-        userRemote.logOut {
+    func handleSignOut(completion: @escaping (Result<(), Error>) -> Void) {
+        userRemote.logOut { result in
+            switch result {
+            case .success():
+                if !self.hasInitialLogin {
+                    do {
+                        try self.userLocal.removeAllData()
+                        self.userCredential = nil
+                    } catch {
+                        return
+                    }
+                }
+                else {
+                    do {
+                        try self.userLocal.signOutWithRememberMe()
+                        self.userCredential = nil
+                    } catch {
+                        return
+                    }
+                }
+                completion(.success(()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
             if !self.hasInitialLogin {
                 do {
                     try self.userLocal.removeAllData()
@@ -82,7 +104,6 @@ public class UserRepositoryImpl: UserRepository {
                     return
                 }
             }
-            completion()
         }
     }
     

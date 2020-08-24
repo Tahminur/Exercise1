@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-@UIApplicationMain
+//@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let appDIContainer = AppDIContainer()
@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        NotificationCenter.default.addObserver(self,
+                               selector: #selector(AppDelegate.applicationDidTimeout(notification:)),
+                               name: .appTimedOut,
+                               object: nil
+        )
         return true
     }
 
@@ -78,5 +83,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
+    
+    @objc func applicationDidTimeout(notification: NSNotification) {
+        let viewController = UIApplication.shared.keyWindow?.rootViewController as! MainTabController
+        viewController.appDIContainer.userRepository.handleSignOut(){ result in
+        switch result {
+        case .success(()):
+            DispatchQueue.main.async {
+                let loginController = viewController.appDIContainer.userContainer.makeLoginViewController()
+                let nav = UINavigationController(rootViewController: loginController)
+                nav.modalPresentationStyle = .fullScreen
+                viewController.present(nav, animated: true, completion: nil)
+            }
+        case .failure(let error):
+            viewController.presentAlert(message: error.localizedDescription)
+            }
+        }
+    }
 }
+/*
+viewController.presentAlert(message: "error")
+viewController.appDIContainer.userRepository.handleSignOut(){ result in
+    switch result {
+    case .success(()):
+        DispatchQueue.main.async {
+            let loginController = viewController.appDIContainer.userContainer.makeLoginViewController()
+            let nav = UINavigationController(rootViewController: loginController)
+            nav.modalPresentationStyle = .fullScreen
+            viewController.present(nav, animated: true, completion: nil)
+        }
+    case .failure(let error):
+        viewController.presentAlert(message: error.localizedDescription)
+    }
+}
+*/

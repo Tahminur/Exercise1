@@ -29,13 +29,18 @@ class SignOutController: UIViewController {
     }()
 
     @objc func handleSignOut() {
-        viewModel.signOut {
-            DispatchQueue.main.async {
-                let loginController = self.appDIContainer.userContainer.makeLoginViewController()
-                let nav = UINavigationController(rootViewController: loginController)
-                nav.modalPresentationStyle = .fullScreen
-                self.present(nav, animated: true, completion: nil)
-                self.tabBarController?.selectedIndex = 0
+        viewModel.signOut { result in
+            switch result {
+            case .success(()):
+                DispatchQueue.main.async {
+                    let loginController = self.appDIContainer.userContainer.makeLoginViewController()
+                    let nav = UINavigationController(rootViewController: loginController)
+                    nav.modalPresentationStyle = .fullScreen
+                    self.present(nav, animated: true, completion: nil)
+                    self.tabBarController?.selectedIndex = 0
+                }
+            case .failure(let error):
+                self.presentAlert(message: error.localizedDescription)
             }
         }
     }

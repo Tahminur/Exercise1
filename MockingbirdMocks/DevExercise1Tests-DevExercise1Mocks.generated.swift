@@ -975,11 +975,11 @@ public final class SignOutMock: DevExercise1.SignOut, Mockingbird.Mock {
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `signOut`(`completion`: @escaping () -> Void)
+  // MARK: Mocked `signOut`(`completion`: @escaping (Result<(), Error>) -> Void)
 
-  public func `signOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+  public func `signOut`(`completion`: @escaping (Result<(), Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `signOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `signOut`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `SignOut`.
@@ -1119,11 +1119,11 @@ public final class UserRemoteImplMock: DevExercise1.UserRemoteImpl, Mockingbird.
 
   public required override init() { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `logOut`(`completion`: @escaping () -> Void)
+  // MARK: Mocked `logOut`(`completion`: @escaping (Result<(), Error>) -> Void)
 
-  public override func `logOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `logOut`(`completion`: @escaping (Result<(), Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `logOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `logOut`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
   // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
 
@@ -1151,11 +1151,11 @@ public final class UserRemoteMock: DevExercise1.UserRemote, Mockingbird.Mock {
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `logOut`(`completion`: @escaping () -> Void)
+  // MARK: Mocked `logOut`(`completion`: @escaping (Result<(), Error>) -> Void)
 
-  public func `logOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+  public func `logOut`(`completion`: @escaping (Result<(), Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `logOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `logOut`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
   // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
 
@@ -1167,4 +1167,19 @@ public final class UserRemoteMock: DevExercise1.UserRemote, Mockingbird.Mock {
 /// Returns a concrete mock of `UserRemote`.
 public func mock(_ type: DevExercise1.UserRemote.Protocol, file: StaticString = #file, line: UInt = #line) -> UserRemoteMock {
   return UserRemoteMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+}
+
+// MARK: - Mocked UserTimeout
+
+public final class UserTimeoutMock: Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+}
+
+@available(*, unavailable, message: "'UserTimeout' does not declare any accessible designated initializers and cannot be mocked")
+public func mock(_ type: DevExercise1.UserTimeout.Type, file: StaticString = #file, line: UInt = #line) -> UserTimeoutMock {
+  fatalError()
 }

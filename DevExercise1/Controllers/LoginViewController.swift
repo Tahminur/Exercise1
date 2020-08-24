@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
         let tf = UITextField()
         tf.textColor = .white
         tf.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        //tf.isSecureTextEntry = true
+        tf.isSecureTextEntry = true
         return tf
     }()
 

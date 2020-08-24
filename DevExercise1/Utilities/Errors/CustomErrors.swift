@@ -36,6 +36,7 @@ public enum loginError: Error {
     case incorrectLogin
     case rememberMeMalfunction
     case noInternet
+    case issueWithCredentials
 }
 
 extension loginError: LocalizedError {
@@ -51,6 +52,8 @@ extension loginError: LocalizedError {
             return NSLocalizedString("No Internet Connection Found", comment: "No Internet")
         case .rememberMeMalfunction:
             return NSLocalizedString("There was an issue retrieving your remembered credentials from memory", comment: "Remember Me issue")
+        case .issueWithCredentials:
+            return NSLocalizedString("There was an issue with logging out due to an error with the cache", comment: "CredentialCache issue")
         }
     }
 }

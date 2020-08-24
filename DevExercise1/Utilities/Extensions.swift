@@ -63,3 +63,7 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
+extension Notification.Name {
+    static let appTimedOut = Notification.Name("appTimedOut")
+}

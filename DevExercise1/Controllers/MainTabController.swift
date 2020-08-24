@@ -18,15 +18,12 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         authenticateUserAndConfigure()
-        //setupTabs()
         self.tabBar.barTintColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         self.tabBar.tintColor = .white
     }
 //need to change for when remember me is available to check for credential = nil or not
-
     func authenticateUserAndConfigure() {
         let authenticated = appDIContainer.userRepository.authenticationValid()
-        print(authenticated)
         if authenticated == nil || authenticated == "" {
             DispatchQueue.main.async {
                 let loginController = self.appDIContainer.userContainer.makeLoginViewController()
