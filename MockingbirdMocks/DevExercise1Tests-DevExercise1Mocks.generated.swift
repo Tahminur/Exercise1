@@ -12,6 +12,7 @@ import ArcGIS
 import CoreData
 import Foundation
 import Moya
+import Security
 import Swift
 import SystemConfiguration
 import UIKit
@@ -30,21 +31,6 @@ public final class AppDelegateMock: Mockingbird.Mock {
 
 @available(*, unavailable, message: "'AppDelegate' does not declare any accessible designated initializers and cannot be mocked")
 public func mock(_ type: DevExercise1.AppDelegate.Type, file: StaticString = #file, line: UInt = #line) -> AppDelegateMock {
-  fatalError()
-}
-
-// MARK: - Mocked ArcGISAuthenticationManager
-
-public final class ArcGISAuthenticationManagerMock: Mockingbird.Mock {
-  static let staticMock = Mockingbird.StaticMock()
-  public let mockingContext = Mockingbird.MockingContext()
-  public let stubbingContext = Mockingbird.StubbingContext()
-  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
-  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
-}
-
-@available(*, unavailable, message: "'ArcGISAuthenticationManager' does not declare any accessible designated initializers and cannot be mocked")
-public func mock(_ type: DevExercise1.ArcGISAuthenticationManager.Type, file: StaticString = #file, line: UInt = #line) -> ArcGISAuthenticationManagerMock {
   fatalError()
 }
 
@@ -117,7 +103,7 @@ public final class CountryCasesViewModelInputMock: DevExercise1.CountryCasesView
 
   // MARK: Mocked `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (String?) -> Void)
 
-  public func `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (String?) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (String?) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `fetchFromDataSource`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (String?) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (String?) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
@@ -184,7 +170,7 @@ public final class CountryCellMock: DevExercise1.CountryCell, Mockingbird.Mock {
 
   // MARK: Mocked `set`(`country`: DevExercise1.Country)
 
-  public override func `set`(`country`: DevExercise1.Country) { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `set`(`country`: DevExercise1.Country) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `set`(`country`: @escaping @autoclosure () -> DevExercise1.Country) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (DevExercise1.Country) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
@@ -433,7 +419,7 @@ public final class CountryRemoteDataSourceImplMock: DevExercise1.CountryRemoteDa
 
   // MARK: Mocked `fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void)
 
-  public override func `fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) {
+  public override func `fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) -> Void {
     let invocation: Mockingbird.Invocation = Mockingbird.Invocation(selectorName: "`fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) -> Void", arguments: [Mockingbird.ArgumentMatcher(`completion`)], returnType: Swift.ObjectIdentifier((Void).self))
     self.mockingContext.didInvoke(invocation) { () -> Void in
       let implementation = self.stubbingContext.implementation(for: invocation)
@@ -500,7 +486,7 @@ public final class CountryRemoteDataSourceMock: DevExercise1.CountryRemoteDataSo
 
   // MARK: Mocked `fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void)
 
-  public func `fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `fetch`(`completion`: @escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `fetch`(`completion`: @escaping @autoclosure () -> (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[AGSArcGISFeature], DevExercise1.fetchError>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
@@ -531,7 +517,7 @@ public final class CountryRepositoryImplMock: DevExercise1.CountryRepositoryImpl
 
   // MARK: Mocked `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void)
 
-  public override func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `fetch`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
@@ -561,7 +547,7 @@ public final class CountryRepositoryMock: DevExercise1.CountryRepository, Mockin
 
   // MARK: Mocked `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void)
 
-  public func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `fetch`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<[DevExercise1.Country], DevExercise1.fetchError>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
@@ -595,22 +581,36 @@ public final class LoginMock: DevExercise1.Login, Mockingbird.Mock {
   public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
   public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
+  // MARK: Mocked rememberMe
+
+  public var `rememberMe`: Bool { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getRememberMe() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> Bool, Bool> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func setRememberMe(_ newValue: @escaping @autoclosure () -> Bool) -> Mockingbird.Mockable<Mockingbird.PropertySetterDeclaration, (Bool) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
   fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
     Mockingbird.checkVersion(for: self)
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `rememberMe`()
+  // MARK: Mocked `reset`()
 
-  public func `rememberMe`() { fatalError("See 'Thunk Stubs' in the README") }
+  public func `reset`() -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `rememberMe`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `reset`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `login`(`username`: String, `password`: String)
+  // MARK: Mocked `savedCredentials`(`completion`: -> Void)
 
-  public func `login`(`username`: String, `password`: String) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `savedCredentials`(`completion`: -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `login`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `savedCredentials`(`completion`: @escaping @autoclosure () -> -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (-> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `login`(`username`: String, `password`: String, `rememberMe`: Bool, `completion`: -> Void)
+
+  public func `login`(`username`: String, `password`: String, `rememberMe`: Bool, `completion`: -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `login`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `rememberMe`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String, Bool, -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `Login`.
@@ -631,29 +631,6 @@ public final class MainTabControllerMock: Mockingbird.Mock {
 @available(*, unavailable, message: "'MainTabController' does not declare any accessible designated initializers and cannot be mocked")
 public func mock(_ type: DevExercise1.MainTabController.Type, file: StaticString = #file, line: UInt = #line) -> MainTabControllerMock {
   fatalError()
-}
-
-// MARK: - Mocked MapManager
-
-public final class MapManagerMock: DevExercise1.MapManager, Mockingbird.Mock {
-  static let staticMock = Mockingbird.StaticMock()
-  public let mockingContext = Mockingbird.MockingContext()
-  public let stubbingContext = Mockingbird.StubbingContext()
-  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
-  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
-
-  public enum InitializerProxy {
-    public static func initialize(__file: StaticString = #file, __line: UInt = #line) -> MapManagerMock { fatalError("See 'Thunk Stubs' in the README") }
-  }
-
-  // MARK: Mocked init()
-
-  public required override init() { fatalError("See 'Thunk Stubs' in the README") }
-}
-
-/// Returns an abstract mock which should be initialized using `mock(MapManager.self).initialize(…)`.
-public func mock(_ type: DevExercise1.MapManager.Type, file: StaticString = #file, line: UInt = #line) -> MapManagerMock.InitializerProxy.Type {
-  return MapManagerMock.InitializerProxy.self
 }
 
 // MARK: - Mocked MapRemoteDataSource
@@ -763,7 +740,7 @@ public final class MapViewModelInputMock: DevExercise1.MapViewModelInput, Mockin
 
   // MARK: Mocked `licenseMap`()
 
-  public func `licenseMap`() throws { fatalError("See 'Thunk Stubs' in the README") }
+  public func `licenseMap`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `licenseMap`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
@@ -788,13 +765,13 @@ public final class MapViewModelMock: DevExercise1.MapViewModel, Mockingbird.Mock
 
   // MARK: Mocked `licenseMap`()
 
-  public override func `licenseMap`() throws { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `licenseMap`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `licenseMap`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
   // MARK: Mocked `retrieveFeatureLayers`(`completion`: @escaping ([AGSFeatureLayer]) -> Void)
 
-  public override func `retrieveFeatureLayers`(`completion`: @escaping ([AGSFeatureLayer]) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `retrieveFeatureLayers`(`completion`: @escaping ([AGSFeatureLayer]) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
   public func `retrieveFeatureLayers`(`completion`: @escaping @autoclosure () -> ([AGSFeatureLayer]) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping ([AGSFeatureLayer]) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
@@ -882,6 +859,139 @@ public func mock(_ type: DevExercise1.SceneDelegate.Type, file: StaticString = #
   fatalError()
 }
 
+// MARK: - Mocked SecureDataStorage
+
+public final class SecureDataStorageMock: DevExercise1.SecureDataStorage, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public enum InitializerProxy {
+    public static func initialize(`service`: String, __file: StaticString = #file, __line: UInt = #line) -> SecureDataStorageMock { fatalError("See 'Thunk Stubs' in the README") }
+  }
+
+  // MARK: Mocked `contains`(`item`: DevExercise1.SecureDataItem)
+
+  public override func `contains`(`item`: DevExercise1.SecureDataItem) -> Bool { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `contains`(`item`: @escaping @autoclosure () -> DevExercise1.SecureDataItem) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (DevExercise1.SecureDataItem) -> Bool, Bool> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `retrieve`(`item`: DevExercise1.SecureDataItem)
+
+  public override func `retrieve`(`item`: DevExercise1.SecureDataItem) throws -> String { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `retrieve`(`item`: @escaping @autoclosure () -> DevExercise1.SecureDataItem) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (DevExercise1.SecureDataItem) throws -> String, String> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `removeAllData`()
+
+  public override func `removeAllData`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `removeAllData`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `delete`(_ `items`: DevExercise1.SecureDataItem...)
+
+  public override func `delete`(_ `items`: DevExercise1.SecureDataItem...) throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `delete`(_ `items`: @escaping @autoclosure () -> [DevExercise1.SecureDataItem]) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, ([DevExercise1.SecureDataItem]) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `delete`(_ `items`: DevExercise1.SecureDataItem...) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, ([DevExercise1.SecureDataItem]) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked init(`service`: String)
+
+  public required override init(`service`: String) { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `store`(`value`: String, `item`: DevExercise1.SecureDataItem)
+
+  public override func `store`(`value`: String, `item`: DevExercise1.SecureDataItem) throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `store`(`value`: @escaping @autoclosure () -> String, `item`: @escaping @autoclosure () -> DevExercise1.SecureDataItem) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (String, DevExercise1.SecureDataItem) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+}
+
+/// Returns an abstract mock which should be initialized using `mock(SecureDataStorage.self).initialize(…)`.
+public func mock(_ type: DevExercise1.SecureDataStorage.Type, file: StaticString = #file, line: UInt = #line) -> SecureDataStorageMock.InitializerProxy.Type {
+  return SecureDataStorageMock.InitializerProxy.self
+}
+
+// MARK: - Mocked SecureStorage
+
+public final class SecureStorageMock: DevExercise1.SecureStorage, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
+    Mockingbird.checkVersion(for: self)
+    self.sourceLocation = sourceLocation
+  }
+
+  // MARK: Mocked `contains`(`item`: DevExercise1.SecureDataItem)
+
+  public func `contains`(`item`: DevExercise1.SecureDataItem) -> Bool { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `contains`(`item`: @escaping @autoclosure () -> DevExercise1.SecureDataItem) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (DevExercise1.SecureDataItem) -> Bool, Bool> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `retrieve`(`item`: DevExercise1.SecureDataItem)
+
+  public func `retrieve`(`item`: DevExercise1.SecureDataItem) throws -> String { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `retrieve`(`item`: @escaping @autoclosure () -> DevExercise1.SecureDataItem) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (DevExercise1.SecureDataItem) throws -> String, String> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `removeAllData`()
+
+  public func `removeAllData`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `removeAllData`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `delete`(_ `items`: DevExercise1.SecureDataItem...)
+
+  public func `delete`(_ `items`: DevExercise1.SecureDataItem...) throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `delete`(_ `items`: @escaping @autoclosure () -> [DevExercise1.SecureDataItem]) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, ([DevExercise1.SecureDataItem]) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `delete`(_ `items`: DevExercise1.SecureDataItem...) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, ([DevExercise1.SecureDataItem]) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `store`(`value`: String, `item`: DevExercise1.SecureDataItem)
+
+  public func `store`(`value`: String, `item`: DevExercise1.SecureDataItem) throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `store`(`value`: @escaping @autoclosure () -> String, `item`: @escaping @autoclosure () -> DevExercise1.SecureDataItem) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (String, DevExercise1.SecureDataItem) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+}
+
+/// Returns a concrete mock of `SecureStorage`.
+public func mock(_ type: DevExercise1.SecureStorage.Protocol, file: StaticString = #file, line: UInt = #line) -> SecureStorageMock {
+  return SecureStorageMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+}
+
+// MARK: - Mocked SecureStoreQueryable
+
+public final class SecureStoreQueryableMock: DevExercise1.SecureStoreQueryable, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  // MARK: Mocked query
+
+  public var `query`: [String: Any] { get { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getQuery() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> [String: Any], [String: Any]> { fatalError("See 'Thunk Stubs' in the README") }
+
+  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
+    Mockingbird.checkVersion(for: self)
+    self.sourceLocation = sourceLocation
+  }
+}
+
+/// Returns a concrete mock of `SecureStoreQueryable`.
+public func mock(_ type: DevExercise1.SecureStoreQueryable.Protocol, file: StaticString = #file, line: UInt = #line) -> SecureStoreQueryableMock {
+  return SecureStoreQueryableMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+}
+
 // MARK: - Mocked SignOutController
 
 public final class SignOutControllerMock: Mockingbird.Mock {
@@ -911,11 +1021,11 @@ public final class SignOutMock: DevExercise1.SignOut, Mockingbird.Mock {
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `signOut`()
+  // MARK: Mocked `signOut`(`completion`: @escaping () -> Void)
 
-  public func `signOut`() { fatalError("See 'Thunk Stubs' in the README") }
+  public func `signOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `signOut`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `signOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `SignOut`.
@@ -932,28 +1042,54 @@ public final class UserLocalImplMock: DevExercise1.UserLocalImpl, Mockingbird.Mo
   public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
   public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
-  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
-    super.init()
-    Mockingbird.checkVersion(for: self)
-    self.sourceLocation = sourceLocation
+  public enum InitializerProxy {
+    public static func initialize(`secure`: DevExercise1.SecureStorage, __file: StaticString = #file, __line: UInt = #line) -> UserLocalImplMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
-  // MARK: Mocked `rememberUser`()
+  // MARK: Mocked authenticatedUser
 
-  public override func `rememberUser`() { fatalError("See 'Thunk Stubs' in the README") }
+  override public var `authenticatedUser`: String? { get { fatalError("See 'Thunk Stubs' in the README") } }
 
-  public func `rememberUser`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func getAuthenticatedUser() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> String?, String?> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `signOut`()
+  // MARK: Mocked authenticationToken
 
-  public override func `signOut`() { fatalError("See 'Thunk Stubs' in the README") }
+  override public var `authenticationToken`: String? { get { fatalError("See 'Thunk Stubs' in the README") } }
 
-  public func `signOut`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func getAuthenticationToken() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> String?, String?> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `removeAllData`()
+
+  public override func `removeAllData`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `removeAllData`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `signOutWithRememberMe`()
+
+  public override func `signOutWithRememberMe`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `signOutWithRememberMe`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked init(`secure`: DevExercise1.SecureStorage)
+
+  public required override init(`secure`: DevExercise1.SecureStorage) { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `rememberUser`(`username`: String, `password`: String, `token`: String)
+
+  public override func `rememberUser`(`username`: String, `password`: String, `token`: String) throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `rememberUser`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `token`: @escaping @autoclosure () -> String) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (String, String, String) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `savedUser`()
+
+  public override func `savedUser`() throws -> [String]? { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `savedUser`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> [String]?, [String]?> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
-/// Returns a concrete mock of `UserLocalImpl`.
-public func mock(_ type: DevExercise1.UserLocalImpl.Type, file: StaticString = #file, line: UInt = #line) -> UserLocalImplMock {
-  return UserLocalImplMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+/// Returns an abstract mock which should be initialized using `mock(UserLocalImpl.self).initialize(…)`.
+public func mock(_ type: DevExercise1.UserLocalImpl.Type, file: StaticString = #file, line: UInt = #line) -> UserLocalImplMock.InitializerProxy.Type {
+  return UserLocalImplMock.InitializerProxy.self
 }
 
 // MARK: - Mocked UserLocal
@@ -965,22 +1101,46 @@ public final class UserLocalMock: DevExercise1.UserLocal, Mockingbird.Mock {
   public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
   public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
+  // MARK: Mocked authenticatedUser
+
+  public var `authenticatedUser`: String? { get { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getAuthenticatedUser() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> String?, String?> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked authenticationToken
+
+  public var `authenticationToken`: String? { get { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getAuthenticationToken() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> String?, String?> { fatalError("See 'Thunk Stubs' in the README") }
+
   fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
     Mockingbird.checkVersion(for: self)
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `rememberUser`()
+  // MARK: Mocked `removeAllData`()
 
-  public func `rememberUser`() { fatalError("See 'Thunk Stubs' in the README") }
+  public func `removeAllData`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `rememberUser`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `removeAllData`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `signOut`()
+  // MARK: Mocked `signOutWithRememberMe`()
 
-  public func `signOut`() { fatalError("See 'Thunk Stubs' in the README") }
+  public func `signOutWithRememberMe`() throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `signOut`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `signOutWithRememberMe`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `rememberUser`(`username`: String, `password`: String, `token`: String)
+
+  public func `rememberUser`(`username`: String, `password`: String, `token`: String) throws -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `rememberUser`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `token`: @escaping @autoclosure () -> String) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (String, String, String) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `savedUser`()
+
+  public func `savedUser`() throws -> [String]? { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `savedUser`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> [String]?, [String]?> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `UserLocal`.
@@ -997,22 +1157,30 @@ public final class UserRemoteImplMock: DevExercise1.UserRemoteImpl, Mockingbird.
   public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
   public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
-  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
-    super.init()
-    Mockingbird.checkVersion(for: self)
-    self.sourceLocation = sourceLocation
+  public enum InitializerProxy {
+    public static func initialize(__file: StaticString = #file, __line: UInt = #line) -> UserRemoteImplMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
-  // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential)
+  // MARK: Mocked init()
 
-  public override func `arcGISSignIn`(`credential`: AGSCredential) { fatalError("See 'Thunk Stubs' in the README") }
+  public required override init() { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `arcGISSignIn`(`credential`: @escaping @autoclosure () -> AGSCredential) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSCredential) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  // MARK: Mocked `logOut`(`completion`: @escaping () -> Void)
+
+  public override func `logOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `logOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
+
+  public override func `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `arcGISSignIn`(`credential`: @escaping @autoclosure () -> AGSCredential, `completion`: @escaping @autoclosure () -> (Result<AGSCredential, Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSCredential, @escaping (Result<AGSCredential, Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
-/// Returns a concrete mock of `UserRemoteImpl`.
-public func mock(_ type: DevExercise1.UserRemoteImpl.Type, file: StaticString = #file, line: UInt = #line) -> UserRemoteImplMock {
-  return UserRemoteImplMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+/// Returns an abstract mock which should be initialized using `mock(UserRemoteImpl.self).initialize(…)`.
+public func mock(_ type: DevExercise1.UserRemoteImpl.Type, file: StaticString = #file, line: UInt = #line) -> UserRemoteImplMock.InitializerProxy.Type {
+  return UserRemoteImplMock.InitializerProxy.self
 }
 
 // MARK: - Mocked UserRemote
@@ -1029,11 +1197,17 @@ public final class UserRemoteMock: DevExercise1.UserRemote, Mockingbird.Mock {
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential)
+  // MARK: Mocked `logOut`(`completion`: @escaping () -> Void)
 
-  public func `arcGISSignIn`(`credential`: AGSCredential) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `logOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `arcGISSignIn`(`credential`: @escaping @autoclosure () -> AGSCredential) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSCredential) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `logOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
+
+  public func `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `arcGISSignIn`(`credential`: @escaping @autoclosure () -> AGSCredential, `completion`: @escaping @autoclosure () -> (Result<AGSCredential, Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSCredential, @escaping (Result<AGSCredential, Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `UserRemote`.
@@ -1054,21 +1228,47 @@ public final class UserRepositoryImplMock: DevExercise1.UserRepositoryImpl, Mock
     public static func initialize(`userRemote`: DevExercise1.UserRemote, `userLocal`: DevExercise1.UserLocal, __file: StaticString = #file, __line: UInt = #line) -> UserRepositoryImplMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
-  // MARK: Mocked `handleSignOut`()
+  // MARK: Mocked hasInitialLogin
 
-  public override func `handleSignOut`() { fatalError("See 'Thunk Stubs' in the README") }
+  override public var `hasInitialLogin`: Bool { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
-  public func `handleSignOut`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func getHasInitialLogin() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> Bool, Bool> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func setHasInitialLogin(_ newValue: @escaping @autoclosure () -> Bool) -> Mockingbird.Mockable<Mockingbird.PropertySetterDeclaration, (Bool) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `authenticationValid`()
+
+  public override func `authenticationValid`() -> String? { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `authenticationValid`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> String?, String?> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `reset`()
+
+  public override func `reset`() -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `reset`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `handleSignOut`(`completion`: @escaping () -> Void)
+
+  public override func `handleSignOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `handleSignOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `passSavedUser`(`completion`: @escaping (Result<[String], Error>) -> Void)
+
+  public override func `passSavedUser`(`completion`: @escaping (Result<[String], Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `passSavedUser`(`completion`: @escaping @autoclosure () -> (Result<[String], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[String], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
   // MARK: Mocked init(`userRemote`: DevExercise1.UserRemote, `userLocal`: DevExercise1.UserLocal)
 
   public required override init(`userRemote`: DevExercise1.UserRemote, `userLocal`: DevExercise1.UserLocal) { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `handleLogin`(`username`: String, `password`: String)
+  // MARK: Mocked `handleLogin`(`username`: String, `password`: String, `rememberMe`: Bool, `completion`: -> Void)
 
-  public override func `handleLogin`(`username`: String, `password`: String) { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `handleLogin`(`username`: String, `password`: String, `rememberMe`: Bool, `completion`: -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `handleLogin`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `handleLogin`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `rememberMe`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String, Bool, -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns an abstract mock which should be initialized using `mock(UserRepositoryImpl.self).initialize(…)`.
@@ -1085,22 +1285,40 @@ public final class UserRepositoryMock: DevExercise1.UserRepository, Mockingbird.
   public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
   public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
+  // MARK: Mocked hasInitialLogin
+
+  public var `hasInitialLogin`: Bool { get { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getHasInitialLogin() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> Bool, Bool> { fatalError("See 'Thunk Stubs' in the README") }
+
   fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
     Mockingbird.checkVersion(for: self)
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `handleSignOut`()
+  // MARK: Mocked `authenticationValid`()
 
-  public func `handleSignOut`() { fatalError("See 'Thunk Stubs' in the README") }
+  public func `authenticationValid`() -> String? { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `handleSignOut`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `authenticationValid`() -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, () -> String?, String?> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `handleLogin`(`username`: String, `password`: String)
+  // MARK: Mocked `handleSignOut`(`completion`: @escaping () -> Void)
 
-  public func `handleLogin`(`username`: String, `password`: String) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `handleSignOut`(`completion`: @escaping () -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `handleLogin`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `handleSignOut`(`completion`: @escaping @autoclosure () -> () -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping () -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `passSavedUser`(`completion`: @escaping (Result<[String], Error>) -> Void)
+
+  public func `passSavedUser`(`completion`: @escaping (Result<[String], Error>) -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `passSavedUser`(`completion`: @escaping @autoclosure () -> (Result<[String], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[String], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `handleLogin`(`username`: String, `password`: String, `rememberMe`: Bool, `completion`: -> Void)
+
+  public func `handleLogin`(`username`: String, `password`: String, `rememberMe`: Bool, `completion`: -> Void) -> Void { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `handleLogin`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `rememberMe`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String, Bool, -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `UserRepository`.

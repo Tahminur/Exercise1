@@ -34,6 +34,7 @@ public enum loginError: Error {
     case missingUsername
     case missingPassword
     case incorrectLogin
+    case rememberMeMalfunction
     case noInternet
 }
 
@@ -48,6 +49,8 @@ extension loginError: LocalizedError {
             return NSLocalizedString("Your username or password is incorrect", comment: "Incorrect Login")
         case .noInternet:
             return NSLocalizedString("No Internet Connection Found", comment: "No Internet")
+        case .rememberMeMalfunction:
+            return NSLocalizedString("There was an issue retrieving your remembered credentials from memory", comment: "Remember Me issue")
         }
     }
 }

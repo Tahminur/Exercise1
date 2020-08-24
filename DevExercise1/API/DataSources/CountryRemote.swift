@@ -10,7 +10,6 @@ import Foundation
 import ArcGIS
 
 public protocol CountryRemoteDataSource {
-
     func fetch(completion:@escaping (Result<[AGSArcGISFeature], fetchError>) -> Void)
     var featureTable: AGSServiceFeatureTable {get}
     func retrieveCountries() -> [AGSArcGISFeature]

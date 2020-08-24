@@ -10,9 +10,7 @@ import Foundation
 
 public protocol UserLocal {
     func rememberUser(username: String, password: String, token: String) throws
-
-    func signOut() throws
-
+    func signOutWithRememberMe() throws
     var authenticatedUser: String? { get }
     //change to hasrememberme after confirming and add after standardstorage is made
     //var hasInitialLogin: Bool { get }
@@ -51,11 +49,10 @@ public class UserLocalImpl: UserLocal {
         return nil
     }
 
-    public func signOut() throws {
-        print("Signing out and forgetting unless remember me checked")
-        try secure.delete(.user, .password, .token)
+    public func signOutWithRememberMe() throws {
+        try secure.delete(.token)
     }
-
+    
     public func removeAllData() throws {
         try secure.removeAllData()
     }

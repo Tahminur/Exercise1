@@ -14,7 +14,7 @@ protocol UserRepository {
     func handleSignOut(completion: @escaping () -> Void)
     func authenticationValid() -> String?
     var hasInitialLogin: Bool { get }
-    func passSavedUser() -> [String]
+    func passSavedUser(completion: @escaping (Result<[String],Error>) -> Void)
 }
 
 //implement named user login from arcgis
@@ -50,18 +50,16 @@ public class UserRepositoryImpl: UserRepository {
             case .success(let user):
                 //handle saving this user to local here
                 self.userCredential = user
-                if rememberMe {
+                if rememberMe == true {
                     do {
                         try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
                         self.hasInitialLogin = rememberMe
                     } catch {
-                        //replace error here with typed error with localized description
-                        completion(.failure(error))
+                        completion(.failure(loginError.rememberMeMalfunction))
                     }
                 }
                 completion(.success(()))
             case .failure:
-                //pass up the error
                 completion(.failure(loginError.incorrectLogin))
             }
         }
@@ -71,7 +69,15 @@ public class UserRepositoryImpl: UserRepository {
         userRemote.logOut {
             if !self.hasInitialLogin {
                 do {
-                    try self.userLocal.signOut()
+                    try self.userLocal.removeAllData()
+                    self.userCredential = nil
+                } catch {
+                    return
+                }
+            }
+            else {
+                do {
+                    try self.userLocal.signOutWithRememberMe()
                     self.userCredential = nil
                 } catch {
                     return
@@ -80,24 +86,28 @@ public class UserRepositoryImpl: UserRepository {
             completion()
         }
     }
-    func passSavedUser() -> [String] {
+    
+    func passSavedUser(completion: @escaping (Result<[String],Error>) -> Void){
         if self.hasInitialLogin {
             do {
                 let creds = try userLocal.savedUser()
                 self.hasInitialLogin = false
-                return creds!
+                if creds == nil {
+                    completion(.success(["",""]))
+                }
+                else {
+                    completion(.success(creds!))
+                }
             } catch {
-                print("handle error")
+                //replace this with correct errors
+                completion(.failure(loginError.noInternet))
             }
         }
-        return ["", ""]
     }
-
-    //
-
+    //using currently to reset all saved credentials to the keychain
     func reset() {
         do {
-            try userLocal.signOut()
+            try userLocal.removeAllData()
         } catch {
             print("nothing in local")
         }

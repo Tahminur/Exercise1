@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
         let tf = UITextField()
         tf.textColor = .white
         tf.attributedPlaceholder = NSAttributedString(string: "Enter Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
-        tf.isSecureTextEntry = true
+        //tf.isSecureTextEntry = true
         return tf
     }()
 
@@ -58,23 +58,20 @@ class LoginViewController: UIViewController {
     // MARK: - View Setup
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.reset()
+        setRememberedCredentials()
         configureUI()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setRememberedCredentials()
-        viewModel.rememberMe = false
-    }
+    
     func setRememberedCredentials() {
-        usernameField.text = viewModel.username
-        passwordField.text = viewModel.password
-        if viewModel.username != "" && viewModel.password != "" {
-            usernameField.text = viewModel.username
-            passwordField.text = viewModel.password
-        } else {
-            usernameField.text = ""
-            passwordField.text = ""
+        viewModel.savedCredentials(){ result in
+            switch result {
+            case .success(let savedCreds):
+                self.usernameField.text = savedCreds[0]
+                self.passwordField.text = savedCreds[1]
+                self.rememberMeSwitch.isOn = true
+            case .failure(let error):
+                self.presentAlert(message: error.localizedDescription)
+            }
         }
     }
 
@@ -93,7 +90,7 @@ class LoginViewController: UIViewController {
         view.addSubview(stack)
         stack.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
     }
-//have to fix this so that it can allow multipe attempts to login, currently only allows one
+
     @objc func handleLogin() {
         guard let username = usernameField.text else { return }
         guard let password = passwordField.text else { return }
@@ -112,10 +109,7 @@ class LoginViewController: UIViewController {
         }
     }
     @objc func enableRememberMe() {
-        if rememberMeSwitch.isOn {
-            print("handle remembering here")
-        }
-        //viewModel.rememberMe = rememberMeSwitch.isOn
+        viewModel.rememberMe = rememberMeSwitch.isOn
     }
 
     static func create(with viewModel: Login) -> LoginViewController {

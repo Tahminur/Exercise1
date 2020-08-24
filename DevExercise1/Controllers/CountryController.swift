@@ -68,7 +68,6 @@ class CountryController: UIViewController {
         tableView.dataSource = self
     }
 }
-
 // MARK: - TableView
 extension CountryController: UITableViewDelegate, UITableViewDataSource {
 

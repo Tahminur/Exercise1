@@ -25,7 +25,6 @@ public class CountryRepositoryImpl: CountryRepository {
         self.reachable = reachable
         self.mapper = mapper
     }
-
     //will handle fetching from local or fetching from remote
     public func fetch(forceRefresh: Bool, completion: @escaping (Result<[Country], fetchError>) -> Void) {
         if reachable() {
@@ -34,7 +33,6 @@ public class CountryRepositoryImpl: CountryRepository {
                     switch result {
                     case .success(let features):
                         let countriesFetched = self.mapper.mapToCountry(features: features)
-
                         completion(.success(countriesFetched))
                     case .failure(.errorCasting):
                         completion(.failure(.errorCasting))
