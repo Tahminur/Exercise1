@@ -11,10 +11,11 @@ import Foundation
 //will have access to user repo
 protocol Login {
 
-    func login(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void)
+    func login(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
     var rememberMe: Bool { get set }
     var username: String { get }
     var password: String { get }
+    func reset()
 }
 
 public final class LoginViewModelImpl: Login {
@@ -30,16 +31,18 @@ public final class LoginViewModelImpl: Login {
         password = repository.passSavedUser()[1]
     }
     //error handle to be added here
-    func login(username: String, password: String, completion:@escaping(Result<(), Error>) -> Void) {
-        repository.handleLogin(username: username, password: password, rememberMe: self.rememberMe) { result in
+    func login(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void) {
+        repository.handleLogin(username: username, password: password, rememberMe: rememberMe) { result in
             switch result {
             case .success:
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))
             }
-
         }
     }
 
+    func reset() {
+        repository.reset()
+    }
 }

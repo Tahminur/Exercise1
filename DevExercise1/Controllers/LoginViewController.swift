@@ -58,16 +58,23 @@ class LoginViewController: UIViewController {
     // MARK: - View Setup
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.viewModel.reset()
         configureUI()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setRememberedCredentials()
+        viewModel.rememberMe = false
     }
     func setRememberedCredentials() {
+        usernameField.text = viewModel.username
+        passwordField.text = viewModel.password
         if viewModel.username != "" && viewModel.password != "" {
             usernameField.text = viewModel.username
             passwordField.text = viewModel.password
+        } else {
+            usernameField.text = ""
+            passwordField.text = ""
         }
     }
 
@@ -90,7 +97,7 @@ class LoginViewController: UIViewController {
     @objc func handleLogin() {
         guard let username = usernameField.text else { return }
         guard let password = passwordField.text else { return }
-        viewModel.login(username: username, password: password) { result in
+        viewModel.login(username: username, password: password, rememberMe: rememberMeSwitch.isOn) { result in
             switch result {
             case .success:
                 guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
@@ -108,7 +115,7 @@ class LoginViewController: UIViewController {
         if rememberMeSwitch.isOn {
             print("handle remembering here")
         }
-        viewModel.rememberMe = rememberMeSwitch.isOn
+        //viewModel.rememberMe = rememberMeSwitch.isOn
     }
 
     static func create(with viewModel: Login) -> LoginViewController {

@@ -26,6 +26,7 @@ class MainTabController: UITabBarController {
 
     func authenticateUserAndConfigure() {
         let authenticated = appDIContainer.userRepository.authenticationValid()
+
         if authenticated == nil {
             DispatchQueue.main.async {
                 let loginController = self.appDIContainer.userContainer.makeLoginViewController()

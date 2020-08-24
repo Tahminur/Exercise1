@@ -84,11 +84,22 @@ public class UserRepositoryImpl: UserRepository {
         if self.hasInitialLogin {
             do {
                 let creds = try userLocal.savedUser()
+                self.hasInitialLogin = false
                 return creds!
             } catch {
                 print("handle error")
             }
         }
         return ["", ""]
+    }
+
+    //
+
+    func reset() {
+        do {
+            try userLocal.signOut()
+        } catch {
+            print("nothing in local")
+        }
     }
 }
