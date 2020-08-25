@@ -35,8 +35,8 @@ class MapViewController: UIViewController {
         self.mapView.map = self.map
         do {
             try viewModel.licenseMap()
-        } catch {
-            self.presentAlert(message: "Error with Licensing")
+        } catch let error {
+            self.presentAlert(message: error.localizedDescription)
         }
         //below is for the method that uses the mapmanager
         //setupMap()

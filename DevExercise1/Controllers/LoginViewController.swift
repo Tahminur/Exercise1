@@ -61,9 +61,9 @@ class LoginViewController: UIViewController {
         setRememberedCredentials()
         configureUI()
     }
-    
+
     func setRememberedCredentials() {
-        viewModel.savedCredentials(){ result in
+        viewModel.savedCredentials { result in
             switch result {
             case .success(let savedCreds):
                 self.usernameField.text = savedCreds[0]

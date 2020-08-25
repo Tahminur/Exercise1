@@ -52,7 +52,7 @@ public class UserLocalImpl: UserLocal {
     public func signOutWithRememberMe() throws {
         try secure.delete(.token)
     }
-    
+
     public func removeAllData() throws {
         try secure.removeAllData()
     }

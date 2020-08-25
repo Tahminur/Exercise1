@@ -25,7 +25,7 @@ public final class LoginViewModelImpl: Login {
         self.repository = repository
     }
     func savedCredentials(completion: @escaping(Result<[String], Error>) -> Void) {
-        repository.passSavedUser() { result in
+        repository.passSavedUser { result in
             switch result {
             case .success(let creds):
                 completion(.success(creds))

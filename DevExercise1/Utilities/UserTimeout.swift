@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class UserTimeout: UIApplication{
+class UserTimeout: UIApplication {
         private var timeoutInSeconds: TimeInterval {
            // 30 seconds
            return 30
@@ -37,16 +37,15 @@ class UserTimeout: UIApplication{
        }
 
        override func sendEvent(_ event: UIEvent) {
-        
+
            super.sendEvent(event)
 
-        
         if idleTimer != nil {
                self.resetIdleTimer()
            }
 
         if let touches = event.allTouches {
-            for touch in touches where touch.phase == UITouch.Phase.began{
+            for touch in touches where touch.phase == UITouch.Phase.began {
                    self.resetIdleTimer()
                }
            }

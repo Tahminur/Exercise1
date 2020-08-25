@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CountryCasesViewModelInput {
-    func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (String?) -> Void)
+    func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void)
 }
 
 protocol CountryCasesViewModelOutput {
@@ -25,7 +25,7 @@ public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCa
         self.repository = repository
     }
     //move reachable internet check here and pass error on failure to after this in the countrycontroller
-    func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (String?) -> Void) {
+    func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void) {
         if forceRefresh {
             countries.removeAll()
             repository.fetch(forceRefresh: forceRefresh) { result in
@@ -33,10 +33,10 @@ public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCa
                 case .success(let fetched):
                     for country in fetched {
                         self.countries.append(CountryItemViewModel(country: country))
-                        completion(nil)
+                        completion(.success(()))
                     }
                 case .failure(let error):
-                    completion(error.localizedDescription)
+                    completion(.failure(error))
                 }
             }
         }

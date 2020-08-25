@@ -14,7 +14,7 @@ protocol UserRepository {
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
     func authenticationValid() -> String?
     var hasInitialLogin: Bool { get }
-    func passSavedUser(completion: @escaping (Result<[String],Error>) -> Void)
+    func passSavedUser(completion: @escaping (Result<[String], Error>) -> Void)
 }
 
 //implement named user login from arcgis
@@ -67,7 +67,7 @@ public class UserRepositoryImpl: UserRepository {
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void) {
         userRemote.logOut { result in
             switch result {
-            case .success():
+            case .success:
                 if !self.hasInitialLogin {
                     do {
                         try self.userLocal.removeAllData()
@@ -75,8 +75,7 @@ public class UserRepositoryImpl: UserRepository {
                     } catch {
                         return
                     }
-                }
-                else {
+                } else {
                     do {
                         try self.userLocal.signOutWithRememberMe()
                         self.userCredential = nil
@@ -95,8 +94,7 @@ public class UserRepositoryImpl: UserRepository {
                 } catch {
                     return
                 }
-            }
-            else {
+            } else {
                 do {
                     try self.userLocal.signOutWithRememberMe()
                     self.userCredential = nil
@@ -106,16 +104,15 @@ public class UserRepositoryImpl: UserRepository {
             }
         }
     }
-    
-    func passSavedUser(completion: @escaping (Result<[String],Error>) -> Void){
+
+    func passSavedUser(completion: @escaping (Result<[String], Error>) -> Void) {
         if self.hasInitialLogin {
             do {
                 let creds = try userLocal.savedUser()
                 self.hasInitialLogin = false
                 if creds == nil {
-                    completion(.success(["",""]))
-                }
-                else {
+                    completion(.success(["", ""]))
+                } else {
                     completion(.success(creds!))
                 }
             } catch {

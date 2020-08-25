@@ -83,12 +83,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
+
     @objc func applicationDidTimeout(notification: NSNotification) {
         let viewController = UIApplication.shared.keyWindow?.rootViewController as! MainTabController
-        viewController.appDIContainer.userRepository.handleSignOut(){ result in
+        viewController.appDIContainer.userRepository.handleSignOut { result in
         switch result {
-        case .success(()):
+        case .success():
             DispatchQueue.main.async {
                 let loginController = viewController.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)

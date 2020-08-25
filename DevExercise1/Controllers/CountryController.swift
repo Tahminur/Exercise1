@@ -22,10 +22,11 @@ class CountryController: UIViewController {
         }
         //fetches data
         viewModel.fetchFromDataSource(forceRefresh: false) { result in
-            if result == nil {
+            switch result {
+            case .success():
                 self.tableView.reloadData()
-            } else {
-                self.presentAlert(message: result!)
+            case .failure(let error):
+                self.presentAlert(message: error.localizedDescription)
             }
         }
     }
@@ -35,10 +36,11 @@ class CountryController: UIViewController {
         configureTableView()
         print()
         viewModel.fetchFromDataSource(forceRefresh: true) { result in
-            if result == nil {
+            switch result {
+            case .success():
                 self.tableView.reloadData()
-            } else {
-                self.presentAlert(message: result!)
+            case .failure(let error):
+                self.presentAlert(message: error.localizedDescription)
             }
         }
         navigationItem.title = "Cases"
@@ -53,11 +55,12 @@ class CountryController: UIViewController {
 
     @objc func refreshCountryData(_ sender: Any) {
         viewModel.fetchFromDataSource(forceRefresh: true) { result in
-            if result == nil {
+            switch result {
+            case .success():
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
-            } else {
-                self.presentAlert(message: result!)
+            case .failure(let error):
+                self.presentAlert(message: error.localizedDescription)
                 self.tableView.reloadData()
             }
         }
