@@ -8,11 +8,11 @@
 
 import Foundation
 
-protocol SignOut {
+protocol SignOutUseCase {
     func signOut(completion:@escaping (Result<(), Error>) -> Void)
 }
 
-public final class SignOutImpl: SignOut {
+public final class SignOutViewModelImpl: SignOutUseCase {
     private let repository: UserRepositoryImpl
 
     public init(repository: UserRepositoryImpl) {

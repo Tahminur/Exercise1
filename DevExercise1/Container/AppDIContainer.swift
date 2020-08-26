@@ -7,6 +7,7 @@
 //
 
 import Foundation
+//import Reachability
 
 public typealias Reachable = () -> Bool
 
@@ -31,6 +32,8 @@ final class AppDIContainer {
     lazy var internetCheck: Reachable = {
         guard let r = Reachability() else {return false}
         return r.isReachable
+        /*let reach = try! Reachability()
+        return reach.isReachable()*/
     }
     //mappers
     lazy var calloutMapper: CalloutMapper = {

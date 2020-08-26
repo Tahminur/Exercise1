@@ -8,15 +8,17 @@
 
 import UIKit
 import CoreData
-
+import Reachability
 //@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let appDIContainer = AppDIContainer()
-    let reachability = Reachability()
+    //let reachability = try! Reachability()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //try reachability.stopNotifier()
+        //try reachability.startNotifier()
         NotificationCenter.default.addObserver(self,
                                selector: #selector(AppDelegate.applicationDidTimeout(notification:)),
                                name: .appTimedOut,

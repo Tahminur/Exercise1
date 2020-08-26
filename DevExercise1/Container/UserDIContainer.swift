@@ -28,8 +28,8 @@ final class UserDIContainer {
         return LoginViewController.create(with: makeLoginViewModel())
     }
 
-    func makeSignOutViewModel() -> SignOut {
-        return SignOutImpl(repository: dependencies.userRepo)
+    func makeSignOutViewModel() -> SignOutUseCase {
+        return SignOutViewModelImpl(repository: dependencies.userRepo)
     }
 
     func makeSignOutController() -> SignOutController {

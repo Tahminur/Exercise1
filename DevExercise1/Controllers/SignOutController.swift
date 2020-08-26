@@ -11,7 +11,7 @@ import UIKit
 
 class SignOutController: UIViewController {
 
-    var viewModel: SignOut!
+    var viewModel: SignOutUseCase!
     lazy var appDIContainer: AppDIContainer = {
         return (UIApplication.shared.delegate as! AppDelegate).appDIContainer
     }()
@@ -57,7 +57,7 @@ class SignOutController: UIViewController {
         signOutButton.anchor(top: view.safeAreaLayoutGuide.centerYAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingLeft: 32, paddingRight: 32)
     }
 
-    static func create(with viewModel: SignOut) -> SignOutController {
+    static func create(with viewModel: SignOutUseCase) -> SignOutController {
         let view = SignOutController()
         view.viewModel = viewModel
         return view
