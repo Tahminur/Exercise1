@@ -12,6 +12,7 @@ final class CountryDIContainer {
 
     struct Dependencies {
         let countryRepo: CountryRepository
+        let countryMapper: CountryMapper
     }
 
     private let dependencies: Dependencies
@@ -21,7 +22,7 @@ final class CountryDIContainer {
     }
 
     func makeCountryViewModel() -> CountryCasesViewModel {
-        return CountryCasesViewModel(repository: dependencies.countryRepo)
+        return CountryCasesViewModel(repository: dependencies.countryRepo, mapper: dependencies.countryMapper)
     }
 
     func makeCountryController() -> CountryController {

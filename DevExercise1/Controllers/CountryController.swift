@@ -13,7 +13,7 @@ class CountryController: UIViewController {
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
     var viewModel: CountryCasesViewModel!
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //below unselects the table cell

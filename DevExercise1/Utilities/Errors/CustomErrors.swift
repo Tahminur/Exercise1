@@ -57,3 +57,16 @@ extension loginError: LocalizedError {
         }
     }
 }
+
+public enum mappingError: Error {
+    case errorMapping
+}
+
+extension mappingError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .errorMapping:
+            return NSLocalizedString("There was an error mapping", comment: "mapping error")
+        }
+    }
+}

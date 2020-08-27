@@ -45,7 +45,7 @@ final class AppDIContainer {
     }()
     //repositories
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImpl(remoteDataSource: countryDataSource, mapper: countryMapper, reachable: internetCheck)
+        return CountryRepositoryImpl(remoteDataSource: countryDataSource, reachable: internetCheck)
     }()
     lazy var mapRepository: MapRepository = {
         return MapRepositoryImpl(remoteDataSource: mapDataSource)
@@ -55,7 +55,7 @@ final class AppDIContainer {
     }()
     //containers
     lazy var countryContainer: CountryDIContainer = {
-        let dependencies = CountryDIContainer.Dependencies(countryRepo: countryRepository)
+        let dependencies = CountryDIContainer.Dependencies(countryRepo: countryRepository, countryMapper: countryMapper)
         return CountryDIContainer(dependencies: dependencies)
     }()
 
