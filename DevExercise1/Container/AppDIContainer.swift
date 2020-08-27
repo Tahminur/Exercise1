@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import ArcGIS
 //import Reachability
 
 public typealias Reachable = () -> Bool
@@ -19,14 +20,14 @@ final class AppDIContainer {
     lazy var mapDataSource: MapRemoteDataSource = {
         return MapRemoteDataSource()
     }()
-    lazy var userRemote: UserRemote = {
-        return UserRemoteImpl()
+    lazy var userRemote: UserRemoteDataSource = {
+        return UserRemoteDataSourceImpl()
     }()
     lazy var secureStorage: SecureStorage = {
         return SecureDataStorage()
     }()
-    lazy var userLocal: UserLocal = {
-        return UserLocalImpl(secure: secureStorage)
+    lazy var userLocal: UserLocalDataSource = {
+        return UserLocalDataSourceImpl(secure: secureStorage)
     }()
     //Internet checker
     lazy var internetCheck: Reachable = {

@@ -9,22 +9,22 @@
 import Foundation
 
 //will have access to user repo
-protocol Login {
-
+protocol LoginUseCase {
     func login(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
     var rememberMe: Bool { get set }
     func reset()
-    func savedCredentials(completion: @escaping(Result<[String], Error>) -> Void)
+    func savedCredentials(completion: @escaping(Result<User, Error>) -> Void)
 }
 
-public final class LoginViewModelImpl: Login {
+public final class LoginViewModelImpl: LoginUseCase {
 
     private let repository: UserRepositoryImpl
     var rememberMe: Bool = false
     public init(repository: UserRepositoryImpl) {
         self.repository = repository
     }
-    func savedCredentials(completion: @escaping(Result<[String], Error>) -> Void) {
+
+    func savedCredentials(completion: @escaping(Result<User, Error>) -> Void) {
         repository.passSavedUser { result in
             switch result {
             case .success(let creds):

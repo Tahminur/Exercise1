@@ -9,13 +9,7 @@
 import Foundation
 import ArcGIS
 
-protocol CountryItemViewModelOutput {
-    var countryName: String {get}
-    var countryCases: Int {get}
-    var countryPoint: AGSPoint? {get}
-}
-
-public struct CountryItemViewModel: CountryItemViewModelOutput {
+public struct CountryItemModel {
     let country: Country
     let countryName: String
     var countryCases: Int

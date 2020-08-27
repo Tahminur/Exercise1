@@ -20,7 +20,7 @@ final class UserDIContainer {
         self.dependencies = dependencies
     }
 
-    func makeLoginViewModel() -> Login {
+    func makeLoginViewModel() -> LoginUseCase {
         return LoginViewModelImpl(repository: dependencies.userRepo)
     }
 

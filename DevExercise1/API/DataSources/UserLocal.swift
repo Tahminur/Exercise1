@@ -8,18 +8,18 @@
 
 import Foundation
 
-public protocol UserLocal {
+public protocol UserLocalDataSource {
     func rememberUser(username: String, password: String, token: String) throws
     func signOutWithRememberMe() throws
     var authenticatedUser: String? { get }
     //change to hasrememberme after confirming and add after standardstorage is made
     //var hasInitialLogin: Bool { get }
-    func savedUser() throws -> [String]?
+    func savedUser() throws -> User?
     func removeAllData() throws
     var authenticationToken: String? { get }
 }
 
-public class UserLocalImpl: UserLocal {
+public class UserLocalDataSourceImpl: UserLocalDataSource {
     let secure: SecureStorage
 
     init(secure: SecureStorage) {
@@ -40,13 +40,12 @@ public class UserLocalImpl: UserLocal {
         try secure.store(value: token, item: .token)
     }
 
-    public func savedUser() throws -> [String]? {
+    public func savedUser() throws -> User? {
         let username: String? = try? secure.retrieve(item: .user)
         let password: String? = try? secure.retrieve(item: .password)
-        if username != nil && password != nil {
-            return [username!, password!]
-        }
-        return nil
+        let user: User = User(username: username, password: password)
+        
+        return user
     }
 
     public func signOutWithRememberMe() throws {

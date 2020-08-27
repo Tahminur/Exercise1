@@ -14,13 +14,13 @@ protocol UserRepository {
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
     func authenticationValid() -> String?
     var hasInitialLogin: Bool { get }
-    func passSavedUser(completion: @escaping (Result<[String], Error>) -> Void)
+    func passSavedUser(completion: @escaping (Result<User,Error>) -> Void)
 }
 
 //implement named user login from arcgis
 public class UserRepositoryImpl: UserRepository {
-    private let userRemote: UserRemote
-    private let userLocal: UserLocal
+    private let userRemote: UserRemoteDataSource
+    private let userLocal: UserLocalDataSource
     private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
 
@@ -28,7 +28,7 @@ public class UserRepositoryImpl: UserRepository {
         return userLocal.authenticationToken
     }
 
-    public init(userRemote: UserRemote, userLocal: UserLocal) {
+    public init(userRemote: UserRemoteDataSource, userLocal: UserLocalDataSource) {
         self.userRemote = userRemote
         self.userLocal = userLocal
     }
@@ -104,20 +104,15 @@ public class UserRepositoryImpl: UserRepository {
             }
         }
     }
-
-    func passSavedUser(completion: @escaping (Result<[String], Error>) -> Void) {
+    
+    func passSavedUser(completion: @escaping (Result<User,Error>) -> Void){
         if self.hasInitialLogin {
             do {
                 let creds = try userLocal.savedUser()
                 self.hasInitialLogin = false
-                if creds == nil {
-                    completion(.success(["", ""]))
-                } else {
-                    completion(.success(creds!))
-                }
+                completion(.success(creds!))
             } catch {
-                //replace this with correct errors
-                completion(.failure(loginError.noInternet))
+                completion(.failure(loginError.issueWithCredentials))
             }
         }
     }

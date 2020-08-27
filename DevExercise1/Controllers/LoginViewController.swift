@@ -11,7 +11,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    var viewModel: Login!
+    var viewModel: LoginUseCase!
     // MARK: - UIView Elements
     private let usernameField: UITextField = {
         let tf = UITextField()
@@ -66,8 +66,8 @@ class LoginViewController: UIViewController {
         viewModel.savedCredentials { result in
             switch result {
             case .success(let savedCreds):
-                self.usernameField.text = savedCreds[0]
-                self.passwordField.text = savedCreds[1]
+                self.usernameField.text = savedCreds.username
+                self.passwordField.text = savedCreds.password
                 self.rememberMeSwitch.isOn = true
             case .failure(let error):
                 self.presentAlert(message: error.localizedDescription)
@@ -112,7 +112,7 @@ class LoginViewController: UIViewController {
         viewModel.rememberMe = rememberMeSwitch.isOn
     }
 
-    static func create(with viewModel: Login) -> LoginViewController {
+    static func create(with viewModel: LoginUseCase) -> LoginViewController {
         let view = LoginViewController()
         view.viewModel = viewModel
         return view

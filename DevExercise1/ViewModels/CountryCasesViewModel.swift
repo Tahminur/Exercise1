@@ -13,11 +13,11 @@ protocol CountryCasesViewModelInput {
 }
 
 protocol CountryCasesViewModelOutput {
-    var countries: [CountryItemViewModel] {get}
+    var countries: [CountryItemModel] {get}
 }
 
 public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCasesViewModelInput {
-    var countries: [CountryItemViewModel] = []
+    var countries: [CountryItemModel] = []
 
     private let repository: CountryRepository
 
@@ -32,7 +32,7 @@ public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCa
                 switch result {
                 case .success(let fetched):
                     for country in fetched {
-                        self.countries.append(CountryItemViewModel(country: country))
+                        self.countries.append(CountryItemModel(country: country))
                         completion(.success(()))
                     }
                 case .failure(let error):

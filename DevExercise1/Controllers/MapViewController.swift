@@ -38,22 +38,14 @@ class MapViewController: UIViewController {
         } catch let error {
             self.presentAlert(message: error.localizedDescription)
         }
-        //below is for the method that uses the mapmanager
-        //setupMap()
+
     }
-    /*func setupMap(){
-        DispatchQueue.main.async {
-            self.view.addSubview(self.mapView)
-            self.mapView.pin(to: self.view)
-            MapManager.shared.refreshMap(on: self.mapView, then: nil)
-        }
-    }*/
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setViewpoint()
         refreshMap()
-
+        
     }
     func setViewpoint() {
         mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
