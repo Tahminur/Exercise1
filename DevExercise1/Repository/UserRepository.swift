@@ -14,7 +14,7 @@ protocol UserRepository {
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
     func authenticationValid() -> String?
     var hasInitialLogin: Bool { get }
-    func passSavedUser(completion: @escaping (Result<User,Error>) -> Void)
+    func passSavedUser(completion: @escaping (Result<User, Error>) -> Void)
 }
 
 //implement named user login from arcgis
@@ -105,7 +105,7 @@ public class UserRepositoryImpl: UserRepository {
         }
     }
     //passes the user credentials in a model format upon success for remember me
-    func passSavedUser(completion: @escaping (Result<User,Error>) -> Void){
+    func passSavedUser(completion: @escaping (Result<User, Error>) -> Void) {
         if self.hasInitialLogin {
             do {
                 let creds = try userLocal.savedUser()

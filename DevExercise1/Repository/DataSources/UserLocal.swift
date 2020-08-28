@@ -44,7 +44,7 @@ public class UserLocalDataSourceImpl: UserLocalDataSource {
         let username: String? = try? secure.retrieve(item: .user)
         let password: String? = try? secure.retrieve(item: .password)
         let user: User = User(username: username, password: password)
-        
+
         return user
     }
 

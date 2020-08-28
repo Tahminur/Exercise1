@@ -10,7 +10,7 @@ import Foundation
 import ArcGIS
 import UIKit
 
-class MapViewController: UIViewController{
+class MapViewController: UIViewController {
 
     var viewModel: MapViewModel!
     var mapView: AGSMapView = AGSMapView()

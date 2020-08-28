@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 //import Reachability
 
-
 //@UIApplicationMain
 //let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
 //let reachability = Reachability()
@@ -18,7 +17,6 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let appDIContainer = AppDIContainer()
-    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -28,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                name: .appTimedOut,
                                object: nil
         )
-        
+
         return true
     }
 
@@ -95,12 +93,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged), name: ReachabilityChangedNotification , object: reachability)
         reachability.startNotifier()
     }*/
-    
+
     @objc func applicationDidTimeout(notification: NSNotification) {
         let viewController = UIApplication.shared.keyWindow?.rootViewController as! MainTabController
         viewController.appDIContainer.userRepository.handleSignOut { result in
         switch result {
-        case .success():
+        case .success:
             DispatchQueue.main.async {
                 let loginController = viewController.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)

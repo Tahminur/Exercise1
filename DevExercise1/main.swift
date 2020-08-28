@@ -17,4 +17,3 @@ UIApplicationMain(
     NSStringFromClass(UserTimeout.self),
     NSStringFromClass(AppDelegate.self)
 )
-

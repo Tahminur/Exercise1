@@ -16,13 +16,12 @@ protocol CountryCasesViewModelOutput {
     var countries: [CountryItemModel] {get}
 }
 
-
 public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCasesViewModelInput {
     var countries: [CountryItemModel] = []
 
     private let repository: CountryRepository
     private let mapper: CountryMapper
-    
+
     public init(repository: CountryRepository, mapper: CountryMapper) {
         self.repository = repository
         self.mapper = mapper

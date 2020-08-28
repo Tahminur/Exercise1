@@ -9,8 +9,8 @@
 import UIKit
 import ArcGIS
 
-protocol onClickedPointDelegate: class{
-    func onPointClick(point:AGSPoint)
+protocol onClickedPointDelegate: class {
+    func onPointClick(point: AGSPoint)
 }
 
 class CountryController: UIViewController {
@@ -18,7 +18,7 @@ class CountryController: UIViewController {
     private let refresher = UIRefreshControl()
     var viewModel: CountryCasesViewModel!
     weak var clickDelegate: onClickedPointDelegate?
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         //below unselects the table cell
@@ -28,7 +28,7 @@ class CountryController: UIViewController {
         //fetches data
         viewModel.fetchFromDataSource(forceRefresh: false) { result in
             switch result {
-            case .success():
+            case .success:
                 self.tableView.reloadData()
             case .failure(let error):
                 self.presentAlert(message: error.localizedDescription)
@@ -41,7 +41,7 @@ class CountryController: UIViewController {
         configureTableView()
         viewModel.fetchFromDataSource(forceRefresh: true) { result in
             switch result {
-            case .success():
+            case .success:
                 self.tableView.reloadData()
             case .failure(let error):
                 self.presentAlert(message: error.localizedDescription)
@@ -60,7 +60,7 @@ class CountryController: UIViewController {
     @objc func refreshCountryData(_ sender: Any) {
         viewModel.fetchFromDataSource(forceRefresh: true) { result in
             switch result {
-            case .success():
+            case .success:
                 self.tableView.reloadData()
                 self.refresher.endRefreshing()
             case .failure(let error):

@@ -11,7 +11,7 @@ import ArcGIS
 
 public protocol CountryMapper {
     func mapToCountry(features: [AGSArcGISFeature]) -> [Country]
-    func mapToCountry2(features: [AGSArcGISFeature]) -> Result<[Country],Error>
+    func mapToCountry2(features: [AGSArcGISFeature]) -> Result<[Country], Error>
 }
 
 public class CountryMapperImpl: CountryMapper {
@@ -31,7 +31,7 @@ public class CountryMapperImpl: CountryMapper {
         }
         return countriesToReturn
     }
-    public func mapToCountry2(features: [AGSArcGISFeature]) -> Result<[Country],Error> {
+    public func mapToCountry2(features: [AGSArcGISFeature]) -> Result<[Country], Error> {
         var countriesToReturn: [Country] = []
         for feature in features {
             guard let name = feature.attributes["Country_Region"] as? String else {
@@ -51,5 +51,5 @@ public class CountryMapperImpl: CountryMapper {
         }
         return .success(countriesToReturn)
     }
-    
+
 }

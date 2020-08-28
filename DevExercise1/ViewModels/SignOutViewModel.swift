@@ -21,7 +21,7 @@ public final class SignOutViewModelImpl: SignOutUseCase {
     func signOut(completion:@escaping ((Result<(), Error>)) -> Void) {
         repository.handleSignOut { result in
             switch result {
-            case .success():
+            case .success:
                 completion(.success(()))
             case .failure(let error):
                 completion(.failure(error))

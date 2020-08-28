@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct User{
+public struct User {
     var username: String?
     var password: String?
 }

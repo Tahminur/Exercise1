@@ -31,7 +31,7 @@ class SignOutController: UIViewController {
     @objc func handleSignOut() {
         viewModel.signOut { result in
             switch result {
-            case .success():
+            case .success:
                 DispatchQueue.main.async {
                     let loginController = self.appDIContainer.userContainer.makeLoginViewController()
                     let nav = UINavigationController(rootViewController: loginController)
