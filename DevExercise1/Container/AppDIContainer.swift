@@ -11,7 +11,6 @@ import ArcGIS
 
 public typealias Reachable = () -> Bool
 
-
 final class AppDIContainer {
     //datasources
 

@@ -11,7 +11,7 @@ import Reachability
 
 //Reachability
 //declare this property where it won't go out of scope relative to your listener
-fileprivate var reachability: Reachability!
+private var reachability: Reachability!
 
 public protocol ReachabilityActionDelegate {
     func reachabilityChanged(_ isReachable: Bool)
@@ -25,22 +25,22 @@ public protocol ReachabilityObserverDelegate: class, ReachabilityActionDelegate 
 
 // Declaring default implementation of adding/removing observer
 extension ReachabilityObserverDelegate {
-    
+
     /** Subscribe on reachability changing */
     public func addReachabilityObserver() throws {
         reachability = try Reachability()
-        
+
         reachability.whenReachable = { [weak self] reachability in
             self?.reachabilityChanged(true)
         }
-        
+
         reachability.whenUnreachable = { [weak self] reachability in
             self?.reachabilityChanged(false)
         }
-        
+
         try reachability.startNotifier()
     }
-    
+
     /** Unsubscribe */
     public func removeReachabilityObserver() {
         reachability.stopNotifier()
@@ -48,11 +48,11 @@ extension ReachabilityObserverDelegate {
     }
 }
 
-public class InternetConnectivity:ReachabilityObserverDelegate {
-    
+public class InternetConnectivity: ReachabilityObserverDelegate {
+
     public var connectionStatus = true
-    
-    required init(){
+
+    required init() {
         try? addReachabilityObserver()
     }
     deinit {
@@ -62,4 +62,3 @@ public class InternetConnectivity:ReachabilityObserverDelegate {
         self.connectionStatus = isReachable
     }
 }
-
