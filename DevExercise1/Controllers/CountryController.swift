@@ -107,7 +107,7 @@ extension CountryController: UITableViewDelegate, UITableViewDataSource {
             presentAlert(message: "This country has no associated location, Weird")
             return
         }
-        Storage.shared.point = clickedCell.point!
+        SharedPoint.shared.point = clickedCell.point!
         self.tabBarController?.selectedIndex = 1
     }
 }

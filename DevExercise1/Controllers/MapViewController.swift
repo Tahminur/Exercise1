@@ -45,7 +45,7 @@ class MapViewController: UIViewController{
         refreshMap()
     }
     func setViewpoint() {
-        mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))
+        mapView.setViewpoint(AGSViewpoint(center: SharedPoint.shared.point, scale: 30000000))
     }
     // MARK: - Refreshing Map
     func refreshMap() {
