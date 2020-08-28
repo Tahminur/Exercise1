@@ -13,7 +13,6 @@
 		4515FEF524EEF26200AE7EA4 /* SecureDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4515FEF424EEF26200AE7EA4 /* SecureDataStorage.swift */; };
 		452ABE0524C8CD05009E08C1 /* RepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */; };
 		452B065024CF4C1900F1BFE3 /* CustomErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */; };
-		452B065224CF641000F1BFE3 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065124CF641000F1BFE3 /* Reachability.swift */; };
 		452B065524D081AE00F1BFE3 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065424D081AE00F1BFE3 /* AppDIContainer.swift */; };
 		452B065724D094A700F1BFE3 /* CountryDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065624D094A700F1BFE3 /* CountryDIContainer.swift */; };
 		452B065924D094BD00F1BFE3 /* MapDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452B065824D094BD00F1BFE3 /* MapDIContainer.swift */; };
@@ -21,8 +20,8 @@
 		453E602524D8A63B00B3559E /* MapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E602424D8A63B00B3559E /* MapRepository.swift */; };
 		4549520524B633F300023370 /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520424B633F300023370 /* CountryController.swift */; };
 		4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520624B63BA200023370 /* CountryCasesViewModel.swift */; };
-		455362A724F98840001CA6E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455362A624F98840001CA6E4 /* NetworkManager.swift */; };
 		455362A924F98BC9001CA6E4 /* SharedPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455362A824F98BC9001CA6E4 /* SharedPoint.swift */; };
+		455362AB24F98F57001CA6E4 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455362AA24F98F57001CA6E4 /* Network.swift */; };
 		4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67B24E319D700E9751B /* LoginViewModel.swift */; };
 		4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67D24E31ABB00E9751B /* LoginViewController.swift */; };
 		4561A68024E32DFA00E9751B /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67F24E32DFA00E9751B /* UserRepository.swift */; };
@@ -89,7 +88,6 @@
 		4515FEF424EEF26200AE7EA4 /* SecureDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureDataStorage.swift; sourceTree = "<group>"; };
 		452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTests.swift; sourceTree = "<group>"; };
 		452B064F24CF4C1900F1BFE3 /* CustomErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrors.swift; sourceTree = "<group>"; };
-		452B065124CF641000F1BFE3 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		452B065424D081AE00F1BFE3 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		452B065624D094A700F1BFE3 /* CountryDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDIContainer.swift; sourceTree = "<group>"; };
 		452B065824D094BD00F1BFE3 /* MapDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDIContainer.swift; sourceTree = "<group>"; };
@@ -97,8 +95,8 @@
 		453E602424D8A63B00B3559E /* MapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepository.swift; sourceTree = "<group>"; };
 		4549520424B633F300023370 /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
 		4549520624B63BA200023370 /* CountryCasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCasesViewModel.swift; sourceTree = "<group>"; };
-		455362A624F98840001CA6E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		455362A824F98BC9001CA6E4 /* SharedPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPoint.swift; sourceTree = "<group>"; };
+		455362AA24F98F57001CA6E4 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		4561A67B24E319D700E9751B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4561A67D24E31ABB00E9751B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4561A67F24E32DFA00E9751B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -370,9 +368,8 @@
 				45C78EE124DC94AE00BF0C6D /* Mappers */,
 				4561A67824E3178200E9751B /* Errors */,
 				45FE2B20249C1DAE00D8727D /* Extensions.swift */,
-				452B065124CF641000F1BFE3 /* Reachability.swift */,
-				455362A624F98840001CA6E4 /* NetworkManager.swift */,
 				455362A824F98BC9001CA6E4 /* SharedPoint.swift */,
+				455362AA24F98F57001CA6E4 /* Network.swift */,
 				45696A0124F371B600338490 /* UserTimeout.swift */,
 			);
 			path = Utilities;
@@ -736,11 +733,10 @@
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
 				4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */,
 				45C78EDA24D9036D00BF0C6D /* Callout.swift in Sources */,
-				452B065224CF641000F1BFE3 /* Reachability.swift in Sources */,
+				455362AB24F98F57001CA6E4 /* Network.swift in Sources */,
 				453E602524D8A63B00B3559E /* MapRepository.swift in Sources */,
 				4515FEF324EEF00800AE7EA4 /* SecureStoreQueryable.swift in Sources */,
 				453E602324D8A5F600B3559E /* CountryRepository.swift in Sources */,
-				455362A724F98840001CA6E4 /* NetworkManager.swift in Sources */,
 				45C78EE024DC7DE600BF0C6D /* CountryProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

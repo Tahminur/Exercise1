@@ -16,16 +16,14 @@ public protocol CountryRepository {
 public class CountryRepositoryImpl: CountryRepository {
 
     private let remoteDataSource: CountryRemoteDataSource
-    //below variable to be changed
-    private let reachable: Reachable
+    private let internetConnection: ReachabilityObserverDelegate
 
-    public init(remoteDataSource: CountryRemoteDataSource, reachable: @escaping Reachable) {
+    public init(remoteDataSource: CountryRemoteDataSource, internetConnection: ReachabilityObserverDelegate) {
         self.remoteDataSource = remoteDataSource
-        self.reachable = reachable
+        self.internetConnection = internetConnection
     }
-    //will handle fetching from remote or local, but for now only fetches from remote until local is implemented
     public func fetch(forceRefresh: Bool, completion: @escaping (Result<[AGSArcGISFeature], Error>) -> Void) {
-        if reachable() {
+        if internetConnection.connectionStatus {
             if forceRefresh {
                 remoteDataSource.fetch { result in
                     switch result {

@@ -11,9 +11,13 @@ import ArcGIS
 
 public typealias Reachable = () -> Bool
 
+
 final class AppDIContainer {
     //datasources
-    let reach = Reach()
+
+    let internetConnectivity: ReachabilityObserverDelegate = {
+        return InternetConnectivity()
+    }()
     lazy var countryDataSource: CountryRemoteDataSource = {
         return CountryRemoteDataSourceImpl()
     }()
@@ -31,16 +35,7 @@ final class AppDIContainer {
     }()
     //Internet checker
     lazy var internetCheck: Reachable = {
-        //self.reachability.startNotifier()
-        self.reach.monitorReachabilityChanges()
-        //always returns false for some reason
-        let status = self.reach.connectionStatus()
-        switch status {
-        case .unknown, .offline:
-            return false
-        default:
-            return true
-        }
+        return true
     }
     //mappers
     lazy var calloutMapper: CalloutMapper = {
@@ -51,7 +46,7 @@ final class AppDIContainer {
     }()
     //repositories
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImpl(remoteDataSource: countryDataSource, reachable: internetCheck)
+        return CountryRepositoryImpl(remoteDataSource: countryDataSource, reachable: internetCheck, internetConnection: internetConnectivity)
     }()
     lazy var mapRepository: MapRepository = {
         return MapRepositoryImpl(remoteDataSource: mapDataSource)
