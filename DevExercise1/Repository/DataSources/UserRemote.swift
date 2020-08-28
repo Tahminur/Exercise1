@@ -15,11 +15,12 @@ public protocol UserRemoteDataSource {
 }
 
 public class UserRemoteDataSourceImpl: NSObject, UserRemoteDataSource {
-    //in field mobility app we can make it be the pseg portal possibly?
+    //the portal is set here initially since it is not allowed to be nil
     private var portal: AGSPortal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
 
+    //attempts to sign in user using the provided credential by attempting to load the portal object with the given credential
     public func arcGISSignIn(credential: AGSCredential, completion:@escaping (Result<AGSCredential, Error>) -> Void) {
-        //resets portal
+        //resets the portal to allow for another login attempt.
         self.portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
         portal.credential = credential
         self.portal.load { [weak self] (error) in
@@ -33,6 +34,7 @@ public class UserRemoteDataSourceImpl: NSObject, UserRemoteDataSource {
             }
         }
     }
+    //clears the credentialcache to allow for new signin
     public func logOut(completion: @escaping (Result<(), Error>) -> Void) {
         AGSAuthenticationManager.shared().credentialCache.removeAndRevokeAllCredentials { [weak self] (credentials) in
             if credentials.count != 0 {

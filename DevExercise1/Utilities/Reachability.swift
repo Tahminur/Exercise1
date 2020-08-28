@@ -8,7 +8,7 @@
 
 //TODO: -GET RID OF THIS FILE AND REPLACE WITH THE POD
 
-import Foundation
+/*import Foundation
 import SystemConfiguration
 
 public enum ReachabilityError: Error {
@@ -407,4 +407,4 @@ fileprivate extension Reachability {
     }
 
 }
-
+*/

@@ -23,7 +23,7 @@ public class CountryRepositoryImpl: CountryRepository {
         self.remoteDataSource = remoteDataSource
         self.reachable = reachable
     }
-    //will handle fetching from local or fetching from remote
+    //will handle fetching from remote or local, but for now only fetches from remote until local is implemented
     public func fetch(forceRefresh: Bool, completion: @escaping (Result<[AGSArcGISFeature], Error>) -> Void) {
         if reachable() {
             if forceRefresh {

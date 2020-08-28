@@ -10,7 +10,7 @@ import Foundation
 import ArcGIS
 import UIKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController{
 
     var viewModel: MapViewModel!
     var mapView: AGSMapView = AGSMapView()
@@ -38,14 +38,11 @@ class MapViewController: UIViewController {
         } catch let error {
             self.presentAlert(message: error.localizedDescription)
         }
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setViewpoint()
         refreshMap()
-        
     }
     func setViewpoint() {
         mapView.setViewpoint(AGSViewpoint(center: Storage.shared.point, scale: 30000000))

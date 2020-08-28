@@ -18,13 +18,13 @@ public protocol CountryRemoteDataSource {
 public class CountryRemoteDataSourceImpl: CountryRemoteDataSource {
 
     var dataRetrieved: [AGSArcGISFeature] = []
-
+    //The feature table that will be queried for data
     public var featureTable: AGSServiceFeatureTable = {
     let countryServiceURL = URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer/2")!
         return AGSServiceFeatureTable(url: countryServiceURL)
     }()
 
-    //change to propogate errors pass data retrieved to the completion handler, and get rid of the other fetch call in the view model.
+    //fetches the data from the feature table and then runs a query on the fetched data to return agsarcgisfeatures on success and a fetcherror type on failure
     public func fetch(completion:@escaping (Result<[AGSArcGISFeature], fetchError>) -> Void ) {
         featureTable.load { [weak self] (error) in
 
@@ -59,7 +59,7 @@ public class CountryRemoteDataSourceImpl: CountryRemoteDataSource {
             }
         }
     }
-
+//just used to pass queried and fetched features
     public func retrieveCountries() -> [AGSArcGISFeature] {
         return self.dataRetrieved
     }

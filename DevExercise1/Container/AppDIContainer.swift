@@ -8,12 +8,12 @@
 
 import Foundation
 import ArcGIS
-//import Reachability
 
 public typealias Reachable = () -> Bool
 
 final class AppDIContainer {
     //datasources
+    let reach = Reach()
     lazy var countryDataSource: CountryRemoteDataSource = {
         return CountryRemoteDataSourceImpl()
     }()
@@ -31,10 +31,16 @@ final class AppDIContainer {
     }()
     //Internet checker
     lazy var internetCheck: Reachable = {
-        guard let r = Reachability() else {return false}
-        return r.isReachable
-        /*let reach = try! Reachability()
-        return reach.isReachable()*/
+        //self.reachability.startNotifier()
+        self.reach.monitorReachabilityChanges()
+        //always returns false for some reason
+        let status = self.reach.connectionStatus()
+        switch status {
+        case .unknown, .offline:
+            return false
+        default:
+            return true
+        }
     }
     //mappers
     lazy var calloutMapper: CalloutMapper = {

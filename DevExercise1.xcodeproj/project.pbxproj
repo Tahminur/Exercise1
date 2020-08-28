@@ -21,6 +21,7 @@
 		453E602524D8A63B00B3559E /* MapRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453E602424D8A63B00B3559E /* MapRepository.swift */; };
 		4549520524B633F300023370 /* CountryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520424B633F300023370 /* CountryController.swift */; };
 		4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4549520624B63BA200023370 /* CountryCasesViewModel.swift */; };
+		455362A724F98840001CA6E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455362A624F98840001CA6E4 /* NetworkManager.swift */; };
 		4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67B24E319D700E9751B /* LoginViewModel.swift */; };
 		4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67D24E31ABB00E9751B /* LoginViewController.swift */; };
 		4561A68024E32DFA00E9751B /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A67F24E32DFA00E9751B /* UserRepository.swift */; };
@@ -96,6 +97,7 @@
 		453E602424D8A63B00B3559E /* MapRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRepository.swift; sourceTree = "<group>"; };
 		4549520424B633F300023370 /* CountryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryController.swift; sourceTree = "<group>"; };
 		4549520624B63BA200023370 /* CountryCasesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCasesViewModel.swift; sourceTree = "<group>"; };
+		455362A624F98840001CA6E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		4561A67B24E319D700E9751B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		4561A67D24E31ABB00E9751B /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4561A67F24E32DFA00E9751B /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 				453E602224D8A5F600B3559E /* CountryRepository.swift */,
 				453E602424D8A63B00B3559E /* MapRepository.swift */,
 				4561A67F24E32DFA00E9751B /* UserRepository.swift */,
+				4561A67924E3180600E9751B /* DataSources */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -284,7 +287,7 @@
 				45FE2A7F249BC20900D8727D /* Views */,
 				45FE2A7E249BC20400D8727D /* Models */,
 				45FE2A7C249BC1E700D8727D /* Controllers */,
-				45FE2A7D249BC1F600D8727D /* API */,
+				4561A67A24E3182F00E9751B /* Repository */,
 				4561A67724E3158700E9751B /* Moya */,
 				452B065324D0818C00F1BFE3 /* Container */,
 				4561A67624E314AC00E9751B /* Storage */,
@@ -332,15 +335,6 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		45FE2A7D249BC1F600D8727D /* API */ = {
-			isa = PBXGroup;
-			children = (
-				4561A67924E3180600E9751B /* DataSources */,
-				4561A67A24E3182F00E9751B /* Repository */,
-			);
-			path = API;
-			sourceTree = "<group>";
-		};
 		45FE2A7E249BC20400D8727D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +372,7 @@
 				4561A67824E3178200E9751B /* Errors */,
 				45FE2B20249C1DAE00D8727D /* Extensions.swift */,
 				452B065124CF641000F1BFE3 /* Reachability.swift */,
+				455362A624F98840001CA6E4 /* NetworkManager.swift */,
 				45696A0124F371B600338490 /* UserTimeout.swift */,
 			);
 			path = Utilities;
@@ -745,6 +740,7 @@
 				453E602524D8A63B00B3559E /* MapRepository.swift in Sources */,
 				4515FEF324EEF00800AE7EA4 /* SecureStoreQueryable.swift in Sources */,
 				453E602324D8A5F600B3559E /* CountryRepository.swift in Sources */,
+				455362A724F98840001CA6E4 /* NetworkManager.swift in Sources */,
 				45C78EE024DC7DE600BF0C6D /* CountryProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

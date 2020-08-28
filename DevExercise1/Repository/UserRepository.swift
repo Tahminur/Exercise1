@@ -63,7 +63,7 @@ public class UserRepositoryImpl: UserRepository {
             }
         }
     }
-
+//signs out and based on initial login status also deletes userlocal data
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void) {
         userRemote.logOut { result in
             switch result {
@@ -87,7 +87,7 @@ public class UserRepositoryImpl: UserRepository {
             case .failure(let error):
                 completion(.failure(error))
             }
-            if !self.hasInitialLogin {
+            /*if !self.hasInitialLogin {
                 do {
                     try self.userLocal.removeAllData()
                     self.userCredential = nil
@@ -101,10 +101,10 @@ public class UserRepositoryImpl: UserRepository {
                 } catch {
                     return
                 }
-            }
+            }*/
         }
     }
-    
+    //passes the user credentials in a model format upon success for remember me
     func passSavedUser(completion: @escaping (Result<User,Error>) -> Void){
         if self.hasInitialLogin {
             do {

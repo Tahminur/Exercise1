@@ -20,7 +20,7 @@ public class MapRepositoryImpl: MapRepository {
     public init(remoteDataSource: MapRemoteDataSource) {
         self.remoteDataSource = remoteDataSource
     }
-
+//converts the featuretables into featurelayers
     public func fetch() -> [AGSFeatureLayer] {
         var layers: [AGSFeatureLayer] = []
         for table in remoteDataSource.features {

@@ -8,22 +8,27 @@
 
 import UIKit
 import CoreData
-import Reachability
+//import Reachability
+
+
 //@UIApplicationMain
+//let ReachabilityChangedNotification = NSNotification.Name("ReachabilityChangedNotification")
+//let reachability = Reachability()
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let appDIContainer = AppDIContainer()
-    //let reachability = try! Reachability()
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //try reachability.stopNotifier()
-        //try reachability.startNotifier()
+        //addReachabilityNotifier()
         NotificationCenter.default.addObserver(self,
                                selector: #selector(AppDelegate.applicationDidTimeout(notification:)),
                                name: .appTimedOut,
                                object: nil
         )
+        
         return true
     }
 
@@ -86,6 +91,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
+    /*func addReachabilityNotifier() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged), name: ReachabilityChangedNotification , object: reachability)
+        reachability.startNotifier()
+    }*/
+    
     @objc func applicationDidTimeout(notification: NSNotification) {
         let viewController = UIApplication.shared.keyWindow?.rootViewController as! MainTabController
         viewController.appDIContainer.userRepository.handleSignOut { result in
@@ -102,20 +112,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-}
-/*
-viewController.presentAlert(message: "error")
-viewController.appDIContainer.userRepository.handleSignOut(){ result in
-    switch result {
-    case .success(()):
-        DispatchQueue.main.async {
-            let loginController = viewController.appDIContainer.userContainer.makeLoginViewController()
-            let nav = UINavigationController(rootViewController: loginController)
-            nav.modalPresentationStyle = .fullScreen
-            viewController.present(nav, animated: true, completion: nil)
+    /*@objc func reachabilityChanged(note:NSNotification) {
+        let reachability = note.object as! Reachability
+        if reachability.isReachable() {
+            
+        } else {
+            
         }
-    case .failure(let error):
-        viewController.presentAlert(message: error.localizedDescription)
-    }
+    }*/
 }
-*/
