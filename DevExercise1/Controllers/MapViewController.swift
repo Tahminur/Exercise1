@@ -44,6 +44,7 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         refreshMap()
     }
+
     func setViewpoint() {
         mapView.setViewpoint(AGSViewpoint(center: SharedPoint.shared.point, scale: 30000000))
     }

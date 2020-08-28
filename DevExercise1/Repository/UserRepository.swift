@@ -21,19 +21,26 @@ protocol UserRepository {
 public class UserRepositoryImpl: UserRepository {
     private let userRemote: UserRemoteDataSource
     private let userLocal: UserLocalDataSource
+    private let internetConnection: ReachabilityObserverDelegate
     private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
+    
 
     func authenticationValid() -> String? {
         return userLocal.authenticationToken
     }
 
-    public init(userRemote: UserRemoteDataSource, userLocal: UserLocalDataSource) {
+    public init(userRemote: UserRemoteDataSource, userLocal: UserLocalDataSource, internetConnection: ReachabilityObserverDelegate) {
         self.userRemote = userRemote
         self.userLocal = userLocal
+        self.internetConnection = internetConnection
     }
     //create the ags credential here and sign in
     func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void) {
+        if !internetConnection.connectionStatus{
+            completion(.failure(loginError.noInternet))
+            return
+        }
         userCredential = AGSCredential(user: username, password: password)
         if username == "" {
             completion(.failure(loginError.missingUsername))

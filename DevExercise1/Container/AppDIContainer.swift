@@ -13,10 +13,6 @@ public typealias Reachable = () -> Bool
 
 final class AppDIContainer {
     //datasources
-
-    let internetConnectivity: ReachabilityObserverDelegate = {
-        return InternetConnectivity()
-    }()
     lazy var countryDataSource: CountryRemoteDataSource = {
         return CountryRemoteDataSourceImpl()
     }()
@@ -33,9 +29,9 @@ final class AppDIContainer {
         return UserLocalDataSourceImpl(secure: secureStorage)
     }()
     //Internet checker
-    lazy var internetCheck: Reachable = {
-        return true
-    }
+    let internetConnectivity: ReachabilityObserverDelegate = {
+        return InternetConnectivity()
+    }()
     //mappers
     lazy var calloutMapper: CalloutMapper = {
         return CalloutMapperImpl()
@@ -45,13 +41,13 @@ final class AppDIContainer {
     }()
     //repositories
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImpl(remoteDataSource: countryDataSource, reachable: internetCheck, internetConnection: internetConnectivity)
+        return CountryRepositoryImpl(remoteDataSource: countryDataSource, internetConnection: internetConnectivity)
     }()
     lazy var mapRepository: MapRepository = {
         return MapRepositoryImpl(remoteDataSource: mapDataSource)
     }()
     lazy var userRepository: UserRepositoryImpl = {
-        return UserRepositoryImpl(userRemote: userRemote, userLocal: userLocal)
+        return UserRepositoryImpl(userRemote: userRemote, userLocal: userLocal, internetConnection: internetConnectivity)
     }()
     //containers
     lazy var countryContainer: CountryDIContainer = {

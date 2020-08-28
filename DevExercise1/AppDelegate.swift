@@ -20,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        //addReachabilityNotifier()
         NotificationCenter.default.addObserver(self,
                                selector: #selector(AppDelegate.applicationDidTimeout(notification:)),
                                name: .appTimedOut,
@@ -89,11 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    /*func addReachabilityNotifier() {
-        NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChanged), name: ReachabilityChangedNotification , object: reachability)
-        reachability.startNotifier()
-    }*/
-
     @objc func applicationDidTimeout(notification: NSNotification) {
         let viewController = UIApplication.shared.keyWindow?.rootViewController as! MainTabController
         viewController.appDIContainer.userRepository.handleSignOut { result in
@@ -110,12 +104,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    /*@objc func reachabilityChanged(note:NSNotification) {
-        let reachability = note.object as! Reachability
-        if reachability.isReachable() {
-            
-        } else {
-            
-        }
-    }*/
 }
