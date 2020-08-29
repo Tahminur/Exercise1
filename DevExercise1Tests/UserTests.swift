@@ -63,7 +63,7 @@ class UserTests: XCTestCase {
     }
 
     func testLoginFailure() {
-        loginViewModel.login(username: "test", password: "ddd", rememberMe: false) { result in
+        loginViewModel.login(username: "testbob", password: "ddd", rememberMe: false) { result in
             switch result {
             case .success((let success)):
                 //shouldn't reach here
@@ -75,8 +75,16 @@ class UserTests: XCTestCase {
     }
 
     func testSignOut() {
-        signOutViewModel.signOut { _ in
-
+        signOutViewModel.signOut { result in
+            switch result{
+            case .success(let success):
+                //shouldn't reach here
+                XCTAssertNotNil(success)
+            case .failure(let error):
+                XCTAssertNil(error)
+            }
         }
     }
+    
+    
 }
