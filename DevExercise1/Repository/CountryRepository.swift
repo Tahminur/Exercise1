@@ -22,7 +22,7 @@ public class CountryRepositoryImpl: CountryRepository {
         self.remoteDataSource = remoteDataSource
         self.internetConnection = internetConnection
     }
-    
+
     public func fetch(forceRefresh: Bool, completion: @escaping (Result<[AGSArcGISFeature], Error>) -> Void) {
         if internetConnection.connectionStatus {
             if forceRefresh {

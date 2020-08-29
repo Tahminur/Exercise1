@@ -24,7 +24,6 @@ public class UserRepositoryImpl: UserRepository {
     private let internetConnection: ReachabilityObserverDelegate
     private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
-    
 
     func authenticationValid() -> String? {
         return userLocal.authenticationToken
@@ -37,7 +36,7 @@ public class UserRepositoryImpl: UserRepository {
     }
     //create the ags credential here and sign in
     func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void) {
-        if !internetConnection.connectionStatus{
+        if !internetConnection.connectionStatus {
             completion(.failure(loginError.noInternet))
             return
         }

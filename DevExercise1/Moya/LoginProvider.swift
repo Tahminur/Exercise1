@@ -41,14 +41,14 @@ extension LoginProvider: TargetType {
         switch self {
         case .login(let username, let password):
             //let ub64 = username.utf8
-            
+
             return .requestCompositeParameters(bodyParameters: ["username": username, "password": password], bodyEncoding: JSONEncoding.default, urlParameters: [:])
         }
     }
 
     public var headers: [String: String]? {
         switch self {
-        case .login(_,_):
+        case .login:
             return [
                 "Content-Type": "application/json"
             ]
