@@ -94,21 +94,6 @@ public class UserRepositoryImpl: UserRepository {
             case .failure(let error):
                 completion(.failure(error))
             }
-            /*if !self.hasInitialLogin {
-                do {
-                    try self.userLocal.removeAllData()
-                    self.userCredential = nil
-                } catch {
-                    return
-                }
-            } else {
-                do {
-                    try self.userLocal.signOutWithRememberMe()
-                    self.userCredential = nil
-                } catch {
-                    return
-                }
-            }*/
         }
     }
     //passes the user credentials in a model format upon success for remember me

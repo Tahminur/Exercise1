@@ -38,6 +38,9 @@
 		456D8E0624B3D4BF004B72A1 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */; };
 		45759AB524B4E56F009FEBEA /* CountryItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB424B4E56F009FEBEA /* CountryItemModel.swift */; };
 		45759AB724B4EB6A009FEBEA /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45759AB624B4EB69009FEBEA /* MapViewController.swift */; };
+		4599C6BC24FAAFA500E8B00E /* MapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4599C6BB24FAAFA500E8B00E /* MapperTests.swift */; };
+		4599C6BE24FAB46500E8B00E /* LoginProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4599C6BD24FAB46500E8B00E /* LoginProvider.swift */; };
+		4599C6C024FAB91300E8B00E /* UserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4599C6BF24FAB91300E8B00E /* UserTests.swift */; };
 		45C78ED624D902C200BF0C6D /* CountryMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78ED524D902C200BF0C6D /* CountryMapper.swift */; };
 		45C78ED824D902EB00BF0C6D /* CalloutMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78ED724D902EB00BF0C6D /* CalloutMapper.swift */; };
 		45C78EDA24D9036D00BF0C6D /* Callout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78ED924D9036D00BF0C6D /* Callout.swift */; };
@@ -57,7 +60,7 @@
 		45FE2A8F249BD46700D8727D /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A8E249BD46700D8727D /* MainTabController.swift */; };
 		45FE2B21249C1DAE00D8727D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2B20249C1DAE00D8727D /* Extensions.swift */; };
 		69D86E483AD96DC6D582BCFD /* Pods_DevExercise1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62C07EE8BC1D47E8472A3A37 /* Pods_DevExercise1.framework */; };
-		A58BFED117108C9DAA3DD58B /* DevExercise1Tests-DevExercise1Mocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEA6F4D614D51B008B30E47 /* DevExercise1Tests-DevExercise1Mocks.generated.swift */; };
+		A69DE842AB00B367CFB1977C /* DevExercise1Tests-DevExercise1Mocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEA6F4D614D51B008B30E47 /* DevExercise1Tests-DevExercise1Mocks.generated.swift */; };
 		B7326024AF4D908E0DD63F1F /* Pods_DevExercise1Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FF77CFA3BA198944CD00D1 /* Pods_DevExercise1Tests.framework */; };
 		CAE6D6741AAF469760B7EF09 /* Pods_DevExercise1_DevExercise1UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0E7F9CA94BAD669CAD3D054 /* Pods_DevExercise1_DevExercise1UITests.framework */; };
 /* End PBXBuildFile section */
@@ -113,6 +116,9 @@
 		456D8E0524B3D4BF004B72A1 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		45759AB424B4E56F009FEBEA /* CountryItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryItemModel.swift; sourceTree = "<group>"; };
 		45759AB624B4EB69009FEBEA /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		4599C6BB24FAAFA500E8B00E /* MapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapperTests.swift; sourceTree = "<group>"; };
+		4599C6BD24FAB46500E8B00E /* LoginProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProvider.swift; sourceTree = "<group>"; };
+		4599C6BF24FAB91300E8B00E /* UserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTests.swift; sourceTree = "<group>"; };
 		45C78ED524D902C200BF0C6D /* CountryMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryMapper.swift; sourceTree = "<group>"; };
 		45C78ED724D902EB00BF0C6D /* CalloutMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalloutMapper.swift; sourceTree = "<group>"; };
 		45C78ED924D9036D00BF0C6D /* Callout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Callout.swift; sourceTree = "<group>"; };
@@ -210,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				45C78EDF24DC7DE600BF0C6D /* CountryProvider.swift */,
+				4599C6BD24FAB46500E8B00E /* LoginProvider.swift */,
 			);
 			path = Moya;
 			sourceTree = "<group>";
@@ -306,6 +313,8 @@
 				45FE2A63249BC11D00D8727D /* DevExercise1Tests.swift */,
 				452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */,
 				456969FB24F357A000338490 /* SecureStoreTests.swift */,
+				4599C6BB24FAAFA500E8B00E /* MapperTests.swift */,
+				4599C6BF24FAB91300E8B00E /* UserTests.swift */,
 				45FE2A65249BC11D00D8727D /* Info.plist */,
 			);
 			path = DevExercise1Tests;
@@ -593,9 +602,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1-DevExercise1UITests/Pods-DevExercise1-DevExercise1UITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1-DevExercise1UITests/Pods-DevExercise1-DevExercise1UITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -608,7 +621,7 @@
 			files = (
 			);
 			inputPaths = (
-				"/tmp/Mockingbird-34004836-EF3C-4390-BC9B-6AC5122ED3F4",
+				"/tmp/Mockingbird-78ABEAC9-34CA-4A83-805F-557EE3A27F99",
 			);
 			name = "Generate Mockingbird Mocks";
 			outputPaths = (
@@ -616,7 +629,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmockingbird generate \\\n  --targets 'DevExercise1' \\\n  --outputs \"${SRCROOT}/MockingbirdMocks/DevExercise1Tests-DevExercise1Mocks.generated.swift\"\n\n# Ensure mocks are generated prior to running Compile Sources\nrm -f '/tmp/Mockingbird-34004836-EF3C-4390-BC9B-6AC5122ED3F4'\n";
+			shellScript = "set -e\n\nmockingbird generate \\\n  --targets 'DevExercise1' \\\n  --outputs \"${SRCROOT}/MockingbirdMocks/DevExercise1Tests-DevExercise1Mocks.generated.swift\"\n\n# Ensure mocks are generated prior to running Compile Sources\nrm -f '/tmp/Mockingbird-78ABEAC9-34CA-4A83-805F-557EE3A27F99'\n";
 		};
 		8A7F99FDC5F67BB7D8181E90 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -648,9 +661,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1Tests/Pods-DevExercise1Tests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1Tests/Pods-DevExercise1Tests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -665,9 +682,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1/Pods-DevExercise1-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-DevExercise1/Pods-DevExercise1-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -683,11 +704,11 @@
 			);
 			name = "Clean Mockingbird Mocks";
 			outputPaths = (
-				"/tmp/Mockingbird-34004836-EF3C-4390-BC9B-6AC5122ED3F4",
+				"/tmp/Mockingbird-78ABEAC9-34CA-4A83-805F-557EE3A27F99",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo $RANDOM > '/tmp/Mockingbird-34004836-EF3C-4390-BC9B-6AC5122ED3F4'\n";
+			shellScript = "echo $RANDOM > '/tmp/Mockingbird-78ABEAC9-34CA-4A83-805F-557EE3A27F99'\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -733,6 +754,7 @@
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,
 				4561A67C24E319D700E9751B /* LoginViewModel.swift in Sources */,
 				45C78EDA24D9036D00BF0C6D /* Callout.swift in Sources */,
+				4599C6BE24FAB46500E8B00E /* LoginProvider.swift in Sources */,
 				455362AB24F98F57001CA6E4 /* Network.swift in Sources */,
 				453E602524D8A63B00B3559E /* MapRepository.swift in Sources */,
 				4515FEF324EEF00800AE7EA4 /* SecureStoreQueryable.swift in Sources */,
@@ -745,10 +767,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4599C6C024FAB91300E8B00E /* UserTests.swift in Sources */,
 				456969FC24F357A000338490 /* SecureStoreTests.swift in Sources */,
 				45FE2A64249BC11D00D8727D /* DevExercise1Tests.swift in Sources */,
+				4599C6BC24FAAFA500E8B00E /* MapperTests.swift in Sources */,
 				452ABE0524C8CD05009E08C1 /* RepositoryTests.swift in Sources */,
-				A58BFED117108C9DAA3DD58B /* DevExercise1Tests-DevExercise1Mocks.generated.swift in Sources */,
+				A69DE842AB00B367CFB1977C /* DevExercise1Tests-DevExercise1Mocks.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

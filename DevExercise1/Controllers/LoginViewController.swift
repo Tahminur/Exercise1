@@ -82,6 +82,7 @@ class LoginViewController: UIViewController {
         rememberMe.spacing = 20
         rememberMe.distribution = .fillProportionally
         rememberMe.alignment = .center
+        
         let stack = UIStackView(arrangedSubviews: [usernameField, passwordField, loginButton, rememberMe])
         stack.axis = .vertical
         stack.spacing = 10

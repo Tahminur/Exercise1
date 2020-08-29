@@ -20,12 +20,10 @@ class RepositoryTests: XCTestCase {
     }
     var dataSource: CountryRemoteDataSourceImplMock!
     var repo: CountryRepositoryImpl!
-    var mapper: CountryMapperMock!
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         dataSource = mock(CountryRemoteDataSourceImpl.self)
-        mapper = mock(CountryMapper.self)
-        repo = CountryRepositoryImpl(remoteDataSource: dataSource, mapper: mapper, reachable: {return true})
+        repo = CountryRepositoryImpl(remoteDataSource: dataSource, internetConnection: InternetConnectivity())
     }
 
     override func tearDown() {
@@ -68,25 +66,10 @@ class RepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
     }
 
-    func testCountryMapping() {
-        given(dataSource.fetch(completion: any())) ~> {completion in
-            completion(.success([]))
-        }
-        given(mapper.mapToCountry(features: any())).willReturn([])
-        let expectation = eventually {
-            verify(
-                mapper.mapToCountry(features: any())
-            ).wasCalled()
-        }
-        repo.fetch(forceRefresh: true) { _ in}
-        wait(for: [expectation], timeout: 5.0)
-    }
-
     func testDataSourceFetch() {
         given(dataSource.fetch(completion: any())) ~> {completion in
             completion(.success([]))
         }
-        given(mapper.mapToCountry(features: any())).willReturn([])
         let expectation = eventually {
             verify(
                 dataSource.fetch(completion: any())

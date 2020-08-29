@@ -25,7 +25,7 @@ public class UserRemoteDataSourceImpl: NSObject, UserRemoteDataSource {
         portal.credential = credential
         self.portal.load { [weak self] (error) in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(loginError.issueWithCredentials))
                 return
             }
             //check the loaded state

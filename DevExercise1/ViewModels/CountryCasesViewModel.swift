@@ -26,7 +26,6 @@ public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCa
         self.repository = repository
         self.mapper = mapper
     }
-    //move reachable internet check here and pass error on failure to after this in the countrycontroller
 
     func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void) {
         if forceRefresh {
@@ -34,7 +33,7 @@ public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCa
             repository.fetch(forceRefresh: forceRefresh) { result in
                 switch result {
                 case .success(let fetched):
-                    switch self.mapper.mapToCountry2(features: fetched) {
+                    switch self.mapper.mapToCountry(features: fetched) {
                     case .success(let countries):
                         for country in countries {
                             self.countries.append(CountryItemModel(country: country))
