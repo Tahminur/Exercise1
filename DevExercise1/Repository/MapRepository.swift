@@ -11,6 +11,7 @@ import ArcGIS
 
 protocol MapRepository {
     func fetch() -> [AGSFeatureLayer]
+    func licenseMap() throws 
 }
 
 public class MapRepositoryImpl: MapRepository {
@@ -27,5 +28,13 @@ public class MapRepositoryImpl: MapRepository {
             layers.append(AGSFeatureLayer(featureTable: table))
         }
         return layers
+    }
+    
+    func licenseMap() throws {
+        do {
+            try AGSArcGISRuntimeEnvironment.setLicenseKey("runtimelite,1000,rud4539920132,none,3M2PMD17J1802J7EZ106")
+        } catch let error as NSError {
+            throw error
+        }
     }
 }

@@ -33,10 +33,13 @@ class MapViewController: UIViewController {
         configureUI()
         setupDelegates()
         self.mapView.map = self.map
-        do {
-            try viewModel.licenseMap()
-        } catch let error {
-            self.presentAlert(message: error.localizedDescription)
+        self.viewModel.licenseMap(){ result in
+            switch result {
+            case .success(_):
+                return
+            case .failure(let error):
+                self.presentAlert(message: error.localizedDescription)
+            }
         }
     }
 
