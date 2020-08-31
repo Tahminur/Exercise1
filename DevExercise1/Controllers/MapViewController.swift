@@ -33,9 +33,9 @@ class MapViewController: UIViewController {
         configureUI()
         setupDelegates()
         self.mapView.map = self.map
-        self.viewModel.licenseMap(){ result in
+        self.viewModel.licenseMap { result in
             switch result {
-            case .success(_):
+            case .success:
                 return
             case .failure(let error):
                 self.presentAlert(message: error.localizedDescription)

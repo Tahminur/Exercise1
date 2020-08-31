@@ -9,7 +9,6 @@
 import UIKit
 import ArcGIS
 
-
 class CountryController: UIViewController {
     var tableView = UITableView()
     private let refresher = UIRefreshControl()

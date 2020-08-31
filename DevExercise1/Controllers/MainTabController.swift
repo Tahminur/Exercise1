@@ -23,7 +23,7 @@ class MainTabController: UITabBarController {
     }
 //need to change to not compare to nil or empty string
     func authenticateUserAndConfigure() {
-        
+
         /*appDIContainer.userRepository.passSavedUser(){ result in
             switch result {
             case .success(_):

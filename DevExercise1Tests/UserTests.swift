@@ -76,7 +76,7 @@ class UserTests: XCTestCase {
 
     func testSignOut() {
         signOutViewModel.signOut { result in
-            switch result{
+            switch result {
             case .success(let success):
                 //shouldn't reach here
                 XCTAssertNotNil(success)
@@ -85,6 +85,5 @@ class UserTests: XCTestCase {
             }
         }
     }
-    
-    
+
 }
