@@ -10,7 +10,7 @@ import Foundation
 import ArcGIS
 
 public protocol UserRemoteDataSource {
-    func arcGISSignIn(credential: AGSCredential, completion:@escaping (Result<AGSCredential, Error>) -> Void)
+    func arcGISSignIn(username: String, password: String, completion:@escaping (Result<AGSCredential, Error>) -> Void)
     func logOut(completion: @escaping (Result<(), Error>) -> Void)
 }
 
@@ -19,9 +19,10 @@ public class UserRemoteDataSourceImpl: NSObject, UserRemoteDataSource {
     private var portal: AGSPortal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
 
     //attempts to sign in user using the provided credential by attempting to load the portal object with the given credential
-    public func arcGISSignIn(credential: AGSCredential, completion:@escaping (Result<AGSCredential, Error>) -> Void) {
+    public func arcGISSignIn(username: String, password: String, completion:@escaping (Result<AGSCredential, Error>) -> Void) {
         //resets the portal to allow for another login attempt.
         self.portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
+        let credential = AGSCredential(user: username, password: password)
         portal.credential = credential
         self.portal.load { [weak self] (error) in
             if let error = error {

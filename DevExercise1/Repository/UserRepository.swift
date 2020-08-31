@@ -7,12 +7,10 @@
 //
 
 import Foundation
-import ArcGIS
 
 protocol UserRepository {
     func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
-    //func authenticationValid() -> String?
     func authenticationValid() -> Bool?
     var hasInitialLogin: Bool { get }
     func passSavedUser(completion: @escaping (Result<User, Error>) -> Void)
@@ -23,7 +21,6 @@ public class UserRepositoryImpl: UserRepository {
     private let userRemote: UserRemoteDataSource
     private let userLocal: UserLocalDataSource
     private let internetConnection: ReachabilityObserverDelegate
-    private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
 
     func authenticationValid() -> Bool? {
@@ -41,7 +38,6 @@ public class UserRepositoryImpl: UserRepository {
             completion(.failure(loginError.noInternet))
             return
         }
-        userCredential = AGSCredential(user: username, password: password)
         if username == "" {
             completion(.failure(loginError.missingUsername))
             return
@@ -51,11 +47,10 @@ public class UserRepositoryImpl: UserRepository {
             return
         }
         //check internet connectivity here
-        userRemote.arcGISSignIn(credential: userCredential!) { result in
+        userRemote.arcGISSignIn(username: username, password: password) { result in
             switch result {
             case .success(let user):
                 //handle saving this user to local here
-                self.userCredential = user
                 if rememberMe == true {
                     do {
                         try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
@@ -78,14 +73,12 @@ public class UserRepositoryImpl: UserRepository {
                 if !self.hasInitialLogin {
                     do {
                         try self.userLocal.removeAllData()
-                        self.userCredential = nil
                     } catch {
                         return
                     }
                 } else {
                     do {
                         try self.userLocal.signOutWithRememberMe()
-                        self.userCredential = nil
                     } catch {
                         return
                     }
