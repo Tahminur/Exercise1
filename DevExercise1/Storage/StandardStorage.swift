@@ -7,4 +7,5 @@
 //
 
 import Foundation
-//USE USER DEFAULTS HERE TO STORE
+//Store countries here with their appropriate data
+//AGSOfflineSettings, AGSOfflineMap, AGSOfflineMapInfo      **AGSOfflineMapParametersKey 

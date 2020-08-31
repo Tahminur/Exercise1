@@ -12,7 +12,8 @@ import ArcGIS
 protocol UserRepository {
     func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
-    func authenticationValid() -> String?
+    //func authenticationValid() -> String?
+    func authenticationValid() -> Bool?
     var hasInitialLogin: Bool { get }
     func passSavedUser(completion: @escaping (Result<User, Error>) -> Void)
 }
@@ -25,8 +26,8 @@ public class UserRepositoryImpl: UserRepository {
     private var userCredential: AGSCredential?
     public var hasInitialLogin: Bool = false
 
-    func authenticationValid() -> String? {
-        return userLocal.authenticationToken
+    func authenticationValid() -> Bool? {
+        return userLocal.authenticationToken?.isEmpty
     }
 
     public init(userRemote: UserRemoteDataSource, userLocal: UserLocalDataSource, internetConnection: ReachabilityObserverDelegate) {

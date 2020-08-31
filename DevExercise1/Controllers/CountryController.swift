@@ -9,15 +9,11 @@
 import UIKit
 import ArcGIS
 
-protocol onClickedPointDelegate: class {
-    func onPointClick(point: AGSPoint)
-}
 
 class CountryController: UIViewController {
     var tableView = UITableView()
     private let refresher = UIRefreshControl()
     var viewModel: CountryCasesViewModel!
-    weak var clickDelegate: onClickedPointDelegate?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
