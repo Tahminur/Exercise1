@@ -38,7 +38,7 @@ class MainTabController: UITabBarController {
             }
         }*/
         let authenticated = appDIContainer.userRepository.authenticationValid()
-        if authenticated == true {
+        if authenticated == false {
             DispatchQueue.main.async {
                 let loginController = self.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)

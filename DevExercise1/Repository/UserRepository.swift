@@ -11,7 +11,7 @@ import Foundation
 protocol UserRepository {
     func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
     func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
-    func authenticationValid() -> Bool?
+    func authenticationValid() -> Bool
     var hasInitialLogin: Bool { get }
     func passSavedUser(completion: @escaping (Result<User, Error>) -> Void)
 }
@@ -23,8 +23,14 @@ public class UserRepositoryImpl: UserRepository {
     private let internetConnection: ReachabilityObserverDelegate
     public var hasInitialLogin: Bool = false
 
-    func authenticationValid() -> Bool? {
-        return userLocal.authenticationToken?.isEmpty
+    func authenticationValid() -> Bool {
+        if userLocal.authenticationToken == nil {
+            return false
+        }
+        else{
+            return true
+        }
+        //return userLocal.authenticationToken?.isEmpty
     }
 
     public init(userRemote: UserRemoteDataSource, userLocal: UserLocalDataSource, internetConnection: ReachabilityObserverDelegate) {

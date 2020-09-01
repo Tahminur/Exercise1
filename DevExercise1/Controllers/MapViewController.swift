@@ -149,8 +149,8 @@ extension MapViewController: AGSGeoViewTouchDelegate {
             }
         }
 }
-extension MapViewController: OnClickDelegate{
+/*extension MapViewController: OnClickDelegate{
     func onClick(point: AGSPoint) {
         mapView.setViewpoint(AGSViewpoint(center: point, scale: 30000000))
     }
-}
+}*/
