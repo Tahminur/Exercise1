@@ -7,18 +7,18 @@
 //
 
 import Foundation
+import ArcGIS
 
-protocol CountryCasesViewModelInput {
+protocol CountryCasesViewModel {
     func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void)
-}
-
-protocol CountryCasesViewModelOutput {
     var countries: [CountryItemModel] {get}
 }
 
-public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCasesViewModelInput {
+public final class CountryCasesViewModelImpl: CountryCasesViewModel {
     var countries: [CountryItemModel] = []
 
+    private var point: AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
+    
     private let repository: CountryRepository
     private let mapper: CountryMapper
 
@@ -48,4 +48,9 @@ public final class CountryCasesViewModel: CountryCasesViewModelOutput, CountryCa
             }
         }
     }
+    
+    func setPoint(newPoint: AGSPoint) {
+        self.point = newPoint
+    }
+    
 }

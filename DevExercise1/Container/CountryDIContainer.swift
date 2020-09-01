@@ -22,7 +22,7 @@ final class CountryDIContainer {
     }
 
     func makeCountryViewModel() -> CountryCasesViewModel {
-        return CountryCasesViewModel(repository: dependencies.countryRepo, mapper: dependencies.countryMapper)
+        return CountryCasesViewModelImpl(repository: dependencies.countryRepo, mapper: dependencies.countryMapper)
     }
 
     func makeCountryController() -> CountryController {

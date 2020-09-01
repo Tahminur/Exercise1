@@ -16,6 +16,7 @@ class MapViewController: UIViewController {
     var mapView: AGSMapView = AGSMapView()
     var map: AGSMap!
     var mapper: CalloutMapper!
+    
     private weak var activeSelectionQuery: AGSCancelable?
     // MARK: - View setup
     static func create(with viewModel: MapViewModel, mapper: CalloutMapper) -> MapViewController {
@@ -147,4 +148,9 @@ extension MapViewController: AGSGeoViewTouchDelegate {
                 return
             }
         }
+}
+extension MapViewController: OnClickDelegate{
+    func onClick(point: AGSPoint) {
+        mapView.setViewpoint(AGSViewpoint(center: point, scale: 30000000))
+    }
 }
