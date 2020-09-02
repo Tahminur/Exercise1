@@ -47,6 +47,8 @@
 		45C78EDE24DB551800BF0C6D /* MapRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78EDD24DB551800BF0C6D /* MapRemote.swift */; };
 		45C78EE024DC7DE600BF0C6D /* CountryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78EDF24DC7DE600BF0C6D /* CountryProvider.swift */; };
 		45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8181D24A0F4E0008B7E0F /* CountryCell.swift */; };
+		45F2D3AA250004C3001A9FA6 /* CountryLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2D3A9250004C3001A9FA6 /* CountryLocal.swift */; };
+		45F2D3AC25002DF2001A9FA6 /* CountryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2D3AB25002DF2001A9FA6 /* CountryStorage.swift */; };
 		45FE2A4A249BC11C00D8727D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A49249BC11C00D8727D /* AppDelegate.swift */; };
 		45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FE2A4B249BC11C00D8727D /* SceneDelegate.swift */; };
 		45FE2A51249BC11C00D8727D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45FE2A4F249BC11C00D8727D /* Main.storyboard */; };
@@ -124,6 +126,8 @@
 		45C78EDD24DB551800BF0C6D /* MapRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRemote.swift; sourceTree = "<group>"; };
 		45C78EDF24DC7DE600BF0C6D /* CountryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryProvider.swift; sourceTree = "<group>"; };
 		45D8181D24A0F4E0008B7E0F /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
+		45F2D3A9250004C3001A9FA6 /* CountryLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryLocal.swift; sourceTree = "<group>"; };
+		45F2D3AB25002DF2001A9FA6 /* CountryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryStorage.swift; sourceTree = "<group>"; };
 		45FE2A46249BC11C00D8727D /* DevExercise1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DevExercise1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FE2A49249BC11C00D8727D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45FE2A4B249BC11C00D8727D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 			children = (
 				4515FEED24EEEEE800AE7EA4 /* SecureStorage */,
 				4561A68D24E3843B00E9751B /* StandardStorage.swift */,
+				45F2D3AB25002DF2001A9FA6 /* CountryStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -232,6 +237,7 @@
 			children = (
 				45C78EDD24DB551800BF0C6D /* MapRemote.swift */,
 				45C78EDB24DB550300BF0C6D /* CountryRemote.swift */,
+				45F2D3A9250004C3001A9FA6 /* CountryLocal.swift */,
 				4561A68124E32E1100E9751B /* UserRemote.swift */,
 				4561A68724E3317200E9751B /* UserLocal.swift */,
 			);
@@ -741,11 +747,13 @@
 				45759AB524B4E56F009FEBEA /* CountryItemModel.swift in Sources */,
 				4515FEEF24EEEFB000AE7EA4 /* SecureStore.swift in Sources */,
 				4561A68E24E3843B00E9751B /* StandardStorage.swift in Sources */,
+				45F2D3AC25002DF2001A9FA6 /* CountryStorage.swift in Sources */,
 				452B065524D081AE00F1BFE3 /* AppDIContainer.swift in Sources */,
 				4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */,
 				45FE2B21249C1DAE00D8727D /* Extensions.swift in Sources */,
 				4561A68424E32EBD00E9751B /* SignOutController.swift in Sources */,
 				4515FEF124EEEFD700AE7EA4 /* SecureStoreError.swift in Sources */,
+				45F2D3AA250004C3001A9FA6 /* CountryLocal.swift in Sources */,
 				4549520724B63BA200023370 /* CountryCasesViewModel.swift in Sources */,
 				4561A68224E32E1100E9751B /* UserRemote.swift in Sources */,
 				45FE2A4C249BC11C00D8727D /* SceneDelegate.swift in Sources */,

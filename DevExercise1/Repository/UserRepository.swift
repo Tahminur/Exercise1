@@ -26,8 +26,7 @@ public class UserRepositoryImpl: UserRepository {
     func authenticationValid() -> Bool {
         if userLocal.authenticationToken == nil {
             return false
-        }
-        else{
+        } else {
             return true
         }
         //return userLocal.authenticationToken?.isEmpty

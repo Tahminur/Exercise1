@@ -18,7 +18,7 @@ public final class CountryCasesViewModelImpl: CountryCasesViewModel {
     var countries: [CountryItemModel] = []
 
     private var point: AGSPoint = AGSPoint(x: 133, y: -25, spatialReference: .wgs84())
-    
+
     private let repository: CountryRepository
     private let mapper: CountryMapper
 
@@ -48,9 +48,9 @@ public final class CountryCasesViewModelImpl: CountryCasesViewModel {
             }
         }
     }
-    
+
     func setPoint(newPoint: AGSPoint) {
         self.point = newPoint
     }
-    
+
 }
