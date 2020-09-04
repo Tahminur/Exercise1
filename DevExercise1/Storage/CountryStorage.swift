@@ -12,9 +12,7 @@ import UIKit
 
 public protocol CountryStorage {
     func save(name: String, cases: Int32) throws
-    //func returnCountries()
     func retrieveFromStorage(completion: @escaping (Result<[NSManagedObject], Error>) -> Void)
-    //var countries: [NSManagedObject] { get set }
 }
 
 public class CountryStorageImpl: CountryStorage {
@@ -35,10 +33,10 @@ public class CountryStorageImpl: CountryStorage {
 
         do {
             try managedContext.save()
+            print("saving \(name)")
             countries.append(country)
         } catch let error as NSError {
             throw error
-            //print("Could not save. \(error), \(error.userInfo)")
         }
     }
 
@@ -57,19 +55,5 @@ public class CountryStorageImpl: CountryStorage {
         }
         completion(.success(countries))
     }
-
-    /*public func returnCountries() {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CountryData")
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let managedContext = appDelegate.persistentContainer.viewContext
-
-        do {
-          countries = try managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-          print("Could not fetch. \(error), \(error.userInfo)")
-        }
-    }*/
 
 }

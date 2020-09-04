@@ -26,7 +26,7 @@ class CountryController: UIViewController {
             self.tableView.deselectRow(at: index, animated: true)
         }
         //fetches data
-        viewModel.fetchFromDataSource2(forceRefresh: false) { result in
+        viewModel.fetchFromDataSource(forceRefresh: false) { result in
             switch result {
             case .success:
                 self.tableView.reloadData()
@@ -39,7 +39,7 @@ class CountryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTableView()
-        viewModel.fetchFromDataSource2(forceRefresh: true) { result in
+        viewModel.fetchFromDataSource(forceRefresh: true) { result in
             switch result {
             case .success:
                 self.tableView.reloadData()
@@ -58,7 +58,7 @@ class CountryController: UIViewController {
     }
 
     @objc func refreshCountryData(_ sender: Any) {
-        viewModel.fetchFromDataSource2(forceRefresh: true) { result in
+        viewModel.fetchFromDataSource(forceRefresh: true) { result in
             switch result {
             case .success:
                 self.tableView.reloadData()

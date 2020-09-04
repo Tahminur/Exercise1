@@ -11,7 +11,6 @@ import ArcGIS
 
 protocol CountryCasesViewModel {
     func fetchFromDataSource(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void)
-    func fetchFromDataSource2(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void)
     var countries: [CountryItemModel] {get}
 }
 
@@ -34,30 +33,6 @@ public final class CountryCasesViewModelImpl: CountryCasesViewModel {
             repository.fetch(forceRefresh: forceRefresh) { result in
                 switch result {
                 case .success(let fetched):
-                    switch self.mapper.mapToCountry(features: fetched) {
-                    case .success(let countries):
-                        for country in countries {
-                            self.countries.append(CountryItemModel(country: country))
-                                completion(.success(()))
-                        }
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        }
-    }
-
-    func fetchFromDataSource2(forceRefresh: Bool, completion:@escaping (Result<(), Error>) -> Void) {
-        if forceRefresh {
-            countries.removeAll()
-            repository.newFetch(forceRefresh: forceRefresh) { result in
-                switch result {
-                case .success(let fetched):
-                    //save countries
-                    self.repository.savingCountries(countries: fetched)
                     for country in fetched {
                         self.countries.append(CountryItemModel(country: country))
                             completion(.success(()))

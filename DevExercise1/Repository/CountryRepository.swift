@@ -10,8 +10,8 @@ import Foundation
 import ArcGIS
 
 public protocol CountryRepository {
-    func fetch(forceRefresh: Bool, completion: @escaping (Result<[AGSArcGISFeature], Error>) -> Void)
-    func newFetch(forceRefresh: Bool, completion: @escaping (Result<[Country], Error>) -> Void)
+    //func fetch(forceRefresh: Bool, completion: @escaping (Result<[AGSArcGISFeature], Error>) -> Void)
+    func fetch(forceRefresh: Bool, completion: @escaping (Result<[Country], Error>) -> Void)
     func savingCountries(countries: [Country])
 }
 
@@ -29,35 +29,16 @@ public class CountryRepositoryImpl: CountryRepository {
         self.internetConnection = internetConnection
     }
 
-    public func fetch(forceRefresh: Bool, completion: @escaping (Result<[AGSArcGISFeature], Error>) -> Void) {
+    public func fetch(forceRefresh: Bool, completion: @escaping (Result<[Country], Error>) -> Void) {
         if internetConnection.connectionStatus {
             if forceRefresh {
                 remoteDataSource.fetch { result in
                     switch result {
                     case .success(let features):
-                        completion(.success(features))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                }
-            } else {
-                let countriesFetched = remoteDataSource.retrieveCountries()
-                completion(.success(countriesFetched))
-            }
-        } else {
-            completion(.failure(fetchError.noInternet))
-        }
-    }
-
-    public func newFetch(forceRefresh: Bool, completion: @escaping (Result<[Country], Error>) -> Void) {
-        if internetConnection.connectionStatus {
-            if forceRefresh {
-                remoteDataSource.fetch { result in
-                    switch result {
-                    case .success(let features):
-                        self.mapper.mapToCountry2(features: features) { result in
+                        self.mapper.mapToCountry(features: features) { result in
                             switch result {
                             case .success(let countries):
+                                self.savingCountries(countries: countries)
                                 completion(.success(countries))
                             case .failure(let error):
                                 completion(.failure(error))
@@ -67,11 +48,11 @@ public class CountryRepositoryImpl: CountryRepository {
                         completion(.failure(error))
                     }
                 }
-            } else {
+            } /*else {
                 localDataSource.fetchFromLocal { result in
                     switch result {
                     case .success(let features):
-                        self.mapper.mapToCountry3(features: features) { result in
+                        self.mapper.mapToCountry(features: features) { result in
                             switch result {
                             case .success(let countries):
                                 completion(.success(countries))
@@ -83,12 +64,12 @@ public class CountryRepositoryImpl: CountryRepository {
                         completion(.failure(error))
                     }
                 }
-            }
+            }*/
         } else {
             localDataSource.fetchFromLocal { result in
                 switch result {
                 case .success(let features):
-                    self.mapper.mapToCountry3(features: features) { result in
+                    self.mapper.mapToCountry(features: features) { result in
                         switch result {
                         case .success(let countries):
                             completion(.success(countries))
