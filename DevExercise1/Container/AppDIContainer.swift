@@ -12,9 +12,16 @@ import ArcGIS
 public typealias Reachable = () -> Bool
 
 final class AppDIContainer {
+    //data storage
+    lazy var countryStorage: CountryStorage = {
+        return CountryStorageImpl()
+    }()
     //datasources
-    lazy var countryDataSource: CountryRemoteDataSource = {
+    lazy var countryRemoteDataSource: CountryRemoteDataSource = {
         return CountryRemoteDataSourceImpl()
+    }()
+    lazy var countryLocalDataSource: CountryLocalDataSource = {
+       return CountryLocalDataSourceImpl(countryStorage: countryStorage)
     }()
     lazy var mapDataSource: MapRemoteDataSource = {
         return MapRemoteDataSource()
@@ -41,7 +48,7 @@ final class AppDIContainer {
     }()
     //repositories
     lazy var countryRepository: CountryRepository = {
-        return CountryRepositoryImpl(remoteDataSource: countryDataSource, internetConnection: internetConnectivity)
+        return CountryRepositoryImpl(remoteDataSource: countryRemoteDataSource, localDataSource: countryLocalDataSource, mapper: countryMapper, internetConnection: internetConnectivity)
     }()
     lazy var mapRepository: MapRepository = {
         return MapRepositoryImpl(remoteDataSource: mapDataSource)

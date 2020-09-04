@@ -31,7 +31,6 @@ public class CountryRemoteDataSourceImpl: CountryRemoteDataSource {
             guard let self = self else { return }
 
             if let error = error {
-
                 print("Error loading Corona Cases feature layer: \(error.localizedDescription)")
                 completion(.failure(.errorLoad))
                 return
@@ -59,6 +58,7 @@ public class CountryRemoteDataSourceImpl: CountryRemoteDataSource {
             }
         }
     }
+
 //just used to pass queried and fetched features
     public func retrieveCountries() -> [AGSArcGISFeature] {
         return self.dataRetrieved
