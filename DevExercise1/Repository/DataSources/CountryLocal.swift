@@ -26,6 +26,13 @@ public class CountryLocalDataSourceImpl: CountryLocalDataSource {
     }
 
     public func storeCountries(countries: [Country]) throws {
+        //delete all entities within table originally to make room for new data
+        do {
+            try countryStorage.deleteEntities()
+        } catch {
+            throw error
+        }
+
         for country in countries {
             do {
                 try countryStorage.save(name: country.name, cases: Int32(country.cases))

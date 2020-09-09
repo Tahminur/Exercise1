@@ -23,7 +23,8 @@ class RepositoryTests: XCTestCase {
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         dataSource = mock(CountryRemoteDataSourceImpl.self)
-        repo = CountryRepositoryImpl(remoteDataSource: dataSource, internetConnection: InternetConnectivity())
+        repo = CountryRepositoryImpl(remoteDataSource: dataSource, localDataSource: CountryLocalDataSourceImpl(countryStorage: CountryStorageImpl()), mapper: CountryMapperImpl(), internetConnection: InternetConnectivity())
+        //repo = CountryRepositoryImpl(remoteDataSource: dataSource, localDataSource: InternetConnectivity(),mapper: CountryMapperImpl())
     }
 
     override func tearDown() {

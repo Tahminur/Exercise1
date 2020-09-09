@@ -88,35 +88,9 @@ public func mock(_ type: DevExercise1.CalloutMapper.Protocol, file: StaticString
   return CalloutMapperMock(sourceLocation: Mockingbird.SourceLocation(file, line))
 }
 
-// MARK: - Mocked CountryCasesViewModelInput
+// MARK: - Mocked CountryCasesViewModel
 
-public final class CountryCasesViewModelInputMock: DevExercise1.CountryCasesViewModelInput, Mockingbird.Mock {
-  static let staticMock = Mockingbird.StaticMock()
-  public let mockingContext = Mockingbird.MockingContext()
-  public let stubbingContext = Mockingbird.StubbingContext()
-  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
-  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
-
-  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
-    Mockingbird.checkVersion(for: self)
-    self.sourceLocation = sourceLocation
-  }
-
-  // MARK: Mocked `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (Result<(), Error>) -> Void)
-
-  public func `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (Result<(), Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
-
-  public func `fetchFromDataSource`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
-}
-
-/// Returns a concrete mock of `CountryCasesViewModelInput`.
-public func mock(_ type: DevExercise1.CountryCasesViewModelInput.Protocol, file: StaticString = #file, line: UInt = #line) -> CountryCasesViewModelInputMock {
-  return CountryCasesViewModelInputMock(sourceLocation: Mockingbird.SourceLocation(file, line))
-}
-
-// MARK: - Mocked CountryCasesViewModelOutput
-
-public final class CountryCasesViewModelOutputMock: DevExercise1.CountryCasesViewModelOutput, Mockingbird.Mock {
+public final class CountryCasesViewModelMock: DevExercise1.CountryCasesViewModel, Mockingbird.Mock {
   static let staticMock = Mockingbird.StaticMock()
   public let mockingContext = Mockingbird.MockingContext()
   public let stubbingContext = Mockingbird.StubbingContext()
@@ -133,11 +107,17 @@ public final class CountryCasesViewModelOutputMock: DevExercise1.CountryCasesVie
     Mockingbird.checkVersion(for: self)
     self.sourceLocation = sourceLocation
   }
+
+  // MARK: Mocked `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (Result<(), Error>) -> Void)
+
+  public func `fetchFromDataSource`(`forceRefresh`: Bool, `completion`: @escaping (Result<(), Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `fetchFromDataSource`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
-/// Returns a concrete mock of `CountryCasesViewModelOutput`.
-public func mock(_ type: DevExercise1.CountryCasesViewModelOutput.Protocol, file: StaticString = #file, line: UInt = #line) -> CountryCasesViewModelOutputMock {
-  return CountryCasesViewModelOutputMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+/// Returns a concrete mock of `CountryCasesViewModel`.
+public func mock(_ type: DevExercise1.CountryCasesViewModel.Protocol, file: StaticString = #file, line: UInt = #line) -> CountryCasesViewModelMock {
+  return CountryCasesViewModelMock(sourceLocation: Mockingbird.SourceLocation(file, line))
 }
 
 // MARK: - Mocked CountryCell
@@ -204,6 +184,89 @@ public func mock(_ type: DevExercise1.CountryController.Type, file: StaticString
   fatalError()
 }
 
+// MARK: - Mocked CountryLocalDataSourceImpl
+
+public final class CountryLocalDataSourceImplMock: DevExercise1.CountryLocalDataSourceImpl, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public enum InitializerProxy {
+    public static func initialize(`countryStorage`: DevExercise1.CountryStorage, __file: StaticString = #file, __line: UInt = #line) -> CountryLocalDataSourceImplMock { fatalError("See 'Thunk Stubs' in the README") }
+  }
+
+  // MARK: Mocked countries
+
+  override public var `countries`: [NSManagedObject] { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getCountries() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> [NSManagedObject], [NSManagedObject]> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func setCountries(_ newValue: @escaping @autoclosure () -> [NSManagedObject]) -> Mockingbird.Mockable<Mockingbird.PropertySetterDeclaration, ([NSManagedObject]) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `fetchFromLocal`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void)
+
+  public override func `fetchFromLocal`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `fetchFromLocal`(`completion`: @escaping @autoclosure () -> (Result<[NSManagedObject], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[NSManagedObject], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked init(`countryStorage`: DevExercise1.CountryStorage)
+
+  public required override init(`countryStorage`: DevExercise1.CountryStorage) { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `storeCountries`(`countries`: [DevExercise1.Country])
+
+  public override func `storeCountries`(`countries`: [DevExercise1.Country]) throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `storeCountries`(`countries`: @escaping @autoclosure () -> [DevExercise1.Country]) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, ([DevExercise1.Country]) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+}
+
+/// Returns an abstract mock which should be initialized using `mock(CountryLocalDataSourceImpl.self).initialize(…)`.
+public func mock(_ type: DevExercise1.CountryLocalDataSourceImpl.Type, file: StaticString = #file, line: UInt = #line) -> CountryLocalDataSourceImplMock.InitializerProxy.Type {
+  return CountryLocalDataSourceImplMock.InitializerProxy.self
+}
+
+// MARK: - Mocked CountryLocalDataSource
+
+public final class CountryLocalDataSourceMock: DevExercise1.CountryLocalDataSource, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  // MARK: Mocked countries
+
+  public var `countries`: [NSManagedObject] { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getCountries() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> [NSManagedObject], [NSManagedObject]> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func setCountries(_ newValue: @escaping @autoclosure () -> [NSManagedObject]) -> Mockingbird.Mockable<Mockingbird.PropertySetterDeclaration, ([NSManagedObject]) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
+    Mockingbird.checkVersion(for: self)
+    self.sourceLocation = sourceLocation
+  }
+
+  // MARK: Mocked `fetchFromLocal`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void)
+
+  public func `fetchFromLocal`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `fetchFromLocal`(`completion`: @escaping @autoclosure () -> (Result<[NSManagedObject], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[NSManagedObject], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `storeCountries`(`countries`: [DevExercise1.Country])
+
+  public func `storeCountries`(`countries`: [DevExercise1.Country]) throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `storeCountries`(`countries`: @escaping @autoclosure () -> [DevExercise1.Country]) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, ([DevExercise1.Country]) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+}
+
+/// Returns a concrete mock of `CountryLocalDataSource`.
+public func mock(_ type: DevExercise1.CountryLocalDataSource.Protocol, file: StaticString = #file, line: UInt = #line) -> CountryLocalDataSourceMock {
+  return CountryLocalDataSourceMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+}
+
 // MARK: - Mocked CountryMapperImpl
 
 public final class CountryMapperImplMock: DevExercise1.CountryMapperImpl, Mockingbird.Mock {
@@ -219,11 +282,17 @@ public final class CountryMapperImplMock: DevExercise1.CountryMapperImpl, Mockin
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `mapToCountry`(`features`: [AGSArcGISFeature])
+  // MARK: Mocked `mapToCountry`(`features`: [AGSArcGISFeature], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void)
 
-  public override func `mapToCountry`(`features`: [AGSArcGISFeature]) -> Result<[DevExercise1.Country], Error> { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `mapToCountry`(`features`: [AGSArcGISFeature], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `mapToCountry`(`features`: @escaping @autoclosure () -> [AGSArcGISFeature]) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([AGSArcGISFeature]) -> Result<[DevExercise1.Country], Error>, Result<[DevExercise1.Country], Error>> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `mapToCountry`(`features`: @escaping @autoclosure () -> [AGSArcGISFeature], `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([AGSArcGISFeature], @escaping (Result<[DevExercise1.Country], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `mapToCountry`(`features`: [NSManagedObject], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void)
+
+  public override func `mapToCountry`(`features`: [NSManagedObject], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `mapToCountry`(`features`: @escaping @autoclosure () -> [NSManagedObject], `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([NSManagedObject], @escaping (Result<[DevExercise1.Country], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `CountryMapperImpl`.
@@ -245,11 +314,17 @@ public final class CountryMapperMock: DevExercise1.CountryMapper, Mockingbird.Mo
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `mapToCountry`(`features`: [AGSArcGISFeature])
+  // MARK: Mocked `mapToCountry`(`features`: [AGSArcGISFeature], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void)
 
-  public func `mapToCountry`(`features`: [AGSArcGISFeature]) -> Result<[DevExercise1.Country], Error> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `mapToCountry`(`features`: [AGSArcGISFeature], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `mapToCountry`(`features`: @escaping @autoclosure () -> [AGSArcGISFeature]) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([AGSArcGISFeature]) -> Result<[DevExercise1.Country], Error>, Result<[DevExercise1.Country], Error>> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `mapToCountry`(`features`: @escaping @autoclosure () -> [AGSArcGISFeature], `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([AGSArcGISFeature], @escaping (Result<[DevExercise1.Country], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `mapToCountry`(`features`: [NSManagedObject], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void)
+
+  public func `mapToCountry`(`features`: [NSManagedObject], `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `mapToCountry`(`features`: @escaping @autoclosure () -> [NSManagedObject], `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([NSManagedObject], @escaping (Result<[DevExercise1.Country], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `CountryMapper`.
@@ -451,18 +526,24 @@ public final class CountryRepositoryImplMock: DevExercise1.CountryRepositoryImpl
   public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
 
   public enum InitializerProxy {
-    public static func initialize(`remoteDataSource`: DevExercise1.CountryRemoteDataSource, `internetConnection`: DevExercise1.ReachabilityObserverDelegate, __file: StaticString = #file, __line: UInt = #line) -> CountryRepositoryImplMock { fatalError("See 'Thunk Stubs' in the README") }
+    public static func initialize(`remoteDataSource`: DevExercise1.CountryRemoteDataSource, `localDataSource`: DevExercise1.CountryLocalDataSource, `mapper`: DevExercise1.CountryMapper, `internetConnection`: DevExercise1.ReachabilityObserverDelegate, __file: StaticString = #file, __line: UInt = #line) -> CountryRepositoryImplMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
-  // MARK: Mocked `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[AGSArcGISFeature], Error>) -> Void)
+  // MARK: Mocked `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void)
 
-  public override func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[AGSArcGISFeature], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `fetch`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<[AGSArcGISFeature], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<[AGSArcGISFeature], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `fetch`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<[DevExercise1.Country], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked init(`remoteDataSource`: DevExercise1.CountryRemoteDataSource, `internetConnection`: DevExercise1.ReachabilityObserverDelegate)
+  // MARK: Mocked init(`remoteDataSource`: DevExercise1.CountryRemoteDataSource, `localDataSource`: DevExercise1.CountryLocalDataSource, `mapper`: DevExercise1.CountryMapper, `internetConnection`: DevExercise1.ReachabilityObserverDelegate)
 
-  public required override init(`remoteDataSource`: DevExercise1.CountryRemoteDataSource, `internetConnection`: DevExercise1.ReachabilityObserverDelegate) { fatalError("See 'Thunk Stubs' in the README") }
+  public required override init(`remoteDataSource`: DevExercise1.CountryRemoteDataSource, `localDataSource`: DevExercise1.CountryLocalDataSource, `mapper`: DevExercise1.CountryMapper, `internetConnection`: DevExercise1.ReachabilityObserverDelegate) { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `savingCountries`(`countries`: [DevExercise1.Country])
+
+  public override func `savingCountries`(`countries`: [DevExercise1.Country]) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `savingCountries`(`countries`: @escaping @autoclosure () -> [DevExercise1.Country]) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([DevExercise1.Country]) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns an abstract mock which should be initialized using `mock(CountryRepositoryImpl.self).initialize(…)`.
@@ -484,16 +565,107 @@ public final class CountryRepositoryMock: DevExercise1.CountryRepository, Mockin
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[AGSArcGISFeature], Error>) -> Void)
+  // MARK: Mocked `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void)
 
-  public func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[AGSArcGISFeature], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `fetch`(`forceRefresh`: Bool, `completion`: @escaping (Result<[DevExercise1.Country], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `fetch`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<[AGSArcGISFeature], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<[AGSArcGISFeature], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `fetch`(`forceRefresh`: @escaping @autoclosure () -> Bool, `completion`: @escaping @autoclosure () -> (Result<[DevExercise1.Country], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (Bool, @escaping (Result<[DevExercise1.Country], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `savingCountries`(`countries`: [DevExercise1.Country])
+
+  public func `savingCountries`(`countries`: [DevExercise1.Country]) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `savingCountries`(`countries`: @escaping @autoclosure () -> [DevExercise1.Country]) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, ([DevExercise1.Country]) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `CountryRepository`.
 public func mock(_ type: DevExercise1.CountryRepository.Protocol, file: StaticString = #file, line: UInt = #line) -> CountryRepositoryMock {
   return CountryRepositoryMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+}
+
+// MARK: - Mocked CountryStorageImpl
+
+public final class CountryStorageImplMock: DevExercise1.CountryStorageImpl, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  // MARK: Mocked countries
+
+  override public var `countries`: [NSManagedObject] { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  public func getCountries() -> Mockingbird.Mockable<Mockingbird.PropertyGetterDeclaration, () -> [NSManagedObject], [NSManagedObject]> { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func setCountries(_ newValue: @escaping @autoclosure () -> [NSManagedObject]) -> Mockingbird.Mockable<Mockingbird.PropertySetterDeclaration, ([NSManagedObject]) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
+    super.init()
+    Mockingbird.checkVersion(for: self)
+    self.sourceLocation = sourceLocation
+  }
+
+  // MARK: Mocked `deleteEntities`()
+
+  public override func `deleteEntities`() throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `deleteEntities`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `retrieveFromStorage`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void)
+
+  public override func `retrieveFromStorage`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `retrieveFromStorage`(`completion`: @escaping @autoclosure () -> (Result<[NSManagedObject], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[NSManagedObject], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `save`(`name`: String, `cases`: Int32)
+
+  public override func `save`(`name`: String, `cases`: Int32) throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `save`(`name`: @escaping @autoclosure () -> String, `cases`: @escaping @autoclosure () -> Int32) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (String, Int32) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+}
+
+/// Returns a concrete mock of `CountryStorageImpl`.
+public func mock(_ type: DevExercise1.CountryStorageImpl.Type, file: StaticString = #file, line: UInt = #line) -> CountryStorageImplMock {
+  return CountryStorageImplMock(sourceLocation: Mockingbird.SourceLocation(file, line))
+}
+
+// MARK: - Mocked CountryStorage
+
+public final class CountryStorageMock: DevExercise1.CountryStorage, Mockingbird.Mock {
+  static let staticMock = Mockingbird.StaticMock()
+  public let mockingContext = Mockingbird.MockingContext()
+  public let stubbingContext = Mockingbird.StubbingContext()
+  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
+  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
+
+  fileprivate init(sourceLocation: Mockingbird.SourceLocation) {
+    Mockingbird.checkVersion(for: self)
+    self.sourceLocation = sourceLocation
+  }
+
+  // MARK: Mocked `deleteEntities`()
+
+  public func `deleteEntities`() throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `deleteEntities`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `retrieveFromStorage`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void)
+
+  public func `retrieveFromStorage`(`completion`: @escaping (Result<[NSManagedObject], Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `retrieveFromStorage`(`completion`: @escaping @autoclosure () -> (Result<[NSManagedObject], Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<[NSManagedObject], Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
+  // MARK: Mocked `save`(`name`: String, `cases`: Int32)
+
+  public func `save`(`name`: String, `cases`: Int32) throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `save`(`name`: @escaping @autoclosure () -> String, `cases`: @escaping @autoclosure () -> Int32) -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, (String, Int32) throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+}
+
+/// Returns a concrete mock of `CountryStorage`.
+public func mock(_ type: DevExercise1.CountryStorage.Protocol, file: StaticString = #file, line: UInt = #line) -> CountryStorageMock {
+  return CountryStorageMock(sourceLocation: Mockingbird.SourceLocation(file, line))
 }
 
 // MARK: - Mocked InternetConnectivity
@@ -597,6 +769,12 @@ public final class MapRepositoryImplMock: DevExercise1.MapRepositoryImpl, Mockin
     public static func initialize(`remoteDataSource`: DevExercise1.MapRemoteDataSource, __file: StaticString = #file, __line: UInt = #line) -> MapRepositoryImplMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
+  // MARK: Mocked `licenseMap`()
+
+  public override func `licenseMap`() throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `licenseMap`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+
   // MARK: Mocked init(`remoteDataSource`: DevExercise1.MapRemoteDataSource)
 
   public required override init(`remoteDataSource`: DevExercise1.MapRemoteDataSource) { fatalError("See 'Thunk Stubs' in the README") }
@@ -626,6 +804,12 @@ public final class MapRepositoryMock: DevExercise1.MapRepository, Mockingbird.Mo
     Mockingbird.checkVersion(for: self)
     self.sourceLocation = sourceLocation
   }
+
+  // MARK: Mocked `licenseMap`()
+
+  public func `licenseMap`() throws { fatalError("See 'Thunk Stubs' in the README") }
+
+  public func `licenseMap`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
   // MARK: Mocked `fetch`()
 
@@ -668,11 +852,11 @@ public final class MapViewModelInputMock: DevExercise1.MapViewModelInput, Mockin
     self.sourceLocation = sourceLocation
   }
 
-  // MARK: Mocked `licenseMap`()
+  // MARK: Mocked `licenseMap`(`completion`: @escaping (Result<(), Error>) -> Void)
 
-  public func `licenseMap`() throws { fatalError("See 'Thunk Stubs' in the README") }
+  public func `licenseMap`(`completion`: @escaping (Result<(), Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `licenseMap`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `licenseMap`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `MapViewModelInput`.
@@ -693,11 +877,11 @@ public final class MapViewModelMock: DevExercise1.MapViewModel, Mockingbird.Mock
     public static func initialize(`repository`: DevExercise1.MapRepository, __file: StaticString = #file, __line: UInt = #line) -> MapViewModelMock { fatalError("See 'Thunk Stubs' in the README") }
   }
 
-  // MARK: Mocked `licenseMap`()
+  // MARK: Mocked `licenseMap`(`completion`: @escaping (Result<(), Error>) -> Void)
 
-  public override func `licenseMap`() throws { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `licenseMap`(`completion`: @escaping (Result<(), Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `licenseMap`() -> Mockingbird.Mockable<Mockingbird.ThrowingFunctionDeclaration, () throws -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `licenseMap`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
   // MARK: Mocked `retrieveFeatureLayers`(`completion`: @escaping ([AGSFeatureLayer]) -> Void)
 
@@ -1083,11 +1267,11 @@ public final class UserRemoteDataSourceImplMock: DevExercise1.UserRemoteDataSour
 
   public func `logOut`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
+  // MARK: Mocked `arcGISSignIn`(`username`: String, `password`: String, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
 
-  public override func `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public override func `arcGISSignIn`(`username`: String, `password`: String, `completion`: @escaping (Result<AGSCredential, Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `arcGISSignIn`(`credential`: @escaping @autoclosure () -> AGSCredential, `completion`: @escaping @autoclosure () -> (Result<AGSCredential, Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSCredential, @escaping (Result<AGSCredential, Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `arcGISSignIn`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `completion`: @escaping @autoclosure () -> (Result<AGSCredential, Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String, @escaping (Result<AGSCredential, Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns an abstract mock which should be initialized using `mock(UserRemoteDataSourceImpl.self).initialize(…)`.
@@ -1115,11 +1299,11 @@ public final class UserRemoteDataSourceMock: DevExercise1.UserRemoteDataSource, 
 
   public func `logOut`(`completion`: @escaping @autoclosure () -> (Result<(), Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (@escaping (Result<(), Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 
-  // MARK: Mocked `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
+  // MARK: Mocked `arcGISSignIn`(`username`: String, `password`: String, `completion`: @escaping (Result<AGSCredential, Error>) -> Void)
 
-  public func `arcGISSignIn`(`credential`: AGSCredential, `completion`: @escaping (Result<AGSCredential, Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
+  public func `arcGISSignIn`(`username`: String, `password`: String, `completion`: @escaping (Result<AGSCredential, Error>) -> Void) { fatalError("See 'Thunk Stubs' in the README") }
 
-  public func `arcGISSignIn`(`credential`: @escaping @autoclosure () -> AGSCredential, `completion`: @escaping @autoclosure () -> (Result<AGSCredential, Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (AGSCredential, @escaping (Result<AGSCredential, Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
+  public func `arcGISSignIn`(`username`: @escaping @autoclosure () -> String, `password`: @escaping @autoclosure () -> String, `completion`: @escaping @autoclosure () -> (Result<AGSCredential, Error>) -> Void) -> Mockingbird.Mockable<Mockingbird.FunctionDeclaration, (String, String, @escaping (Result<AGSCredential, Error>) -> Void) -> Void, Void> { fatalError("See 'Thunk Stubs' in the README") }
 }
 
 /// Returns a concrete mock of `UserRemoteDataSource`.
@@ -1139,20 +1323,5 @@ public final class UserTimeoutMock: Mockingbird.Mock {
 
 @available(*, unavailable, message: "'UserTimeout' does not declare any accessible designated initializers and cannot be mocked")
 public func mock(_ type: DevExercise1.UserTimeout.Type, file: StaticString = #file, line: UInt = #line) -> UserTimeoutMock {
-  fatalError()
-}
-
-// MARK: - Mocked onClickedPointDelegate
-
-public final class onClickedPointDelegateMock: Mockingbird.Mock {
-  static let staticMock = Mockingbird.StaticMock()
-  public let mockingContext = Mockingbird.MockingContext()
-  public let stubbingContext = Mockingbird.StubbingContext()
-  public let mockMetadata = Mockingbird.MockMetadata(["generator_version": "0.14.0", "module_name": "DevExercise1"])
-  public var sourceLocation: Mockingbird.SourceLocation? { get { fatalError("See 'Thunk Stubs' in the README") } set { fatalError("See 'Thunk Stubs' in the README") } }
-}
-
-@available(*, unavailable, message: "'onClickedPointDelegate' inherits from the externally-defined type 'class' which needs to be declared in a supporting source file")
-public func mock(_ type: DevExercise1.onClickedPointDelegate.Protocol, file: StaticString = #file, line: UInt = #line) -> onClickedPointDelegateMock {
   fatalError()
 }

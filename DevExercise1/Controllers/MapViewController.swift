@@ -15,7 +15,12 @@ class MapViewController: UIViewController {
     var viewModel: MapViewModel!
     var mapView: AGSMapView = AGSMapView()
     var map: AGSMap!
+    var offlineMap: AGSMap?
     var mapper: CalloutMapper!
+    //vars below to be moved to local later on
+    var parameters: AGSGenerateOfflineMapParameters?
+    var offlineMapTask: AGSOfflineMapTask?
+    var generateOfflineMapJob: AGSGenerateOfflineMapJob?
 
     private weak var activeSelectionQuery: AGSCancelable?
     // MARK: - View setup
@@ -66,14 +71,17 @@ class MapViewController: UIViewController {
     }
     @objc func refreshMapButtonPress(_ sender: Any) {
         self.map = nil
+        self.offlineMapTask = nil
         self.map = AGSMap(basemap: .darkGrayCanvasVector())
         self.mapView.map = self.map
         self.viewModel.retrieveFeatureLayers { layers in
             for layer in layers {
                 self.mapView.map?.operationalLayers.add(layer)
             }
+            self.generateOfflineMapActions()
         }
         self.setViewpoint()
+
     }
     func configureUI() {
         view.addSubview(mapView)
@@ -154,3 +162,96 @@ extension MapViewController: AGSGeoViewTouchDelegate {
         mapView.setViewpoint(AGSViewpoint(center: point, scale: 30000000))
     }
 }*/
+extension MapViewController {
+    //offline map stuff
+    func getNewOfflineMapDirectoryURL() -> URL {
+        //get suitable directory
+        let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+
+        //create name
+        let formattedDate = ISO8601DateFormatter().string(from: Date())
+
+        return documentDirectoryURL.appendingPathComponent("\(formattedDate)")
+    }
+
+    func createFrameForOfflineMode() -> AGSEnvelope {
+        //change this envelope to fit the required scope
+        /*let toleranceInPoints: Double = 500
+        let toleranceInMapUnits = toleranceInPoints * mapView.unitsPerPoint
+        let envelope = AGSEnvelope(xMin: SharedPoint.shared.point.x - toleranceInMapUnits,
+                                    yMin: SharedPoint.shared.point.y - toleranceInMapUnits,
+                                    xMax: SharedPoint.shared.point.x + toleranceInMapUnits,
+                                    yMax: SharedPoint.shared.point.y + toleranceInMapUnits,
+                                    spatialReference: mapView.map?.spatialReference)*/
+        let frame = mapView.convert(view.frame, from: view)
+        let minPoint = mapView.screen(toLocation: frame.origin)
+        let maxPoint = mapView.screen(toLocation: CGPoint(x: frame.maxX, y: frame.maxY))
+        let envelope = AGSEnvelope(min: minPoint, max: maxPoint)
+        return envelope
+    }
+
+    func takeMapOffline() {
+
+        guard let offlineMapTask = offlineMapTask,
+            let parameters = parameters else {
+                print("parameters not set")
+                return
+        }
+
+        let downloadDirectory = getNewOfflineMapDirectoryURL()
+
+        let generateOfflineMapJob = offlineMapTask.generateOfflineMapJob(with: parameters, downloadDirectory: downloadDirectory)
+        self.generateOfflineMapJob = generateOfflineMapJob
+        //can add job prorgess portrayal here
+
+        //start job
+        generateOfflineMapJob.start(statusHandler: nil) { [weak self] (result, error) in
+            guard let self = self else {
+                print("generateofflinemapjob did not start")
+                return
+            }
+
+            if let error = error {
+                self.presentAlert(message: error.localizedDescription)
+            } else if let result = result {
+                self.takingMapOfflineSuccessful(with: result)
+            }
+        }
+
+    }
+
+    func takingMapOfflineSuccessful(with result: AGSGenerateOfflineMapResult) {
+        if let layerErrors = result.layerErrors as? [AGSLayer: Error],
+            let tableErrors = result.tableErrors as? [AGSFeatureTable: Error],
+            !(layerErrors.isEmpty && tableErrors.isEmpty) {
+            let errorMessages = layerErrors.map { "\($0.key.name): \($0.value.localizedDescription)" } +
+                tableErrors.map { "\($0.key.displayName): \($0.value.localizedDescription)" }
+
+            presentAlert(message: errorMessages.joined(separator: "\n"))
+
+        }
+        print("Taken Offline successful")
+        self.mapView.map = result.offlineMap
+    }
+
+    func generateOfflineMapActions() {
+        let areaOfInterest = createFrameForOfflineMode()
+        self.offlineMapTask = AGSOfflineMapTask(onlineMap: self.mapView.map!)
+        print(self.offlineMapTask?.loadStatus.rawValue)
+        offlineMapTask?.defaultGenerateOfflineMapParameters(withAreaOfInterest: areaOfInterest) { [weak self] (parameters: AGSGenerateOfflineMapParameters?, error: Error?) in
+            guard let parameters = parameters,
+                let self = self else {
+                    print("issue with setting parameters in generate offline map actions")
+                    return
+            }
+
+            if let error = error {
+                self.presentAlert(message: error.localizedDescription)
+                return
+            }
+            self.parameters = parameters
+            self.takeMapOffline()
+        }
+    }
+
+}

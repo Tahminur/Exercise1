@@ -12,7 +12,7 @@ import UIKit
 class UserTimeout: UIApplication {
         private var timeoutInSeconds: TimeInterval {
            // 30 seconds
-           return 200
+           return 200*60
        }
 
        private var idleTimer: Timer?

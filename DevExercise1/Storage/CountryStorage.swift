@@ -13,6 +13,7 @@ import UIKit
 public protocol CountryStorage {
     func save(name: String, cases: Int32) throws
     func retrieveFromStorage(completion: @escaping (Result<[NSManagedObject], Error>) -> Void)
+    func deleteEntities() throws
 }
 
 public class CountryStorageImpl: CountryStorage {
@@ -54,6 +55,22 @@ public class CountryStorageImpl: CountryStorage {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
         completion(.success(countries))
+    }
+
+    public func deleteEntities() throws {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "CountryData")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+
+        let managedContext = appDelegate.persistentContainer.viewContext
+
+        do {
+            try managedContext.execute(deleteRequest)
+        } catch let error as NSError {
+            throw error
+        }
     }
 
 }

@@ -46,6 +46,7 @@
 		45C78EDC24DB550300BF0C6D /* CountryRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78EDB24DB550300BF0C6D /* CountryRemote.swift */; };
 		45C78EDE24DB551800BF0C6D /* MapRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78EDD24DB551800BF0C6D /* MapRemote.swift */; };
 		45C78EE024DC7DE600BF0C6D /* CountryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C78EDF24DC7DE600BF0C6D /* CountryProvider.swift */; };
+		45C9189F2509353A00A0730A /* CountryStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C9189E2509353A00A0730A /* CountryStorageTests.swift */; };
 		45D8181E24A0F4E0008B7E0F /* CountryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8181D24A0F4E0008B7E0F /* CountryCell.swift */; };
 		45F2D3AA250004C3001A9FA6 /* CountryLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2D3A9250004C3001A9FA6 /* CountryLocal.swift */; };
 		45F2D3AC25002DF2001A9FA6 /* CountryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F2D3AB25002DF2001A9FA6 /* CountryStorage.swift */; };
@@ -125,6 +126,7 @@
 		45C78EDB24DB550300BF0C6D /* CountryRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryRemote.swift; sourceTree = "<group>"; };
 		45C78EDD24DB551800BF0C6D /* MapRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapRemote.swift; sourceTree = "<group>"; };
 		45C78EDF24DC7DE600BF0C6D /* CountryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryProvider.swift; sourceTree = "<group>"; };
+		45C9189E2509353A00A0730A /* CountryStorageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryStorageTests.swift; sourceTree = "<group>"; };
 		45D8181D24A0F4E0008B7E0F /* CountryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryCell.swift; sourceTree = "<group>"; };
 		45F2D3A9250004C3001A9FA6 /* CountryLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryLocal.swift; sourceTree = "<group>"; };
 		45F2D3AB25002DF2001A9FA6 /* CountryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryStorage.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				45FE2A63249BC11D00D8727D /* DevExercise1Tests.swift */,
 				452ABE0424C8CD05009E08C1 /* RepositoryTests.swift */,
 				456969FB24F357A000338490 /* SecureStoreTests.swift */,
+				45C9189E2509353A00A0730A /* CountryStorageTests.swift */,
 				4599C6BF24FAB91300E8B00E /* UserTests.swift */,
 				45FE2A65249BC11D00D8727D /* Info.plist */,
 			);
@@ -772,6 +775,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45C9189F2509353A00A0730A /* CountryStorageTests.swift in Sources */,
 				4599C6C024FAB91300E8B00E /* UserTests.swift in Sources */,
 				456969FC24F357A000338490 /* SecureStoreTests.swift in Sources */,
 				45FE2A64249BC11D00D8727D /* DevExercise1Tests.swift in Sources */,
