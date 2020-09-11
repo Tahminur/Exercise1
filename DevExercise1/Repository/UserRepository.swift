@@ -8,15 +8,16 @@
 
 import Foundation
 
+public typealias PossibleErrorComplete = (Error?) -> Void
+
 protocol UserRepository {
-    func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
-    func handleSignOut(completion: @escaping (Result<(), Error>) -> Void)
+    func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping PossibleErrorComplete)
+    func handleSignOut(completion: @escaping PossibleErrorComplete)
     func authenticationValid() -> Bool
     var hasInitialLogin: Bool { get }
     func passSavedUser(completion: @escaping (Result<User, Error>) -> Void)
 }
 
-//implement named user login from arcgis
 public class UserRepositoryImpl: UserRepository {
     private let userRemote: UserRemoteDataSource
     private let userLocal: UserLocalDataSource
@@ -29,7 +30,6 @@ public class UserRepositoryImpl: UserRepository {
         } else {
             return true
         }
-        //return userLocal.authenticationToken?.isEmpty
     }
 
     public init(userRemote: UserRemoteDataSource, userLocal: UserLocalDataSource, internetConnection: ReachabilityObserverDelegate) {
@@ -37,21 +37,21 @@ public class UserRepositoryImpl: UserRepository {
         self.userLocal = userLocal
         self.internetConnection = internetConnection
     }
-    //create the ags credential here and sign in
-    func handleLogin(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void) {
+
+    func handleLogin(username: String, password: String, rememberMe: Bool, completion: @escaping PossibleErrorComplete) {
         if !internetConnection.connectionStatus {
-            completion(.failure(loginError.noInternet))
+            completion(loginError.noInternet)
             return
         }
         if username == "" {
-            completion(.failure(loginError.missingUsername))
+            completion(loginError.missingUsername)
             return
         }
         if password == "" {
-            completion(.failure(loginError.missingPassword))
+            completion(loginError.missingPassword)
             return
         }
-        //check internet connectivity here
+
         userRemote.arcGISSignIn(username: username, password: password) { result in
             switch result {
             case .success(let user):
@@ -61,37 +61,19 @@ public class UserRepositoryImpl: UserRepository {
                         try self.userLocal.rememberUser(username: user.username!, password: user.password!, token: user.token!)
                         self.hasInitialLogin = rememberMe
                     } catch {
-                        completion(.failure(loginError.rememberMeMalfunction))
+                        completion(loginError.rememberMeMalfunction)
                     }
                 }
-                completion(.success(()))
+                completion(nil)
             case .failure:
-                completion(.failure(loginError.incorrectLogin))
+                completion(loginError.incorrectLogin)
             }
         }
     }
 //signs out and based on initial login status also deletes userlocal data
-    func handleSignOut(completion: @escaping (Result<(), Error>) -> Void) {
-        userRemote.logOut { result in
-            switch result {
-            case .success:
-                if !self.hasInitialLogin {
-                    do {
-                        try self.userLocal.removeAllData()
-                    } catch {
-                        return
-                    }
-                } else {
-                    do {
-                        try self.userLocal.signOutWithRememberMe()
-                    } catch {
-                        return
-                    }
-                }
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+    func handleSignOut(completion: @escaping PossibleErrorComplete) {
+        userRemote.logOut { error in
+            completion(error)
         }
     }
     //passes the user credentials in a model format upon success for remember me

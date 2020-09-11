@@ -48,23 +48,7 @@ public class CountryRepositoryImpl: CountryRepository {
                         completion(.failure(error))
                     }
                 }
-            } /*else {
-                localDataSource.fetchFromLocal { result in
-                    switch result {
-                    case .success(let features):
-                        self.mapper.mapToCountry(features: features) { result in
-                            switch result {
-                            case .success(let countries):
-                                completion(.success(countries))
-                            case .failure(let error):
-                                completion(.failure(error))
-                            }
-                        }
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                }
-            }*/
+            }
         } else {
             localDataSource.fetchFromLocal { result in
                 switch result {

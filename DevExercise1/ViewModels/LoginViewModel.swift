@@ -10,7 +10,7 @@ import Foundation
 
 //will have access to user repo
 protocol LoginUseCase {
-    func login(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void)
+    func login(username: String, password: String, rememberMe: Bool, completion: @escaping PossibleErrorComplete)
     var rememberMe: Bool { get set }
     func reset()
     func savedCredentials(completion: @escaping(Result<User, Error>) -> Void)
@@ -35,14 +35,9 @@ public final class LoginViewModelImpl: LoginUseCase {
         }
     }
 
-    func login(username: String, password: String, rememberMe: Bool, completion:@escaping(Result<(), Error>) -> Void) {
-        repository.handleLogin(username: username, password: password, rememberMe: rememberMe) { result in
-            switch result {
-            case .success:
-                completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+    func login(username: String, password: String, rememberMe: Bool, completion: @escaping PossibleErrorComplete) {
+        repository.handleLogin(username: username, password: password, rememberMe: rememberMe) { error in
+                completion(error)
         }
     }
 

@@ -39,37 +39,28 @@ class UserTests: XCTestCase {
     }
 
     func testLoginFailureNoUsername() {
-        loginViewModel.login(username: "", password: "", rememberMe: false) { result in
-            switch result {
-            case .success((let success)):
-                //shouldn't reach here
-                XCTAssertNil(success)
-            case .failure(let error):
+        loginViewModel.login(username: "", password: "", rememberMe: false) { error in
+            guard error == nil else {
                 XCTAssertEqual(error as! loginError, loginError.missingUsername)
+                return
             }
         }
     }
 
     func testLoginFailureNoPassword() {
-        loginViewModel.login(username: "test", password: "", rememberMe: false) { result in
-            switch result {
-            case .success((let success)):
-                //shouldn't reach here
-                XCTAssertNil(success)
-            case .failure(let error):
+        loginViewModel.login(username: "test", password: "", rememberMe: false) { error in
+            guard error == nil else {
                 XCTAssertEqual(error as! loginError, loginError.missingPassword)
+                return
             }
         }
     }
 
     func testLoginFailure() {
-        loginViewModel.login(username: "testbob", password: "ddd", rememberMe: false) { result in
-            switch result {
-            case .success((let success)):
-                //shouldn't reach here
-                XCTAssertNil(success)
-            case .failure(let error):
+        loginViewModel.login(username: "test", password: "tyh", rememberMe: false) { error in
+            guard error == nil else {
                 XCTAssertEqual(error as! loginError, loginError.incorrectLogin)
+                return
             }
         }
     }

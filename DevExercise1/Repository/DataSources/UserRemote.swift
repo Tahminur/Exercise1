@@ -11,7 +11,7 @@ import ArcGIS
 
 public protocol UserRemoteDataSource {
     func arcGISSignIn(username: String, password: String, completion:@escaping (Result<AGSCredential, Error>) -> Void)
-    func logOut(completion: @escaping (Result<(), Error>) -> Void)
+    func logOut(completion: @escaping PossibleErrorComplete)
 }
 
 public class UserRemoteDataSourceImpl: NSObject, UserRemoteDataSource {
@@ -34,15 +34,15 @@ public class UserRemoteDataSourceImpl: NSObject, UserRemoteDataSource {
         }
     }
     //clears the credentialcache to allow for new signin
-    public func logOut(completion: @escaping (Result<(), Error>) -> Void) {
+    public func logOut(completion: @escaping PossibleErrorComplete) {
         //resets the portal to allow for another login attempt.
         self.portal = AGSPortal(url: URL(string: "https://www.arcgis.com")!, loginRequired: true)
         AGSAuthenticationManager.shared().credentialCache.removeAndRevokeAllCredentials { [weak self] (credentials) in
             if credentials.count != 0 {
-                completion(.failure(loginError.issueWithCredentials))
+                completion(loginError.issueWithCredentials)
                 return
             }
-            completion(.success(()))
+            completion(nil)
         }
     }
 

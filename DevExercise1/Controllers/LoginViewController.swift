@@ -95,18 +95,17 @@ class LoginViewController: UIViewController {
     @objc func handleLogin() {
         guard let username = usernameField.text else { return }
         guard let password = passwordField.text else { return }
-        viewModel.login(username: username, password: password, rememberMe: rememberMeSwitch.isOn) { result in
-            switch result {
-            case .success:
-                guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
-                guard let tab = window.rootViewController as? MainTabController else { return }
-
-                tab.setupTabs()
-
-                self.dismiss(animated: true, completion: nil)
-            case .failure(let error):
-                self.presentAlert(message: error.localizedDescription)
+        viewModel.login(username: username, password: password, rememberMe: rememberMeSwitch.isOn) { error in
+            guard error == nil else {
+                self.presentAlert(message: error!.localizedDescription)
+                return
             }
+            guard let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) else { return }
+            guard let tab = window.rootViewController as? MainTabController else { return }
+
+            tab.setupTabs()
+
+            self.dismiss(animated: true, completion: nil)
         }
     }
     @objc func enableRememberMe() {

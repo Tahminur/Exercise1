@@ -74,20 +74,50 @@ class MapViewController: UIViewController {
         self.offlineMapTask = nil
         self.map = AGSMap(basemap: .darkGrayCanvasVector())
         self.mapView.map = self.map
+
         self.viewModel.retrieveFeatureLayers { layers in
             for layer in layers {
                 self.mapView.map?.operationalLayers.add(layer)
             }
-            self.generateOfflineMapActions()
         }
         self.setViewpoint()
+    }
+    @objc func store(_ sender: Any) {
+        //self.generateOfflineMapActions()
+        self.offlineMapTask = AGSOfflineMapTask(onlineMap: self.mapView.map!)
 
+        let areaOfInterest = createFrameForOfflineMode()
+        //print(self.offlineMapTask?.loadStatus.rawValue)
+        print(areaOfInterest.height)
+        offlineMapTask?.defaultGenerateOfflineMapParameters(withAreaOfInterest: areaOfInterest) { [weak self] (parameters: AGSGenerateOfflineMapParameters?, error: Error?) in
+
+            guard let self = self else {
+                print("couldn't find self")
+                return
+            }
+            guard let parameters = parameters else {
+                //parameters not being set properly for some reason
+                print("issue with setting parameters in generate offline map actions")
+                return
+            }
+
+            if let error = error {
+                self.presentAlert(message: error.localizedDescription)
+                return
+            }
+            self.parameters = parameters
+            print("starting takemapoffline function")
+            self.takeMapOffline()
+        }
     }
     func configureUI() {
         view.addSubview(mapView)
         self.mapView.pin(to: view)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(refreshMapButtonPress(_:)))
         navigationItem.rightBarButtonItem?.tintColor = .white
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Store", style: .plain, target: self, action: #selector(store(_:)))
+        navigationItem.leftBarButtonItem?.tintColor = .white
     }
 }
 
@@ -157,17 +187,12 @@ extension MapViewController: AGSGeoViewTouchDelegate {
             }
         }
 }
-/*extension MapViewController: OnClickDelegate{
-    func onClick(point: AGSPoint) {
-        mapView.setViewpoint(AGSViewpoint(center: point, scale: 30000000))
-    }
-}*/
+
 extension MapViewController {
     //offline map stuff
     func getNewOfflineMapDirectoryURL() -> URL {
         //get suitable directory
         let documentDirectoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-
         //create name
         let formattedDate = ISO8601DateFormatter().string(from: Date())
 
@@ -175,15 +200,7 @@ extension MapViewController {
     }
 
     func createFrameForOfflineMode() -> AGSEnvelope {
-        //change this envelope to fit the required scope
-        /*let toleranceInPoints: Double = 500
-        let toleranceInMapUnits = toleranceInPoints * mapView.unitsPerPoint
-        let envelope = AGSEnvelope(xMin: SharedPoint.shared.point.x - toleranceInMapUnits,
-                                    yMin: SharedPoint.shared.point.y - toleranceInMapUnits,
-                                    xMax: SharedPoint.shared.point.x + toleranceInMapUnits,
-                                    yMax: SharedPoint.shared.point.y + toleranceInMapUnits,
-                                    spatialReference: mapView.map?.spatialReference)*/
-        let frame = mapView.convert(view.frame, from: view)
+        let frame = mapView.convert(UIScreen.main.bounds, from: view)
         let minPoint = mapView.screen(toLocation: frame.origin)
         let maxPoint = mapView.screen(toLocation: CGPoint(x: frame.maxX, y: frame.maxY))
         let envelope = AGSEnvelope(min: minPoint, max: maxPoint)
@@ -214,6 +231,7 @@ extension MapViewController {
             if let error = error {
                 self.presentAlert(message: error.localizedDescription)
             } else if let result = result {
+                print("starting map offline successful")
                 self.takingMapOfflineSuccessful(with: result)
             }
         }
@@ -226,7 +244,6 @@ extension MapViewController {
             !(layerErrors.isEmpty && tableErrors.isEmpty) {
             let errorMessages = layerErrors.map { "\($0.key.name): \($0.value.localizedDescription)" } +
                 tableErrors.map { "\($0.key.displayName): \($0.value.localizedDescription)" }
-
             presentAlert(message: errorMessages.joined(separator: "\n"))
 
         }
@@ -236,20 +253,19 @@ extension MapViewController {
 
     func generateOfflineMapActions() {
         let areaOfInterest = createFrameForOfflineMode()
-        self.offlineMapTask = AGSOfflineMapTask(onlineMap: self.mapView.map!)
-        print(self.offlineMapTask?.loadStatus.rawValue)
+        //print(self.offlineMapTask?.loadStatus.rawValue)
         offlineMapTask?.defaultGenerateOfflineMapParameters(withAreaOfInterest: areaOfInterest) { [weak self] (parameters: AGSGenerateOfflineMapParameters?, error: Error?) in
             guard let parameters = parameters,
                 let self = self else {
                     print("issue with setting parameters in generate offline map actions")
                     return
             }
-
             if let error = error {
                 self.presentAlert(message: error.localizedDescription)
                 return
             }
             self.parameters = parameters
+            print("starting takemapoffline function")
             self.takeMapOffline()
         }
     }

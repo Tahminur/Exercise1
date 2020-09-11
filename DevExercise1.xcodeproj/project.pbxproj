@@ -30,7 +30,6 @@
 		4561A68624E32F4300E9751B /* SignOutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68524E32F4300E9751B /* SignOutViewModel.swift */; };
 		4561A68824E3317200E9751B /* UserLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68724E3317200E9751B /* UserLocal.swift */; };
 		4561A68C24E3576400E9751B /* UserDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68B24E3576400E9751B /* UserDIContainer.swift */; };
-		4561A68E24E3843B00E9751B /* StandardStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561A68D24E3843B00E9751B /* StandardStorage.swift */; };
 		456969FC24F357A000338490 /* SecureStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456969FB24F357A000338490 /* SecureStoreTests.swift */; };
 		45696A0224F371B600338490 /* UserTimeout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45696A0124F371B600338490 /* UserTimeout.swift */; };
 		45696A0424F3737600338490 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45696A0324F3737600338490 /* main.swift */; };
@@ -110,7 +109,6 @@
 		4561A68524E32F4300E9751B /* SignOutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignOutViewModel.swift; sourceTree = "<group>"; };
 		4561A68724E3317200E9751B /* UserLocal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocal.swift; sourceTree = "<group>"; };
 		4561A68B24E3576400E9751B /* UserDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDIContainer.swift; sourceTree = "<group>"; };
-		4561A68D24E3843B00E9751B /* StandardStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardStorage.swift; sourceTree = "<group>"; };
 		456969FB24F357A000338490 /* SecureStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStoreTests.swift; sourceTree = "<group>"; };
 		45696A0124F371B600338490 /* UserTimeout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTimeout.swift; sourceTree = "<group>"; };
 		45696A0324F3737600338490 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 			isa = PBXGroup;
 			children = (
 				4515FEED24EEEEE800AE7EA4 /* SecureStorage */,
-				4561A68D24E3843B00E9751B /* StandardStorage.swift */,
 				45F2D3AB25002DF2001A9FA6 /* CountryStorage.swift */,
 			);
 			path = Storage;
@@ -749,7 +746,6 @@
 				4561A68024E32DFA00E9751B /* UserRepository.swift in Sources */,
 				45759AB524B4E56F009FEBEA /* CountryItemModel.swift in Sources */,
 				4515FEEF24EEEFB000AE7EA4 /* SecureStore.swift in Sources */,
-				4561A68E24E3843B00E9751B /* StandardStorage.swift in Sources */,
 				45F2D3AC25002DF2001A9FA6 /* CountryStorage.swift in Sources */,
 				452B065524D081AE00F1BFE3 /* AppDIContainer.swift in Sources */,
 				4561A67E24E31ABB00E9751B /* LoginViewController.swift in Sources */,

@@ -14,7 +14,8 @@ import Mockingbird
 @testable import DevExercise1
 //change tests so they do not rely on network connectivity
 class RepositoryTests: XCTestCase {
-
+//mock the actual responses from esri i.e. 200 code 400 ...
+    //look into the clean architecture videos from before to help with testing
     let failedRetrieveEndpoint = { (target: CountryProvider) -> Endpoint in
         return Endpoint(url: URL(target: target).absoluteString, sampleResponseClosure: { .networkResponse(500, Data()) }, method: target.method, task: target.task, httpHeaderFields: target.headers)
     }
@@ -49,7 +50,7 @@ class RepositoryTests: XCTestCase {
         }
         wait(for: [expectation], timeout: 10.0)
     }
-
+//doesnt really test data retrieval here test the
     func testDataRetrievalFailure() {
         let expectation = self.expectation(description: "Failed to retrieve countries")
         let provider = MoyaProvider<CountryProvider>(endpointClosure: failedRetrieveEndpoint, stubClosure: MoyaProvider.immediatelyStub)
@@ -59,14 +60,16 @@ class RepositoryTests: XCTestCase {
             case .success(let emptyFeature):
                 //checks if it has 0 bytes loaded in 
                 XCTAssert(emptyFeature.data == Data())
-                expectation.fulfill()
             case .failure:
-                expectation.fulfill()
+                XCTFail()
             }
+            expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10.0)
     }
-
+//good test add another test that checks the completion for data
+    //you should only be mocking one thing and then test the actual code implementations for your classes,
+    //ex: mock repository but not local and remote datasources
     func testDataSourceFetch() {
         given(dataSource.fetch(completion: any())) ~> {completion in
             completion(.success([]))

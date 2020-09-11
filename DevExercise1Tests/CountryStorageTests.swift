@@ -20,7 +20,7 @@ class CountryStorageTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        countryStorage = nil
+        try! countryStorage.deleteEntities()
     }
 
     func testSave() {
@@ -30,13 +30,14 @@ class CountryStorageTests: XCTestCase {
           XCTFail("Saving country failed with \(error.localizedDescription).")
         }
     }
-
+//use expectations for completion handlers in order to ensure that the code within the completion is actually reaching
+    //will also test performance.
     func testRetreive() {
         try! countryStorage.save(name: "test", cases: 123)
         countryStorage.retrieveFromStorage { result in
             switch result {
             case .success(let countries):
-                XCTAssertNotNil(countries)
+                XCTAssertEqual(countries.count, 1)
             case .failure:
                 XCTFail("Error retrieving")
             }

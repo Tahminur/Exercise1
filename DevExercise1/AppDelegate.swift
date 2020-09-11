@@ -90,17 +90,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     @objc func applicationDidTimeout(notification: NSNotification) {
         let viewController = UIApplication.shared.keyWindow?.rootViewController as! MainTabController
-        viewController.appDIContainer.userRepository.handleSignOut { result in
-        switch result {
-        case .success:
+        viewController.appDIContainer.userRepository.handleSignOut { error in
+            guard error == nil else {
+                viewController.presentAlert(message: error!.localizedDescription)
+                return
+            }
             DispatchQueue.main.async {
                 let loginController = viewController.appDIContainer.userContainer.makeLoginViewController()
                 let nav = UINavigationController(rootViewController: loginController)
                 nav.modalPresentationStyle = .fullScreen
                 viewController.present(nav, animated: true, completion: nil)
-            }
-        case .failure(let error):
-            viewController.presentAlert(message: error.localizedDescription)
             }
         }
     }

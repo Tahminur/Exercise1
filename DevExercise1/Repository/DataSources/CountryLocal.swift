@@ -41,6 +41,7 @@ public class CountryLocalDataSourceImpl: CountryLocalDataSource {
             }
         }
     }
+
     public func fetchFromLocal(completion: @escaping (Result<[NSManagedObject], Error>) -> Void) {
         countryStorage.retrieveFromStorage { result in
             switch result {
@@ -49,7 +50,6 @@ public class CountryLocalDataSourceImpl: CountryLocalDataSource {
             case .failure(let error):
                 completion(.failure(error))
             }
-
         }
     }
 }

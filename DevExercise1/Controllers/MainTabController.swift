@@ -23,20 +23,6 @@ class MainTabController: UITabBarController {
     }
 //need to change to not compare to nil or empty string
     func authenticateUserAndConfigure() {
-
-        /*appDIContainer.userRepository.passSavedUser(){ result in
-            switch result {
-            case .success(_):
-                self.setupTabs()
-            case .failure(_):
-                DispatchQueue.main.async {
-                    let loginController = self.appDIContainer.userContainer.makeLoginViewController()
-                    let nav = UINavigationController(rootViewController: loginController)
-                    nav.modalPresentationStyle = .fullScreen
-                    self.present(nav, animated: true, completion: nil)
-                }
-            }
-        }*/
         let authenticated = appDIContainer.userRepository.authenticationValid()
         if authenticated == false {
             DispatchQueue.main.async {

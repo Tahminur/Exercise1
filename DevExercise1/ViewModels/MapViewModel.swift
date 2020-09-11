@@ -11,7 +11,6 @@ import ArcGIS
 
 protocol MapViewModelInput {
     func licenseMap(completion: @escaping (Result<(), Error>) -> Void)
-
 }
 
 class MapViewModel: MapViewModelInput {
