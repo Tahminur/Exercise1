@@ -21,6 +21,11 @@ class MapViewController: UIViewController {
     var parameters: AGSGenerateOfflineMapParameters?
     var offlineMapTask: AGSOfflineMapTask?
     var generateOfflineMapJob: AGSGenerateOfflineMapJob?
+    //trying something with exporttilecache
+    var exportTileCacheTask: AGSExportTileCacheTask?
+    var exportTileCacheParameters: AGSExportTileCacheParameters?
+    var exportTileCachejob: AGSExportTileCacheJob?
+    var tiledLayer: AGSArcGISTiledLayer?
 
     private weak var activeSelectionQuery: AGSCancelable?
     // MARK: - View setup
@@ -83,31 +88,41 @@ class MapViewController: UIViewController {
         self.setViewpoint()
     }
     @objc func store(_ sender: Any) {
-        //self.generateOfflineMapActions()
-        self.offlineMapTask = AGSOfflineMapTask(onlineMap: self.mapView.map!)
-
+        //this service does not support ecxporting tile layers so have to again find another way
+        self.exportTileCacheTask = AGSExportTileCacheTask(url: URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer")!)
+        self.tiledLayer = AGSArcGISTiledLayer(url: URL(string: "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/Coronavirus_2019_nCoV_Cases/FeatureServer")!)
         let areaOfInterest = createFrameForOfflineMode()
-        //print(self.offlineMapTask?.loadStatus.rawValue)
-        print(areaOfInterest.height)
-        offlineMapTask?.defaultGenerateOfflineMapParameters(withAreaOfInterest: areaOfInterest) { [weak self] (parameters: AGSGenerateOfflineMapParameters?, error: Error?) in
-
-            guard let self = self else {
-                print("couldn't find self")
-                return
-            }
-            guard let parameters = parameters else {
-                //parameters not being set properly for some reason
-                print("issue with setting parameters in generate offline map actions")
-                return
-            }
-
+        self.exportTileCacheTask?.exportTileCacheParameters(withAreaOfInterest: areaOfInterest, minScale: self.mapView.mapScale, maxScale: self.mapView.mapScale) { [weak self] (params: AGSExportTileCacheParameters?, error: Error?) in
             if let error = error {
-                self.presentAlert(message: error.localizedDescription)
+                print("export tile cache task failure")
+                print(error)
                 return
             }
-            self.parameters = parameters
-            print("starting takemapoffline function")
-            self.takeMapOffline()
+            guard let params = params else {return}
+            // obtain the export tile cache parameters
+            // set these parameters and provide them to the exportTileCacheJob  // to download the tile cache to the device
+            self?.exportTileCacheParameters = params
+            //destination path for the tpk, including name
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            let destinationPath = "\(path)/myTileCache.tpk"
+            //get the job
+            self?.exportTileCachejob = self?.exportTileCacheTask!.exportTileCacheJob(with: (self?.exportTileCacheParameters)!, downloadFileURL: URL(string: destinationPath)!)
+            //run the job
+            self?.exportTileCachejob!.start(statusHandler: { (status: AGSJobStatus) -> Void in
+             //show job status
+                print("started export tile job")
+                print(status)}) { [weak self] (result: AnyObject?, error: Error?) -> Void in
+                if let error = error {
+                    print(error)
+                    return
+                }
+
+                guard let tileCache = result as? AGSTileCache else {return}
+                let newTiledLayer = AGSArcGISTiledLayer(tileCache: tileCache)
+                print("adding new map back to the base map")
+                self?.map = AGSMap(basemap: AGSBasemap(baseLayer: newTiledLayer))
+                self?.view.reloadInputViews()
+            }
         }
     }
     func configureUI() {
